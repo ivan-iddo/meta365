@@ -26,7 +26,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?=base_url().'game';?>">
+        <a class="nav-link" href="<?=base_url().'gamevoucher';?>">
           <i class="nav-icon fa fa-gamepad"></i> Voucher Game</a>
       </li>
     </ul>
