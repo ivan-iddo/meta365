@@ -8,8 +8,8 @@
             <div class="card-header">
               <i class="fa fa-mobile"></i> Pulsa
             </div>
+            <?php echo form_open('pulsa/insert') ?>
             <div class="card-body">
-              <form>
                 <fieldset class="form-group">
                   <label>No. HandPhone</label>
                   <div class="input-group">
@@ -18,7 +18,7 @@
                         <i class="fa fa-phone"></i>
                       </span>
                     </span>
-                    <input class="form-control" id="phone" type="phone">
+                    <input class="form-control" name="phone" id="phone" type="phone">
                   </div>
                 </fieldset>
                 <fieldset class="form-group">
@@ -29,14 +29,13 @@
                         <i class="fa fa-tag"></i>
                       </span>
                     </span>
-                    <select class="form-control select2-single" id="select2-1">
+                    <select class="form-control select2-single" name="product_id" id="product_id">
                       <option>25 K</option>
                       <option>50 K</option>
                       <option>100 K</option>
                     </select>
                   </div>
                 </fieldset>
-              </form>
             </div>
             <div class="card-footer">
               <button class="btn btn-sm btn-primary" type="submit">
