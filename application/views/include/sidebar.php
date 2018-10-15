@@ -15,9 +15,19 @@
         <a class="nav-link" href="<?=base_url().'travel';?>">
           <i class="nav-icon fa fa-plane"></i> Travel & Ticketing</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<?=base_url().'ppob';?>">
-          <i class="nav-icon fa fa-tint"></i> PPOB</a>
+      <li class="nav-item nav-dropdown">
+        <a class="nav-link nav-dropdown-toggle" href="#">
+          <i class="nav-icon fa fa-percent"></i> PPOB</a>
+        <ul class="nav-dropdown-items">
+          <li class="nav-item">
+            <a class="nav-link" href="<?=base_url().'ppob/pdam';?>">
+              <i class="nav-icon fa fa-tint"></i> PDAM</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?=base_url().'ppob/pln';?>">
+              <i class="nav-icon fa fa-bolt"></i> PLN</a>
+          </li>
+        </ul>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="<?=base_url().'emoney';?>">

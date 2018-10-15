@@ -9,11 +9,11 @@
     <meta name="keyword" content="Meta365, Payment Gateway, PPOB, Blacksmith18">
     <title>Meta365</title>
     <!-- Icons-->
-    <link href="<?=base_url();?>application/assets/vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
-    <link href="<?=base_url();?>application/assets/vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
-    <link href="<?=base_url();?>application/assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="<?=base_url();?>application/assets/vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <link href="<?=base_url();?>assets/vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
+    <link href="<?=base_url();?>assets/vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+    <link href="<?=base_url();?>assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<?=base_url();?>assets/vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
     <!-- Main styles for this application-->
-    <link href="<?=base_url();?>application/assets/css/style.css" rel="stylesheet">
-    <link href="<?=base_url();?>application/assets/vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+    <link href="<?=base_url();?>assets/css/style.css" rel="stylesheet">
+    <link href="<?=base_url();?>assets/vendors/pace-progress/css/pace.min.css" rel="stylesheet">
   </head>
