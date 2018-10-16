@@ -1,12 +1,13 @@
 <IfModule mod_rewrite.c>
  RewriteEngine On
  #RewriteBase /
-RewriteCond %{REQUEST_URI} ^system.*
+ RewriteCond %{REQUEST_URI} ^system.*
  RewriteRule ^(.*)$ /index.php?/$1 [L]
-RewriteCond %{REQUEST_URI} ^application.*
+ RewriteCond %{REQUEST_URI} ^application.*
  RewriteRule ^(.*)$ /index.php?/$1 [L]
-RewriteCond %{REQUEST_FILENAME} !-f
+ RewriteCond %{REQUEST_FILENAME} !-f
  RewriteCond %{REQUEST_FILENAME} !-d
+ RewriteCond $1 !^(index\.php|public|images|robots\.txt|css)
  RewriteRule ^(.*)$ index.php?baseurl=$1 [QSA,L]
 </IfModule>
 <IfModule !mod_rewrite.c>

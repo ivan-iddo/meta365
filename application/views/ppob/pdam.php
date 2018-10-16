@@ -6,7 +6,7 @@
         <div class="col-md-6">
           <div class="card">
             <div class="card-header">
-              <i class="fa fa-exchange"></i>PPOB
+              <i class="fa fa-tint"></i>PDAM
             </div>
             <div class="card-body">
               <form>

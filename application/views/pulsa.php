@@ -8,8 +8,8 @@
             <div class="card-header">
               <i class="fa fa-mobile"></i> Pulsa
             </div>
-            <?php echo form_open('pulsa/insert') ?>
             <div class="card-body">
+              <?= form_open('pulsa/insert');?>
                 <fieldset class="form-group">
                   <label>No. HandPhone</label>
                   <div class="input-group">
@@ -36,6 +36,7 @@
                     </select>
                   </div>
                 </fieldset>
+              <?= form_close('pulsa/insert');?>
             </div>
             <div class="card-footer">
               <button class="btn btn-sm btn-primary" type="submit">

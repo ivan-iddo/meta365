@@ -11,9 +11,19 @@
         <a class="nav-link" href="<?=base_url().'pulsa';?>">
           <i class="nav-icon fa fa-mobile"></i> Pulsa</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<?=base_url().'travel';?>">
+      <li class="nav-item nav-dropdown">
+        <a class="nav-link nav-dropdown-toggle" href="#">
           <i class="nav-icon fa fa-plane"></i> Travel & Ticketing</a>
+        <ul class="nav-dropdown-items">
+          <li class="nav-item">
+            <a class="nav-link" href="<?=base_url().'travel/kai';?>">
+              <i class="nav-icon fa fa-train"></i> KAI</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?=base_url().'travel/pesawat';?>">
+              <i class="nav-icon fa fa-plane"></i> Pesawat</a>
+          </li>
+        </ul>
       </li>
       <li class="nav-item nav-dropdown">
         <a class="nav-link nav-dropdown-toggle" href="#">

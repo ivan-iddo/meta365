@@ -9,4 +9,11 @@ class Ppob extends CI_Controller {
 		
 		$this->load->view('include/layout', $data);
 	}
+
+	public function pdam()
+	{
+		$data['module'] = "ppob/pdam";
+		
+		$this->load->view('include/layout', $data);
+	}
 }

@@ -65,7 +65,7 @@
             <span class="badge badge-dark">42</span>
           </a>
           <div class="divider"></div>
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" href="<?=base_url();?>logout">
             <i class="fa fa-lock"></i> Logout</a>
         </div>
       </li>

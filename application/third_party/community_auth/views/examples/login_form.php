@@ -15,6 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 if( ! isset( $optional_login ) )
 {
+	print_r($optional_login);
 	echo '<h1>Login</h1>';
 }
 
