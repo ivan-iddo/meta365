@@ -6,5 +6,7 @@
     <script src="<?=base_url();?>assets/vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
     <script src="<?=base_url();?>assets/vendors/@coreui/coreui-pro/js/coreui.min.js"></script>
     <script src="<?=base_url();?>assets/vendors/chart.js/js/Chart.min.js"></script>
+    <script src="<?=base_url();?>assets/vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js"></script>
+    <script src="<?=base_url();?>assets/js/main.js"></script>
   </body>
 </html>
