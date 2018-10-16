@@ -73,7 +73,7 @@
   </header>
   <div class="app-body">
     <?php $this->load->view('include/sidebar');?>
-    <?php $this->load->view($module);?>
+    <?php (is_file(APPPATH.'views/' . $module .'.php') ? $this->load->view($module): null);?>
     <aside class="aside-menu">
       <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">

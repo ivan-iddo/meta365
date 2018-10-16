@@ -9,6 +9,7 @@ class Dashboard extends MY_Controller {
 		{
 
 			$data['module'] = "dashboard";
+			$data['module_name'] = "Dashboard";
 		
 			$this->load->view('include/layout', $data);
 
