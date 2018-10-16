@@ -193,7 +193,7 @@ class Examples extends MY_Controller
 		// Customize this array for your user
 		$user_data = [
 			'username'   => 'admin',
-			'passwd'     => 'admin',
+			'passwd'     => 'Admin365',
 			'email'      => 'admin@meta365.com',
 			'auth_level' => '1', // 9 if you want to login @ examples/index.
 		];
