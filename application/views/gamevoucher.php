@@ -6,7 +6,7 @@
         <div class="col-md-6">
           <div class="card">
             <div class="card-header">
-              <i class="fa fa-gamepad"></i>Game Voucher
+              <i class="fa fa-gamepad"></i>Voucher Game
             </div>
             <div class="card-body">
               <?= form_open('Gamevoucher/insert');?>
