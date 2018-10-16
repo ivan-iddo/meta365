@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Travel extends CI_Controller {
+class Travel extends MY_Controller {
 
 	public function index()
 	{
@@ -12,15 +12,23 @@ class Travel extends CI_Controller {
 
 	public function kai()
 	{
-		$data['module'] = "travel/kai";
-		
-		$this->load->view('include/layout', $data);
+		if( $this->require_role('admin') )
+		{
+			$data['module'] = "travel/kai";
+			$data['module_name'] = "KAI";
+			
+			$this->load->view('include/layout', $data);
+		}
 	}
 
 	public function pesawat()
 	{
-		$data['module'] = "travel/pesawat";
-		
-		$this->load->view('include/layout', $data);
+		if( $this->require_role('admin') )
+		{
+			$data['module'] = "travel/pesawat";
+			$data['module_name'] = "Pesawat";
+			
+			$this->load->view('include/layout', $data);
+		}
 	}
 }

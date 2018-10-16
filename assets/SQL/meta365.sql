@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 16, 2018 at 10:46 AM
+-- Generation Time: Oct 16, 2018 at 08:52 PM
 -- Server version: 8.0.12
 -- PHP Version: 7.2.8
 
@@ -79,9 +79,11 @@ CREATE TABLE `auth_sessions` (
 --
 
 INSERT INTO `auth_sessions` (`id`, `user_id`, `login_time`, `modified_at`, `ip_address`, `user_agent`) VALUES
-('ta67l4srjgdqukt0kjnru19s0icsc56p', 3614488494, '2018-10-16 10:43:54', '2018-10-16 10:43:55', '127.0.0.1', 'Chrome 69.0.3497.100 on Mac OS X'),
-('32jn5hbmah99nsl863r5nj9uu638sd55', 3614488494, '2018-10-16 10:44:15', '2018-10-16 10:44:15', '127.0.0.1', 'Chrome 69.0.3497.100 on Mac OS X'),
-('0vrncfoqttt3jco9hr5m32sc0en1km88', 3614488494, '2018-10-16 10:45:27', '2018-10-16 10:45:27', '127.0.0.1', 'Chrome 69.0.3497.100 on Mac OS X');
+('4ln7bclktutv0dcutro0gbg73l0s785n', 1729583169, '2018-10-16 20:42:51', '2018-10-16 20:48:46', '127.0.0.1', 'Chrome 69.0.3497.100 on Mac OS X'),
+('suehu2aa43uogi45c5f8nbmvv45ir5tn', 3614488494, '2018-10-16 19:51:57', '2018-10-16 19:51:57', '127.0.0.1', 'Chrome 69.0.3497.100 on Mac OS X'),
+('kh2imjf5vnqq2n26v7s1qc7tjgc4a7pk', 3614488494, '2018-10-16 19:57:37', '2018-10-16 19:57:38', '127.0.0.1', 'Chrome 69.0.3497.100 on Mac OS X'),
+('qbk2bdljggo3v04fagi6pa20rsdclc2g', 3614488494, '2018-10-16 20:10:50', '2018-10-16 20:10:50', '127.0.0.1', 'Chrome 69.0.3497.100 on Mac OS X'),
+('6gsrkag4lr26knvdfhkr1sdp33k5q8qf', 3614488494, '2018-10-16 20:11:10', '2018-10-16 20:11:10', '127.0.0.1', 'Chrome 69.0.3497.100 on Mac OS X');
 
 -- --------------------------------------------------------
 
@@ -134,6 +136,17 @@ CREATE TABLE `login_errors` (
   `time` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `login_errors`
+--
+
+INSERT INTO `login_errors` (`ai`, `username_or_email`, `ip_address`, `time`) VALUES
+(2, '', '127.0.0.1', '2018-10-16 19:56:44'),
+(3, '', '127.0.0.1', '2018-10-16 19:57:27'),
+(4, '', '127.0.0.1', '2018-10-16 19:57:31'),
+(5, '', '127.0.0.1', '2018-10-16 19:57:47'),
+(6, '', '127.0.0.1', '2018-10-16 20:00:04');
+
 -- --------------------------------------------------------
 
 --
@@ -172,7 +185,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `email`, `auth_level`, `banned`, `passwd`, `passwd_recovery_code`, `passwd_recovery_date`, `passwd_modified_at`, `last_login`, `created_at`, `modified_at`) VALUES
-(3614488494, 'admin', 'admin@meta365.com', 1, '0', '$2y$11$OUHGkJK4rxU/XDjUb7YTEeRRWeYreFvADm28bvCjIdMAcArHEczG6', NULL, NULL, NULL, '2018-10-16 10:45:27', '2018-10-16 10:35:31', '2018-10-16 10:45:27');
+(1729583169, 'ivan', 'ivan@meta365.com', 6, '0', '$2y$11$X0NMge6rqfG4X1Ed2T/Nkuml3duriW8nlLWy6ja7DyIPuQmwoAtNS', NULL, NULL, NULL, '2018-10-16 20:42:51', '2018-10-16 20:42:39', '2018-10-16 20:42:51'),
+(3614488494, 'admin', 'admin@meta365.com', 6, '0', '$2y$11$OUHGkJK4rxU/XDjUb7YTEeRRWeYreFvADm28bvCjIdMAcArHEczG6', NULL, NULL, NULL, '2018-10-16 20:37:00', '2018-10-16 10:35:31', '2018-10-16 20:37:00');
 
 --
 -- Triggers `users`
@@ -290,13 +304,13 @@ ALTER TABLE `denied_access`
 -- AUTO_INCREMENT for table `ips_on_hold`
 --
 ALTER TABLE `ips_on_hold`
-  MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `login_errors`
 --
 ALTER TABLE `login_errors`
-  MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `username_or_email_on_hold`

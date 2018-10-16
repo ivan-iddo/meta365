@@ -1,7 +1,7 @@
 <!-- Breadcrumb-->
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Meta365</li>
-  <li class="breadcrumb-item active"><?=$module;?></li>
+  <li class="breadcrumb-item active"><?=$module_name;?></li>
   <!-- Breadcrumb Menu-->
   <li class="breadcrumb-menu d-md-down-none">
     <div class="btn-group" role="group" aria-label="Button group">

@@ -68,10 +68,10 @@ class Users extends MY_Controller {
 	{
 		// Customize this array for your user
 		$user_data = [
-			'username'   => 'admin',
+			'username'   => 'ivan',
 			'passwd'     => 'Admin365',
-			'email'      => 'admin@meta365.com',
-			'auth_level' => '1', // 9 if you want to login @ examples/index.
+			'email'      => 'ivan@meta365.com',
+			'auth_level' => '6', // 9 if you want to login @ examples/index.
 		];
 
 		$this->is_logged_in();
