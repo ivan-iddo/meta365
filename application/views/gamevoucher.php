@@ -8,8 +8,8 @@
             <div class="card-header">
               <i class="fa fa-gamepad"></i>Game Voucher
             </div>
+            <?php echo form_open('Gamevoucher/insert') ?>
             <div class="card-body">
-              <form>
                 <fieldset class="form-group">
                   <label>Voucher Type</label>
                   <div class="input-group">
@@ -18,7 +18,7 @@
                         <i class="fa fa-id-card"></i>
                       </span>
                     </span>
-                    <select class="form-control select2-single" id="select2-1">
+                    <select class="form-control select2-single" name="product_name" id="product_name">
                       <option>Google Play</option>
                       <option>Garena</option>
                       <option>Steam</option>
@@ -33,14 +33,13 @@
                         <i class="fa fa-tag"></i>
                       </span>
                     </span>
-                    <select class="form-control select2-single" id="select2-1">
+                    <select class="form-control select2-single" name="product_type" id="product_type">
                       <option>25 K</option>
                       <option>50 K</option>
                       <option>100 K</option>
                     </select>
                   </div>
                 </fieldset>
-              </form>
             </div>
             <div class="card-footer">
               <button class="btn btn-sm btn-primary" type="submit">
