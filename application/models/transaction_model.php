@@ -34,13 +34,6 @@ class transaction_model extends CI_Model {
 	$this->db->insert($this->table, $data);
 	}
 	
-	function kd($id){
-        $query = $this->db->query("SELECT product_name as ID FROM transaction WHERE product_id='$id'");
-        $data = $query->row_array();
-        $id = $data['ID'];
-        return $id;
-	}
-	
     // update data
     function update($id, $data) {
         $this->db->where($this->id, $id);

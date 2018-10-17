@@ -58,6 +58,17 @@ public function get_all()
         $this->db->delete($this->table);
     }
 	
+	function bykode($kode){
+		$query = $this->db->get_where('product',array('product_name'=>$kode));
+
+		 if ($query->num_rows() > 0) { 
+            foreach ($query->result() as $data) { 
+                $hasil[] = $data; 
+            } 
+            return $hasil; 
+        } 
+	}
+	
 	function kdotomatis() {
         $jenis = 'PL'.date('ym');
         $query = $this->db->query("SELECT max(transaction_id) as maxID FROM pulsa WHERE transaction_id LIKE '$jenis%'");

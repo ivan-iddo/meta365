@@ -5,15 +5,25 @@ class Gamevoucher extends CI_Controller {
 
 	function __construct() {
         parent::__construct();
-		$this->load->model(array('pulsa_model','transaction_model'));
+		$this->load->model(array('game_model','transaction_model'));
         $this->load->library('form_validation');
     }
 
 	public function index()
 	{
-		$data['module'] = "gamevoucher";
+		$data = array(
+           'module' => "gamevoucher",
+		   'product' => $this->game_model->data(),
+		);
 		
 		$this->load->view('include/layout', $data);
+	}
+	
+	public function get()
+	{
+		$id = $_GET['id'];
+		$data = $this->game_model->id($id);
+		echo json_encode($data);
 	}
 
 	public function insert()
@@ -23,20 +33,19 @@ class Gamevoucher extends CI_Controller {
 
 			'phone' 			=> $this->input->post("phone"),
 			'product_id' 		=> $this->input->post("product_id"),
-			'transaction_id' => $this->Gamevoucher->kdotomatis(),
+			'transaction_id' => $this->game_model->kdotomatis(),
             'uid' => $uid,
 		);
 
-		$this->Gamevoucher->insert($data);
-
+		$this->game_model->insert($data);
 		$this->session->set_flashdata('message', 'Record Succes');
-		
 		redirect('Gamevoucher');
 
 	}
 
+
 	public function view($id) {
-        $row = $this->pulsa_model->get_by($id);
+        $row = $this->game_model->get_by($id);
         if ($row) {
             $data = array(
                 'product_id' => $row->product_id,
@@ -53,10 +62,10 @@ class Gamevoucher extends CI_Controller {
     }
 
     public function delete($id) {
-        $row = $this->pulsa_model->get_by($id);
+        $row = $this->game_model->get_by($id);
 
         if ($row) {
-            $this->pulsa_model->delete($id);
+            $this->game_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
             redirect(site_url('pulsa'));
         } else {
@@ -64,9 +73,9 @@ class Gamevoucher extends CI_Controller {
             redirect(site_url('pulsa'));
         }
     }
-
+	
     public function checkout_pulsa($id) {
-	$row = $this->pulsa_model->get_by($id);
+	$row = $this->game_model->get_by($id);
 	if ($row) {
     $request_data = array(
 		'method'    =>'rajabiller.game',

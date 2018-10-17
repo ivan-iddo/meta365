@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class game_model extends CI_model{
-	public $table = 'pulsa';
+	public $table = 'game';
     public $id1 = 'transaction_id';
 	public $id = 'product_id';
     public $order = 'DESC';
@@ -12,7 +12,7 @@ class game_model extends CI_model{
 public function get_all()
 	{
 		$query = $this->db->select("*")
-				 ->from('pulsa')
+				 ->from('game')
 				 ->order_by('id', 'DESC')
 				 ->get();
 		return $query->result();
@@ -60,14 +60,33 @@ public function get_all()
 	
 	function kdotomatis() {
         $jenis = 'GM'.date('ym');
-        $query = $this->db->query("SELECT max(transaction_id) as maxID FROM pulsa WHERE transaction_id LIKE '$jenis%'");
+        $query = $this->db->query("SELECT max(transaction_id) as maxID FROM game WHERE transaction_id LIKE '$jenis%'");
         $data = $query->row_array();
         $idMax = $data['maxID'];
         $noUrut = (int) substr($idMax, 6, 3);
         $noUrut++;
-        $newID = $jenis . sprintf("%03s", $noUrut);
-        return $newID;
+        $ID = $jenis . sprintf("%03s", $noUrut);
+        return $ID;
     }
 
+	function data(){
+    $query =$this->db->query("SELECT  * FROM product WHERE product='game'");
+       if ($query->num_rows() > 0) { 
+            foreach ($query->result() as $data) { 
+                $hasil[] = $data; 
+            } 
+            return $hasil; 
+        } 
+    }
+	
+	function id($id){
+    $query =$this->db->query("SELECT  * FROM product WHERE product='game' and product_name='$id'");
+       if ($query->num_rows() > 0) { 
+            foreach ($query->result() as $data) { 
+                $hasil[] = $data; 
+            } 
+            return $hasil;
+        } 
+    }
 
 }

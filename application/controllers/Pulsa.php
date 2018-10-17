@@ -33,6 +33,12 @@ class Pulsa extends CI_Controller {
 
 	}
 
+	function get(){
+		$kode=$this->input->post('product');
+		$data=$this->pulsa_model->bykode($kode);
+		echo json_encode($data);
+	}
+	
     public function delete($id) {
         $row = $this->pulsa_model->get_by($id);
 
