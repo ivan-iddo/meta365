@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Gamevoucher extends CI_Controller {
+class Gamevoucher extends MY_Controller {
 
 	function __construct() {
         parent::__construct();
@@ -11,17 +11,20 @@ class Gamevoucher extends CI_Controller {
 
 	public function index()
 	{
+		if( $this->require_role('admin') )
+		{
 		$data = array(
            'module' => "gamevoucher",
+           'module_name' => "Voucher Game",
 		   'product' => $this->game_model->data(),
-		);
-		
-		$this->load->view('include/layout', $data);
+		);			
+			$this->load->view('include/layout', $data);
+		}
 	}
 	
 	public function get()
 	{
-		$id = $_GET['id'];
+		$id = $this->input->post("id");
 		$data = $this->game_model->id($id);
 		echo json_encode($data);
 	}

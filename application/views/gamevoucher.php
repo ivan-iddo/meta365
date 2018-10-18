@@ -6,10 +6,10 @@
         <div class="col-md-6">
           <div class="card">
             <div class="card-header">
-              <i class="fa fa-gamepad"></i>Game Voucher
+              <i class="fa fa-gamepad"></i>Voucher Game
             </div>
-            <?php echo form_open('Gamevoucher/insert') ?>
             <div class="card-body">
+              <?= form_open('Gamevoucher/insert');?>
                 <fieldset class="form-group">
                   <label>Voucher Type</label>
                   <div class="input-group">
@@ -18,12 +18,12 @@
                         <i class="fa fa-id-card"></i>
                       </span>
                     </span>
-                    <select class="form-control select2-single" name="product_name" id="product_name" onchange="name(this.value)" required>
-                      <option>--Pilih--</option>
+                    <select class="form-control select2-single" name="product_type" id="product_type" required>
+					<option value=''>-PILIH-</option>
 					  <?php 
-						foreach($product as $row):
+						foreach($product->result() as $row):
 						?>
-						<option value="<?php echo $row->product_name;?>"><?php echo $row->product_name;?></option>
+						<option value="<?php echo $row->product_type;?>"><?php echo $row->product_type;?></option>
 						<?php
 						endforeach;
 					 ?>
@@ -38,20 +38,20 @@
                         <i class="fa fa-tag"></i>
                       </span>
                     </span>
-                    <select class="form-control select2-single" name="product_id" id="product_id" required>
-                      <option>--Pilih--</option>
-                    </select>
+                    <select class="product_id form-control select2-single" name="product_id" id="product_id" required>
+                    <option value="0">-PILIH-</option>
+					</select>
                   </div>
                 </fieldset>
-				 <fieldset class="form-group">
-                  <label>No. HandPhone</label>
+				  <fieldset class="form-group">
+                  <label>Phone</label>
                   <div class="input-group">
                     <span class="input-group-prepend">
                       <span class="input-group-text">
-                        <i class="fa fa-phone"></i>
+					  <i class="fa fa-phone"></i>
                       </span>
                     </span>
-                    <input class="form-control" name="phone" id="phone" type="phone" placeholder="0812XXXXXXXXXXXX" maxlength="12" required>
+                    <input class="form-control" id="phone" name="phone" type="text" maxlength="15" required>
                   </div>
                 </fieldset>
             </div>
@@ -69,28 +69,26 @@
   </div>
 </main>
 <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.js'?>"></script>
-		<script>
-			function name(id)
-			{
-				if(id != null) {
-                $.ajax({
-                    type : "GET",
-                    url  : "<?php echo base_url('gamevoucher/get')?>",
-                    dataType : "JSON",
-                    data : {id: id},
-                    cache:false,
-                    success: function(data){
-                        $("#product_id").empty();
-					         $(data).each(function()
-							 {
-							     var option = $('<option />');
-							     option.attr('value', this.product_id).text(this.product_type);
-
-							     $('#product_id').append(option);
-							 });
-                        
-                    }
-                });
-			}
-			}
-		</script>
+		<script type="text/javascript">
+	$(document).ready(function(){
+		$('#product_type').change(function(){
+			var id=$(this).val();
+			$.ajax({
+				url : "<?php echo base_url();?>gamevoucher/get",
+				method : "POST",
+				data : {id: id},
+				async : false,
+		        dataType : 'json',
+				success: function(data){
+					var html = '';
+		            var i;
+		            for(i=0; i<data.length; i++){
+		                html += '<option value='+data[i].product_id+'>'+data[i].product_name+'</option>';
+		            }
+		            $('.product_id').html(html);
+					
+				}
+			});
+		});
+	});
+</script>

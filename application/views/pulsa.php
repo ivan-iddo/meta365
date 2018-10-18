@@ -8,8 +8,8 @@
             <div class="card-header">
               <i class="fa fa-mobile"></i> Pulsa
             </div>
-            <?php echo form_open('pulsa/insert') ?>
             <div class="card-body">
+              <?= form_open('pulsa/insert');?>
                 <fieldset class="form-group">
                   <label>No. HandPhone</label>
                   <div class="input-group">
@@ -18,7 +18,7 @@
                         <i class="fa fa-phone"></i>
                       </span>
                     </span>
-                    <input class="form-control" name="phone" id="phone" type="phone" placeholder="0812XXXXXXXXXXXX" maxlength="12" required>
+                    <input class="form-control" name="phone" id="phone" type="phone" placeholder="081210090111" maxlength="12" required>
                   </div>
                 </fieldset>
                 <fieldset class="form-group">
@@ -51,7 +51,8 @@
 </main>
 <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.js'?>"></script>
 			<script type="text/javascript">
-			  $('#phone').keypress(function() {
+			  $(document).ready(function(){
+				$('#phone').on('input',function(){
 				var phone = this.value;
 				var telkomsel=["0812","0813","0821","0822","0852","0853","0823","0851"];
 				var indosat=["0814","0815","0816","0855","0856","0857","0858"];
@@ -110,6 +111,7 @@
 						}++b;
 				}
 			  });
+			});
 			</script>
 	<script type="text/javascript">
 		$(document).ready(function(){
@@ -126,7 +128,7 @@
 					         $(data).each(function()
 							 {
 							     var option = $('<option />');
-							     option.attr('value', this.product_id).text(this.product_type);
+							     option.attr('value', this.product_id).text(this.product_name);
 
 							     $('#product_id').append(option);
 							 });

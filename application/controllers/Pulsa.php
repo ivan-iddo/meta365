@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pulsa extends CI_Controller {
+class Pulsa extends MY_Controller {
 
 	function __construct() {
         parent::__construct();
@@ -11,9 +11,13 @@ class Pulsa extends CI_Controller {
 
 	public function index()
 	{
-		$data['module'] = "pulsa";
-		
-		$this->load->view('include/layout', $data);
+		if( $this->require_role('admin') )
+		{
+			$data['module'] = "pulsa";
+			$data['module_name'] = "Pulsa";
+			
+			$this->load->view('include/layout', $data);
+		}
 	}
 	
 	public function insert()
@@ -111,7 +115,7 @@ class Pulsa extends CI_Controller {
 			'method'    =>'rajabiller.harga',
 			'uid'       =>'123',
 			'pin'       =>'230',
-			'produk' => $product['product_name'],
+			'produk' => $product['product_type'],
 		);
 		$Rb 		= $this->send($request_data);
 		$data = array(

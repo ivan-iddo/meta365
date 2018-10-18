@@ -70,23 +70,13 @@ public function get_all()
     }
 
 	function data(){
-    $query =$this->db->query("SELECT  * FROM product WHERE product='game'");
-       if ($query->num_rows() > 0) { 
-            foreach ($query->result() as $data) { 
-                $hasil[] = $data; 
-            } 
-            return $hasil; 
-        } 
+	$hasil=$this->db->query("SELECT DISTINCT product_type FROM product WHERE product='game'");
+	return $hasil;
     }
 	
 	function id($id){
-    $query =$this->db->query("SELECT  * FROM product WHERE product='game' and product_name='$id'");
-       if ($query->num_rows() > 0) { 
-            foreach ($query->result() as $data) { 
-                $hasil[] = $data; 
-            } 
-            return $hasil;
-        } 
+    $query =$this->db->query("SELECT  * FROM product WHERE product='game' and product_type='$id'");
+      return $query->result();
     }
 
 }

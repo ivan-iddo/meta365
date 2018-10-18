@@ -1,10 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class pulsa_model extends CI_model{
-	public $table = 'pulsa';
+class pesawat_model extends CI_model{
+	public $table = 'pesawat';
     public $id1 = 'transaction_id';
-	public $id = 'product_id';
+	public $id = 'pesawat_id';
     public $order = 'DESC';
 
 
@@ -12,7 +12,7 @@ class pulsa_model extends CI_model{
 public function get_all()
 	{
 		$query = $this->db->select("*")
-				 ->from('game')
+				 ->from('pesawat')
 				 ->order_by('id', 'DESC')
 				 ->get();
 		return $query->result();
@@ -58,27 +58,14 @@ public function get_all()
         $this->db->delete($this->table);
     }
 	
-	function bykode($kode){
-		$query = $this->db->query("SELECT * FROM product WHERE product='PULSA' and product_type='$kode' ORDER BY product_name ASC");
-
-		 if ($query->num_rows() > 0) { 
-            foreach ($query->result() as $data) { 
-                $hasil[] = $data; 
-            } 
-            return $hasil; 
-        } 
-	}
-	
 	function kdotomatis() {
-        $jenis = 'PL'.date('ym');
-        $query = $this->db->query("SELECT max(transaction_id) as maxID FROM pulsa WHERE transaction_id LIKE '$jenis%'");
+        $jenis = 'KAI'.date('ym');
+        $query = $this->db->query("SELECT max(transaction_id) as maxID FROM pesawat WHERE transaction_id LIKE '$jenis%'");
         $data = $query->row_array();
         $idMax = $data['maxID'];
         $noUrut = (int) substr($idMax, 6, 3);
         $noUrut++;
-        $newID = $jenis . sprintf("%03s", $noUrut);
-        return $newID;
+        $ID = $jenis . sprintf("%03s", $noUrut);
+        return $ID;
     }
-
-
 }
