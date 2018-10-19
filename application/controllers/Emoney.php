@@ -1,12 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Emoney extends CI_Controller {
+class Emoney extends MY_Controller {
 
 	public function index()
 	{
-		$data['module'] = "emoney";
-		
-		$this->load->view('include/layout', $data);
+		if( $this->require_role('admin') )
+		{
+			$data['module'] = "emoney";
+			$data['module_name'] = "E-money";
+			
+			$this->load->view('include/layout', $data);
+		}
 	}
 }

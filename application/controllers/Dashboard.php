@@ -1,12 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller {
-
+class Dashboard extends MY_Controller {
+	
 	public function index()
 	{
-		$data['module'] = "dashboard";
+		if( $this->require_role('admin') )
+		{
+			$data['module'] = "dashboard";
+			$data['module_name'] = "Dashboard";
 		
-		$this->load->view('include/layout', $data);
+			$this->load->view('include/layout', $data);
+		}
 	}
 }
