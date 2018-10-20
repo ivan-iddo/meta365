@@ -35,7 +35,7 @@ $config['base_url'] = 'http://localhost/meta365/';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -324,7 +324,7 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = hex2bin('9b01b4732f9f6b7a356aa012fcc83c64');
 
 /*
 |--------------------------------------------------------------------------
