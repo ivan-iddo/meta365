@@ -68,4 +68,14 @@ public function get_all()
         $ID = $jenis . sprintf("%03s", $noUrut);
         return $ID;
     }
+	
+	function data(){
+    $query =$this->db->query("SELECT * FROM product WHERE product='STASIUN' ORDER BY product_type ASC ");
+       if ($query->num_rows() > 0) { 
+            foreach ($query->result() as $data) { 
+                $hasil[] = $data; 
+            } 
+            return $hasil; 
+        } 
+    }
 }

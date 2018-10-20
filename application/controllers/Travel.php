@@ -14,9 +14,11 @@ class Travel extends MY_Controller {
 	{
 		if( $this->require_role('admin') )
 		{
-			$data['module'] = "travel/kai";
-			$data['module_name'] = "KAI";
-			
+		$data = array(
+           'module' => "travel/kai",
+           'module_name' => "KAI",
+		   'product' => $this->kai_model->data(),
+		);
 			$this->load->view('include/layout', $data);
 		}
 	}
@@ -25,9 +27,11 @@ class Travel extends MY_Controller {
 	{
 		if( $this->require_role('admin') )
 		{
-			$data['module'] = "travel/pesawat";
-			$data['module_name'] = "Pesawat";
-			
+		$data = array(
+           'module' => "travel/pesawat",
+           'module_name' => "Pesawat",
+		   'product' => $this->pesawat_model->data(),
+		);
 			$this->load->view('include/layout', $data);
 		}
 	}

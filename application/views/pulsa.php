@@ -26,7 +26,7 @@
                   <div class="input-group">
                     <span class="input-group-prepend">
                       <span class="input-group-text">
-                        <i class="fa fa-tag"></i>
+                        <i class="fa fa-money"></i>
                       </span>
                     </span>
                    <select class="form-control select2-single" name="product_id" id="product_id" required>

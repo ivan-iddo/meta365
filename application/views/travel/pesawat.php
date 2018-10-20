@@ -10,7 +10,7 @@
             </div>
             <div class="card-body">
               <?= form_open('travel/insert_pesawat');?>
-                <fieldset class="form-group">
+				 <fieldset class="form-group">
                   <label>From</label>
                   <div class="input-group">
                     <span class="input-group-prepend">
@@ -18,10 +18,24 @@
                         <i class="fa fa-arrow-up"></i>
                       </span>
                     </span>
-                    <select class="form-control select2-single" id="select2-1" name="from" required>
-                      <option selected>BDG - Bandung</option>
-                      <option>JKT - Jakarta</option>
-                      <option>DPS - Denpasar</option>
+                    <select class="form-control select2-single" id="select2-2" name="from" required>
+                   <option selected >BDO - Bandar Udara Internasional Husein Sastranegara, Bandung</option>
+					<?php 
+					$propinsi=null;
+					foreach($product as $row){
+					if($propinsi != $row->product_type){
+						 if ($propinsi !== null) {
+						echo '</optgroup>';
+						}
+						echo '<optgroup label="'.$row->product_type.'">';
+						}
+						echo '<option value="'.$row->product_id.'">'.$row->product_id.' - '.$row->product_name.'</option>';
+						$propinsi = $row->product_type;
+					}
+					if ($propinsi !== null) {
+						echo '</optgroup>';
+					}
+					 ?>
                     </select>
                   </div>
                 </fieldset>
@@ -34,9 +48,23 @@
                       </span>
                     </span>
                     <select class="form-control select2-single" id="select2-1" name="to" required>
-                      <option>BDG - Bandung</option>
-                      <option selected>JKT - Jakarta</option>
-                      <option>DPS - Denpasar</option>
+                    <option selected>HLP - Bandar Udara Internasional Halim Perdanakusuma, Jakarta</option>
+					<?php 
+					$propinsi=null;
+					foreach($product as $row){
+					if($propinsi != $row->product_type){
+						 if ($propinsi !== null) {
+						echo '</optgroup>';
+						}
+						echo '<optgroup label="'.$row->product_type.'">';
+						}
+						echo '<option value="'.$row->product_id.'">'.$row->product_id.' - '.$row->product_name.'</option>';
+						$propinsi = $row->product_type;
+					}
+					if ($propinsi !== null) {
+						echo '</optgroup>';
+					}
+					 ?>
                     </select>
                   </div>
                 </fieldset>

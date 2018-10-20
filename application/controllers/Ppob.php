@@ -163,7 +163,7 @@ class Ppob extends MY_Controller {
 	{
 		$uid = $this->session->userdata('id');
 		$idpel 		= $this->input->post("pelanggan");
-		$pa=$idpel.length;
+		$pa=strlen($idpel);
 		if($pa==12){
 			$IDPEL1 ='';
 			$IDPEL2 =$idpel;

@@ -15,14 +15,14 @@
                   <div class="input-group">
                     <span class="input-group-prepend">
                       <span class="input-group-text">
-                        <i class="fa fa-arrow-down"></i>
+                        <i class="fa fa-bolt"></i>
                       </span>
                     </span>
                     <select class="form-control select2-single" name="product_id" id="product_id" required>
 					  <?php 
 						foreach($product as $row):
 						?>
-						<option value="<?php echo $row->product_type;?>"><?php echo $row->product_name;?></option>
+						<option value="<?php echo $row->product_id;?>"><?php echo $row->product_name;?></option>
 						<?php
 						endforeach;
 					 ?>
@@ -37,18 +37,22 @@
                         <i class="fa fa-id-card"></i>
                       </span>
                     </span>
-                    <input class="form-control" id="pelanggan" type="text" maxlength="12" required>
+                    <input class="form-control" id="pelanggan" name="pelanggan" type="text" maxlength="12" required>
                   </div>
                 </fieldset>
-                <fieldset class="form-group">
-                  <label>Nominal</label>
+				 <fieldset class="form-group">
+                  <label>Denominasi</label>
                   <div class="input-group">
                     <span class="input-group-prepend">
                       <span class="input-group-text">
-                        Rp.
+                         <i class="fa fa-money"></i>
                       </span>
                     </span>
-                    <input class="form-control" id="nominal" name="nominal" type="text" maxlength="15" required>
+                    <select class="form-control select2-single" id="nominal" name="nominal" required>
+                      <option value="25">25 K</option>
+                      <option value="50">50 K</option>
+                      <option value="100">100 K</option>
+                    </select>
                   </div>
                 </fieldset>
             </div>

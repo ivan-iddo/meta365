@@ -15,19 +15,26 @@
                   <div class="input-group">
                     <span class="input-group-prepend">
                       <span class="input-group-text">
-                        <i class="fa fa-arrow-down"></i>
+                        <i class="fa fa-map-marker"></i>
                       </span>
                     </span>
                     <select class="form-control select2-single" name="product_id" id="select2-1" required>
 					<?php 
-					foreach($product as $row):
-						?>
-						<optgroup label="<?php echo $row->product_type;?>">
-						<option value="<?php echo $row->product_id;?>"><?php echo $row->product_name;?></option>
-						<?php
-						endforeach;
+					$propinsi=null;
+					foreach($product as $row){
+					if($propinsi != $row->product_type){
+						 if ($propinsi !== null) {
+						echo '</optgroup>';
+						}
+						echo '<optgroup label="'.$row->product_type.'">';
+						}
+						echo '<option value="'.$row->product_id.'">'.$row->product_name.'</option>';
+						$propinsi = $row->product_type;
+					}
+					if ($propinsi !== null) {
+						echo '</optgroup>';
+					}
 					 ?>
-					 </optgroup>
                     </select>
                   </div>
                 </fieldset>
