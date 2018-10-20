@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 /**
  * Community Auth - Authentication Config
  *
@@ -12,7 +11,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @license     BSD - http://www.opensource.org/licenses/BSD-3-Clause
  * @link        http://community-auth.com
  */
-
 /*
 | -----------------------------------------------------------------
 |						LEVELS AND ROLES							
@@ -26,7 +24,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | No user level should ever be set with a key of 0.
 |
 */
-
 $config['levels_and_roles'] = [
 	'1' => 'user',
 	'4' => 'businesspartner',
@@ -34,7 +31,6 @@ $config['levels_and_roles'] = [
 	'8' => 'manager',
 	'9' => 'root'
 ];
-
 /*
 | -----------------------------------------------------------------
 |							GROUPS							
@@ -42,13 +38,11 @@ $config['levels_and_roles'] = [
 | This definition sets grouped roles that will be used for authentication.
 |
 */
-
 $config['groups'] = [
 	'superuser' => 'root',
 	'employees' => 'manager,admin',
 	'client' => 'businesspartner, user'
 ];
-
 /*
 | -----------------------------------------------------------------
 |				ADD ACL QUERY TO AUTH FUNCTIONS							
@@ -63,9 +57,7 @@ $config['groups'] = [
 | already been done.
 |
 */
-
 $config['add_acl_query_to_auth_functions'] = FALSE;
-
 /*
 | -----------------------------------------------------------------
 |						MAX_ALLOWED_ATTEMPTS						
@@ -75,9 +67,7 @@ $config['add_acl_query_to_auth_functions'] = FALSE;
 | placed on hold.
 | 
 */
-
 $config['max_allowed_attempts'] = 5;
-
 /*
 | -----------------------------------------------------------------
 |						DENY_ACCESS	AT					
@@ -90,9 +80,7 @@ $config['max_allowed_attempts'] = 5;
 | SET TO ZERO TO DISABLE THIS FUNCTIONALITY
 | 
 */
-
 $config['deny_access_at'] = 10;
-
 /*
 | -----------------------------------------------------------------
 |					DENIED ACCESS REASON						
@@ -100,7 +88,6 @@ $config['deny_access_at'] = 10;
 | The reasons why an IP address may be in the deny list
 | 
 */
-
 $config['denied_access_reason'] = [
 	'0' => 'Not Specified',
 	'1' => 'Login Attempts',
@@ -110,7 +97,6 @@ $config['denied_access_reason'] = [
 	'5' => 'Obscene Language',
 	'6' => 'Threatening Language'
 ];
-
 /*
 | -----------------------------------------------------------------
 |					APACHE CONFIG FILE LOCATION						
@@ -118,9 +104,7 @@ $config['denied_access_reason'] = [
 | The location, including filename, or your Apache config file.
 | 
 */
-
 $config['apache_config_file_location'] = FCPATH . '.htaccess';
-
 /*
 | -----------------------------------------------------------------
 |							SECONDS_ON_HOLD							
@@ -132,9 +116,7 @@ $config['apache_config_file_location'] = FCPATH . '.htaccess';
 | 600 seconds is 10 minutes
 |
 */
-
 $config['seconds_on_hold'] = 600;
-
 /*
 | -----------------------------------------------------------------
 |						DISALLOW_MULTIPLE_LOGINS					
@@ -144,9 +126,7 @@ $config['seconds_on_hold'] = 600;
 | than one browser on the same device.
 |
 */
-
 $config['disallow_multiple_logins'] = FALSE;
-
 /*
 | -----------------------------------------------------------------
 |						ENCRYPT AUTH IDENTIFIERS					
@@ -156,9 +136,7 @@ $config['disallow_multiple_logins'] = FALSE;
 | CodeIgniter 3, so we have to do the encyption if we want (or not).
 |
 */
-
 $config['encrypt_auth_identifiers'] = FALSE;
-
 /*
 | -----------------------------------------------------------------
 |						ENCRYPT ALL COOKIES					
@@ -169,9 +147,7 @@ $config['encrypt_auth_identifiers'] = FALSE;
 | affect the session contents.
 |
 */
-
 $config['encrypt_all_cookies'] = TRUE;
-
 /*
 | -----------------------------------------------------------------
 |						ALLOW REMEMBER ME							
@@ -181,9 +157,7 @@ $config['encrypt_all_cookies'] = TRUE;
 | even after the browser has closed.
 |
 */
-
 $config['allow_remember_me'] = FALSE;
-
 /*
 | -----------------------------------------------------------------
 |					REMEMBER ME COOKIE NAME							
@@ -192,9 +166,7 @@ $config['allow_remember_me'] = FALSE;
 | Remember that Internet Explorer doesn't like underscores.
 |
 */
-
 $config['remember_me_cookie_name'] = 'rememberMe';
-
 /*
 | -----------------------------------------------------------------
 |					REMEMBER ME EXPIRATION							
@@ -202,9 +174,7 @@ $config['remember_me_cookie_name'] = 'rememberMe';
 | How long (in seconds) the remember me funcationality allows the session to last.
 |
 */
-
 $config['remember_me_expiration'] = 93062220;
-
 /*
 | -----------------------------------------------------------------
 |					HTTP USER COOKIE NAME							
@@ -216,9 +186,7 @@ $config['remember_me_expiration'] = 93062220;
 | related to the logged in user. DO NOT USE FOR AUTHENTICATION!
 |
 */
-
 $config['http_user_cookie_name'] = 'httpUser';
-
 /*
 | -----------------------------------------------------------------
 |					HTTP USER COOKIE ELEMENTS							
@@ -232,9 +200,7 @@ $config['http_user_cookie_name'] = 'httpUser';
 | ESPECIALLY IF YOU ARE NOT ENCRYPTING ALL COOKIE CONTENTS!
 |
 */
-
 $config['http_user_cookie_elements'] = ['username'];
-
 /*
 | -----------------------------------------------------------------
 |				      TOKEN COOKIES CONFIG						
@@ -245,11 +211,9 @@ $config['http_user_cookie_elements'] = ['username'];
 | The token jar size is the amount of tokens that can be held in each cookie.
 |
 */
-
 $config['http_tokens_cookie']  = 'httpTokens';
 $config['https_tokens_cookie'] = 'httpsTokens';
 $config['token_jar_size']      = 32;
-
 /*
 | -----------------------------------------------------------------
 |						TOKEN NAMES						
@@ -266,10 +230,8 @@ $config['token_jar_size']      = 32;
 | Do not set these values equal to each other!
 |
 */
-
 $config['token_name']       = 'token';
 $config['login_token_name'] = 'loginToken';
-
 /*
 | -----------------------------------------------------------------
 |					RECOVERY CODE EXPIRATION							
@@ -278,9 +240,7 @@ $config['login_token_name'] = 'loginToken';
 | The default is two hours.
 |
 */
-
 $config['recovery_code_expiration'] = 60 * 60 * 2;
-
 /*
 | -----------------------------------------------------------------
 |				DELETE SESSION COOKIE ON LOGOUT							
@@ -294,9 +254,7 @@ $config['recovery_code_expiration'] = 60 * 60 * 2;
 | Note: unless you set 'show_login_form_on_logout' to FALSE,
 | the session cookie is immediately re-created.
 */
-
 $config['delete_session_cookie_on_logout'] = FALSE;
-
 /*
 | -----------------------------------------------------------------
 |				SHOW LOGIN FORM ON LOGOUT							
@@ -305,9 +263,7 @@ $config['delete_session_cookie_on_logout'] = FALSE;
 | on the logout page, or else just show the logout confirmation page.
 | The default (TRUE) is to show the login form.
 */
-
 $config['show_login_form_on_logout'] = TRUE;
-
 /*
 | -----------------------------------------------------------------
 |				DEFAULT LOGIN REDIRECT							
@@ -317,9 +273,7 @@ $config['show_login_form_on_logout'] = TRUE;
 | reached the login page and have no redirect, this URI STRING is where 
 | they will be redirected to. The default is to be redirected to the home page.
 */
-
 $config['default_login_redirect'] = '';
-
 /*
 | -----------------------------------------------------------------
 |				ALLOWED PAGES FOR LOGIN							
@@ -329,9 +283,7 @@ $config['default_login_redirect'] = '';
 | an old LOGIN_PAGE, or some random page. LOGIN_PAGE is automatically 
 | added, so you just put in optional login pages here.
 */
-
 $config['allowed_pages_for_login'] = [];
-
 /*
 | -----------------------------------------------------------------
 |				REDIRECT TO HTTPS						
@@ -339,9 +291,7 @@ $config['allowed_pages_for_login'] = [];
 | If a page is supposed to be viewed using an encrypted connection, 
 | you can either redirect to the HTTPS version, or serve up a 404 error.
 */
-
 $config['redirect_to_https'] = FALSE;
-
 /*
 | -----------------------------------------------------------------
 |				LOGIN FORM VALIDATION FILE						
@@ -350,9 +300,7 @@ $config['redirect_to_https'] = FALSE;
 | The file must be located in application/config, or in community_auth/config.
 | Make sure to remove any file extension, as this string is passed to config->load().
 */
-
 $config['login_form_validation_file'] = 'form_validation/examples/login';
-
 /*
 | -----------------------------------------------------------------
 |				DECLARED AUTH MODEL						
@@ -363,9 +311,7 @@ $config['login_form_validation_file'] = 'form_validation/examples/login';
 | When creating your own model, make sure it extends Auth_model,
 | unless you intend to replace the entire Auth model with your own.
 */
-
 $config['declared_auth_model'] = 'auth_model';
-
 #
 # -----------------------------------------------------------------
 #				HANDLE AUTH SESSIONS GC ON LOGOUT						
@@ -384,9 +330,6 @@ $config['declared_auth_model'] = 'auth_model';
 # Example cront to run once every 10 minutes (using wget):
 #     */10 * * * * /usr/bin/wget http://<YOUR DOMAIN>/crons/auth_sessions_gc -O /dev/null
 #
-
 $config['auth_sessions_gc_on_logout'] = TRUE;
-
-
 /* End of file authentication.php */
 /* Location: /community_auth/config/authentication.php */

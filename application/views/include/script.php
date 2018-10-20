@@ -1,4 +1,4 @@
-    <!-- Bootstrap and necessary plugins-->
+  <!-- Bootstrap and necessary plugins-->
     <script src="<?=base_url();?>assets/vendors/jquery/js/jquery.min.js"></script>
     <script src="<?=base_url();?>assets/vendors/popper.js/js/popper.min.js"></script>
     <script src="<?=base_url();?>assets/vendors/bootstrap/js/bootstrap.min.js"></script>
