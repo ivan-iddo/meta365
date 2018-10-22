@@ -18,10 +18,30 @@
                         <i class="fa fa-id-card"></i>
                       </span>
                     </span>
-                    <input class="form-control" id="pelanggan" name="pelanggan" type="text">
+                    <input class="form-control" id="pelanggan" name="pelanggan" type="text" required>
                   </div>
                 </fieldset>
                 <fieldset class="form-group">
+                  <label>Product</label>
+                  <div class="input-group">
+                    <span class="input-group-prepend">
+                      <span class="input-group-text">
+                         <i class="fa fa-money"></i>
+                      </span>
+                    </span>
+                   <select class="form-control select2-single" name="product_type" id="product_type" required>
+					<option value=''>-PILIH-</option>
+					  <?php 
+						foreach($product->result() as $row):
+						?>
+						<option value="<?php echo $row->product_type;?>"><?php echo $row->product_type;?></option>
+						<?php
+						endforeach;
+					 ?>
+                    </select>
+                  </div>
+                </fieldset>
+				 <fieldset class="form-group">
                   <label>Denominasi</label>
                   <div class="input-group">
                     <span class="input-group-prepend">
@@ -29,11 +49,9 @@
                          <i class="fa fa-money"></i>
                       </span>
                     </span>
-                    <select class="form-control select2-single" id="select2-1" name="nominal">
-                      <option value="25">25 K</option>
-                      <option value="50">50 K</option>
-                      <option value="100">100 K</option>
-                    </select>
+                   <select class="product_id form-control select2-single" name="product_id" id="product_id" required>
+                    <option value="0">-PILIH-</option>
+					</select>
                   </div>
                 </fieldset>
               </form>
@@ -51,3 +69,27 @@
     </div>
   </div>
 </main>
+<script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.js'?>"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#product_type').change(function(){
+			var id=$(this).val();
+			$.ajax({
+				url : "<?php echo base_url();?>emoney/get",
+				method : "POST",
+				data : {id: id},
+				async : false,
+		        dataType : 'json',
+				success: function(data){
+					var html = '';
+		            var i;
+		            for(i=0; i<data.length; i++){
+		                html += '<option value='+data[i].product_id+'>'+data[i].nominal+'</option>';
+		            }
+		            $('.product_id').html(html);
+					
+				}
+			});
+		});
+	});
+</script>

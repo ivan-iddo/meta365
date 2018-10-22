@@ -78,4 +78,8 @@ public function get_all()
             return $hasil; 
         } 
     }
+	function id($id){
+    $query =$this->db->query("SELECT * FROM nominal WHERE product_id='$id'");
+      return $query->result();
+    }
 }

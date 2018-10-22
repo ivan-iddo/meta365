@@ -22,19 +22,37 @@ class Pulsa extends MY_Controller {
 	
 	public function insert()
 	{
-		$uid = $this->session->userdata('id');
+		if( $this->require_role('admin') )
+		{
+		$uid = $this->auth_data->user_id;
+		$transaction_id = $this->pulsa_model->kdotomatis();
 		$data = array(
 
 			'phone' 			=> $this->input->post("phone"),
 			'product_id' 		=> $this->input->post("product_id"),
-			'transaction_id' => $this->pulsa_model->kdotomatis(),
+			'transaction_id' => $transaction_id,
             'uid' => $uid,
 		);
 
 		$this->pulsa_model->insert($data);
-		$this->session->set_flashdata('message', 'Record Succes');
-		redirect('pulsa');
+		$id= $transaction_id;
+		$row = $this->pulsa_model->get_by($id);
+        if ($row) {
+            $data = array(
+                'product_id' => $row->product_id,
+                'phone' => $row->phone,
+                'transaction_id' => $row->transaction_id,
+            );
+			$data['date'] = date("F j, Y");
+			$data['module'] = "checkout";
+			$data['module_name'] = "Checkout";
+			$data['action'] = "checkout_pulsa";
+			$data['product'] = $this->db->get_where('product', array('product_id' => $row->product_id))->row_array();
+			$data['sell'] = $this->db->get_where('pricelist', array('product_id' => $row->product_id))->row_array();
+        $this->load->view('include/layout', $data);
 
+		}
+		}
 	}
 
 	function get(){
@@ -74,7 +92,8 @@ class Pulsa extends MY_Controller {
         }
     }
 	
-	public function checkout_pulsa($id) {
+	public function checkout_pulsa() {
+	$id=$this->input->post("id");
 	$row = $this->pulsa_model->get_by($id);
 	if ($row) {
     $request_data = array(
@@ -100,7 +119,7 @@ class Pulsa extends MY_Controller {
 	);
 	$this->transaction_model->insert($data);
 	$this->session->set_flashdata('message', 'succes Record Success');
-    redirect(site_url('pulsa/pulsa_view'));
+    redirect(site_url('pulsa'));
     }
 	}
 	

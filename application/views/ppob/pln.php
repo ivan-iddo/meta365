@@ -40,7 +40,7 @@
                     <input class="form-control" id="pelanggan" name="pelanggan" type="text" maxlength="12" required>
                   </div>
                 </fieldset>
-				 <fieldset class="form-group">
+				<fieldset class="form-group">
                   <label>Denominasi</label>
                   <div class="input-group">
                     <span class="input-group-prepend">
@@ -48,10 +48,7 @@
                          <i class="fa fa-money"></i>
                       </span>
                     </span>
-                    <select class="form-control select2-single" id="nominal" name="nominal" required>
-                      <option value="25">25 K</option>
-                      <option value="50">50 K</option>
-                      <option value="100">100 K</option>
+                    <select class="nominal form-control select2-single" id="nominal" name="nominal">
                     </select>
                   </div>
                 </fieldset>
@@ -69,3 +66,27 @@
     </div>
   </div>
 </main>
+<script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.js'?>"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#product_id').change(function(){
+			var id=$(this).val();
+			$.ajax({
+				url : "<?php echo base_url();?>ppob/get",
+				method : "POST",
+				data : {id: id},
+				async : false,
+		        dataType : 'json',
+				success: function(data){
+					var html = '';
+		            var i;
+		            for(i=0; i<data.length; i++){
+		                html += '<option value='+data[i].nominal+'>'+data[i].products_type+'</option>';
+		            }
+		            $('.nominal').html(html);
+					
+				}
+			});
+		});
+	});
+</script>

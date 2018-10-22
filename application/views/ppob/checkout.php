@@ -15,7 +15,8 @@
             <div>Invoice
               <strong>#<?php echo $transaction_id; ?></strong>
             </div>
-            <div><?php echo $date; ?></div>
+            <div><?php echo $pelanggan; ?></div>
+            <div><?php echo $date_transaction; ?></div>
           </div>
           <!-- /.col-->
         </div>
@@ -38,8 +39,7 @@
                 <td class="left"><?php echo $product['product']; ?></td>
                 <td class="left"><?php echo $product['product_name']; ?></td>
                 <td class="center">1</td>
-				<?php $pr=$sell['price_sell'];?>
-                <td class="right">Rp. <?php echo number_format($pr, 0, ',', '.')?></td>
+                <td class="right">Rp. <?php echo number_format($nominal, 0, ',', '.')?></td>
 				<?php $total=$pr*1?>
 				<td class="right">Rp. <?php echo number_format($total, 0, ',', '.') ?></td>
               </tr>

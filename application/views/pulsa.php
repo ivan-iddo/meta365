@@ -66,7 +66,7 @@
 				var b=0;
 				while(b<a){
 					if(telkomsel[b]==t){
-						var product='AS';
+						var product='Telkomsel';
 						 $('[name="product"]').val(product);
 						}++b;
 				}
