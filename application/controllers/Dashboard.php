@@ -7,6 +7,7 @@ class Dashboard extends MY_Controller {
 	{
 		if( $this->require_role('admin') )
 		{
+			
 			$data['module'] = "dashboard";
 			$data['module_name'] = "Dashboard";
 		

@@ -5,10 +5,13 @@ class Users extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+
 		// Force SSL
 		//$this->force_ssl();
 	}
+
 	// -----------------------------------------------------------------------
+
 	/**
 	 * Demonstrate being redirected to login.
 	 * If you are logged in and request this method,
@@ -75,14 +78,19 @@ class Users extends MY_Controller {
 			'email'      => 'admin@gtpay.id',
 			'auth_level' => '6', // 9 if you want to login @ examples/index.
 		];
+
 		$this->is_logged_in();
+
 		echo $this->load->view('examples/page_header', '', TRUE);
+
 		// Load resources
 		$this->load->helper('auth');
 		$this->load->model('examples/examples_model');
 		$this->load->model('examples/validation_callables');
 		$this->load->library('form_validation');
+
 		$this->form_validation->set_data( $user_data );
+
 		$validation_rules = [
 			[
 				'field' => 'username',
@@ -121,19 +129,24 @@ class Users extends MY_Controller {
 				'rules' => 'required|integer|in_list[1,6,9]'
 			]
 		];
+
 		$this->form_validation->set_rules( $validation_rules );
+
 		if( $this->form_validation->run() )
 		{
 			$user_data['passwd']     = $this->authentication->hash_passwd($user_data['passwd']);
 			$user_data['user_id']    = $this->examples_model->get_unused_id();
 			$user_data['created_at'] = date('Y-m-d H:i:s');
+
 			// If username is not used, it must be entered into the record as NULL
 			if( empty( $user_data['username'] ) )
 			{
 				$user_data['username'] = NULL;
 			}
+
 			$this->db->set($user_data)
 				->insert(db_table('user_table'));
+
 			if( $this->db->affected_rows() == 1 )
 				echo '<h1>Congratulations</h1>' . '<p>User ' . $user_data['username'] . ' was created.</p>';
 		}
@@ -141,10 +154,12 @@ class Users extends MY_Controller {
 		{
 			echo '<h1>User Creation Error(s)</h1>' . validation_errors();
 		}
+
 		echo $this->load->view('examples/page_footer', '', TRUE);
 	}
 
 	// --------------------------------------------------------------
+
 	/**
 	 * User recovery form
 	 */
@@ -152,6 +167,7 @@ class Users extends MY_Controller {
 	{
 		// Load resources
 		$this->load->model('examples/examples_model');
+
 		/// If IP or posted email is on hold, display message
 		if( $on_hold = $this->authentication->current_hold_status( TRUE ) )
 		{
@@ -169,6 +185,7 @@ class Users extends MY_Controller {
 					{
 						// Log an error if banned
 						$this->authentication->log_error( $this->input->post('email', TRUE ) );
+
 						// Show special message for banned user
 						$view_data['banned'] = 1;
 					}
@@ -184,6 +201,7 @@ class Users extends MY_Controller {
 							. $this->authentication->random_salt() 
 							. $this->authentication->random_salt() 
 							. $this->authentication->random_salt(), 0, 72 );
+
 						// Update user record with recovery code and time
 						$this->examples_model->update_user_raw_data(
 							$user_data->user_id,
@@ -192,32 +210,43 @@ class Users extends MY_Controller {
 								'passwd_recovery_date' => date('Y-m-d H:i:s')
 							]
 						);
+
 						// Set the link protocol
 						$link_protocol = USE_SSL ? 'https' : NULL;
+
 						// Set URI of link
 						$link_uri = 'examples/recovery_verification/' . $user_data->user_id . '/' . $recovery_code;
+
 						$view_data['special_link'] = anchor( 
 							site_url( $link_uri, $link_protocol ), 
 							site_url( $link_uri, $link_protocol ), 
 							'target ="_blank"' 
 						);
+
 						$view_data['confirmation'] = 1;
 					}
 				}
+
 				// There was no match, log an error, and display a message
 				else
 				{
 					// Log the error
 					$this->authentication->log_error( $this->input->post('email', TRUE ) );
+
 					$view_data['no_match'] = 1;
 				}
 			}
 		}
+
 		echo $this->load->view('examples/page_header', '', TRUE);
+
 		echo $this->load->view('examples/recover_form', ( isset( $view_data ) ) ? $view_data : '', TRUE );
+
 		echo $this->load->view('examples/page_footer', '', TRUE);
 	}
+
 	// --------------------------------------------------------------
+
 	/**
 	 * Verification of a user by email for recovery
 	 * 
@@ -235,16 +264,19 @@ class Users extends MY_Controller {
 		{
 			// Load resources
 			$this->load->model('examples/examples_model');
+
 			if( 
 				/**
 				 * Make sure that $user_id is a number and less 
 				 * than or equal to 10 characters long
 				 */
 				is_numeric( $user_id ) && strlen( $user_id ) <= 10 &&
+
 				/**
 				 * Make sure that $recovery code is exactly 72 characters long
 				 */
 				strlen( $recovery_code ) == 72 &&
+
 				/**
 				 * Try to get a hashed password recovery 
 				 * code and user salt for the user.
@@ -261,21 +293,26 @@ class Users extends MY_Controller {
 					$view_data['username']     = $recovery_data->username;
 					$view_data['recovery_code'] = $recovery_data->passwd_recovery_code;
 				}
+
 				// Link is bad so show message
 				else
 				{
 					$view_data['recovery_error'] = 1;
+
 					// Log an error
 					$this->authentication->log_error('');
 				}
 			}
+
 			// Link is bad so show message
 			else
 			{
 				$view_data['recovery_error'] = 1;
+
 				// Log an error
 				$this->authentication->log_error('');
 			}
+
 			/**
 			 * If form submission is attempting to change password 
 			 */
@@ -284,12 +321,16 @@ class Users extends MY_Controller {
 				$this->examples_model->recovery_password_change();
 			}
 		}
+
 		echo $this->load->view('examples/page_header', '', TRUE);
+
 		echo $this->load->view( 'examples/choose_password_form', $view_data, TRUE );
+
 		echo $this->load->view('examples/page_footer', '', TRUE);
 	}
 
 	// -----------------------------------------------------------------------
+
 	/**
 	 * If you are using some other way to authenticate a created user, 
 	 * such as Facebook, Twitter, etc., you will simply call the user's 
@@ -306,9 +347,11 @@ class Users extends MY_Controller {
 	{
 		// Add the username or email address of the user you want logged in:
 		$username_or_email_address = '';
+
 		if( ! empty( $username_or_email_address ) )
 		{
 			$auth_model = $this->authentication->auth_model;
+
 			// Get normal authentication data using username or email address
 			if( $auth_data = $this->{$auth_model}->get_auth_data( $username_or_email_address ) )
 			{
@@ -318,6 +361,7 @@ class Users extends MY_Controller {
 				 * no redirect is desired.
 				 */
 				$this->authentication->redirect_after_login();
+
 				// Set auth related session / cookies
 				$this->authentication->maintain_state( $auth_data );
 			}
