@@ -1,9 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-<<<<<<< HEAD:application/controllers/Users.php
 
-=======
->>>>>>> origin/BackEnd:application/controllers/Users.php
 class Users extends MY_Controller {
 	public function __construct()
 	{
@@ -23,18 +20,17 @@ class Users extends MY_Controller {
 	{
 		if( $this->require_role('admin') )
 		{
-<<<<<<< HEAD:application/controllers/Users.php
 
 			echo '<p>You are logged in!</p>';
 
 		}
 	}
 
-=======
-			echo '<p>You are logged in!</p>';
-		}
+	public function register()
+	{
+		$this->load->view('user/register','',FALSE);
 	}
->>>>>>> origin/BackEnd:application/controllers/Users.php
+
 	/**
 	 * This login method only serves to redirect a user to a 
 	 * location once they have successfully logged in. It does
@@ -46,7 +42,6 @@ class Users extends MY_Controller {
 		// Method should not be directly accessible
 		if( $this->uri->uri_string() == 'users/login')
 			show_404();
-<<<<<<< HEAD:application/controllers/Users.php
 
 		if( strtolower( $_SERVER['REQUEST_METHOD'] ) == 'post' )
 			$this->require_min_level(1);
@@ -58,21 +53,12 @@ class Users extends MY_Controller {
 
 	// --------------------------------------------------------------
 
-=======
-		if( strtolower( $_SERVER['REQUEST_METHOD'] ) == 'post' )
-			$this->require_min_level(1);
-		$this->setup_login_form();
-		$this->load->view('login','',FALSE);
-	}
-	// --------------------------------------------------------------
->>>>>>> origin/BackEnd:application/controllers/Users.php
 	/**
 	 * Log out
 	 */
 	public function logout()
 	{
 		$this->authentication->logout();
-<<<<<<< HEAD:application/controllers/Users.php
 
 		// Set redirect protocol
 		$redirect_protocol = USE_SSL ? 'https' : NULL;
@@ -80,19 +66,13 @@ class Users extends MY_Controller {
 		redirect( site_url( LOGIN_PAGE . '?' . AUTH_LOGOUT_PARAM . '=1', $redirect_protocol ) );
 	}
 
-=======
-		// Set redirect protocol
-		$redirect_protocol = USE_SSL ? 'https' : NULL;
-		redirect( site_url( LOGIN_PAGE . '?' . AUTH_LOGOUT_PARAM . '=1', $redirect_protocol ) );
-	}
->>>>>>> origin/BackEnd:application/controllers/Users.php
 	public function create_user()
 	{
 		// Customize this array for your user
 		$user_data = [
-			'username'   => 'ivan',
-			'passwd'     => 'Admin365',
-			'email'      => 'ivan@meta365.com',
+			'username'   => 'admin',
+			'passwd'     => 'Gtadmin123',
+			'email'      => 'admin@gtpay.id',
 			'auth_level' => '6', // 9 if you want to login @ examples/index.
 		];
 		$this->is_logged_in();
@@ -163,10 +143,7 @@ class Users extends MY_Controller {
 		}
 		echo $this->load->view('examples/page_footer', '', TRUE);
 	}
-<<<<<<< HEAD:application/controllers/Users.php
 
-=======
->>>>>>> origin/BackEnd:application/controllers/Users.php
 	// --------------------------------------------------------------
 	/**
 	 * User recovery form
@@ -311,10 +288,7 @@ class Users extends MY_Controller {
 		echo $this->load->view( 'examples/choose_password_form', $view_data, TRUE );
 		echo $this->load->view('examples/page_footer', '', TRUE);
 	}
-<<<<<<< HEAD:application/controllers/Users.php
 
-=======
->>>>>>> origin/BackEnd:application/controllers/Users.php
 	// -----------------------------------------------------------------------
 	/**
 	 * If you are using some other way to authenticate a created user, 
@@ -353,8 +327,4 @@ class Users extends MY_Controller {
 			echo 'Example requires that you set a username or email address.';
 		}
 	}
-<<<<<<< HEAD:application/controllers/Users.php
 }
-=======
-}
->>>>>>> origin/BackEnd:application/controllers/Users.php

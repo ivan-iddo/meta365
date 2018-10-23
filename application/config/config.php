@@ -35,10 +35,7 @@ $config['base_url'] = 'http://meta365.devel/';
 |
 */
 $config['index_page'] = '';
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/BackEnd
 /*
 |--------------------------------------------------------------------------
 | URI PROTOCOL
@@ -309,10 +306,7 @@ $config['cache_query_string'] = FALSE;
 |
 */
 $config['encryption_key'] = hex2bin('9b01b4732f9f6b7a356aa012fcc83c64');
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/BackEnd
 /*
 |--------------------------------------------------------------------------
 | Session Variables
