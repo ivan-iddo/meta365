@@ -184,29 +184,49 @@ var cardChart4 = new Chart($('#card-chart4'), {
 var mainChart = new Chart($('#main-chart'), {
   type: 'line',
   data: {
-    labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S'],
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     datasets: [{
-      label: 'My First dataset',
+      label: 'PDAM',
       backgroundColor: hexToRgba(getStyle('--info'), 10),
-      borderColor: getStyle('--info'),
-      pointHoverBackgroundColor: '#fff',
-      borderWidth: 2,
-      data: [165, 180, 70, 69, 77, 57, 125, 165, 172, 91, 173, 138, 155, 89, 50, 161, 65, 163, 160, 103, 114, 185, 125, 196, 183, 64, 137, 95, 112, 175]
-    }, {
-      label: 'My Second dataset',
-      backgroundColor: 'transparent',
       borderColor: getStyle('--success'),
       pointHoverBackgroundColor: '#fff',
       borderWidth: 2,
-      data: [92, 97, 80, 100, 86, 97, 83, 98, 87, 98, 93, 83, 87, 98, 96, 84, 91, 97, 88, 86, 94, 86, 95, 91, 98, 91, 92, 80, 83, 82]
-    }, {
-      label: 'My Third dataset',
-      backgroundColor: 'transparent',
-      borderColor: getStyle('--danger'),
+      data: [165, 180, 70, 69, 77, 57, 125, 165, 172, 91, 173, 138]
+    },{
+      label: 'PLN',
+      backgroundColor: hexToRgba(getStyle('--info'), 9),
+      borderColor: getStyle('--success'),
       pointHoverBackgroundColor: '#fff',
-      borderWidth: 1,
-      borderDash: [8, 5],
-      data: [65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65]
+      borderWidth: 2,
+      data: [92, 97, 80, 100, 86, 97, 83, 98, 87, 98, 93, 83]
+    },{
+      label: 'Pesawat',
+      backgroundColor: hexToRgba(getStyle('--info'), 8),
+      borderColor: getStyle('--success'),
+      pointHoverBackgroundColor: '#fff',
+      borderWidth: 2,
+      data: [92, 97, 80, 100, 86, 97, 83, 98, 87, 98, 93, 200]
+    },{
+      label: 'Game',
+      backgroundColor: hexToRgba(getStyle('--info'), 6),
+      borderColor: getStyle('--success'),
+      pointHoverBackgroundColor: '#fff',
+      borderWidth: 2,
+      data: [92, 97, 80, 100, 86, 97, 83, 98, 87, 98, 3, 83]
+    },{
+      label: 'KAI',
+      backgroundColor: hexToRgba(getStyle('--info'), 4),
+      borderColor: getStyle('--success'),
+      pointHoverBackgroundColor: '#fff',
+      borderWidth: 2,
+      data: [92, 97, 80, 100, 86, 97, 83, 98, 87, 98, 93, 83]
+    },{
+      label: 'Pulsa',
+      backgroundColor: hexToRgba(getStyle('--info'), 2),
+      borderColor: getStyle('--success'),
+      pointHoverBackgroundColor: '#fff',
+      borderWidth: 2,
+      data: [65, 65, 65, 65, 8, 9, 83, 98, 87, 98, 93, 83]
     }]
   },
   options: {

@@ -6,34 +6,25 @@
         <div class="col-md-6">
           <div class="card">
             <div class="card-header">
-              <i class="fa fa-tint"></i>PDAM
+              <i class="fa fa-credit-card"></i>MULTIFINANCE
             </div>
             <div class="card-body">
-			<?= form_open('ppob/insert_pdam');?>
+			<?= form_open('ppob/insert_multifinance');?>
 				<fieldset class="form-group">
-                  <label>Wilayah</label>
+                  <label>Product</label>
                   <div class="input-group">
                     <span class="input-group-prepend">
                       <span class="input-group-text">
-                        <i class="fa fa-map-marker"></i>
+                        <i class="fa fa-rouble"></i>
                       </span>
                     </span>
-                    <select class="form-control select2-single" name="product_id" id="select2-1" required>
-					<?php 
-					$propinsi=null;
-					foreach($product as $row){
-					if($propinsi != $row->product_type){
-						 if ($propinsi !== null) {
-						echo '</optgroup>';
-						}
-						echo '<optgroup label="'.$row->product_type.'">';
-						}
-						echo '<option value="'.$row->product_id.'">'.$row->product.' - '.$row->product_name.'</option>';
-						$propinsi = $row->product_type;
-					}
-					if ($propinsi !== null) {
-						echo '</optgroup>';
-					}
+                    <select class="form-control select2-single" name="product_id" id="product_id" required>
+					 <?php 
+						foreach($product as $row):
+						?>
+						<option value="<?php echo $row->product_id;?>"><?php echo $row->product_type;?></option>
+						<?php
+						endforeach;
 					 ?>
                     </select>
                   </div>

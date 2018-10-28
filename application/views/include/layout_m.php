@@ -15,37 +15,39 @@
       <li class="nav-item dropdown d-md-down-none">
         <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
           <i class="icon-envelope-letter"></i>
-          <span class="badge badge-pill badge-info">3</span>
+          <span class="badge badge-pill badge-info">4</span>
         </a>
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
           <div class="dropdown-header text-center">
-            <strong>Messages</strong>
+            <strong>You have 4 messages</strong>
           </div>
-		  <a class="dropdown-item text-center" href="<?=base_url().'pesan/';?>">
+          <a class="dropdown-item" href="#" title="Deposit dengan nominal Rp.xxxxx berhasil, silahkan cek saldo Anda">
+            <div class="message">
+              <div class="text-truncate font-weight-bold">Deposit Berhasil</div>
+              <div class="small text-muted text-truncate">Deposit dengan nominal Rp.xxxxx berhasil, silahkan cek saldo Anda</div>
+            </div>
+          </a>
+          <a class="dropdown-item" href="#" title="Transaksi dengan kode TRX091230123 berhasil">
+            <div class="message">
+              <div class="text-truncate font-weight-bold">Transaksi Berhasil</div>
+              <div class="small text-muted text-truncate">Transaksi dengan kode TRX091230123 berhasil</div>
+            </div>
+          </a>
+          <a class="dropdown-item" href="#" title="Transaksi dengan kode TRX5312230123 berhasil">
+            <div class="message">
+              <div class="text-truncate font-weight-bold">Transaksi Berhasil</div>
+              <div class="small text-muted text-truncate">Transaksi dengan kode TRX5312230123 berhasil</div>
+            </div>
+          </a>
+          <a class="dropdown-item" href="#" title="Transaksi dengan kode TRX95544230123 berhasil">
+            <div class="message">
+              <div class="text-truncate font-weight-bold">Transaksi Berhasil</div>
+              <div class="small text-muted text-truncate">Transaksi dengan kode TRX95544230123 berhasil</div>
+            </div>
+          </a>
+          <a class="dropdown-item text-center" href="#">
             <strong>View all messages</strong>
           </a>
-		  <?php
-			foreach ($pesan as $pesan) {
-		  ?>
-          <a class="dropdown-item" href="<?=base_url().'pesan/detail_pesan';?>" title=<?php echo $pesan->title ?>>
-            <small class="text-muted float-right mt-1">Today, 3:47 PM</small>
-			<div class="message">
-              <div class="fa fa-user-circle font-weight-bold"> <?php echo $pesan->username ?></div>
-              <div class="small text-muted text-truncate"><?php echo $pesan->isi ?></div>
-            </div>
-          </a>
-		  <?php
-			}
-		   ?>
-		  <br>
-		  <form method="post" action="<?=base_url().'pesan/insert';?>">
-            <div class="form-group">
-             <textarea class="form-control" id="isi" name="isi" name="body" rows="3" placeholder="Click here to reply"></textarea>
-            </div>
-            <div class="form-group text-right">
-               <button class="btn btn-success" type="submit">Send</button>
-            </div>
-         </form>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -56,11 +58,11 @@
           <div class="dropdown-header text-center">
             <strong>Account</strong>
           </div>
-          <a class="dropdown-item" href="<?=base_url().'users/profile';?>">
+          <a class="dropdown-item" href="#">
             <i class="fa fa-user"></i> Profile</a>
-          <a class="dropdown-item" href="<?=base_url().'pesan/payment';?>">
+          <a class="dropdown-item" href="#">
             <i class="fa fa-usd"></i> Payments
-            <span class="badge badge-dark">9</span>
+            <span class="badge badge-dark">42</span>
           </a>
           <div class="divider"></div>
           <a class="dropdown-item" href="<?=base_url();?>logout">
@@ -70,7 +72,7 @@
     </ul>
   </header>
   <div class="app-body">
-    <?php $this->load->view('include/sidebar');?>
+    <?php $this->load->view('include/sidebar_m');?>
     <?php (is_file(APPPATH.'views/' . $module .'.php') ? $this->load->view($module): null);?>
   </div>
 <?php $this->load->view('include/footer');?>

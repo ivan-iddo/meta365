@@ -2,13 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Users extends MY_Controller {
-	public function __construct()
-	{
-		parent::__construct();
-
-		// Force SSL
-		//$this->force_ssl();
-	}
+	function __construct() {
+        parent::__construct();
+		$this->load->model('user');
+        $this->load->library('form_validation');
+    }
 
 	// -----------------------------------------------------------------------
 
@@ -29,6 +27,25 @@ class Users extends MY_Controller {
 		}
 	}
 
+	public function profile()
+	{
+		if( $this->require_role('admin, user') )
+		{
+		$uid = $this->auth_data->user_id;
+		$prof = $this->user->get_by_id($uid);
+		if ($prof) {
+		$data = array(
+           'username' => $prof->username,
+           'email' => $prof->email,
+           'last_login' => $prof->last_login,
+           'module' => "user/profile",
+           'module_name' => "Profile",
+		);
+		$this->load->view('include/layout', $data);
+		}
+		}
+	}
+	
 	public function register()
 	{
 		$this->load->view('user/register','',FALSE);
@@ -73,29 +90,27 @@ class Users extends MY_Controller {
 	{
 		// Customize this array for your user
 		$user_data = [
-			'username'   => 'admin',
-			'passwd'     => 'Gtadmin123',
-			'email'      => 'admin@gtpay.id',
-			'auth_level' => '6', // 9 if you want to login @ examples/index.
+			'username'   => $this->input->post("username"),
+			'passwd'     => $this->input->post("password"),
+			'email'      => $this->input->post("email"),
+			'auth_level' => $this->input->post("level"), // 1,6,9 if you want to login @ examples/index.
 		];
 
 		$this->is_logged_in();
-
-		echo $this->load->view('examples/page_header', '', TRUE);
-
+		
 		// Load resources
 		$this->load->helper('auth');
 		$this->load->model('examples/examples_model');
 		$this->load->model('examples/validation_callables');
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_data( $user_data );
+		$this->form_validation->set_data($user_data);
 
 		$validation_rules = [
 			[
 				'field' => 'username',
 				'label' => 'username',
-				'rules' => 'max_length[12]|is_unique[' . db_table('user_table') . '.username]',
+				'rules' => 'is_unique[' . db_table('user_table') . '.username]',
 				'errors' => [
 					'is_unique' => 'Username already in use.'
 				]
@@ -118,7 +133,7 @@ class Users extends MY_Controller {
 			[
 				'field'  => 'email',
 				'label'  => 'email',
-				'rules'  => 'trim|required|valid_email|is_unique[' . db_table('user_table') . '.email]',
+				'rules'  => 'trim|valid_email|is_unique[' . db_table('user_table') . '.email]',
 				'errors' => [
 					'is_unique' => 'Email address already in use.'
 				]
@@ -126,7 +141,7 @@ class Users extends MY_Controller {
 			[
 				'field' => 'auth_level',
 				'label' => 'auth_level',
-				'rules' => 'required|integer|in_list[1,6,9]'
+				'rules' => 'integer|in_list[1,6,9]'
 			]
 		];
 
@@ -138,24 +153,30 @@ class Users extends MY_Controller {
 			$user_data['user_id']    = $this->examples_model->get_unused_id();
 			$user_data['created_at'] = date('Y-m-d H:i:s');
 
-			// If username is not used, it must be entered into the record as NULL
-			if( empty( $user_data['username'] ) )
-			{
-				$user_data['username'] = NULL;
-			}
-
 			$this->db->set($user_data)
 				->insert(db_table('user_table'));
+				$this->session->set_flashdata('notif', 
+			  '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> You have successfully register.
+                <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>');
+			  
 
-			if( $this->db->affected_rows() == 1 )
-				echo '<h1>Congratulations</h1>' . '<p>User ' . $user_data['username'] . ' was created.</p>';
 		}
 		else
 		{
-			echo '<h1>User Creation Error(s)</h1>' . validation_errors();
+			validation_errors();
+			$this->session->set_flashdata('notif', 
+			  '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Gagal!</strong> You have gagal register.
+                <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>');
 		}
-
-		echo $this->load->view('examples/page_footer', '', TRUE);
+		echo $this->load->view('user/register', '', TRUE);
 	}
 
 	// --------------------------------------------------------------

@@ -12,7 +12,7 @@ class pulsa_model extends CI_model{
 public function get_all()
 	{
 		$query = $this->db->select("*")
-				 ->from('game')
+				 ->from('pulsa')
 				 ->order_by('id', 'DESC')
 				 ->get();
 		return $query->result();

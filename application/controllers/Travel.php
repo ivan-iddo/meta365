@@ -5,16 +5,19 @@ class Travel extends MY_Controller {
 	
 	function __construct() {
         parent::__construct();
-		$this->load->model(array('pesawat_model','kai_model','transaction_model'));
+		$this->load->model(array('pesawat_model','kai_model','transaction_model','pesan_model'));
         $this->load->library('form_validation');
     }
 
 
 	public function kai()
 	{
-		if( $this->require_role('admin') )
+		if( $this->require_role('admin, user') )
 		{
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
 		$data = array(
+           'pesan' => $pesan,
            'module' => "travel/kai",
            'module_name' => "KAI",
 		   'product' => $this->kai_model->data(),
@@ -25,9 +28,12 @@ class Travel extends MY_Controller {
 
 	public function pesawat()
 	{
-		if( $this->require_role('admin') )
+		if( $this->require_role('admin, user') )
 		{
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
 		$data = array(
+            'pesan' => $pesan,
            'module' => "travel/pesawat",
            'module_name' => "Pesawat",
 		   'product' => $this->pesawat_model->data(),
@@ -38,6 +44,8 @@ class Travel extends MY_Controller {
 	
 	public function insert_kai()
 	{
+		if( $this->require_role('admin, user') )
+		{
 		$uid = $this->auth_data->user_id;
 		$date = $this->input->post("daterange");
 		$PP = $this->input->post("PP");
@@ -69,12 +77,12 @@ class Travel extends MY_Controller {
 			'idpel1'       =>'idpel1',
 			'idpel2'       =>'idpel2',
 			'idpel3'       =>'',
-			'product_id' => $row->product_id,
+			'kode_produk' => $row->product_id,
 			'ref1' => '',
 		);
 		$respon = $this->send($request_data);
 		$Rb 		= json_decode($respon);
-		$user = $this->session->userdata('id');
+		$uid = $this->auth_data->user_id;
 		$id = $row->transaction_id;
 		$debit       =$Rb ->SALDO_TERPOTONG;
 		$data = array(
@@ -84,6 +92,7 @@ class Travel extends MY_Controller {
 		'debit'       =>$debit,
 		'saldo'       =>$this->transaction_model->saldo($debit),
 		'status'       =>$Rb ->STATUS,
+		'uid'       =>$uid,
 		);
 		$this->transaction_model->insert($data);
 		}
@@ -103,10 +112,13 @@ class Travel extends MY_Controller {
         $this->load->view('include/layout', $data);
 
 		}
+		}
 	}
 	
 	public function insert_pesawat()
 	{
+		if( $this->require_role('admin, user') )
+		{
 		$uid = $this->auth_data->user_id;
 		$date = $this->input->post("daterange");
 		$PP = $this->input->post("PP");
@@ -130,5 +142,37 @@ class Travel extends MY_Controller {
 		$this->session->set_flashdata('message', 'Record Succes');
 		redirect('travel/pesawat');
 
+	}
+	}
+	
+	public function pesawat_m()
+	{
+		if($this->require_role('root'))
+		{
+			
+		$topup = $this->transaction_model->get_pesawat();
+		$data = array(
+            'topup' => $topup,
+			'module' => 'topup/history_m',
+			'module_name' => 'History Pesawat',
+        );
+			$this->load->view('include/layout_m', $data);
+
+		}
+	}
+	
+	public function kai_m()
+	{
+		if($this->require_role('root'))
+		{
+		$topup = $this->transaction_model->get_kai();
+		$data = array(
+            'topup' => $topup,
+			'module' => 'topup/history_m',
+			'module_name' => 'History KAI',
+        );	
+			$this->load->view('include/layout_m', $data);
+
+		}
 	}
 }

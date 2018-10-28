@@ -1,5 +1,5 @@
 <main class="main">
-  <?php $this->load->view('include/breadcrumb');?>
+  <?php $this->load->view('include/breadcrumb_m');?>
   <div class="container-fluid">
     <div class="animated fadeIn">
       <div class="card">
@@ -29,6 +29,12 @@
             <!-- /.col-->
           </div>
           <!-- /.row-->
+		  <?php
+			foreach($product as $data){
+				$product[] = $data->product_id;
+				$kredit[] = (float) $data->debit;
+			}
+		  ?>
           <div class="chart-wrapper" style="height:300px;margin-top:40px;">
             <canvas class="chart" id="main-chart" height="300"></canvas>
           </div>
@@ -77,49 +83,6 @@
             </div>
           </div>
         </div>
-      </div>
-      
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card">
-            <div class="card-header">History</div>
-            <div class="card-body">
-              
-                        <table class="table table-responsive-sm table-hover table-outline mb-0">
-                <thead class="thead-light">
-                  <tr>
-                    <th class="text-center">
-                      No.
-                    </th>
-                    <th>TRX ID</th>
-                    <th>Info</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-				<?php
-                 $no = 0;
-                 foreach ($history as $history) {
-                 ?>
-                 <tr>
-                   <td><?php echo ++$no ?></td>
-                   <td><?php echo $history->transaction_id ?></td>
-                   <td><?php echo $history->product_id ?> Saldo IDR Rp.
-				   <?php echo number_format($history->debit, 0, ',', '.')?>
-				   </td>
-                   <td><?php echo $history->date_transaction ?></td>
-                   <td><?php echo $history->status ?></td>
-                 </tr>
-                 <?php
-                 }
-                 ?>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <!-- /.col-->
       </div>
       <!-- /.row-->
     </div>

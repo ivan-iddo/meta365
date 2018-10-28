@@ -61,8 +61,7 @@
                 </tr>
               </tbody>
             </table>
-			<input type="hidden" name="id" id="id" value="<?php echo $transaction_id; ?>" /> 
-            <a class="btn btn-success" href="<?php echo $action; ?>">Checkout</a>
+			<a class="btn btn-success" href="<?php echo $action ?>/<?php echo $transaction_id ?>">Checkout</a>
           </div>
         </div>
       </div>

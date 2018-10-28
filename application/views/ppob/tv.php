@@ -6,22 +6,22 @@
         <div class="col-md-6">
           <div class="card">
             <div class="card-header">
-              <i class="fa fa-gamepad"></i>Voucher Game
+              <i class="fa fa-tv"></i>TV Berlangganan
             </div>
             <div class="card-body">
-              <?= form_open('Gamevoucher/insert');?>
-                <fieldset class="form-group">
-                  <label>Voucher Type</label>
+			<?= form_open('ppob/insert_tv');?>
+				<fieldset class="form-group">
+                  <label>Product</label>
                   <div class="input-group">
                     <span class="input-group-prepend">
                       <span class="input-group-text">
-                        <i class="fa fa-gamepad"></i>
+                        <i class="fa fa-rouble"></i>
                       </span>
                     </span>
-                    <select class="form-control select2-single" name="product_type" id="product_type" required>
-					<option value=''>-PILIH-</option>
-					  <?php 
-						foreach($product->result() as $row):
+                    <select class="form-control select2-single" name="product" id="product" required>
+					<option value="">-PILIH-</option>
+					 <?php 
+						foreach($product as $row):
 						?>
 						<option value="<?php echo $row->product_type;?>"><?php echo $row->product_type;?></option>
 						<?php
@@ -30,29 +30,30 @@
                     </select>
                   </div>
                 </fieldset>
-                <fieldset class="form-group">
-                  <label>Denominasi</label>
+				<fieldset class="form-group">
+                  <label>Product Type</label>
                   <div class="input-group">
                     <span class="input-group-prepend">
                       <span class="input-group-text">
-                         <i class="fa fa-money"></i>
+                        <i class="fa fa-product-hunt"></i>
                       </span>
                     </span>
-                    <select class="product_id form-control select2-single" name="product_id" id="product_id" required>
-                    <option value="">-PILIH-</option>
+                    <select class="product_id  form-control select2-single" name="product_id" id="product_id" required>
+                     <option value="">-PILIH-</option>
 					</select>
                   </div>
                 </fieldset>
-				  <fieldset class="form-group">
-                  <label>Phone</label>
+                <fieldset class="form-group">
+                  <label>ID Pelanggan</label>
                   <div class="input-group">
                     <span class="input-group-prepend">
                       <span class="input-group-text">
-					  <i class="fa fa-phone"></i>
+                        <i class="fa fa-id-card"></i>
                       </span>
                     </span>
-                    <input class="form-control" id="phone" name="phone" type="text" maxlength="12" required>
+                    <input class="form-control" id="pelanggan" name="pelanggan" type="text" maxlength="12" required>
                   </div>
+                </fieldset>
                 </fieldset>
             </div>
             <div class="card-footer">
@@ -71,10 +72,10 @@
 <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.js'?>"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#product_type').change(function(){
+		$('#product').change(function(){
 			var id=$(this).val();
 			$.ajax({
-				url : "<?php echo base_url();?>gamevoucher/get",
+				url : "<?php echo base_url();?>ppob/get_tv",
 				method : "POST",
 				data : {id: id},
 				async : false,

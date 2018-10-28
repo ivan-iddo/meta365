@@ -1,10 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class game_model extends CI_model{
-	public $table = 'game';
+class bpjs_model extends CI_model{
+	public $table = 'bpjs';
     public $id1 = 'transaction_id';
-	public $id = 'product_id';
+	public $id = 'pesawat_id';
     public $order = 'DESC';
 
 
@@ -12,7 +12,7 @@ class game_model extends CI_model{
 public function get_all()
 	{
 		$query = $this->db->select("*")
-				 ->from('game')
+				 ->from('bpjs')
 				 ->order_by('id', 'DESC')
 				 ->get();
 		return $query->result();
@@ -59,24 +59,13 @@ public function get_all()
     }
 	
 	function kdotomatis() {
-        $jenis = 'GM'.date('ym');
-        $query = $this->db->query("SELECT max(transaction_id) as maxID FROM game WHERE transaction_id LIKE '$jenis%'");
+        $jenis = 'BPJ'.date('ym');
+        $query = $this->db->query("SELECT max(transaction_id) as maxID FROM pesawat WHERE transaction_id LIKE '$jenis%'");
         $data = $query->row_array();
         $idMax = $data['maxID'];
-        $noUrut = (int) substr($idMax, 6, 3);
+        $noUrut = (int) substr($idMax, 7, 3);
         $noUrut++;
         $ID = $jenis . sprintf("%03s", $noUrut);
         return $ID;
     }
-
-	function data(){
-	$hasil=$this->db->query("SELECT DISTINCT product_type FROM product WHERE product='game'");
-	return $hasil;
-    }
-	
-	function id($id){
-    $query =$this->db->query("SELECT * FROM product WHERE product='game' and product_type='$id'");
-      return $query->result();
-    }
-
 }

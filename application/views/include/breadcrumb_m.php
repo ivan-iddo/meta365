@@ -5,7 +5,7 @@
   <!-- Breadcrumb Menu-->
   <li class="breadcrumb-menu d-md-down-none">
     <div class="btn-group" role="group" aria-label="Button group">
-      <a class="btn" href="<?=base_url().'dashboard';?>">
+      <a class="btn" href="<?=base_url().'menager';?>">
         <i class="icon-graph"></i>  Dashboard</a>
 	  <ul class="nav navbar-nav ml-auto">
       <li class="nav-item dropdown">
@@ -14,9 +14,7 @@
           <div class="dropdown-header text-center">
             <strong>Saldo</strong>
           </div>
-          <a class="dropdown-item" href="<?=base_url().'topup';?>">
-            <i class="fa fa-money"></i> Topup Saldo</a>
-          <a class="dropdown-item" href="<?=base_url().'topup/history';?>">
+          <a class="dropdown-item" href="<?=base_url().'topup/history_m';?>">
             <i class="fa fa-usd"></i> History
           </a>
         </div>

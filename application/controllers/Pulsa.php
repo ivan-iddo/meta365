@@ -5,16 +5,21 @@ class Pulsa extends MY_Controller {
 
 	function __construct() {
         parent::__construct();
-		$this->load->model(array('pulsa_model','transaction_model'));
+		$this->load->model(array('pesan_model','pulsa_model','transaction_model'));
         $this->load->library('form_validation');
     }
 
 	public function index()
 	{
-		if( $this->require_role('admin') )
+		if( $this->require_role('admin, user') )
 		{
-			$data['module'] = "pulsa";
-			$data['module_name'] = "Pulsa";
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$data = array(
+            'pesan' => $pesan,
+			'module' => "pulsa",
+			'module_name' => "Pulsa",
+		);
 			
 			$this->load->view('include/layout', $data);
 		}
@@ -22,7 +27,7 @@ class Pulsa extends MY_Controller {
 	
 	public function insert()
 	{
-		if( $this->require_role('admin') )
+		if( $this->require_role('admin, user') )
 		{
 		$uid = $this->auth_data->user_id;
 		$transaction_id = $this->pulsa_model->kdotomatis();
@@ -92,8 +97,7 @@ class Pulsa extends MY_Controller {
         }
     }
 	
-	public function checkout_pulsa() {
-	$id=$this->input->post("id");
+	public function checkout_pulsa($id) {
 	$row = $this->pulsa_model->get_by($id);
 	if ($row) {
     $request_data = array(
@@ -106,9 +110,9 @@ class Pulsa extends MY_Controller {
 	);
 	$respon = $this->send($request_data);
 	$Rb 		= json_decode($respon);
-	$user = $this->session->userdata('id');
 	$id = $row->transaction_id;
 	$debit       =$Rb ->SALDO_TERPOTONG;
+	$uid = $this->auth_data->user_id;
 	$data = array(
 	'product_id'       =>$Rb ->KODE_PRODUK,
 	'transaction_id'       =>$id,
@@ -116,6 +120,7 @@ class Pulsa extends MY_Controller {
 	'debit'       =>$debit,
 	'saldo'       =>$this->transaction_model->saldo($debit),
 	'status'       =>$Rb ->STATUS,
+	'uid'       => $uid,
 	);
 	$this->transaction_model->insert($data);
 	$this->session->set_flashdata('message', 'succes Record Success');
@@ -143,6 +148,22 @@ class Pulsa extends MY_Controller {
 		);
 		$this->template->display('harga_pulsa', $data);
     }
+	}
+	
+	public function pulsa_m()
+	{
+		if($this->require_role('root'))
+		{
+			
+		$topup = $this->transaction_model->get_pulsa();
+		$data = array(
+            'topup' => $topup,
+			'module' => 'topup/history_m',
+			'module_name' => 'History Pulsa',
+        );
+			$this->load->view('include/layout_m', $data);
+
+		}
 	}
 	
 	function send($data){

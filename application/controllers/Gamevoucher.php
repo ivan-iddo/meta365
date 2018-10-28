@@ -5,16 +5,19 @@ class Gamevoucher extends MY_Controller {
 
 	function __construct() {
         parent::__construct();
-		$this->load->model(array('game_model','transaction_model'));
+		$this->load->model(array('pesan_model','game_model','transaction_model'));
         $this->load->library('form_validation');
     }
 
 	public function index()
 	{
 		
-		if( $this->require_role('admin') )
+		if( $this->require_role('admin, user') )
 		{
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
 		$data = array(
+            'pesan' => $pesan,
            'module' => "gamevoucher",
            'module_name' => "Voucher Game",
 		   'product' => $this->game_model->data(),
@@ -33,7 +36,7 @@ class Gamevoucher extends MY_Controller {
 	public function insert()
 	{
 		
-		if( $this->require_role('admin') )
+		if( $this->require_role('admin, user') )
 		{
 		$uid = $this->auth_data->user_id;
 		$transaction_id = $this->game_model->kdotomatis();
@@ -110,7 +113,7 @@ class Gamevoucher extends MY_Controller {
 	);
 	$respon = $this->send($request_data);
 	$Rb 		= json_decode($respon);
-	$user = $this->session->userdata('id');
+	$uid = $this->auth_data->user_id;
 	$id = $row->transaction_id;
 	$debit       =$Rb ->SALDO_TERPOTONG;
 	$data = array(
@@ -120,11 +123,29 @@ class Gamevoucher extends MY_Controller {
 	'debit'       =>$debit,
 	'saldo'       =>$this->transaction_model->saldo($debit),
 	'status'       =>$Rb ->STATUS,
+	'uid'       =>$uid,
 	);
 	$this->transaction_model->insert($data);
 	$this->session->set_flashdata('message', 'succes Record Success');
     redirect(site_url('gamevoucher'));
     }
+	}
+	
+	public function gamevoucher_m()
+	{
+		if($this->require_role('root'))
+		{
+			
+		$topup = $this->transaction_model->get_game();
+		$data = array(
+            'topup' => $topup,
+			'module' => 'topup/history_m',
+			'module_name' => 'History Game',
+        );
+		
+			$this->load->view('include/layout_m', $data);
+
+		}
 	}
 	
 	

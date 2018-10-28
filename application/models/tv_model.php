@@ -1,10 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class kai_model extends CI_model{
-	public $table = 'kai';
+class tv_model extends CI_model{
+	public $table = 'tv';
     public $id1 = 'transaction_id';
-	public $id = 'kai_id';
+	public $id = 'product_id';
     public $order = 'DESC';
 
 
@@ -12,7 +12,7 @@ class kai_model extends CI_model{
 public function get_all()
 	{
 		$query = $this->db->select("*")
-				 ->from('kai')
+				 ->from('tv')
 				 ->order_by('id', 'DESC')
 				 ->get();
 		return $query->result();
@@ -47,30 +47,30 @@ public function get_all()
     }
 	
     // update data
-    function update($id, $data) {
+    function update($id1, $data) {
         $this->db->where($this->id, $id);
         $this->db->update($this->table, $data);
     }
 
     // delete data
     function delete($id) {
-        $this->db->where($this->id, $id);
+        $this->db->where($this->id1, $id);
         $this->db->delete($this->table);
     }
 	
 	function kdotomatis() {
-        $jenis = 'KAI'.date('ym');
-        $query = $this->db->query("SELECT max(transaction_id) as maxID FROM kai WHERE transaction_id LIKE '$jenis%'");
+        $jenis = 'TEL'.date('ym');
+        $query = $this->db->query("SELECT max(transaction_id) as maxID FROM telkom WHERE transaction_id LIKE '$jenis%'");
         $data = $query->row_array();
         $idMax = $data['maxID'];
-        $noUrut = (int) substr($idMax, 6, 3);
+        $noUrut = (int) substr($idMax, 7, 3);
         $noUrut++;
         $ID = $jenis . sprintf("%03s", $noUrut);
         return $ID;
     }
 	
-	function data(){
-    $query =$this->db->query("SELECT * FROM product WHERE product='STASIUN' ORDER BY product_type ASC ");
+	function id($id){
+    $query =$this->db->query("SELECT * FROM product WHERE product='tv' and product_type='$id' ORDER BY product_name ASC");
        if ($query->num_rows() > 0) { 
             foreach ($query->result() as $data) { 
                 $hasil[] = $data; 
@@ -78,4 +78,15 @@ public function get_all()
             return $hasil; 
         } 
     }
+	
+	function data(){
+    $query =$this->db->query("SELECT DISTINCT product_type FROM product WHERE product='tv' ORDER BY `product_type` ASC");
+       if ($query->num_rows() > 0) { 
+            foreach ($query->result() as $data) { 
+                $hasil[] = $data; 
+            } 
+            return $hasil; 
+        } 
+    }
+	
 }

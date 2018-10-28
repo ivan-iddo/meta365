@@ -48,13 +48,13 @@ public function get_all()
 	
     // update data
     function update($id, $data) {
-        $this->db->where($this->id, $id);
+        $this->db->where($this->id1, $id);
         $this->db->update($this->table, $data);
     }
 
     // delete data
     function delete($id) {
-        $this->db->where($this->id, $id);
+        $this->db->where($this->id1, $id);
         $this->db->delete($this->table);
     }
 	
@@ -63,7 +63,7 @@ public function get_all()
         $query = $this->db->query("SELECT max(transaction_id) as maxID FROM pln WHERE transaction_id LIKE '$jenis%'");
         $data = $query->row_array();
         $idMax = $data['maxID'];
-        $noUrut = (int) substr($idMax, 6, 3);
+        $noUrut = (int) substr($idMax, 7, 3);
         $noUrut++;
         $ID = $jenis . sprintf("%03s", $noUrut);
         return $ID;
@@ -78,6 +78,7 @@ public function get_all()
             return $hasil; 
         } 
     }
+	
 	function id($id){
     $query =$this->db->query("SELECT * FROM nominal WHERE product_id='$id'");
       return $query->result();

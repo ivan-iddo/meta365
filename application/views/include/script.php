@@ -12,6 +12,6 @@
     <script src="<?=base_url();?>assets/vendors/select2/js/select2.min.js"></script>
     <script src="<?=base_url();?>assets/vendors/bootstrap-daterangepicker/js/daterangepicker.js"></script>
     <script src="<?=base_url();?>assets/js/advanced-forms.js"></script>
-    <script src="<?=base_url();?>assets/js/main.js"></script>
+    <script src="<?=base_url();?>assets/js/grafik.js"></script>
   </body>
 </html>

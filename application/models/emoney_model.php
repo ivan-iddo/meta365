@@ -48,18 +48,18 @@ public function get_all()
 	
     // update data
     function update($id, $data) {
-        $this->db->where($this->id, $id);
+        $this->db->where($this->id1, $id);
         $this->db->update($this->table, $data);
     }
 
     // delete data
     function delete($id) {
-        $this->db->where($this->id, $id);
+        $this->db->where($this->id1, $id);
         $this->db->delete($this->table);
     }
 	
 	function kdotomatis() {
-        $jenis = 'GM'.date('ym');
+        $jenis = 'EM'.date('ym');
         $query = $this->db->query("SELECT max(transaction_id) as maxID FROM emoney WHERE transaction_id LIKE '$jenis%'");
         $data = $query->row_array();
         $idMax = $data['maxID'];
@@ -70,12 +70,12 @@ public function get_all()
     }
 
 	function data(){
-	$hasil=$this->db->query("SELECT DISTINCT product_type FROM emoney WHERE product='bank'");
+	$hasil=$this->db->query("SELECT DISTINCT product_type FROM emoney ORDER BY product_type ASC");
 	return $hasil;
     }
 	
 	function id($id){
-    $query =$this->db->query("SELECT * FROM emoney WHERE product='bank' and product_type='$id'");
+    $query =$this->db->query("SELECT * FROM emoney WHERE product_type='$id'");
     return $query->result();
     }
 

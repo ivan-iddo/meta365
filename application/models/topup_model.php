@@ -1,29 +1,20 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class game_model extends CI_model{
-	public $table = 'game';
-    public $id1 = 'transaction_id';
-	public $id = 'product_id';
+class topup_model extends CI_model{
+	public $table = 'topup';
+    public $id = 'transaction_id';
     public $order = 'DESC';
 
 
-
-public function get_all()
+	public function get_all()
 	{
 		$query = $this->db->select("*")
-				 ->from('game')
-				 ->order_by('id', 'DESC')
+				 ->from('topup')
 				 ->get();
 		return $query->result();
 	}
 
-	
-    // get data by id
-	function get_by($id) {
-        $this->db->where($this->id1, $id);
-        return $this->db->get($this->table)->row();
-    }
 	
     function get_by_id($id) {
         $this->db->where($this->id, $id);
@@ -48,35 +39,41 @@ public function get_all()
 	
     // update data
     function update($id, $data) {
-        $this->db->where($this->id1, $id);
+        $this->db->where($this->id, $id);
         $this->db->update($this->table, $data);
     }
 
     // delete data
     function delete($id) {
-        $this->db->where($this->id1, $id);
+        $this->db->where($this->id, $id);
         $this->db->delete($this->table);
     }
 	
+	function kode(){
+		$query = $this->db->query("SELECT * FROM product WHERE product='PULSA' and product_type='$kode' ORDER BY product_name ASC");
+
+		 if ($query->num_rows() > 0) { 
+            foreach ($query->result() as $data) { 
+                $hasil[] = $data; 
+            } 
+            return $hasil; 
+        } 
+	}
+	
 	function kdotomatis() {
-        $jenis = 'GM'.date('ym');
-        $query = $this->db->query("SELECT max(transaction_id) as maxID FROM game WHERE transaction_id LIKE '$jenis%'");
+        $jenis = 'UP'.date('ym');
+        $query = $this->db->query("SELECT max(transaction_id) as maxID FROM topup WHERE transaction_id LIKE '$jenis%'");
         $data = $query->row_array();
         $idMax = $data['maxID'];
         $noUrut = (int) substr($idMax, 6, 3);
         $noUrut++;
-        $ID = $jenis . sprintf("%03s", $noUrut);
-        return $ID;
+        $newID = $jenis . sprintf("%03s", $noUrut);
+        return $newID;
     }
 
-	function data(){
-	$hasil=$this->db->query("SELECT DISTINCT product_type FROM product WHERE product='game'");
-	return $hasil;
-    }
-	
 	function id($id){
-    $query =$this->db->query("SELECT * FROM product WHERE product='game' and product_type='$id'");
-      return $query->result();
+    $query =$this->db->query("SELECT * FROM topup WHERE uid='$id'");
+    return $query->result();
     }
 
 }

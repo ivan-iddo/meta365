@@ -6,36 +6,19 @@
         <div class="col-md-6">
           <div class="card">
             <div class="card-header">
-              <i class="fa fa-tint"></i>PDAM
+              <i class="fa fa-shield"></i>Asuransi BPJS
             </div>
             <div class="card-body">
-			<?= form_open('ppob/insert_pdam');?>
+			<?= form_open('bpjs/insert_bpjs');?>
 				<fieldset class="form-group">
-                  <label>Wilayah</label>
+                  <label>Periode</label>
                   <div class="input-group">
                     <span class="input-group-prepend">
                       <span class="input-group-text">
-                        <i class="fa fa-map-marker"></i>
+                        <i class="fa fa-calculator"></i>
                       </span>
                     </span>
-                    <select class="form-control select2-single" name="product_id" id="select2-1" required>
-					<?php 
-					$propinsi=null;
-					foreach($product as $row){
-					if($propinsi != $row->product_type){
-						 if ($propinsi !== null) {
-						echo '</optgroup>';
-						}
-						echo '<optgroup label="'.$row->product_type.'">';
-						}
-						echo '<option value="'.$row->product_id.'">'.$row->product.' - '.$row->product_name.'</option>';
-						$propinsi = $row->product_type;
-					}
-					if ($propinsi !== null) {
-						echo '</optgroup>';
-					}
-					 ?>
-                    </select>
+                    <input class="form-control" id="periode" name="periode" type="text" maxlength="12" placeholder="Periode >2 yaitu 12,1" required>
                   </div>
                 </fieldset>
                 <fieldset class="form-group">
@@ -47,6 +30,17 @@
                       </span>
                     </span>
                     <input class="form-control" id="pelanggan" name="pelanggan" type="text" maxlength="12" required>
+                  </div>
+                </fieldset>
+				<fieldset class="form-group">
+                  <label>Phone</label>
+                  <div class="input-group">
+                    <span class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="fa fa-phone"></i>
+                      </span>
+                    </span>
+                    <input class="form-control" id="phone" name="phone" type="text" maxlength="12" placeholder="081210090111" required>
                   </div>
                 </fieldset>
             </div>

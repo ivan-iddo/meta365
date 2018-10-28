@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <div class="card">
       <div class="card-header">Invoice
-        <strong>#TOPUP12312312</strong>
+        <strong>#<?php echo $transaction_id; ?></strong>
         <a class="btn btn-sm btn-info float-right" href="#" onclick="javascript:window.print();">
           <i class="fa fa-print"></i> Print</a>
         <a class="btn btn-sm btn-info float-right" href="#">
@@ -13,9 +13,9 @@
         <div class="row mb-4">
           <div class="col-sm-4">
             <div>Invoice
-              <strong>#TOPUP123123123</strong>
+              <strong>#<?php echo $transaction_id; ?></strong>
             </div>
-            <div>23 Oktober 2018</div>
+            <div><?php echo $date; ?></div>
           </div>
           <!-- /.col-->
         </div>
@@ -36,10 +36,10 @@
               <tr>
                 <td class="center">1</td>
                 <td class="left">Topup Saldo</td>
-                <td class="left">Topup Saldo Ibu Maryani</td>
+                <td class="left">Topup Saldo <?php echo $name; ?></td>
                 <td class="center">1</td>
-                <td class="right">Rp. <?php echo number_format(1000000, 0, ',', '.')?></td>
-				        <td class="right">Rp. <?php echo number_format(1000000, 0, ',', '.') ?></td>
+                <td class="right">Rp. <?php echo number_format($nominal, 0, ',', '.')?></td>
+				<td class="right">Rp. <?php echo number_format($nominal, 0, ',', '.') ?></td>
               </tr>
               <tr>
                 <td class="center">2</td>
@@ -47,7 +47,7 @@
                 <td class="left">Kode Verifikasi</td>
                 <td class="center"></td>
                 <td class="right"></td>
-                <td class="right">Rp. <?php echo number_format(345, 0, ',', '.') ?></td>
+                <td class="right">Rp. <?php echo number_format($kode, 0, ',', '.') ?></td>
               </tr>
             </tbody>
           </table>
@@ -62,12 +62,13 @@
                     <strong>Total</strong>
                   </td>
                   <td class="right">
-                    <strong>Rp. <?php echo number_format(1000345, 0, ',', '.') ?></strong>
+					<?php $total=$nominal+$kode?>
+                    <strong>Rp. <?php echo number_format($total, 0, ',', '.') ?></strong>
                   </td>
                 </tr>
               </tbody>
             </table>
-            <a class="btn btn-success" href="#">Checkout</a>
+			<a class="btn btn-success" href="<?php echo $action ?>/<?php echo $transaction_id ?>">Checkout</a>
           </div>
         </div>
       </div>

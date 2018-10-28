@@ -62,6 +62,9 @@
                 <div class="col-6 text-right">
                   <a href="<?php echo site_url('users/recover', (USE_SSL ? 'https' : NULL)); ?>" class="btn btn-link px-0" >Forgot password?</a>
                 </div>
+				<div class="col-12 text-right">
+                  <a href="<?php echo site_url('users/register'); ?>" class="btn btn-link px-0" >Create account New</a>
+                </div>
               </div>
             <?= form_close();?>
 

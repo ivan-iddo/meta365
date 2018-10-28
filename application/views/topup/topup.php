@@ -6,14 +6,14 @@
         <div class="col-md-6">
           <div class="card">
             <div class="card-header">
-              <i class="fa fa-mobile"></i> Topup
+              <i class="fa fa-money"></i> Topup
             </div>
             <div class="card-body">
-              <?= form_open('pulsa/insert');?>
+              <?= form_open('topup/insert');?>
                 <fieldset class="form-group">
                   <label>Rekening Tujuan</label>
                   <div class="input-group">
-                   <select class="form-control select2-single" name="product_id" id="product_id" required>
+                   <select class="form-control select2-single" name="no_rek" id="no_rek" required>
 				   <option value=''>-Pilih Rekening Tujuan-</option>
 				   <option value=''>Rekening Bank A</option>
 				   <option value=''>Rekening Bank B</option>
@@ -29,11 +29,10 @@
                         Rp.
                       </span>
                     </span>
-                    <input class="form-control" name="nominal" id="nominal" type="phone" placeholder="500.000" required>
+                    <input class="form-control" name="nominal" id="nominal" type="text" placeholder="500000" required>
                   </div>
                 </fieldset>
             </div>
-			<input name="product" id="product" class="form-control" type="hidden">
             <div class="card-footer">
               <button class="btn btn-sm btn-primary" type="submit">
                 <i class="fa fa-dot-circle-o"></i> Submit</button>
