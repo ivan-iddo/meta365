@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Topup extends MY_Controller {
 	function __construct() {
         parent::__construct();
-		$this->load->model(array('pesan_model','topup_model','transaction_model'));
+		$this->load->model(array('pesan_model','topup_model','transaction_model','payment_model'));
         $this->load->library('form_validation');
     }
 
@@ -14,10 +14,14 @@ class Topup extends MY_Controller {
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
 		$data = array(
             'pesan' => $pesan,
-			'module' = "topup/topup",
-			'module_name' = "Topup",
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
+			'module' => "topup/topup",
+			'module_name' => "Topup",
 		);
 			
 			$this->load->view('include/layout', $data);
@@ -29,10 +33,14 @@ class Topup extends MY_Controller {
 		if($this->require_role('admin, user'))
 		{
 		$uid = $this->auth_data->user_id;
-		$topup = $this->transaction_model->get($uid);
+		$topup = $this->transaction_model->id($uid);
 		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
 		$data = array(
             'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
             'topup' => $topup,
 			'module' => 'topup/history',
 			'module_name' => 'History Topup',
@@ -50,10 +58,14 @@ class Topup extends MY_Controller {
 		$topup = $this->transaction_model->get_topup();
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
 		$data = array(
             'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
             'topup' => $topup,
-			'module' => 'topup/history_top',
+			'module' => 'topup/history_up',
 			'module_name' => 'History Topup',
         );
 			
@@ -85,6 +97,12 @@ class Topup extends MY_Controller {
                 'kode' => $row->kode,
                 'transaction_id' => $row->transaction_id,
             );
+			$pesan = $this->pesan_model->get_by($uid);
+			$sum= $this->pesan_model->sum($uid);
+			$sum_payment= $this->payment_model->sum($uid);
+			$data['pesan'] = $pesan;
+			$data['sum'] = $sum;
+			$data['sum_payment'] = $sum_payment;
 			$data['date'] = date("F j, Y");
 			$data['name'] = $this->auth_data->username;
 			$data['module'] = "topup/topup_checkout";
@@ -106,8 +124,6 @@ class Topup extends MY_Controller {
     }
     return $string;
 	}
-	
-	
 	
 	public function checkout($id)
 	{

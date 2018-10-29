@@ -37,13 +37,17 @@
             <a class="nav-link" href="<?=base_url().'ppob/pln_m';?>">
               <i class="nav-icon fa fa-bolt"></i> View PLN</a>
           </li>
-		   <li class="nav-item">
+		  	   <li class="nav-item">
             <a class="nav-link" href="<?=base_url().'ppob/multifinance_m';?>">
-              <i class="nav-icon fa fa-bolt"></i> View Multifinance</a>
+              <i class="nav-icon fa fa-credit-card"></i> Multifinance</a>
           </li>
 		   <li class="nav-item">
             <a class="nav-link" href="<?=base_url().'ppob/telkom_m';?>">
-              <i class="nav-icon fa fa-bolt"></i> View Telkom</a>
+              <i class="nav-icon fa fa-phone"></i> Telpon</a>
+          </li>
+		   <li class="nav-item">
+            <a class="nav-link" href="<?=base_url().'ppob/tv_m';?>">
+              <i class="nav-icon fa fa-tv"></i> TV</a>
           </li>
         </ul>
       </li>
@@ -56,6 +60,10 @@
       <li class="nav-item">
         <a class="nav-link" href="<?=base_url().'gamevoucher/gamevoucher_m';?>">
           <i class="nav-icon fa fa-gamepad"></i> View Voucher Game</a>
+      </li>
+	   <li class="nav-item">
+        <a class="nav-link" href="<?=base_url().'bpjs/bpjs_m';?>">
+          <i class="nav-icon fa fa-shield"></i> Asuransi BPJS</a>
       </li>
     </ul>
   </nav>

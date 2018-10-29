@@ -12,7 +12,6 @@
                         <span class="date">
                          <span class="fa fa-paper-clip"></span> <?php echo $pesan->date ?></span>
                     </div>
-                    <div class="title"><?php echo $pesan->title ?></div>
                     <div class="description"><?php echo $pesan->isi ?></div>
 					 <?php
 					 }

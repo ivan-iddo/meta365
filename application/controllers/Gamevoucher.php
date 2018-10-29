@@ -5,7 +5,7 @@ class Gamevoucher extends MY_Controller {
 
 	function __construct() {
         parent::__construct();
-		$this->load->model(array('pesan_model','game_model','transaction_model'));
+		$this->load->model(array('pesan_model','game_model','transaction_model','payment_model'));
         $this->load->library('form_validation');
     }
 
@@ -16,8 +16,12 @@ class Gamevoucher extends MY_Controller {
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
 		$data = array(
             'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
            'module' => "gamevoucher",
            'module_name' => "Voucher Game",
 		   'product' => $this->game_model->data(),
@@ -137,7 +141,14 @@ class Gamevoucher extends MY_Controller {
 		{
 			
 		$topup = $this->transaction_model->get_game();
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
 		$data = array(
+            'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
             'topup' => $topup,
 			'module' => 'topup/history_m',
 			'module_name' => 'History Game',

@@ -28,7 +28,7 @@
                  <tr>
                    <td><?php echo ++$no ?></td>
                    <td><?php echo $topup->transaction_id ?></td>
-                   <td><?php echo $topup->product_id ?> Saldo IDR Rp. <?php echo number_format($topup->kredit, 0, ',', '.')?></td>
+                   <td><?php echo $topup->product_id ?> Saldo IDR Rp. <?php echo number_format($topup->debit, 0, ',', '.')?></td>
                    <td><?php echo $topup->date_transaction ?></td>
                    <td><?php echo $topup->status ?></td>
                    <td><?php echo $topup->username ?></td>

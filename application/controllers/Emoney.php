@@ -5,7 +5,7 @@ class emoney extends MY_Controller {
 
 	function __construct() {
         parent::__construct();
-		$this->load->model(array('emoney_model','pesan_model'));
+		$this->load->model(array('emoney_model','pesan_model','payment_model'));
         $this->load->library('form_validation');
     }
 
@@ -15,8 +15,12 @@ class emoney extends MY_Controller {
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
 		$data = array(
-           'pesan' => $pesan,
+            'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
            'module' => "emoney",
            'module_name' => "e-Money",
 		   'product' => $this->emoney_model->data(),
@@ -39,7 +43,14 @@ class emoney extends MY_Controller {
 		{
 			
 		$topup = $this->transaction_model->get_emoney();
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
 		$data = array(
+            'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
             'topup' => $topup,
 			'module' => 'topup/history_m',
 			'module_name' => 'History E- Money',

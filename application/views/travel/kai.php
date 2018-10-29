@@ -9,18 +9,17 @@
               <i class="fa fa-train"></i> Travel & Ticketing - Kereta Api Indonesia
             </div>
             <div class="card-body">
-              <?= form_open('travel/insert_kai');?>
+              <?= form_open('travel/cek_kai');?>
                 <fieldset class="form-group">
                   <label>From</label>
                   <div class="input-group">
                     <span class="input-group-prepend">
                       <span class="input-group-text">
-                        <i class="fa fa-arrow-up"></i>
+                        <i class="fa fa-arrow-down"></i>
                       </span>
                     </span>
-                    <select class="form-control select2-single" id="select2-1" name="from" required>
-                      <option selected>JKT - Jakarta</option>
-                      <?php 
+                    <select class="form-control select2-single" id="select2-2" name="from" required>
+                    <?php 
 					$propinsi=null;
 					foreach($product as $row){
 					if($propinsi != $row->product_type){
@@ -39,7 +38,7 @@
                     </select>
                   </div>
                 </fieldset>
-                <fieldset class="form-group">
+				 <fieldset class="form-group">
                   <label>To</label>
                   <div class="input-group">
                     <span class="input-group-prepend">
@@ -48,7 +47,6 @@
                       </span>
                     </span>
                     <select class="form-control select2-single" id="select2-1" name="to" required>
-                      <option>BDG - Bandung</option>
                     <?php 
 					$propinsi=null;
 					foreach($product as $row){
@@ -88,10 +86,27 @@
                     </label>
                   </div>
                 </fieldset>
+				<fieldset class="form-group">
+                  <label>Pesan</label>
+                  <div class="input-group">
+                    <span class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="fa fa-user"></i>
+                      </span>
+                    </span>
+                    <select class="form-control select2-single" id="pesan" name="pesan" required>
+                      <option value='1'>1</option>
+                      <option value='2'>2</option>
+                      <option value='3'>3</option>
+                      <option value='4'>4</option>
+                      <option value='5'>5</option>
+                    </select>
+                  </div>
+                </fieldset>
             </div>
             <div class="card-footer">
               <button class="btn btn-sm btn-primary" type="submit">
-                <i class="fa fa-dot-circle-o"></i> Submit</button>
+                <i class="fa fa-dot-circle-o"></i> Cari Tiket KAI</button>
               <button class="btn btn-sm btn-danger" type="reset">
                 <i class="fa fa-ban"></i> Reset</button>
             </div>

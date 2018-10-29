@@ -19,14 +19,19 @@ public function get_all()
 	}
 
 	function get_by($uid){
-		$query =$this->db->query("SELECT * FROM pesan,users where pesan.uid = users.user_id and uid='$uid' order by id ASC limit 3");
+		$query =$this->db->query("SELECT * FROM pesan,users where uid='$uid' and `status`='belum' and pesan.uid = users.user_id order by id DESC limit 3");
     return $query->result();
     }
 	
-    function get_by_id($id) {
-        $this->db->where($this->id, $id);
-        return $this->db->get($this->table)->row();
-    }
+    function get_by_id($uid, $id) {
+        $query =$this->db->query("SELECT * FROM pesan,users where pesan.uid = users.user_id and uid='$uid' and id='$id'");
+    return $query->result();
+	}
+	
+	function status($id) {
+        $query =$this->db->query("UPDATE pesan SET status='sudah' WHERE id='$id'");
+    return $query;
+	}
 
     function insert($data) {
       
@@ -54,5 +59,12 @@ public function get_all()
     function delete($id) {
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
+    }
+	
+	function sum($uid) {
+		 $query =$this->db->query("SELECT COUNT(`status`) as sum FROM pesan WHERE `status`='belum' and uid='$uid'");
+    $data = $query->row_array();
+	$sum = $data['sum'];
+    return $sum;
     }
 }

@@ -9,7 +9,7 @@
               <i class="fa fa-plane"></i> Travel & Ticketing - Pesawat
             </div>
             <div class="card-body">
-              <?= form_open('travel/insert_pesawat');?>
+              <?= form_open('travel/cek_pesawat');?>
 				 <fieldset class="form-group">
                   <label>From</label>
                   <div class="input-group">
@@ -19,7 +19,6 @@
                       </span>
                     </span>
                     <select class="form-control select2-single" id="select2-2" name="from" required>
-                   <option selected >BDO - Bandar Udara Internasional Husein Sastranegara, Bandung</option>
 					<?php 
 					$propinsi=null;
 					foreach($product as $row){
@@ -48,12 +47,11 @@
                       </span>
                     </span>
                     <select class="form-control select2-single" id="select2-1" name="to" required>
-                    <option selected>HLP - Bandar Udara Internasional Halim Perdanakusuma, Jakarta</option>
 					<?php 
 					$propinsi=null;
 					foreach($product as $row){
 					if($propinsi != $row->product_type){
-						 if ($propinsi !== null) {
+						if ($propinsi !== null) {
 						echo '</optgroup>';
 						}
 						echo '<optgroup label="'.$row->product_type.'">';
@@ -88,10 +86,27 @@
                     </label>
                   </div>
                 </fieldset>
+				<fieldset class="form-group">
+                  <label>Pesan</label>
+                  <div class="input-group">
+                    <span class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="fa fa-user"></i>
+                      </span>
+                    </span>
+                    <select class="form-control select2-single" id="pesan" name="pesan" required>
+                      <option value='1'>1</option>
+                      <option value='2'>2</option>
+                      <option value='3'>3</option>
+                      <option value='4'>4</option>
+                      <option value='5'>5</option>
+                    </select>
+                  </div>
+                </fieldset>
             </div>
             <div class="card-footer">
               <button class="btn btn-sm btn-primary" type="submit">
-                <i class="fa fa-dot-circle-o"></i> Submit</button>
+                <i class="fa fa-dot-circle-o"></i> Cari Tiket Pesawat</button>
               <button class="btn btn-sm btn-danger" type="reset">
                 <i class="fa fa-ban"></i> Reset</button>
             </div>

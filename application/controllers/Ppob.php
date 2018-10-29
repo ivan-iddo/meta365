@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Ppob extends MY_Controller {
 	function __construct() {
         parent::__construct();
-		$this->load->model(array('pesan_model','pdam_model','pln_model','multifinance_model','tv_model','telkom_model','transaction_model'));
+		$this->load->model(array('payment_model','pesan_model','pdam_model','pln_model','multifinance_model','tv_model','telkom_model','transaction_model'));
         $this->load->library('form_validation');
     }
 
@@ -25,8 +25,12 @@ class Ppob extends MY_Controller {
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
 		$data = array(
-            'pesan' => $pesan,
+           'pesan' => $pesan,
+           'sum' => $sum,
+           'sum_payment' => $sum_payment,
            'module' => "ppob/pdam",
            'module_name' => "PDAM",
 		   'product' => $this->pdam_model->data(),
@@ -41,8 +45,12 @@ class Ppob extends MY_Controller {
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
 		$data = array(
-            'pesan' => $pesan,
+           'pesan' => $pesan,
+           'sum' => $sum,
+           'sum_payment' => $sum_payment,
            'module' => "ppob/pln",
            'module_name' => "PLN",
 		   'product' => $this->pln_model->data(),
@@ -58,8 +66,12 @@ class Ppob extends MY_Controller {
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
 		$data = array(
-            'pesan' => $pesan,
+           'pesan' => $pesan,
+           'sum' => $sum,
+           'sum_payment' => $sum_payment,
            'module' => "ppob/multifinance",
            'module_name' => "Multifinance",
 		   'product' => $this->multifinance_model->data(),
@@ -74,8 +86,12 @@ class Ppob extends MY_Controller {
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
 		$data = array(
-            'pesan' => $pesan,
+           'pesan' => $pesan,
+           'sum' => $sum,
+           'sum_payment' => $sum_payment,
            'module' => "ppob/telkom",
            'module_name' => "Telpon",
 		   'product' => $this->telkom_model->data(),
@@ -90,8 +106,12 @@ class Ppob extends MY_Controller {
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
 		$data = array(
             'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
            'module' => "ppob/tv",
            'module_name' => "TV",
 		   'product' => $this->tv_model->data(),
@@ -184,6 +204,12 @@ class Ppob extends MY_Controller {
                 'ref2' => $ref2,
             );
 			$this->pdam_model->update($id, $data);
+			$pesan = $this->pesan_model->get_by($uid);
+			$sum= $this->pesan_model->sum($uid);
+			$sum_payment= $this->payment_model->sum($uid);
+			$data['pesan'] = $pesan;
+			$data['sum'] = $sum;
+			$data['sum_payment'] = $sum_payment;
 			$data['module'] = "ppob/checkout";
 			$data['module_name'] = "Checkout";
 			$data['action'] = "checkout_pdam";
@@ -335,6 +361,12 @@ class Ppob extends MY_Controller {
 				'ref2' => $ref2,
             );
 			$this->pln_model->update($id, $data);
+			$pesan = $this->pesan_model->get_by($uid);
+			$sum= $this->pesan_model->sum($uid);
+			$sum_payment= $this->payment_model->sum($uid);
+			$data['pesan'] = $pesan;
+			$data['sum'] = $sum;
+			$data['sum_payment'] = $sum_payment;
 			$data['module'] = "ppob/checkout";
 			$data['module_name'] = "Checkout";
 			$data['action'] = "checkout_pln";
@@ -468,6 +500,12 @@ class Ppob extends MY_Controller {
 				'ref2' => $ref2,
             );
 			$this->telkom_model->update($id, $data);
+			$pesan = $this->pesan_model->get_by($uid);
+			$sum= $this->pesan_model->sum($uid);
+			$sum_payment= $this->payment_model->sum($uid);
+			$data['pesan'] = $pesan;
+			$data['sum'] = $sum;
+			$data['sum_payment'] = $sum_payment;
 			$data['module'] = "ppob/checkout";
 			$data['module_name'] = "Checkout";
 			$data['action'] = "checkout_telkom";
@@ -598,6 +636,12 @@ class Ppob extends MY_Controller {
 				'ref2' => $ref2,
             );
 			$this->multifinance_model->update($id, $data);
+			$pesan = $this->pesan_model->get_by($uid);
+			$sum= $this->pesan_model->sum($uid);
+			$sum_payment= $this->payment_model->sum($uid);
+			$data['pesan'] = $pesan;
+			$data['sum'] = $sum;
+			$data['sum_payment'] = $sum_payment;
 			$data['module'] = "ppob/checkout";
 			$data['module_name'] = "Checkout";
 			$data['action'] = "checkout_multifinance";
@@ -728,6 +772,12 @@ class Ppob extends MY_Controller {
 				'ref2' => $ref2,
             );
 			$this->tv_model->update($id, $data);
+			$pesan = $this->pesan_model->get_by($uid);
+			$sum= $this->pesan_model->sum($uid);
+			$sum_payment= $this->payment_model->sum($uid);
+			$data['pesan'] = $pesan;
+			$data['sum'] = $sum;
+			$data['sum_payment'] = $sum_payment;
 			$data['module'] = "ppob/checkout";
 			$data['module_name'] = "Checkout";
 			$data['action'] = "checkout_tv";
@@ -811,7 +861,14 @@ class Ppob extends MY_Controller {
 		{
 			
 		$topup = $this->transaction_model->get_pdam();
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
 		$data = array(
+            'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
             'topup' => $topup,
 			'module' => 'topup/history_m',
 			'module_name' => 'History PDAM',
@@ -828,10 +885,89 @@ class Ppob extends MY_Controller {
 		{
 			
 		$topup = $this->transaction_model->get_pln();
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
 		$data = array(
+            'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
             'topup' => $topup,
 			'module' => 'topup/history_m',
 			'module_name' => 'History PLN',
+        );
+		
+			$this->load->view('include/layout_m', $data);
+
+		}
+	}
+	
+	public function telkom_m()
+	{
+		if($this->require_role('root'))
+		{
+			
+		$topup = $this->transaction_model->get_telkom();
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
+		$data = array(
+            'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
+            'topup' => $topup,
+			'module' => 'topup/history_m',
+			'module_name' => 'History Telkom',
+        );
+		
+			$this->load->view('include/layout_m', $data);
+
+		}
+	}
+	
+	public function multifinance_m()
+	{
+		if($this->require_role('root'))
+		{
+			
+		$topup = $this->transaction_model->get_multifinance();
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
+		$data = array(
+            'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
+            'topup' => $topup,
+			'module' => 'topup/history_m',
+			'module_name' => 'History Multifinance',
+        );
+		
+			$this->load->view('include/layout_m', $data);
+
+		}
+	}
+	
+	public function tv_m()
+	{
+		if($this->require_role('root'))
+		{
+			
+		$topup = $this->transaction_model->get_tv();
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
+		$data = array(
+            'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
+            'topup' => $topup,
+			'module' => 'topup/history_m',
+			'module_name' => 'History TV',
         );
 		
 			$this->load->view('include/layout_m', $data);

@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Bpjs extends MY_Controller {
 	function __construct() {
         parent::__construct();
-		$this->load->model(array('pesan_model','bpjs_model','transaction_model'));
+		$this->load->model(array('pesan_model','bpjs_model','transaction_model','payment_model'));
         $this->load->library('form_validation');
     }
 	
@@ -14,8 +14,12 @@ class Bpjs extends MY_Controller {
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
 		$data = array(
             'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
 			'module' => "bpjs",
 			'module_name' => "BPJS"
 		);
@@ -86,6 +90,12 @@ class Bpjs extends MY_Controller {
 				'ref2' => $ref2,
             );
 			$this->bpjs_model->update($id, $data);
+			$pesan = $this->pesan_model->get_by($uid);
+			$sum= $this->pesan_model->sum($uid);
+			$sum_payment= $this->payment_model->sum($uid);
+			$data['pesan'] = $pesan;
+			$data['sum'] = $sum;
+			$data['sum_payment'] = $sum_payment;
 			$data['module'] = "ppob/checkout";
 			$data['module_name'] = "Checkout";
 			$data['action'] = "checkout_tv";
@@ -149,6 +159,30 @@ class Bpjs extends MY_Controller {
             redirect(site_url('bpjs'));
         }
     }
+	
+	public function bpjs_m()
+	{
+		if($this->require_role('root'))
+		{
+			
+		$topup = $this->transaction_model->get_bpjs();
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
+		$data = array(
+            'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
+            'topup' => $topup,
+			'module' => 'topup/history_m',
+			'module_name' => 'History BPJS',
+        );
+		
+			$this->load->view('include/layout_m', $data);
+
+		}
+	}
 	
 	function send($data){
     $api_url = "https://202.43.173.234/transaksi/json.php";

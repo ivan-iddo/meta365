@@ -5,7 +5,7 @@ class Menager extends MY_Controller {
 	
 	function __construct() {
         parent::__construct();
-		$this->load->model(array('transaction_model'));
+		$this->load->model(array('transaction_model','pesan_model','payment_model'));
         $this->load->library('form_validation');
     }
 
@@ -20,8 +20,14 @@ class Menager extends MY_Controller {
 		$tiket = $this->transaction_model->sum_tiket();
 		$game = $this->transaction_model->sum_game();
 		$total = $this->transaction_model->total();
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
 		$data = array(
             'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
             'product' => $product,
             'pulsa' => $pulsa,
             'emoney' => $emoney,

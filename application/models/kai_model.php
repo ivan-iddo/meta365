@@ -1,10 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class bpjs_model extends CI_model{
-	public $table = 'bpjs';
+class kai_model extends CI_model{
+	public $table = 'kai';
     public $id1 = 'transaction_id';
-	public $id = 'pesawat_id';
+	public $id = 'kai_id';
     public $order = 'DESC';
 
 
@@ -12,7 +12,7 @@ class bpjs_model extends CI_model{
 public function get_all()
 	{
 		$query = $this->db->select("*")
-				 ->from('bpjs')
+				 ->from('kai')
 				 ->order_by('id', 'DESC')
 				 ->get();
 		return $query->result();
@@ -59,13 +59,23 @@ public function get_all()
     }
 	
 	function kdotomatis() {
-        $jenis = 'BPJ'.date('ym');
-        $query = $this->db->query("SELECT max(transaction_id) as maxID FROM bpjs WHERE transaction_id LIKE '$jenis%'");
+        $jenis = 'KAI'.date('ym');
+        $query = $this->db->query("SELECT max(transaction_id) as maxID FROM kai WHERE transaction_id LIKE '$jenis%'");
         $data = $query->row_array();
         $idMax = $data['maxID'];
         $noUrut = (int) substr($idMax, 7, 3);
         $noUrut++;
         $ID = $jenis . sprintf("%03s", $noUrut);
         return $ID;
+    }
+	
+	function data(){
+    $query =$this->db->query("SELECT * FROM product WHERE product='Stasiun' ORDER BY product_type ASC ");
+       if ($query->num_rows() > 0) { 
+            foreach ($query->result() as $data) { 
+                $hasil[] = $data; 
+            } 
+            return $hasil; 
+        } 
     }
 }

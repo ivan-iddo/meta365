@@ -27,7 +27,7 @@
 		  <?php
 			foreach ($pesan as $pesan) {
 		  ?>
-          <a class="dropdown-item" href="<?=base_url().'pesan/detail_pesan/'.$pesan->id;?>">
+          <a class="dropdown-item" href="<?=base_url().'pesan/dpesan/'.$pesan->id;?>">
             <small class="text-muted float-right mt-1">Today, 3:47 PM</small>
 			<div class="message">
               <div class="fa fa-user-circle font-weight-bold"> <?php echo $pesan->username ?></div>
@@ -38,7 +38,7 @@
 			}
 		   ?>
 		  <br>
-		  <form method="post" action="<?=base_url().'pesan/insert';?>">
+		  <form method="post" action="<?=base_url().'pesan/insert_admin';?>">
             <div class="form-group">
              <textarea class="form-control" id="isi" name="isi" name="body" rows="3" placeholder="Click here to reply"></textarea>
             </div>
@@ -58,7 +58,7 @@
           </div>
           <a class="dropdown-item" href="<?=base_url().'users/profile';?>">
             <i class="fa fa-user"></i> Profile</a>
-          <a class="dropdown-item" href="<?=base_url().'pesan/payment';?>">
+          <a class="dropdown-item" href="<?=base_url().'pesan/payment_admin';?>">
             <i class="fa fa-usd"></i> Payments
             <span class="badge badge-dark"><?php echo $sum_payment ?></span>
           </a>
@@ -70,7 +70,7 @@
     </ul>
   </header>
   <div class="app-body">
-    <?php $this->load->view('include/sidebar');?>
+    <?php $this->load->view('include/admin/sidebar');?>
     <?php (is_file(APPPATH.'views/' . $module .'.php') ? $this->load->view($module): null);?>
   </div>
 <?php $this->load->view('include/footer');?>
