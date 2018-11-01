@@ -10,7 +10,6 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -1030,7 +1029,6 @@ ALTER TABLE `tv`
 --
 ALTER TABLE `username_or_email_on_hold`
   ADD PRIMARY KEY (`ai`);
-
 --
 -- Indexes for table `users`
 --
@@ -1038,11 +1036,9 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `username` (`username`);
-
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
 --
 -- AUTO_INCREMENT for table `acl`
 --
@@ -1096,7 +1092,6 @@ ALTER TABLE `username_or_email_on_hold`
 --
 -- Constraints for dumped tables
 --
-
 --
 -- Constraints for table `acl`
 --
