@@ -12,7 +12,7 @@ class Gamevoucher extends MY_Controller {
 	public function index()
 	{
 		
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
@@ -30,6 +30,27 @@ class Gamevoucher extends MY_Controller {
 		}
 	}
 	
+	public function admin()
+	{
+		
+		if( $this->require_role('admin') )
+		{
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
+		$data = array(
+            'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
+           'module' => "gamevoucher",
+           'module_name' => "Voucher Game",
+		   'product' => $this->game_model->data(),
+		);			
+			$this->load->view('include/admin/layout', $data);
+		}
+	}
+	
 	public function get()
 	{
 		$id = $this->input->post("id");
@@ -40,7 +61,7 @@ class Gamevoucher extends MY_Controller {
 	public function insert()
 	{
 		
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('admin, user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$transaction_id = $this->game_model->kdotomatis();
@@ -61,6 +82,9 @@ class Gamevoucher extends MY_Controller {
                 'phone' => $row->phone,
                 'transaction_id' => $row->transaction_id,
             );
+			$data['pesan'] = $this->pesan_model->get_by($uid);
+			$data['sum']= $this->pesan_model->sum($uid);
+			$data['sum_payment']= $this->payment_model->sum($uid);
 			$data['date'] = date("F j, Y");
 			$data['module'] = "checkout";
 			$data['module_name'] = "Checkout";
@@ -73,24 +97,9 @@ class Gamevoucher extends MY_Controller {
 	}
 
 
-	public function view($id) {
-        $row = $this->game_model->get_by($id);
-        if ($row) {
-            $data = array(
-                'product_id' => $row->product_id,
-                'phone' => $row->phone,
-                'transaction_id' => $row->transaction_id,
-            );
-			$data['transaction'] = $this->db->get_where('transaction', array('transaction_id' => $row->transaction_id))->row_array();
-			$data['product'] = $this->db->get_where('product', array('product_id' => $row->product_id))->row_array();
-            $this->template->display('pulsa/pulsa_view', $data);
-        } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('gamevoucher'));
-        }
-    }
-
     public function delete($id) {
+		if( $this->require_role('admin, user, businesspartner') )
+		{
         $row = $this->game_model->get_by($id);
 
         if ($row) {
@@ -101,9 +110,12 @@ class Gamevoucher extends MY_Controller {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('gamevoucher'));
         }
+        }
     }
 	
     public function checkout_game() {
+	if( $this->require_role('admin, user, businesspartner') )
+	{
 	$id=$this->input->post("id");
 	$row = $this->game_model->get_by($id);
 	if ($row) {
@@ -132,6 +144,7 @@ class Gamevoucher extends MY_Controller {
 	$this->transaction_model->insert($data);
 	$this->session->set_flashdata('message', 'succes Record Success');
     redirect(site_url('gamevoucher'));
+    }
     }
 	}
 	

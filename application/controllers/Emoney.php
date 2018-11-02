@@ -11,7 +11,7 @@ class emoney extends MY_Controller {
 
 	public function index()
 	{
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
@@ -30,6 +30,27 @@ class emoney extends MY_Controller {
 		}
 	}
 	
+	public function admin()
+	{
+		if( $this->require_role('admin') )
+		{
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
+		$data = array(
+            'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
+           'module' => "emoney",
+           'module_name' => "e-Money",
+		   'product' => $this->emoney_model->data(),
+		);
+
+			$this->load->view('include/admin/layout', $data);
+		}
+	}
+	
 	public function get()
 	{
 		$id = $this->input->post("id");
@@ -39,7 +60,7 @@ class emoney extends MY_Controller {
 	
 	public function emoney_m()
 	{
-		if($this->require_role('root'))
+		if( $this->require_role('menager, businesspartner') )
 		{
 			
 		$topup = $this->transaction_model->get_emoney();

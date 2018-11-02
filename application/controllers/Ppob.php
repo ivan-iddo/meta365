@@ -10,7 +10,7 @@ class Ppob extends MY_Controller {
 
 	public function index()
 	{
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('admin, user, businesspartner') )
 		{
 			
 			$data['module'] = "ppob";
@@ -21,7 +21,7 @@ class Ppob extends MY_Controller {
 
 	public function pdam()
 	{
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
@@ -38,10 +38,29 @@ class Ppob extends MY_Controller {
 			$this->load->view('include/layout', $data);
 		}
 	}
+	public function pdam_admin()
+	{
+		if( $this->require_role('admin') )
+		{
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
+		$data = array(
+           'pesan' => $pesan,
+           'sum' => $sum,
+           'sum_payment' => $sum_payment,
+           'module' => "ppob/pdam",
+           'module_name' => "PDAM",
+		   'product' => $this->pdam_model->data(),
+		);
+			$this->load->view('include/admin/layout', $data);
+		}
+	}
 
 	public function pln()
 	{
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
@@ -58,11 +77,30 @@ class Ppob extends MY_Controller {
 			$this->load->view('include/layout', $data);
 		}
 	}
+	public function pln_admin()
+	{
+		if( $this->require_role('admin') )
+		{
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
+		$data = array(
+           'pesan' => $pesan,
+           'sum' => $sum,
+           'sum_payment' => $sum_payment,
+           'module' => "ppob/pln",
+           'module_name' => "PLN",
+		   'product' => $this->pln_model->data(),
+		);
+			$this->load->view('include/admin/layout', $data);
+		}
+	}
 
 	
 	public function multifinance()
 	{
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
@@ -79,10 +117,29 @@ class Ppob extends MY_Controller {
 			$this->load->view('include/layout', $data);
 		}
 	}
+	public function multifinance_admin()
+	{
+		if( $this->require_role('admin') )
+		{
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
+		$data = array(
+           'pesan' => $pesan,
+           'sum' => $sum,
+           'sum_payment' => $sum_payment,
+           'module' => "ppob/multifinance",
+           'module_name' => "Multifinance",
+		   'product' => $this->multifinance_model->data(),
+		);
+			$this->load->view('include/admin/layout', $data);
+		}
+	}
 	
 	public function telkom()
 	{
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
@@ -99,10 +156,29 @@ class Ppob extends MY_Controller {
 			$this->load->view('include/layout', $data);
 		}
 	}
+	public function telkom_admin()
+	{
+		if( $this->require_role('admin') )
+		{
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
+		$data = array(
+           'pesan' => $pesan,
+           'sum' => $sum,
+           'sum_payment' => $sum_payment,
+           'module' => "ppob/telkom",
+           'module_name' => "Telpon",
+		   'product' => $this->telkom_model->data(),
+		);
+			$this->load->view('include/admin/layout', $data);
+		}
+	}
 	
 	public function tv()
 	{
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
@@ -117,6 +193,26 @@ class Ppob extends MY_Controller {
 		   'product' => $this->tv_model->data(),
 		);
 			$this->load->view('include/layout', $data);
+		}
+	}
+	
+	public function tv_admin()
+	{
+		if( $this->require_role('admin') )
+		{
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
+		$data = array(
+            'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
+           'module' => "ppob/tv",
+           'module_name' => "TV",
+		   'product' => $this->tv_model->data(),
+		);
+			$this->load->view('include/admin/layout', $data);
 		}
 	}
 	
@@ -136,7 +232,7 @@ class Ppob extends MY_Controller {
 	
 	public function insert_pdam()
 	{
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('admin, user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$product 		= $this->input->post("product_id");
@@ -221,24 +317,9 @@ class Ppob extends MY_Controller {
 		}
 	}
 	
-	public function view_pdam($id) {
-        $row = $this->pdam_model->get_by($id);
-        if ($row) {
-            $data = array(
-                'idpel1' => $row->idpel1,
-                'idpel2' => $row->idpel2,
-                'transaction_id' => $row->transaction_id,
-            );
-			$data['transaction'] = $this->db->get_where('transaction', array('transaction_id' => $row->transaction_id))->row_array();
-			$data['product'] = $this->db->get_where('product', array('product_id' => $row->product_id))->row_array();
-            $this->template->display('ppob/pln_view', $data);
-        } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('ppob/pdam'));
-        }
-    }
-	
 	public function delete_pdam($id) {
+	if( $this->require_role('admin, user, businesspartner') )
+		{
         $row = $this->pdam_model->get_by($id);
 
         if ($row) {
@@ -249,9 +330,12 @@ class Ppob extends MY_Controller {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('ppob/pdam'));
         }
+        }
     }
 	
 	function checkout_pdam($id) {
+	if( $this->require_role('admin, user, businesspartner') )
+		{
 		$row = $this->pdam_model->get_by($id);
         if ($row) {
         $data_reques = array(
@@ -274,11 +358,12 @@ class Ppob extends MY_Controller {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('ppob/pdam'));
         }
+        }
     }
 	
 	public function insert_pln()
 	{
-		if( $this->require_role('admin, user') )
+	if( $this->require_role('admin, user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$idpel 		= $this->input->post("pelanggan");
@@ -380,24 +465,10 @@ class Ppob extends MY_Controller {
 
 	}
 	
-	public function view_pln($id) {
-        $row = $this->pln_model->get_by($id);
-        if ($row) {
-            $data = array(
-                'idpel1' => $row->idpel1,
-                'idpel2' => $row->idpel2,
-                'transaction_id' => $row->transaction_id,
-            );
-			$data['transaction'] = $this->db->get_where('transaction', array('transaction_id' => $row->transaction_id))->row_array();
-			$data['product'] = $this->db->get_where('product', array('product_id' => $row->product_id))->row_array();
-            $this->template->display('ppob/pln_view', $data);
-        } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('ppob/pln'));
-        }
-    }
 	
 	public function delete_pln($id) {
+	if( $this->require_role('admin, user, businesspartner') )
+		{
         $row = $this->pln_model->get_by($id);
 
         if ($row) {
@@ -408,10 +479,13 @@ class Ppob extends MY_Controller {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('ppob/pln'));
         }
+        }
     }
 	
 	
 	function checkout_pln($id) {
+	if( $this->require_role('admin, user, businesspartner') )
+		{
 		$row = $this->pln_model->get_by($id);
         if ($row) {
         $data_reques = array(
@@ -435,11 +509,12 @@ class Ppob extends MY_Controller {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('ppob/pln'));
         }
+        }
     }
 	
 	public function insert_telkom()
 	{
-		if( $this->require_role('admin, user') )
+	if( $this->require_role('admin, user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$product_id = $this->input->post("product_id");
@@ -518,24 +593,10 @@ class Ppob extends MY_Controller {
 
 	}
 	
-	public function view_telkom($id) {
-        $row = $this->telkom_model->get_by($id);
-        if ($row) {
-            $data = array(
-                'idpel1' => $row->idpel1,
-                'idpel2' => $row->idpel2,
-                'transaction_id' => $row->transaction_id,
-            );
-			$data['transaction'] = $this->db->get_where('transaction', array('transaction_id' => $row->transaction_id))->row_array();
-			$data['product'] = $this->db->get_where('product', array('product_id' => $row->product_id))->row_array();
-            $this->template->display('ppob/pln_telkom', $data);
-        } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('ppob/telkom'));
-        }
-    }
 	
 	public function delete_telkom($id) {
+	if( $this->require_role('admin, user, businesspartner') )
+		{
         $row = $this->telkom_model->get_by($id);
 
         if ($row) {
@@ -546,10 +607,13 @@ class Ppob extends MY_Controller {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('ppob/telkom'));
         }
+        }
     }
 	
 	
 	function checkout_telkom($id) {
+	if( $this->require_role('admin, user, businesspartner') )
+		{
 		$row = $this->telkom_model->get_by($id);
         if ($row) {
         $data_reques = array(
@@ -573,11 +637,12 @@ class Ppob extends MY_Controller {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('ppob/telkom'));
         }
+        }
     }
 	
 	public function insert_multifinance()
 	{
-		if( $this->require_role('admin, user') )
+	if( $this->require_role('admin, user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$idpel 		= $this->input->post("pelanggan");
@@ -654,24 +719,10 @@ class Ppob extends MY_Controller {
 
 	}
 	
-	public function view_multifinance($id) {
-        $row = $this->multifinance_model->get_by($id);
-        if ($row) {
-            $data = array(
-                'idpel1' => $row->idpel1,
-                'idpel2' => $row->idpel2,
-                'transaction_id' => $row->transaction_id,
-            );
-			$data['transaction'] = $this->db->get_where('transaction', array('transaction_id' => $row->transaction_id))->row_array();
-			$data['product'] = $this->db->get_where('product', array('product_id' => $row->product_id))->row_array();
-            $this->template->display('ppob/view_multifinance', $data);
-        } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('ppob/multifinance'));
-        }
-    }
 	
 	public function delete_multifinance($id) {
+	if( $this->require_role('admin, user, businesspartner') )
+		{
         $row = $this->multifinance_model->get_by($id);
 
         if ($row) {
@@ -682,10 +733,13 @@ class Ppob extends MY_Controller {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('ppob/multifinance'));
         }
+        }
     }
 	
 	
 	function checkout_multifinance($id) {
+	if( $this->require_role('admin, user, businesspartner') )
+		{
 		$row = $this->multifinance_model->get_by($id);
         if ($row) {
         $data_reques = array(
@@ -709,11 +763,12 @@ class Ppob extends MY_Controller {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('ppob/multifinance'));
         }
+        }
     }
 	
 	public function insert_tv()
 	{
-		if( $this->require_role('admin, user') )
+	if( $this->require_role('admin, user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$idpel 		= $this->input->post("pelanggan");
@@ -790,24 +845,10 @@ class Ppob extends MY_Controller {
 
 	}
 	
-	public function view_tv($id) {
-        $row = $this->tv_model->get_by($id);
-        if ($row) {
-            $data = array(
-                'idpel1' => $row->idpel1,
-                'idpel2' => $row->idpel2,
-                'transaction_id' => $row->transaction_id,
-            );
-			$data['transaction'] = $this->db->get_where('transaction', array('transaction_id' => $row->transaction_id))->row_array();
-			$data['product'] = $this->db->get_where('product', array('product_id' => $row->product_id))->row_array();
-            $this->template->display('ppob/view_tv', $data);
-        } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('ppob/tv'));
-        }
-    }
-	
+
 	public function delete_tv($id) {
+	if( $this->require_role('admin, user, businesspartner') )
+		{
         $row = $this->tv_model->get_by($id);
 
         if ($row) {
@@ -818,10 +859,13 @@ class Ppob extends MY_Controller {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('ppob/tv'));
         }
+        }
     }
 	
 	
 	function checkout_tv($id) {
+	if( $this->require_role('admin, user, businesspartner') )
+		{
 		$row = $this->tv_model->get_by($id);
         if ($row) {
         $data_reques = array(
@@ -845,6 +889,7 @@ class Ppob extends MY_Controller {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('ppob/tv'));
         }
+        }
     }
 	
 	
@@ -857,9 +902,8 @@ class Ppob extends MY_Controller {
 	
 	public function pdam_m()
 	{
-		if($this->require_role('root'))
-		{
-			
+	if( $this->require_role('menager, businesspartner') )
+		{	
 		$topup = $this->transaction_model->get_pdam();
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
@@ -881,9 +925,8 @@ class Ppob extends MY_Controller {
 	
 	public function pln_m()
 	{
-		if($this->require_role('root'))
+	if( $this->require_role('menager, businesspartner') )
 		{
-			
 		$topup = $this->transaction_model->get_pln();
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
@@ -905,9 +948,8 @@ class Ppob extends MY_Controller {
 	
 	public function telkom_m()
 	{
-		if($this->require_role('root'))
-		{
-			
+	if( $this->require_role('menager, businesspartner') )
+		{	
 		$topup = $this->transaction_model->get_telkom();
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
@@ -929,9 +971,8 @@ class Ppob extends MY_Controller {
 	
 	public function multifinance_m()
 	{
-		if($this->require_role('root'))
-		{
-			
+	if( $this->require_role('menager, businesspartner') )
+		{	
 		$topup = $this->transaction_model->get_multifinance();
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
@@ -953,9 +994,8 @@ class Ppob extends MY_Controller {
 	
 	public function tv_m()
 	{
-		if($this->require_role('root'))
-		{
-			
+	if( $this->require_role('menager, businesspartner') )
+		{	
 		$topup = $this->transaction_model->get_tv();
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);

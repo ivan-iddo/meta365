@@ -37,15 +37,6 @@
 		  <?php
 			}
 		   ?>
-		  <br>
-		  <form method="post" action="<?=base_url().'pesan/insert_admin';?>">
-            <div class="form-group">
-             <textarea class="form-control" id="isi" name="isi" name="body" rows="3" placeholder="Click here to reply"></textarea>
-            </div>
-            <div class="form-group text-right">
-               <button class="btn btn-success" type="submit">Send</button>
-            </div>
-         </form>
         </div>
       </li>
       <li class="nav-item dropdown">

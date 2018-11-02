@@ -10,7 +10,7 @@ class Bpjs extends MY_Controller {
 	
 	public function index()
 	{
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
@@ -28,9 +28,29 @@ class Bpjs extends MY_Controller {
 		}
 	}
 	
+	public function admin()
+	{
+		if( $this->require_role('admin') )
+		{
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
+		$data = array(
+            'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
+			'module' => "bpjs",
+			'module_name' => "BPJS"
+		);
+		
+			$this->load->view('include/admin/layout', $data);
+		}
+	}
+	
 		public function insert_bpjs()
 	{
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('admin, user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$idpel 		= $this->input->post("pelanggan");
@@ -108,24 +128,9 @@ class Bpjs extends MY_Controller {
 
 	}
 	
-	public function view_bpjs($id) {
-        $row = $this->bpjs_model->get_by($id);
-        if ($row) {
-            $data = array(
-                'idpel1' => $row->idpel1,
-                'idpel2' => $row->idpel2,
-                'transaction_id' => $row->transaction_id,
-            );
-			$data['transaction'] = $this->db->get_where('transaction', array('transaction_id' => $row->transaction_id))->row_array();
-			$data['product'] = $this->db->get_where('product', array('product_id' => $row->product_id))->row_array();
-            $this->template->display('bpjs', $data);
-        } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('bpjs'));
-        }
-    }
-	
 	public function delete_bpjs($id) {
+	if( $this->require_role('admin, user, businesspartner') )
+		{
         $row = $this->bpjs_model->get_by($id);
 
         if ($row) {
@@ -136,8 +141,11 @@ class Bpjs extends MY_Controller {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('bpjs'));
         }
+        }
     }
 	function checkout_bpjs($id) {
+	if( $this->require_role('admin, user, businesspartner') )
+		{
 		$row = $this->bpjs_model->get_by($id);
         if ($row) {
         $data_reques = array(
@@ -158,11 +166,12 @@ class Bpjs extends MY_Controller {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('bpjs'));
         }
+        }
     }
 	
 	public function bpjs_m()
 	{
-		if($this->require_role('root'))
+		if($this->require_role('menager, businesspartner'))
 		{
 			
 		$topup = $this->transaction_model->get_bpjs();

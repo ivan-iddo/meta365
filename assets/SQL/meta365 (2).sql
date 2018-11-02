@@ -3,12 +3,13 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2018 at 01:21 AM
+-- Generation Time: Nov 02, 2018 at 10:25 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -76,9 +77,13 @@ CREATE TABLE `auth_sessions` (
 --
 
 INSERT INTO `auth_sessions` (`id`, `user_id`, `login_time`, `modified_at`, `ip_address`, `user_agent`) VALUES
-('39r0p2vp34qj5hftbksevfg956hl692i', 3614488494, '2018-10-27 16:22:20', '2018-10-27 17:04:01', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('7qgnu389ttr331k3vug3unfim40dc7te', 3614488494, '2018-10-27 21:41:11', '2018-10-27 21:01:26', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('2kmums0iv51p3rpgrj800ie57lr29aku', 3614488494, '2018-10-27 23:23:43', '2018-10-27 23:19:18', '::1', 'Chrome 55.0.2883.87 on Windows 7');
+('7koqphp8utvoe9nls4an3ggs8qk7nc9l', 3614488494, '2018-11-02 22:09:28', '2018-11-02 21:09:28', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('lb6f5m4gmvb3ebagcvqpleq7cuiu3nkh', 730510257, '2018-11-02 22:20:47', '2018-11-02 21:20:47', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('rclf8e1nclq318ok5oi2fnd1b2oikur2', 730510257, '2018-11-02 22:21:13', '2018-11-02 21:21:13', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('cs5u0m1dm8vppabtf2qvigfr4mcvjip4', 1301294496, '2018-11-02 22:22:36', '2018-11-02 21:22:36', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('elq7mevs464b2thcujoiosfgf41r1tq7', 3614488494, '2018-11-02 21:55:17', '2018-11-02 21:08:34', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('o0hh019b8ph261vq76ll86e0s56shd7n', 3614488494, '2018-11-02 21:25:17', '2018-11-02 20:37:34', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('misk8ft2ua1ft1ikcpm9ub0kq23j4684', 608603457, '2018-11-02 20:00:56', '2018-11-02 19:34:45', '::1', 'Chrome 55.0.2883.87 on Windows 7');
 
 -- --------------------------------------------------------
 
@@ -205,7 +210,8 @@ CREATE TABLE `game` (
 --
 
 INSERT INTO `game` (`phone`, `product_id`, `transaction_id`, `uid`) VALUES
-('083834129812', 'BSF25H', 'GM1810005', '2147484848');
+('083834129812', 'BSF25H', 'GM1810005', '2147484848'),
+('081234129812', 'GAS100H', 'GM1811001', '608603457');
 
 -- --------------------------------------------------------
 
@@ -231,15 +237,24 @@ CREATE TABLE `kai` (
   `date_go` date NOT NULL,
   `date_back` date NOT NULL,
   `transaction_id` varchar(20) NOT NULL,
-  `uid` varchar(11) NOT NULL
+  `uid` varchar(11) NOT NULL,
+  `harga` varchar(15) NOT NULL,
+  `kai` varchar(60) NOT NULL,
+  `ref2` varchar(20) NOT NULL,
+  `gender` enum('L','P') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `kai`
 --
 
-INSERT INTO `kai` (`from`, `to`, `date_go`, `date_back`, `transaction_id`, `uid`) VALUES
-('BDG-BANDUNG', 'JKT-JAKARTA', '2018-10-01', '0000-00-00', 'KAI1810001', '3614488494');
+INSERT INTO `kai` (`from`, `to`, `date_go`, `date_back`, `transaction_id`, `uid`, `harga`, `kai`, `ref2`, `gender`) VALUES
+('BDG-BANDUNG', 'JKT-JAKARTA', '2018-10-01', '0000-00-00', 'KAI1810001', '3614488494', '0', '0', '0', 'L'),
+('ABR', 'ABR', '0000-00-00', '0000-00-00', 'KAI1810002', '3614488494', '0', '0', '0', 'L'),
+('PLD', 'ABR', '0000-00-00', '0000-00-00', 'KAI1810003', '3614488494', '0', '0', '0', 'L'),
+('PLD', 'ABR', '0000-00-00', '0000-00-00', 'KAI1810004', '3614488494', '0', '0', '0', 'L'),
+('PLD', 'CB', '0000-00-00', '0000-00-00', 'KAI1810005', '3614488494', '0', '0', '0', 'L'),
+('PLD', 'ABR', '0000-00-00', '0000-00-00', 'KAI1811001', '608603457', '', '', '', 'L');
 
 -- --------------------------------------------------------
 
@@ -259,7 +274,7 @@ CREATE TABLE `login_errors` (
 --
 
 INSERT INTO `login_errors` (`ai`, `username_or_email`, `ip_address`, `time`) VALUES
-(19, 'admin', '::1', '2018-10-27 19:55:21');
+(23, 'bangsa', '::1', '2018-11-02 22:21:02');
 
 -- --------------------------------------------------------
 
@@ -318,6 +333,29 @@ INSERT INTO `nominal` (`id`, `product_id`, `products_type`, `nominal`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `payment`
+--
+
+CREATE TABLE `payment` (
+  `uid_pengirim` varchar(11) NOT NULL,
+  `isi` varchar(1000) NOT NULL,
+  `date` datetime NOT NULL,
+  `uid` varchar(11) NOT NULL,
+  `status` enum('belum','sudah') NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`uid_pengirim`, `isi`, `date`, `uid`, `status`, `id`) VALUES
+('3614488494', 'Transaksi dengan kode PLN1810002 berhasil', '2018-10-28 04:09:00', '3614488494', 'sudah', 1),
+('3614488494', 'Transaksi dengan kode PAM1810001 berhasil', '2018-10-31 04:00:00', '3614488494', 'sudah', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pdam`
 --
 
@@ -339,7 +377,8 @@ CREATE TABLE `pdam` (
 --
 
 INSERT INTO `pdam` (`idpel1`, `idpel2`, `product_id`, `transaction_id`, `uid`, `pelanggan`, `nominal`, `struk`, `date_transaction`, `ref2`) VALUES
-('9889888', '', 'WAAETRA', 'PAM1810001', '3614488494', '', '', '', '0000-00-00 00:00:00', '');
+('9889888', '', 'WAAETRA', 'PAM1810001', '3614488494', '', '', '', '0000-00-00 00:00:00', ''),
+('981211111111', '', 'WADPSR', 'PAM1811001', '608603457', '', '', '', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -349,22 +388,25 @@ INSERT INTO `pdam` (`idpel1`, `idpel2`, `product_id`, `transaction_id`, `uid`, `
 
 CREATE TABLE `pesan` (
   `id` int(11) NOT NULL,
-  `uid` varchar(11) NOT NULL,
-  `transaction_id` varchar(15) NOT NULL,
-  `title` varchar(225) NOT NULL,
+  `uid_pengirim` varchar(11) NOT NULL,
   `isi` varchar(1000) NOT NULL,
-  `date` datetime NOT NULL
+  `date` datetime NOT NULL,
+  `uid` varchar(11) NOT NULL,
+  `status` enum('belum','sudah') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pesan`
 --
 
-INSERT INTO `pesan` (`id`, `uid`, `transaction_id`, `title`, `isi`, `date`) VALUES
-(1, '2147484848', 'PLN1810002', 'Transaksi dengan kode PLN1810002 berhasil', 'Transaksi dengan kode PLN1810002 berhasil', '2018-10-28 04:09:00'),
-(2, '3614488494', 'PAM1810001', 'Transaksi dengan kode PAM1810001 berhasil', 'Transaksi dengan kode PAM1810001 berhasil', '2018-10-31 04:00:00'),
-(3, '3614488494', '', '', 'hay bang', '2018-10-27 23:33:54'),
-(4, '3614488494', '', '', 'Trima Kasih', '2018-10-28 00:56:10');
+INSERT INTO `pesan` (`id`, `uid_pengirim`, `isi`, `date`, `uid`, `status`) VALUES
+(1, '2147484848', 'Transaksi dengan kode PLN1810002 berhasil', '2018-10-28 04:09:00', '3614488494', 'sudah'),
+(2, '3614488494', 'Transaksi dengan kode PAM1810001 berhasil', '2018-10-31 04:00:00', '2147484848', 'sudah'),
+(5, '3614488494', 'saya terima kasih', '2018-10-28 22:48:15', '3614488494', 'sudah'),
+(6, '2147484848', 'siap bos', '2018-11-02 21:37:48', '3614488494', 'sudah'),
+(7, '3614488494', 'hay bos', '2018-11-02 21:41:47', '2147484848', 'sudah'),
+(8, '3614488494', 'hay bos', '2018-11-02 21:42:00', '2147484848', 'sudah'),
+(9, '2147484848', 'admin bisa bantu', '2018-11-02 21:52:59', '3614488494', 'belum');
 
 -- --------------------------------------------------------
 
@@ -378,8 +420,21 @@ CREATE TABLE `pesawat` (
   `date_go` date NOT NULL,
   `date_back` date NOT NULL,
   `transaction_id` varchar(20) NOT NULL,
-  `uid` varchar(11) NOT NULL
+  `uid` varchar(11) NOT NULL,
+  `harga` varchar(15) NOT NULL,
+  `maskapai` varchar(60) NOT NULL,
+  `ref2` varchar(20) NOT NULL,
+  `gender` enum('L','P') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pesawat`
+--
+
+INSERT INTO `pesawat` (`from`, `to`, `date_go`, `date_back`, `transaction_id`, `uid`, `harga`, `maskapai`, `ref2`, `gender`) VALUES
+('Bandara Lombok Praya, Lombok Tengah', 'KOE', '0000-00-00', '0000-00-00', 'PES1810001', '3614488494', '', '', '', 'L'),
+('Bandara Lombok Praya, Lombok Tengah', 'DPS', '0000-00-00', '0000-00-00', 'PES1810002', '3614488494', '', '', '', 'L'),
+('Bandara Lombok Praya, Lombok Tengah', 'LBJ', '0000-00-00', '0000-00-00', 'PES1810003', '3614488494', '', '', '', 'L');
 
 -- --------------------------------------------------------
 
@@ -405,9 +460,9 @@ CREATE TABLE `pln` (
 --
 
 INSERT INTO `pln` (`idpel1`, `idpel2`, `product_id`, `nominal`, `transaction_id`, `uid`, `pelanggan`, `struk`, `date_transaction`, `ref2`) VALUES
-('', '981211111111', 'PLNPRAH', '20000', 'PLN1810001', '2147484848', '', '', '0000-00-00 00:00:00', ''),
-('', '981211111111', 'PLNPRAY', '100000', 'PLN1810002', '2147484848', '', '', '0000-00-00 00:00:00', ''),
-('981211111111', '', 'PLNPASCH', '', 'PLN1810003', '2147484848', '', '', '0000-00-00 00:00:00', '');
+('', '981211111111', 'PLNPRAH', '20000', 'PN1810001', '2147484848', '', '', '0000-00-00 00:00:00', ''),
+('', '981211111111', 'PLNPRAY', '100000', 'PN1810002', '2147484848', '', '', '0000-00-00 00:00:00', ''),
+('981211111111', '', 'PLNPASCH', '', 'PN1810003', '2147484848', '', '', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -462,7 +517,7 @@ CREATE TABLE `product` (
   `product_id` varchar(9) NOT NULL,
   `product_type` varchar(40) NOT NULL,
   `product` varchar(40) NOT NULL,
-  `product_name` varchar(60) NOT NULL
+  `product_name` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -470,9 +525,12 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `product_type`, `product`, `product_name`) VALUES
+('ABR', 'Bandung', 'stasiun', 'Ambarawa'),
 ('ADIRA', 'MULTIFINANCE ADIRA FINANCE', 'Multifinance', 'ADIRA FINANCE'),
 ('AGUH', 'AXIS', 'PULSA', 'Internet Unlimited 30 Hari (Paket Data)'),
-('AMQ', 'PAPUA DAN MALUKU', 'BANDARA', 'Bandar Udara Internasional Pattimura,Ambon'),
+('AKB', 'Medan', 'stasiun', 'Aek Loba'),
+('AMQ', 'PAPUA DAN MALUKU', 'BANDARA', 'Bandara Pattimura, Ambon'),
+('AWN', 'Bandung', 'stasiun', 'Arjawinangun'),
 ('AX100H', 'AXIS', 'PULSA', 'AXIS 100 K'),
 ('AX10H', 'AXIS', 'PULSA', 'AXIS 10 K'),
 ('AX25H', 'AXIS', 'PULSA', 'AXIS 25 K'),
@@ -486,21 +544,45 @@ INSERT INTO `product` (`product_id`, `product_type`, `product`, `product_name`) 
 ('B25H', 'BOLT', 'PULSA', 'BOLT 25 K'),
 ('B50H', 'BOLT', 'PULSA', 'BOLT 50 K'),
 ('BAF', 'MULTIFINANCE BAF FINANCE', 'Multifinance', 'BAF FINANCE'),
-('BDJ', 'KALIMANTAN', 'BANDARA', 'Bandar Udara Internasional Syamsuddin Noor,Banjarbaru'),
-('BDO', 'JAWA', 'BANDARA', 'Bandar Udara Internasional Husein Sastranegara,Bandung'),
-('BIK', 'PAPUA DAN MALUKU', 'BANDARA', 'Bandar Udara Internasional Frans Kaisiepo,Biak Numfor'),
-('BPN', 'KALIMANTAN', 'BANDARA', 'Bandar Udara Sultan Aji Muhammad Sulaiman,Balikpapan'),
+('BAP', 'Medan', 'stasiun', 'Bandar Khalifah'),
+('BB', 'Bandung', 'stasiun', 'Brebes'),
+('BBK', 'Bandung', 'stasiun', 'Babakan'),
+('BBN', 'Yogyakarta', 'stasiun', 'Brambanan'),
+('BBT', 'Surabaya', 'stasiun', 'Babat'),
+('BD', 'Bandung', 'stasiun', 'Bandung'),
+('BDJ', 'KALIMANTAN', 'BANDARA', 'Bandara Syamsuddin Noor, Banjar baru'),
+('BDO', 'JAWA', 'BANDARA', 'Bandara Husein Sastranegara, Bandung'),
+('BDT', 'Medan', 'stasiun', 'Bandar Tinggi'),
+('BG', 'Surabaya', 'stasiun', 'Bangil'),
+('BIJ', 'Medan', 'stasiun', 'Binjai'),
+('BIK', 'PAPUA DAN MALUKU', 'BANDARA', 'Bandara Frans Kaisiepo,Biak Numfor'),
+('BJ', 'Bandung', 'stasiun', 'Bojonegoro'),
+('BKS', 'Jakarta', 'stasiun', 'Bekasi'),
+('BL', 'Surabaya', 'stasiun', 'Blitar'),
+('BMA', 'Purwokerto', 'stasiun', 'Bumiayu'),
+('BPN', 'KALIMANTAN', 'BANDARA', 'Bandara Sultan Aji Muhammad Sulaiman, Balik papan'),
 ('BSF100H', 'BSF', 'GAME', 'BSF Voucher 100 K'),
 ('BSF10H', 'BSF', 'GAME', 'BSF Voucher 10 K'),
 ('BSF25H', 'BSF', 'GAME', 'BSF Voucher 25 K'),
 ('BSF500H', 'BSF', 'GAME', 'BSF Voucher 500 K'),
 ('BSF50H', 'BSF', 'GAME', 'BSF Voucher 50 K'),
 ('BSF5H', 'BSF', 'GAME', 'BSF Voucher 5 K'),
-('BTH', 'SUMATERA', 'BANDARA', 'Bandar Udara Hang Nadim,Batam'),
-('BTJ', 'SUMATERA', 'BANDARA', 'Bandar Udara Internasional Sultan Iskandar Muda,Banda Aceh'),
-('BUW', 'SULAWESI', 'BANDARA', 'Bandar Udara Internasional Sultan Murhum Kaimuddin,Baubau'),
-('CGK', 'JAWA', 'BANDARA', 'Bandar Udara Internasional Soekarno-Hatta,Tangerang'),
+('BSS', 'Jember', 'stasiun', 'Bangsalsari'),
+('BTA', 'Tanjung Karang', 'stasiun', 'Baturaja'),
+('BTH', 'SUMATERA', 'BANDARA', 'Bandara Hang Nadim, Batam'),
+('BTJ', 'SUMATERA', 'BANDARA', 'Bandara Sultan Iskandar Muda, Banda Aceh'),
+('BTK', 'Medan', 'stasiun', 'Batang Kuis'),
+('BUW', 'SULAWESI', 'BANDARA', 'Bandara Sultan Murhum Kaimuddin, Baubau'),
+('BW', 'Jember', 'stasiun', 'Banyuwangi'),
+('CB', 'Bandung', 'stasiun', 'Cibatu'),
+('CCL', 'Bandung', 'stasiun', 'Cicalengka'),
+('CE', 'Yogyakarta', 'stasiun', 'Ceper'),
+('CGK', 'JAWA', 'BANDARA', 'Bandara Soekarno-Hatta, Tangerang'),
+('CI', 'Bandung', 'stasiun', 'Ciamis'),
 ('CITIBANK', 'MULTIFINANCE CITIBANK', 'Multifinance ', 'CITIBANK'),
+('CJ', 'Bandung', 'stasiun', 'Cianjur'),
+('CKP', 'Jakarta', 'stasiun', 'Cikampek'),
+('CLG', 'Jakarta', 'stasiun', 'Cilegon'),
 ('CM100H', 'SMARTFREN', 'PULSA', 'SMARTFREN 100 K'),
 ('CM10H', 'SMARTFREN', 'PULSA', 'SMARTFREN 10 K'),
 ('CM150H', 'SMARTFREN', 'PULSA', 'SMARTFREN 150 K'),
@@ -512,8 +594,18 @@ INSERT INTO `product` (`product_id`, `product_type`, `product`, `product_name`) 
 ('CM50H', 'SMARTFREN', 'PULSA', 'SMARTFREN 50 K'),
 ('CM5H', 'SMARTFREN', 'PULSA', 'SMARTFREN 5 K'),
 ('CM60H', 'SMARTFREN', 'PULSA', 'SMARTFREN 60 K'),
-('DJJ', 'PAPUA DAN MALUKU', 'BANDARA', 'Bandar Udara Internasional Sentani,Jayapura'),
-('DPS', 'BALI DAN NUSA TENGGARA', 'BANDARA', 'Bandar Udara Internasional Ngurah Rai,Denpasar'),
+('CMD', 'Bandung', 'stasiun', 'Cimindi'),
+('CMI', 'Bandung', 'stasiun', 'Cimahi'),
+('CMK', 'Bandung', 'stasiun', 'Cimekar'),
+('CN', 'Bandung', 'stasiun', 'Cirebon'),
+('CNP', 'Bandung', 'stasiun', 'Cirebon Prujakan'),
+('CP', 'Purwokerto', 'stasiun', 'Cilacap'),
+('CPD', 'Bandung', 'stasiun', 'Cipendeuy'),
+('CRB', 'Madiun', 'stasiun', 'Caruban'),
+('CU', 'Bandung', 'stasiun', 'Cepu'),
+('DJJ', 'PAPUA DAN MALUKU', 'BANDARA', 'Bandara Sentani, Jayapura'),
+('DL', 'Yogyakarta', 'stasiun', 'Delanggu'),
+('DPS', 'BALI DAN NUSA TENGGARA', 'BANDARA', 'Bandara Ngurah Rai, Denpasar'),
 ('GAR1030H', 'Aeria', 'GAME', 'Aeria 1030 Point'),
 ('GAR11600H', 'Aeria', 'GAME', 'Aeria 11600 Point'),
 ('GAR2100H', 'Aeria', 'GAME', 'Aeria 2100 Point'),
@@ -522,11 +614,16 @@ INSERT INTO `product` (`product_id`, `product_type`, `product`, `product_name`) 
 ('GAR5500H', 'Aeria', 'GAME', 'Aeria 5500 Point'),
 ('GAR8550H', 'Aeria', 'GAME', 'Aeria 8550 Poin'),
 ('GAS100H', 'CASH', 'GAME', 'CASH 100 K'),
+('GB', 'Purwokerto', 'stasiun', 'Gombong'),
 ('GDG100H', 'DASA', 'GAME', 'DASA COIN 100 K'),
 ('GDG10H', 'DASA', 'GAME', 'DASA COIN 10 K'),
 ('GDG20H', 'DASA', 'GAME', 'DASA COIN 20 K'),
 ('GDG50H', 'DASA', 'GAME', 'DASA COIN 50 K'),
-('HLP', 'JAWA', 'BANDARA', 'Bandar Udara Internasional Halim Perdanakusuma,Jakarta'),
+('GLM', 'Jember', 'stasiun', 'Glenmore'),
+('GM', 'Purwokerto', 'stasiun', 'Gumilir'),
+('GMR', 'Jakarta', 'stasiun', 'Gambir'),
+('HGS', 'Bandung', 'stasiun', 'Haur Geulis'),
+('HLP', 'JAWA', 'BANDARA', 'Bandara Halim Perdanakusuma, Jakarta'),
 ('HPESIA', 'TELEPON PASCA BAYAR', 'TELKOM', 'ESIA (POSTPAID)'),
 ('HPFREN', 'TELEPON PASCA BAYAR', 'TELKOM', 'FREN, MOBI (POSTPAID)'),
 ('HPMTRIX', 'TELEPON PASCA BAYAR', 'TELKOM', 'INDOSAT (MATRIX)'),
@@ -545,48 +642,132 @@ INSERT INTO `product` (`product_id`, `product_type`, `product`, `product_name`) 
 ('ID1H', 'INDOSAT', 'PULSA', '1GB 24JAM + BONUS 1GB 4G (60HR) (Paket Data)'),
 ('ID2H', 'INDOSAT', 'PULSA', '2GB 24jam + Bonus 2GB 4G (Paket Data)'),
 ('ID3H', 'INDOSAT', 'PULSA', '3GB 24jam + Bonus 2GB 4GB (Paket Data)'),
-('JOG', 'JAWA', 'BANDARA', 'Bandar Udara Internasional Adisutjipto,Sleman'),
-('KNO', 'SUMATERA', 'BANDARA', 'Bandar Udara Internasional Kualanamu,Deli Serdang'),
-('KOE', 'BALI DAN NUSA TENGGARA', 'BANDARA', 'Bandar Udara Internasional El Tari,Kupang'),
-('LBJ', 'BALI DAN NUSA TENGGARA', 'BANDARA', 'Bandar Udara Komodo,Manggarai Barat'),
-('LOP', 'BALI DAN NUSA TENGGARA', 'BANDARA', 'Bandar Udara Internasional Lombok Praya,Lombok Tengah'),
+('JAKK', 'Jakarta', 'stasiun', 'Jakarta kota'),
+('JBN', 'Bandung', 'stasiun', 'Jambon'),
+('JE', 'Yogyakarta', 'stasiun', 'Jenar'),
+('JG', 'Madiun', 'stasiun', 'Jombang'),
+('JNG', 'Jakarta', 'stasiun', 'Jatinegara'),
+('JOG', 'JAWA', 'BANDARA', 'Bandara Adisutjipto, Sleman'),
+('JR', 'Jember', 'stasiun', 'Jember'),
+('JTB', 'Bandung', 'stasiun', 'Jatibarang'),
+('JTR', 'Jember', 'stasiun', 'Jatiroto'),
+('KA', 'Purwokerto', 'stasiun', 'Karanganyar'),
+('KAC', 'Bandung', 'stasiun', 'Kiaracondong'),
+('KB', 'Tanjung Karang', 'stasiun', 'Kota bumi'),
+('KBR', 'Jember', 'stasiun', 'Kalibaru'),
+('KD', 'Madiun', 'stasiun', 'Kediri'),
+('KDB', 'Yogyakarta', 'stasiun', 'Kedung Banteng'),
+('KIS', 'Medan', 'stasiun', 'Kisaran'),
+('KK', 'Jember', 'stasiun', 'Klakah'),
+('KLS', 'Jember', 'stasiun', 'Kalisetail'),
+('KLT', 'Jember', 'stasiun', 'Kalisat'),
+('KM', 'Purwokerto', 'stasiun', 'Kebumen'),
+('KNE', 'Jember', 'stasiun', 'Karangasem'),
+('KNO', 'SUMATERA', 'BANDARA', 'Bandara Kualanamu, Deli Serdang'),
+('KOE', 'BALI DAN NUSA TENGGARA', 'BANDARA', 'Bandara El Tari, Kupang'),
+('KPN', 'Surabaya', 'stasiun', 'Kepanjen'),
+('KT', 'Yogyakarta', 'stasiun', 'Klaten'),
+('KTA', 'Purwokerto', 'stasiun', 'Kutoarjo'),
+('KTP', 'Sumatra Selatan', 'stasiun', 'Kertapati'),
+('KTS', 'Madiun', 'stasiun', 'Kertosono'),
+('KYA', 'Purwokerto', 'stasiun', 'Kroya'),
+('LBJ', 'BALI DAN NUSA TENGGARA', 'BANDARA', 'Bandara Komodo, Manggarai Barat'),
+('LBP', 'Medan', 'stasiun', 'Lubuk Pakam'),
+('LL', 'Bandung', 'stasiun', 'Leles'),
+('LLG', 'Sumatra Selatan', 'stasiun', 'Lubuk Linggau'),
+('LMG', 'Surabaya', 'stasiun', 'Lamongan'),
+('LMP', 'Medan', 'stasiun', 'Lima puluh'),
+('LOP', 'BALI DAN NUSA TENGGARA', 'BANDARA', 'Bandara Lombok Praya, Lombok Tengah'),
+('LOS', 'Bandung', 'stasiun', 'Losari'),
+('LPN', 'Yogyakarta', 'stasiun', 'Lempuyungan'),
+('LT', 'Sumatra Selatan', 'stasiun', 'Lahat'),
+('LW', 'Surabaya', 'stasiun', 'Lawang'),
+('MA', 'Purwokerto', 'stasiun', 'Maos'),
 ('MAF', 'MULTIFINANCE MAF FINANCE', 'Multifinance', 'MAF FINANCE'),
 ('Mandiri T', 'MULTIFINANCE Mandiri Tunas FINANCE', 'Multifinance', 'Mandiri Tunas FINANCE'),
 ('MCF FINAN', 'MULTIFINANCE MCF FINANCE', 'Multifinance', 'MCF FINANCE'),
-('MDC', 'SULAWESI', 'BANDARA', 'Bandar Udara Internasional Sam Ratulangi,Manado'),
-('MES', 'SUMATERA', 'BANDARA', 'Bandar Udara Internasional Polonia,Medan'),
-('MKQ', 'PAPUA DAN MALUKU', 'BANDARA', 'Bandar Udara Internasional Mopah,Merauke'),
-('PDG', 'SUMATERA', 'BANDARA', 'Bandar Udara Internasional Minangkabau,Padang Pariaman'),
-('PKU', 'SUMATERA', 'BANDARA', 'Bandar Udara Internasional Sultan Syarif Kasim II,Pekanbaru'),
-('PLM', 'SUMATERA', 'BANDARA', 'Bandar Udara Internasional Sultan Mahmud Badaruddin II,Palem'),
+('MDC', 'SULAWESI', 'BANDARA', 'Bandara Sam Ratulangi, Manado'),
+('MDN', 'Medan', 'stasiun', 'Medan'),
+('ME', 'Sumatra Selatan', 'stasiun', 'Muara Enim'),
+('MER', 'Jakarta', 'stasiun', 'Merak'),
+('MES', 'SUMATERA', 'BANDARA', 'Bandara Polonia, Medan'),
+('MGW', 'Yogyakarta', 'stasiun', 'Maguwo'),
+('MI', 'Jember', 'stasiun', 'Mangli'),
+('MKQ', 'PAPUA DAN MALUKU', 'BANDARA', 'Bandara Mopah, Merauke'),
+('ML', 'Surabaya', 'stasiun', 'Malang'),
+('MN', 'Madiun', 'stasiun', 'Madiun'),
+('MP', 'Tanjung Karang', 'stasiun', 'Martapura'),
+('MR', 'Surabaya', 'stasiun', 'Mojokerto'),
+('MRI', 'Jakarta', 'stasiun', 'Manggarai'),
+('NBO', 'Bandung', 'stasiun', 'Ngrombo'),
+('NJ', 'Madiun', 'stasiun', 'Nganjuk'),
+('PA', 'Madiun', 'stasiun', 'Paron'),
+('PB', 'Jember', 'stasiun', 'Probolinggo'),
+('PBA', 'Medan', 'stasiun', 'Perbaungan'),
+('PBM', 'Sumatra Selatan', 'stasiun', 'Prabumulih'),
+('PDG', 'SUMATERA', 'BANDARA', 'Bandara Minangkabau, Padang Pariaman'),
+('PDL', 'Bandung', 'stasiun', 'Padalarang'),
+('PHA', 'Medan', 'stasiun', 'Padang Halaban'),
+('PK', 'Bandung', 'stasiun', 'Pekalongan'),
+('PKU', 'SUMATERA', 'BANDARA', 'Bandar Sultan Syarif Kasim II, Pekan baru'),
+('PLD', 'Bandung', 'stasiun', 'Plered'),
+('PLM', 'SUMATERA', 'BANDARA', 'Bandara Sultan Mahmud Badaruddin II, Palembang'),
 ('PLNNONH', 'NON TAGIHAN', 'PLN', 'PLN NONTAGLIS H2H'),
 ('PLNPASCH', 'PASCA BAYAR', 'PLN', 'PLN PASCABAYAR H2H'),
 ('PLNPRAH', 'PRAH BAYAR', 'PLN', 'PLN Prah Bayar (Token)'),
 ('PLNPRAY', 'PRA BAYAR', 'PLN', 'PLN Pra Bayar (Token)'),
-('PNK', 'KALIMANTAN', 'BANDARA', 'Bandar Udara Internasional Supadio,Pontianak'),
+('PML', 'Bandung', 'stasiun', 'Pemalang'),
+('PNK', 'KALIMANTAN', 'BANDARA', 'Bandara Supadio, Pontianak'),
+('PRA', 'Medan', 'stasiun', 'Perlanaan'),
+('PS', 'Jember', 'stasiun', 'Pasuruan'),
+('PSE', 'Jakarta', 'stasiun', 'Pasar senen'),
+('PTN', 'Yogyakarta', 'stasiun', 'Patukan'),
+('PUR', 'Medan', 'stasiun', 'Pulu Raja'),
+('PWK', 'Bandung', 'stasiun', 'Purwakarta'),
+('PWS', 'Yogyakarta', 'stasiun', 'Purwosari'),
+('PWT', 'Purwokerto', 'stasiun', 'Purwokerto'),
 ('R100H', 'FREN', 'PULSA', 'FREN 100 K'),
 ('R10H', 'FREN', 'PULSA', 'FREN 10 K'),
 ('R20H', 'FREN', 'PULSA', 'FREN 20 K'),
 ('R25H', 'FREN', 'PULSA', 'FREN 25 K'),
 ('R50H', 'FREN', 'PULSA', 'FREN 50 K'),
 ('R5H', 'FREN', 'PULSA', 'FREN 5 K'),
+('RAP', 'Medan', 'stasiun', 'Rantau Prapat'),
+('RBG', 'Bandung', 'stasiun', 'Randu blatung'),
+('RBP', 'Jember', 'stasiun', 'Rambipuji'),
+('RCK', 'Bandung', 'stasiun', 'Rancaekek'),
+('RPH', 'Medan', 'stasiun', 'Rampah'),
 ('S100H', 'TELKOMSEL', 'PULSA', 'TELKOMSEL  100 K'),
 ('S10H', 'TELKOMSEL', 'PULSA', 'TELKOMSEL  10 K'),
 ('S20H', 'TELKOMSEL', 'PULSA', 'TELKOMSEL  20 K'),
 ('S25H', 'TELKOMSEL', 'PULSA', 'TELKOMSEL  25 K'),
 ('S50H', 'TELKOMSEL', 'PULSA', 'TELKOMSEL  50 K'),
 ('S5H', 'TELKOMSEL', 'PULSA', 'TELKOMSEL  5 K'),
+('SBJ', 'Medan', 'stasiun', 'Sei Bejangkar'),
 ('SD100H', 'TELKOMSEL', 'PULSA', 'DATA 2,5GB, 30hari (Paket Data)'),
 ('SD10H', 'TELKOMSEL', 'PULSA', 'DATA 40MB, 7hari (Paket Data)'),
 ('SD20H', 'TELKOMSEL', 'PULSA', 'DATA 200MB, 7hari (Paket Data)'),
 ('SD25H', 'TELKOMSEL', 'PULSA', 'DATA 360MB, 30hari (Paket Data)'),
 ('SD50H', 'TELKOMSEL', 'PULSA', 'DATA 800MB, 30hari (Paket Data)'),
 ('SD5H', 'TELKOMSEL', 'PULSA', 'DATA 20MB, 7hari (Paket Data)'),
-('SOC', 'JAWA', 'BANDARA', 'Bandar Udara Internasional Adisumarmo,Boyolali'),
+('SDA', 'Surabaya', 'stasiun', 'Sidoarjo'),
+('SDR', 'Purwokerto', 'stasiun', 'Sidareja'),
+('SG', 'Jakarta', 'stasiun', 'Serang'),
+('SIR', 'Medan', 'stasiun', 'Siantar'),
+('SK', 'Yogyakarta', 'stasiun', 'Solo jebres'),
+('SLM', 'Yogyakarta', 'stasiun', 'Salem'),
+('SLO', 'Yogyakarta', 'stasiun', 'Solo balapan'),
+('SLW', 'Purwokerto', 'stasiun', 'Slawi'),
+('SMC', 'Bandung', 'stasiun', 'Semarang Poncol'),
+('SMT', 'Bandung', 'stasiun', 'Semarang Tawang'),
+('SOC', 'JAWA', 'BANDARA', 'Bandara Adisumarmo, Boyolali'),
 ('SPEEDY', 'TELKOM', 'TELKOM', 'SPEEDY'),
-('SRG', 'JAWA', 'BANDARA', 'Bandar Udara Internasional Achmad Yani,Semarang'),
+('SPJ', 'Surabaya', 'stasiun', 'Sepanjang'),
+('SRG', 'JAWA', 'BANDARA', 'Bandara Achmad Yani, Semarang'),
+('SRP', 'Jakarta', 'stasiun', 'Serpong'),
 ('STANDAR', 'MULTIFINANCE STANDAR CHARTERED', 'Multifinance', 'STANDAR CHARTERED'),
-('SUB', 'JAWA', 'BANDARA', 'Bandar Udara Internasional Juanda,Sidoarjo'),
+('STL', 'Yogyakarta', 'stasiun', 'Sentolo'),
+('SUB', 'JAWA', 'BANDARA', 'Bandara Juanda, Sidoarjo'),
 ('T100H', 'THREE', 'PULSA', 'THREE 100 K'),
 ('T10H', 'THREE', 'PULSA', 'THREE 10 K'),
 ('T20H', 'THREE', 'PULSA', 'THREE 20 K'),
@@ -603,10 +784,10 @@ INSERT INTO `product` (`product_id`, `product_type`, `product`, `product_name`) 
 ('TELVISOLA', 'Voucher Telkomvision', 'TV', 'Voucher Telkomvision Pra Olahrag'),
 ('TELVISPEL', 'Voucher Telkomvision', 'TV', 'Voucher Telkomvision Pra Pelangi'),
 ('TELVISPEN', 'Voucher Telkomvision', 'TV', 'Voucher Telkomvision Pra Pendidi'),
-('TIM', 'PAPUA DAN MALUKU', 'BANDARA', 'Bandar Udara Internasional Mozes Kilangin,Mimika'),
-('TKG', 'SUMATERA', 'BANDARA', 'Bandar Udara Internasional Radin Inten II,Bandar Lampung'),
-('TNJ', 'SUMATERA', 'BANDARA', 'Bandar Udara Internasional Raja Haji Fisabilillah,Tanjungpin'),
-('TRK', 'KALIMANTAN', 'BANDARA', 'Bandar Udara Internasional Juwata,Tarakan'),
+('TIM', 'PAPUA DAN MALUKU', 'BANDARA', 'Bandara Mozes Kilangin, Mimika'),
+('TKG', 'SUMATERA', 'BANDARA', 'Bandara Radin Inten II, Bandar Lampung'),
+('TNJ', 'SUMATERA', 'BANDARA', 'Bandara Raja Haji Fisabilillah, Tanjung pinang'),
+('TRK', 'KALIMANTAN', 'BANDARA', 'Bandara Juwata, Tarakan'),
 ('TVBIG', 'BIG TV', 'TV', 'BIG TV'),
 ('TVGEN100', 'GENFLIX', 'TV', 'GENFLIX (100.000)'),
 ('TVGEN25', 'GENFLIX', 'TV', 'GENFLIX (25.000)'),
@@ -636,7 +817,7 @@ INSERT INTO `product` (`product_id`, `product_type`, `product`, `product_name`) 
 ('TVSKYFAM6', 'SKYNINDO TV FAMILY', 'TV', 'SKYNINDO TV FAMILY 6 BLN (240.000)'),
 ('TVTLKMV', 'Transvision, Telkomvision, Yes TV', 'TV', 'Transvision, Telkomvision, Yes TV'),
 ('TVTOPAS', 'Topas TV', 'TV', 'Topas TV'),
-('UPG', 'SULAWESI', 'BANDARA', 'Bandar Udara Internasional Sultan Hasanuddin,Maros'),
+('UPG', 'SULAWESI', 'BANDARA', 'Bandara Sultan Hasanuddin, Maros'),
 ('VCC100H', 'Cherry', 'GAME', 'Cherry Credit 100 K'),
 ('VCC300H', 'Cherry', 'GAME', 'Cherry Credit 300 K'),
 ('VCC50H', 'Cherry', 'GAME', 'Cherry Credit 50 K'),
@@ -712,7 +893,9 @@ CREATE TABLE `pulsa` (
 INSERT INTO `pulsa` (`phone`, `transaction_id`, `uid`, `product_id`) VALUES
 ('083834129812', 'PL1810001', '2147484848', 'AXD1H'),
 ('081234129812', 'PL1810002', '2147484848', 'SD100H'),
-('081234129812', 'PL1810003', '2147484848', 'S20H');
+('081234129812', 'PL1810003', '2147484848', 'S20H'),
+('083834129812', 'PL1811001', '608603457', 'AX10H'),
+('081234129812', 'PL1811002', '608603457', 'S5H');
 
 -- --------------------------------------------------------
 
@@ -763,7 +946,12 @@ INSERT INTO `topup` (`transaction_id`, `no_rek`, `nominal`, `kode`, `uid`) VALUE
 ('UP1810005', '', '500000', 377, '2147484848'),
 ('UP1810006', '', '500000', 823, '2147484848'),
 ('UP1810007', '', '1000000', 494, '3614488494'),
-('UP1810008', '', '1000000', 597, '3614488494');
+('UP1810008', '', '1000000', 597, '3614488494'),
+('UP1811001', '', '1000000', 671, '3614488494'),
+('UP1811002', '', '1000000', 298, '608603457'),
+('UP1811003', '', '1000000', 695, '608603457'),
+('UP1811004', '', '500000', 193, '608603457'),
+('UP1811005', '', '10000000', 186, '1301294496');
 
 -- --------------------------------------------------------
 
@@ -788,13 +976,22 @@ CREATE TABLE `transaction` (
 
 INSERT INTO `transaction` (`product_id`, `transaction_id`, `date_transaction`, `debit`, `saldo`, `status`, `kredit`, `uid`) VALUES
 ('GAR1030H', 'GM1810005', '2018-10-17 04:08:11', '100000', '', 'Pendding', '', '2147484848'),
+('GAS100H', 'GM1811001', '2018-11-03 03:00:00', '50000', '1950000', 'Success', '', '608603457'),
 ('K', 'KAI1810001', '2018-10-31 03:00:00', '120000', '', 'Pendding', '', '3614488494'),
+('kai', 'KAI1811001', '2018-11-03 04:00:00', '150000', '1800000', 'Pendding', '', '608603457'),
 ('WAAETRA', 'PAM1810001', '2018-10-01 03:09:11', '200000', '', 'Succes', '', '3614488494'),
+('WADPSR', 'PAM1811001', '2018-11-28 04:00:00', '100000', '17000000', 'Successs', '', '608603457'),
 ('AXD1H', 'PL1810001', '2018-10-17 02:09:00', '50000', '', 'Gagal', '', '2147484848'),
-('PLNPRAY', 'PLN1810002', '2018-10-07 02:00:00', '100000', '', 'Succes', '', '2147484848'),
+('S5H', 'PL1811002', '2018-11-03 03:08:10', '100000', '2000000', 'Pendding', '', '608603457'),
+('PLNPRAY', 'PN1810002', '2018-10-07 02:00:00', '100000', '', 'Succes', '', '2147484848'),
 ('Topup', 'UP1810005', '2018-10-24 01:33:30', '', '', 'Pendding', '500000', '2147484848'),
 ('Topup', 'UP1810006', '2018-10-24 04:24:44', '', '', 'Pendding', '500000', '2147484848'),
-('Topup', 'UP1810007', '2018-10-24 13:50:29', '', '', 'Pendding', '1000000', '3614488494');
+('Topup', 'UP1810007', '2018-10-24 13:50:29', '', '', 'Pendding', '1000000', '3614488494'),
+('Topup', 'UP1811001', '2018-11-02 05:15:01', '', '', 'Pendding', '1000000', '3614488494'),
+('Topup', 'UP1811002', '2018-11-02 20:02:04', '', '', 'Pendding', '1000000', '608603457'),
+('Topup', 'UP1811003', '2018-11-02 20:35:00', '', '', 'Pendding', '1000000', '608603457'),
+('Topup', 'UP1811004', '2018-11-02 20:35:19', '', '', 'Pendding', '500000', '608603457'),
+('Topup', 'UP1811005', '2018-11-02 20:42:02', '', '', 'Pendding', '10000000', '1301294496');
 
 -- --------------------------------------------------------
 
@@ -853,10 +1050,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `email`, `auth_level`, `banned`, `passwd`, `passwd_recovery_code`, `passwd_recovery_date`, `passwd_modified_at`, `last_login`, `created_at`, `modified_at`) VALUES
-(730510257, 'bangsa', 'bangsa@gmail.com', 9, '0', '$2y$11$BYQHui/8kHtRyQav5keEfeZ9odSJpyLFLurQELlPgauuJTsWd9WOO', NULL, NULL, NULL, '2018-10-27 15:48:04', '2018-10-24 02:25:05', '2018-10-27 13:48:04'),
+(286110552, 'palembang', 'palembang@gmail.com', 1, '0', '$2y$11$XlgJq4jfZWYoo2Y720iffOz.TG3b4Opf7i1IEiv8ZNZ1NkoNGs3/C', NULL, NULL, NULL, NULL, '2018-11-02 01:13:15', '2018-11-02 00:13:15'),
+(608603457, 'bandung', 'bandung@gmail.com', 4, '0', '$2y$11$/0FmwEX1jrNbRxD4vMhMfeanjRsNsNqSLvdZG8M5AuVUEQVgm1Bmu', NULL, NULL, NULL, '2018-11-02 20:44:55', '2018-11-02 01:10:48', '2018-11-02 19:44:55'),
+(730510257, 'bangsa', 'bangsa@gmail.com', 9, '0', '$2y$11$BYQHui/8kHtRyQav5keEfeZ9odSJpyLFLurQELlPgauuJTsWd9WOO', NULL, NULL, NULL, '2018-11-02 22:21:13', '2018-10-24 02:25:05', '2018-11-02 21:21:13'),
+(1301294496, 'kota', 'kota@gmail.com', 1, '0', '$2y$11$YmdCjlLVdZWWFq8NzdtBNOeItNs5ynnc2YSyGgmPPzUOVUKNxsGTy', NULL, NULL, NULL, '2018-11-02 22:22:36', '2018-11-02 01:14:24', '2018-11-02 21:22:36'),
+(1380392804, 'menager', 'menager@gmail.com', 8, '0', '$2y$11$ofLgJFxGu3PwbFQiv2.txOTtcN.GAQYMZrXoaYaNk8H42JzGLFvNy', NULL, NULL, NULL, NULL, '2018-11-02 01:12:34', '2018-11-02 00:12:34'),
 (1729583169, 'ivan', 'ivan@meta365.com', 6, '0', '$2y$11$X0NMge6rqfG4X1Ed2T/Nkuml3duriW8nlLWy6ja7DyIPuQmwoAtNS', NULL, NULL, NULL, '2018-10-16 20:42:51', '2018-10-16 20:42:39', '2018-10-16 20:42:51'),
-(2147484848, 'kebangsaan', 'Kebangsaan@gmail.com', 1, '0', '$2y$11$dW56TEdtK/KJZqQm.dpZf.qQK6vUr4CXtlaakmSYijzcYt0nlGhvq', NULL, NULL, NULL, '2018-10-24 19:27:11', '2018-10-24 02:23:48', '2018-10-24 17:27:11'),
-(3614488494, 'admin', 'admin@meta365.com', 6, '0', '$2y$11$OUHGkJK4rxU/XDjUb7YTEeRRWeYreFvADm28bvCjIdMAcArHEczG6', NULL, NULL, NULL, '2018-10-27 23:23:43', '2018-10-16 10:35:31', '2018-10-27 21:23:43');
+(2147484848, 'kebangsaan', 'Kebangsaan@gmail.com', 1, '0', '$2y$11$dW56TEdtK/KJZqQm.dpZf.qQK6vUr4CXtlaakmSYijzcYt0nlGhvq', NULL, NULL, NULL, '2018-11-02 21:42:21', '2018-10-24 02:23:48', '2018-11-02 20:42:21'),
+(3614488494, 'admin', 'admin@meta365.com', 6, '0', '$2y$11$OUHGkJK4rxU/XDjUb7YTEeRRWeYreFvADm28bvCjIdMAcArHEczG6', NULL, NULL, NULL, '2018-11-02 22:13:12', '2018-10-16 10:35:31', '2018-11-02 21:13:12');
 
 --
 -- Triggers `users`
@@ -959,6 +1160,12 @@ ALTER TABLE `nominal`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `payment`
+--
+ALTER TABLE `payment`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `pdam`
 --
 ALTER TABLE `pdam`
@@ -1029,6 +1236,7 @@ ALTER TABLE `tv`
 --
 ALTER TABLE `username_or_email_on_hold`
   ADD PRIMARY KEY (`ai`);
+
 --
 -- Indexes for table `users`
 --
@@ -1036,9 +1244,11 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `username` (`username`);
+
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
 --
 -- AUTO_INCREMENT for table `acl`
 --
@@ -1068,17 +1278,22 @@ ALTER TABLE `ips_on_hold`
 -- AUTO_INCREMENT for table `login_errors`
 --
 ALTER TABLE `login_errors`
-  MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `nominal`
 --
 ALTER TABLE `nominal`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
+-- AUTO_INCREMENT for table `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `pesan`
 --
 ALTER TABLE `pesan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `pricelist`
 --

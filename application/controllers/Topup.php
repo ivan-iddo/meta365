@@ -10,7 +10,7 @@ class Topup extends MY_Controller {
 
 	public function index()
 	{
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('admin, user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
@@ -24,13 +24,13 @@ class Topup extends MY_Controller {
 			'module_name' => "Topup",
 		);
 			
-			$this->load->view('include/layout', $data);
+		$this->load->view('include/layout', $data);
 		}
 	}
 	
 	public function history()
 	{
-		if($this->require_role('admin, user'))
+		if( $this->require_role('admin, user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$topup = $this->transaction_model->id($uid);
@@ -53,7 +53,7 @@ class Topup extends MY_Controller {
 	
 	public function history_m()
 	{
-		if($this->require_role('root'))
+		if( $this->require_role('menager, businesspartner') )
 		{
 		$topup = $this->transaction_model->get_topup();
 		$uid = $this->auth_data->user_id;
@@ -75,7 +75,7 @@ class Topup extends MY_Controller {
 	
 	public function insert()
 	{
-		if( $this->require_role('admin') )
+		if( $this->require_role('admin, user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$transaction_id = $this->topup_model->kdotomatis();
@@ -127,7 +127,7 @@ class Topup extends MY_Controller {
 	
 	public function checkout($id)
 	{
-		if( $this->require_role('admin') )
+		if( $this->require_role('admin, user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$row = $this->topup_model->get_by_id($id);

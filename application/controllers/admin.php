@@ -11,12 +11,12 @@ class admin extends MY_Controller {
 
 	public function index()
 	{
-		if($this->require_role('user'))
+		if($this->require_role('admin'))
 		{
 		$uid = $this->auth_data->user_id;
 		$history = $this->transaction_model->get_transaction($uid);
 		$product = $this->transaction_model->get_all();
-		$pesan = $this->transaction_model->get_data($uid);
+		$pesan = $this->pesan_model->get_by($uid);
 		$pulsa = $this->transaction_model->sum_pulsa();
 		$emoney= $this->transaction_model->sum_emoney();
 		$ppob = $this->transaction_model->sum_ppob();

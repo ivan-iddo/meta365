@@ -11,7 +11,7 @@ class Pulsa extends MY_Controller {
 
 	public function index()
 	{
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('user,businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
@@ -29,9 +29,29 @@ class Pulsa extends MY_Controller {
 		}
 	}
 	
+	public function admin()
+	{
+		if( $this->require_role('admin') )
+		{
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
+		$data = array(
+            'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
+			'module' => "pulsa",
+			'module_name' => "Pulsa",
+		);
+			
+			$this->load->view('include/admin/layout', $data);
+		}
+	}
+	
 	public function insert()
 	{
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('admin, user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$transaction_id = $this->pulsa_model->kdotomatis();
@@ -52,6 +72,9 @@ class Pulsa extends MY_Controller {
                 'phone' => $row->phone,
                 'transaction_id' => $row->transaction_id,
             );
+			$data['pesan'] = $this->pesan_model->get_by($uid);
+			$data['sum']= $this->pesan_model->sum($uid);
+			$data['sum_payment']= $this->payment_model->sum($uid);
 			$data['date'] = date("F j, Y");
 			$data['module'] = "checkout";
 			$data['module_name'] = "Checkout";
@@ -71,6 +94,8 @@ class Pulsa extends MY_Controller {
 	}
 	
     public function delete($id) {
+		if( $this->require_role('admin, user, businesspartner') )
+		{
         $row = $this->pulsa_model->get_by($id);
 
         if ($row) {
@@ -81,84 +106,73 @@ class Pulsa extends MY_Controller {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('pulsa'));
         }
-    }
-
-
-	public function view($id) {
-        $row = $this->pulsa_model->get_by($id);
-        if ($row) {
-            $data = array(
-                'product_id' => $row->product_id,
-                'phone' => $row->phone,
-                'transaction_id' => $row->transaction_id,
-            );
-			$data['transaction'] = $this->db->get_where('transaction', array('transaction_id' => $row->transaction_id))->row_array();
-			$data['product'] = $this->db->get_where('product', array('product_id' => $row->product_id))->row_array();
-            $this->template->display('pulsa/pulsa_view', $data);
-        } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('pulsa'));
         }
     }
+
 	
 	public function checkout_pulsa($id) {
-	$row = $this->pulsa_model->get_by($id);
-	if ($row) {
-    $request_data = array(
-		'method'    =>'rajabiller.pulsa',
-		'uid'       =>'123',
-		'pin'       =>'230',
-		'no_hp' => $row->phone,
-		'kode_produk' => $row->product_id,
-		'ref1' => '',
-	);
-	$respon = $this->send($request_data);
-	$Rb 		= json_decode($respon);
-	$id = $row->transaction_id;
-	$debit       =$Rb ->SALDO_TERPOTONG;
-	$uid = $this->auth_data->user_id;
-	$data = array(
-	'product_id'       =>$Rb ->KODE_PRODUK,
-	'transaction_id'       =>$id,
-	'date_transaction'       =>$Rb ->WAKTU,
-	'debit'       =>$debit,
-	'saldo'       =>$this->transaction_model->saldo($debit),
-	'status'       =>$Rb ->STATUS,
-	'uid'       => $uid,
-	);
-	$this->transaction_model->insert($data);
-	$this->session->set_flashdata('message', 'succes Record Success');
-    redirect(site_url('pulsa'));
-    }
-	}
-	
-	public function cek_harga($id) {
-	$row = $this->pulsa_model->get_by($id);
-	if ($row) {
+		if( $this->require_role('admin, user, businesspartner') )
+		{
+		$row = $this->pulsa_model->get_by($id);
+		if ($row) {
 		$request_data = array(
-		'produk' => $row->product_id,
-		);
-		$product = $this->db->get_where('product', array('product_id' => $row->product_id))->row_array();
-		$request_data = array(
-			'method'    =>'rajabiller.harga',
+			'method'    =>'rajabiller.pulsa',
 			'uid'       =>'123',
 			'pin'       =>'230',
-			'produk' => $product['product_type'],
+			'no_hp' => $row->phone,
+			'kode_produk' => $row->product_id,
+			'ref1' => '',
 		);
-		$Rb 		= $this->send($request_data);
+		$respon = $this->send($request_data);
+		$Rb 		= json_decode($respon);
+		$id = $row->transaction_id;
+		$debit       =$Rb ->SALDO_TERPOTONG;
+		$uid = $this->auth_data->user_id;
 		$data = array(
+		'product_id'       =>$Rb ->KODE_PRODUK,
+		'transaction_id'       =>$id,
+		'date_transaction'       =>$Rb ->WAKTU,
+		'debit'       =>$debit,
+		'saldo'       =>$this->transaction_model->saldo($debit),
 		'status'       =>$Rb ->STATUS,
-		'ket'       =>$Rb ->KET,
+		'uid'       => $uid,
 		);
-		$this->template->display('harga_pulsa', $data);
-    }
+		$this->transaction_model->insert($data);
+		$this->session->set_flashdata('message', 'succes Record Success');
+		redirect(site_url('pulsa'));
+		}
+		}
+	}
+		
+	public function cek_harga($id) {
+	if( $this->require_role('admin, user, businesspartner') )
+		{
+		$row = $this->pulsa_model->get_by($id);
+		if ($row) {
+			$request_data = array(
+			'produk' => $row->product_id,
+			);
+			$product = $this->db->get_where('product', array('product_id' => $row->product_id))->row_array();
+			$request_data = array(
+				'method'    =>'rajabiller.harga',
+				'uid'       =>'123',
+				'pin'       =>'230',
+				'produk' => $product['product_type'],
+			);
+			$Rb 		= $this->send($request_data);
+			$data = array(
+			'status'       =>$Rb ->STATUS,
+			'ket'       =>$Rb ->KET,
+			);
+			$this->template->display('harga_pulsa', $data);
+		}
+		}
 	}
 	
 	public function pulsa_m()
 	{
-		if($this->require_role('root'))
+		if( $this->require_role('menager, businesspartner') )
 		{
-			
 		$topup = $this->transaction_model->get_pulsa();
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);

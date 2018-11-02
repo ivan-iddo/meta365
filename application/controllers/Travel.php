@@ -10,9 +10,8 @@ class travel extends MY_Controller {
 
 	public function index()
 	{
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('admin, user, businesspartner') )
 		{
-			
 			$data['module'] = "Travel";
 			
 			$this->load->view('include/layout', $data);
@@ -21,7 +20,7 @@ class travel extends MY_Controller {
 	
 	public function daftar_kai($id)
 	{
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('admin, user, businesspartner') )
 		{
 			
 		$uid = $this->auth_data->user_id;
@@ -43,7 +42,7 @@ class travel extends MY_Controller {
 	
 	public function daftar_pesawat($id)
 	{
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('admin, user, businesspartner') )
 		{
 			
 		$uid = $this->auth_data->user_id;
@@ -65,7 +64,7 @@ class travel extends MY_Controller {
 
 	public function kai()
 	{
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
@@ -82,10 +81,30 @@ class travel extends MY_Controller {
 			$this->load->view('include/layout', $data);
 		}
 	}
+	
+	public function kai_admin()
+	{
+		if( $this->require_role('admin') )
+		{
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
+		$data = array(
+            'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
+           'module' => "travel/kai",
+           'module_name' => "KAI",
+		   'product' => $this->kai_model->data(),
+		);
+			$this->load->view('include/admin/layout', $data);
+		}
+	}
 
 	public function pesawat()
 	{
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
@@ -101,11 +120,30 @@ class travel extends MY_Controller {
 		);
 			$this->load->view('include/layout', $data);
 		}
+	}	
+	public function pesawat_admin()
+	{
+		if( $this->require_role('admin') )
+		{
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
+		$data = array(
+            'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
+           'module' => "travel/Pesawat",
+           'module_name' => "Pesawat",
+		   'product' => $this->pesawat_model->data(),
+		);
+			$this->load->view('include/admin/layout', $data);
+		}
 	}
 	
 	public function cek_kai()
 	{
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('admin, user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$date = $this->input->post("daterange");
@@ -172,6 +210,8 @@ class travel extends MY_Controller {
 	
 	public function update_kai($id)
 	{
+		if( $this->require_role('admin, user, businesspartner') )
+		{
 		$row = $this->kai_model->get_by($id);
         if ($row) {
 			$transaction_id= $row->transaction_id;
@@ -195,10 +235,13 @@ class travel extends MY_Controller {
 			$data['action'] = "checkout_kai";
 			$this->load->view('include/layout', $data);
 		}
+		}
 	}
 	
 	public function update_pesawat($id)
 	{
+		if( $this->require_role('admin, user, businesspartner') )
+		{
 		$row = $this->pesawat_model->get_by($id);
         if ($row) {
 			$transaction_id= $row->transaction_id;
@@ -222,11 +265,12 @@ class travel extends MY_Controller {
 			$data['action'] = "checkout_pesawat";
 			$this->load->view('include/layout', $data);
 		}
+		}
 	}
 	
 	public function cek_pesawat()
 	{
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('admin, user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$date = $this->input->post("daterange");
@@ -293,9 +337,8 @@ class travel extends MY_Controller {
 	
 	public function kai_m()
 	{
-		if($this->require_role('root'))
-		{
-			
+		if( $this->require_role('menager, businesspartner') )
+		{	
 		$topup = $this->transaction_model->get_kai();
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
@@ -317,9 +360,8 @@ class travel extends MY_Controller {
 	
 	public function pesawat_m()
 	{
-		if($this->require_role('root'))
-		{
-			
+		if( $this->require_role('menager, businesspartner') )
+		{	
 		$topup = $this->transaction_model->get_pesawat();
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);

@@ -11,17 +11,16 @@ class Dashboard extends MY_Controller {
 
 	public function index()
 	{
-		if($this->require_role('admin, user'))
-		{
-			
+		if($this->require_role('admin, user, businesspartner'))
+		{	
 		$uid = $this->auth_data->user_id;
 		$history = $this->transaction_model->get_transaction($uid);
 		$product = $this->transaction_model->get_all();
-		$pulsa = $this->transaction_model->sum_pulsa();
-		$emoney= $this->transaction_model->sum_emoney();
-		$ppob = $this->transaction_model->sum_ppob();
-		$tiket = $this->transaction_model->sum_tiket();
-		$game = $this->transaction_model->sum_game();
+		$pulsa = $this->transaction_model->sum_pulsa_id($uid);
+		$emoney= $this->transaction_model->sum_emoney_id($uid);
+		$ppob = $this->transaction_model->sum_ppob_id($uid);
+		$tiket = $this->transaction_model->sum_tiket_id($uid);
+		$game = $this->transaction_model->sum_game_id($uid);
 		$total = $this->transaction_model->total();
 
         $pesan = $this->pesan_model->get_by($uid);

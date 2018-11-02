@@ -59,11 +59,11 @@ public function get_all()
     }
 	
 	function kdotomatis() {
-        $jenis = 'PLN'.date('ym');
+        $jenis = 'PN'.date('ym');
         $query = $this->db->query("SELECT max(transaction_id) as maxID FROM pln WHERE transaction_id LIKE '$jenis%'");
         $data = $query->row_array();
         $idMax = $data['maxID'];
-        $noUrut = (int) substr($idMax, 7, 3);
+        $noUrut = (int) substr($idMax, 6, 3);
         $noUrut++;
         $ID = $jenis . sprintf("%03s", $noUrut);
         return $ID;

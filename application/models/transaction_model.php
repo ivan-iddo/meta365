@@ -84,11 +84,6 @@ class transaction_model extends CI_Model {
         return $saldo;
     }
 	
-	function get_data($uid) {
-		 $query =$this->db->query("SELECT * FROM pesan,users where pesan.uid = users.user_id and `status`='belum' and uid='$uid'");
-    return $query->result();
-    }
-	
 	function get_pulsa() {
 		 $query =$this->db->query("SELECT * FROM pulsa,transaction,users,product where pulsa.transaction_id = transaction.transaction_id and pulsa.uid = users.user_id and pulsa.product_id = product.product_id");
     return $query->result();
@@ -96,6 +91,13 @@ class transaction_model extends CI_Model {
 	
 	function sum_pulsa() {
 		 $query =$this->db->query("SELECT COUNT(transaction_id)as sum FROM transaction WHERE transaction_id LIKE 'PL%'");
+    $data = $query->row_array();
+	$sum = $data['sum'];
+    return $sum;
+    }
+	
+	function sum_pulsa_id($uid) {
+		 $query =$this->db->query("SELECT COUNT(transaction_id)as sum FROM transaction WHERE uid='$uid' and transaction_id LIKE 'PL%'");
     $data = $query->row_array();
 	$sum = $data['sum'];
     return $sum;
@@ -132,6 +134,12 @@ class transaction_model extends CI_Model {
 	$sum = $data['sum'];
     return $sum;
     }
+	function sum_ppob_id($uid) {
+		 $query =$this->db->query("SELECT COUNT(transaction_id) as sum FROM transaction WHERE uid='$uid' and transaction_id LIKE 'PAM%' or 'PN%' or 'MLT%' or 'TV%' or 'TEL%'");
+    $data = $query->row_array();
+	$sum = $data['sum'];
+    return $sum;
+    }
 	
 	function get_topup() {
 		 $query =$this->db->query("SELECT * FROM topup,transaction,users where topup.transaction_id = transaction.transaction_id and topup.uid = users.user_id");
@@ -146,12 +154,27 @@ class transaction_model extends CI_Model {
     return $sum;
     }
 	
+	function sum_topup_id($uid) {
+		 $query =$this->db->query("SELECT COUNT(transaction_id) as sum FROM transaction WHERE uid='$uid' and transaction_id LIKE 'UP%'");
+	$data = $query->row_array();
+	$sum = $data['sum'];
+    return $sum;
+    }
+	
 	function get_game() {
 		 $query =$this->db->query("SELECT * FROM game,transaction,users where game.transaction_id = transaction.transaction_id and game.uid = users.user_id");
     return $query->result();
     }
+	
 	function sum_game() {
 		 $query =$this->db->query("SELECT COUNT(transaction_id) as sum FROM transaction WHERE transaction_id LIKE 'GM%'");
+    $data = $query->row_array();
+	$sum = $data['sum'];
+    return $sum;
+    }
+	
+	function sum_game_id($uid) {
+	$query =$this->db->query("SELECT COUNT(transaction_id) as sum FROM transaction WHERE uid='$uid' and transaction_id LIKE 'GM%'");
     $data = $query->row_array();
 	$sum = $data['sum'];
     return $sum;
@@ -166,8 +189,16 @@ class transaction_model extends CI_Model {
 		 $query =$this->db->query("SELECT * FROM kai,transaction,users where kai.transaction_id = transaction.transaction_id and kai.uid = users.user_id");
     return $query->result();
     }
+	
 	function sum_tiket() {
 		 $query =$this->db->query("SELECT COUNT(transaction_id) as sum FROM transaction WHERE transaction_id LIKE 'KAI%' or 'PES%'");
+    $data = $query->row_array();
+	$sum = $data['sum'];
+    return $sum;
+    }
+	
+	function sum_tiket_id($uid) {
+		 $query =$this->db->query("SELECT COUNT(transaction_id) as sum FROM transaction WHERE uid='$uid' and transaction_id LIKE 'KAI%' or 'PES%'");
     $data = $query->row_array();
 	$sum = $data['sum'];
     return $sum;
@@ -185,12 +216,25 @@ class transaction_model extends CI_Model {
     return $sum;
     }
 	
+	function sum_emoney_id($uid) {
+		 $query =$this->db->query("SELECT COUNT(transaction_id) as sum FROM transaction WHERE uid='$uid' and transaction_id LIKE 'UP%'");
+    $data = $query->row_array();
+	$sum = $data['sum'];
+    return $sum;
+    }
+	
 	function get_bpjs() {
 		 $query =$this->db->query("SELECT * FROM bpjs,transaction,users where bpjs.transaction_id = transaction.transaction_id and bpjs.uid = users.user_id");
     return $query->result();
     }
 	function sum_bpjs() {
 		 $query =$this->db->query("SELECT COUNT(transaction_id) as sum FROM transaction WHERE transaction_id LIKE 'BPJ%'");
+    $data = $query->row_array();
+	$sum = $data['sum'];
+    return $sum;
+    }
+	function sum_bpjs_id($uid) {
+		 $query =$this->db->query("SELECT COUNT(transaction_id) as sum FROM transaction WHERE uid='$uid' and transaction_id LIKE 'BPJ%'");
     $data = $query->row_array();
 	$sum = $data['sum'];
     return $sum;

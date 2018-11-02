@@ -29,7 +29,7 @@ class Users extends MY_Controller {
 
 	public function profile()
 	{
-		if( $this->require_role('admin, user') )
+		if( $this->require_role('admin, user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$prof = $this->user->get_by_id($uid);
@@ -148,7 +148,7 @@ class Users extends MY_Controller {
 			[
 				'field' => 'auth_level',
 				'label' => 'auth_level',
-				'rules' => 'integer|in_list[1,6,9]'
+				'rules' => 'integer|in_list[1,4,6,8,9]'
 			]
 		];
 

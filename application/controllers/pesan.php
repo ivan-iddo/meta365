@@ -10,7 +10,7 @@ class pesan extends MY_Controller {
 	
 	public function index()
 	{
-		if( $this->require_role('admin, user, root') )
+		if( $this->require_role('admin, user, root, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
@@ -29,7 +29,7 @@ class pesan extends MY_Controller {
 	
 	public function payment()
 	{
-		if( $this->require_role('admin, root, user') )
+		if( $this->require_role('root, user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
@@ -53,7 +53,7 @@ class pesan extends MY_Controller {
 	
 	public function payment_admin()
 	{
-		if( $this->require_role('user') )
+		if( $this->require_role('admin') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
@@ -77,7 +77,7 @@ class pesan extends MY_Controller {
 	
 	public function detail_pesan($id)
 	{
-		if( $this->require_role('admin, root') )
+		if( $this->require_role('businesspartner,user') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by_id($uid, $id);
@@ -98,7 +98,7 @@ class pesan extends MY_Controller {
 	
 	public function dpesan($id)
 	{
-		if( $this->require_role('user') )
+		if( $this->require_role('admin') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by_id($uid, $id);
@@ -110,8 +110,8 @@ class pesan extends MY_Controller {
             'sum' => $sum,
             'sum_payment' => $sum_payment,
             'status' => $status,
-			'module' => 'pesan/detail_pesan',
-			'module_name' => 'Detail Pesan',
+			'module' => 'pesan/pesan_admin',
+			'module_name' => 'Balas Pesan',
         );	
 		 $this->load->view('include/layout', $data);
 		}
@@ -119,37 +119,37 @@ class pesan extends MY_Controller {
 	
 	public function insert()
 	{
-		if( $this->require_role('admin, root') )
+		if( $this->require_role('user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$data = array(
 			'isi' 		=> $this->input->post("isi"),
 			'date' => date("Y-m-d H:i:s"),
 			'uid_pengirim' => $uid,
-            'uid' => '2147484848',
+            'uid' => '3614488494',
             'status' => 'belum',
 		);
 
 		$this->pesan_model->insert($data);
-		redirect(site_url('pesan'));
+		redirect(site_url('dashboard'));
 		}
 	}
 	
 	public function insert_admin()
 	{
-		if( $this->require_role('user') )
+		if( $this->require_role('admin') )
 		{
 		$uid = $this->auth_data->user_id;
 		$data = array(
 			'isi' 		=> $this->input->post("isi"),
 			'date' => date("Y-m-d H:i:s"),
-			'uid_pengirim' => '',
-            'uid' => $uid,
+			'uid_pengirim' => $uid,
+            'uid' => $this->input->post("uid_pengirim"),
             'status' => 'belum',
 		);
 
 		$this->pesan_model->insert($data);
-		redirect(site_url('pesan'));
+		redirect(site_url('admin'));
 		}
 	}
 }

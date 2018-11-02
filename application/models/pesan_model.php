@@ -19,12 +19,12 @@ public function get_all()
 	}
 
 	function get_by($uid){
-		$query =$this->db->query("SELECT * FROM pesan,users where uid='$uid' and `status`='belum' and pesan.uid = users.user_id order by id DESC limit 3");
+		$query =$this->db->query("SELECT * FROM pesan,users where `status`='belum' and pesan.uid_pengirim = users.user_id and uid='$uid' order by id DESC limit 3");
     return $query->result();
     }
 	
     function get_by_id($uid, $id) {
-        $query =$this->db->query("SELECT * FROM pesan,users where pesan.uid = users.user_id and uid='$uid' and id='$id'");
+        $query =$this->db->query("SELECT * FROM pesan,users where pesan.uid_pengirim = users.user_id and uid='$uid' and id='$id'");
     return $query->result();
 	}
 	

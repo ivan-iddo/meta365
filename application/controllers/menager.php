@@ -11,7 +11,7 @@ class Menager extends MY_Controller {
 
 	public function index()
 	{
-		if($this->require_role('root'))
+		if($this->require_role('menager, businesspartner'))
 		{
 		$product = $this->transaction_model->get_all();
 		$pulsa = $this->transaction_model->sum_pulsa();

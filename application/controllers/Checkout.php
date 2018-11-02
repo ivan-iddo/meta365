@@ -10,7 +10,7 @@ class Checkout extends MY_Controller {
 	
 	public function index()
 	{
-		if( $this->require_role('admin') )
+		if( $this->require_role('admin, user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
