@@ -6,18 +6,18 @@
       <div class="card-group">
         <div class="card p-4">
           <div class="card-body">
-		  <?= form_open('users/create_user');?>
-            <h1>Register</h1>
-			<?=$this->session->flashdata('notif')?>
-            <p class="text-muted">Create your account</p>
-			<?php echo form_error('username') ?>
+		        <?= form_open('users/create_user');?>
+            <h1>Registrasi</h1>
+			       <?=$this->session->flashdata('notif')?>
+            <p class="text-muted">Buat akun baru</p>
+			       <?php echo form_error('username') ?>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
                     <i class="icon-user"></i>
                   </span>
                 </div>
-                <input class="form-control" type="text" id="username" name="username" placeholder="Username" maxlength="12" required>
+                <input class="form-control" type="text" id="username" name="username" placeholder="Nama Pengguna" maxlength="12" required>
               </div>
 			  <?php echo form_error('email') ?>
 			  <div class="input-group mb-3">
@@ -26,29 +26,27 @@
                 </div>
                 <input class="form-control" type="email" id="email" name="email" placeholder="Email" required>
               </div>
+              <small class="text-muted">* Sandi minimum 8 karakter, terdiri dari 1 nomor 1 huruf kecil dan 1 huruf besar</small>
               <div class="input-group mb-4">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
                     <i class="icon-lock"></i>
                   </span>
                 </div>
-                <input class="form-control" type="password" id="password" name="password" placeholder="Password" required>
-				* Password min 8 char 1 number 1 lower and 1 upper case
+                <input class="form-control" type="password" id="password" name="password" placeholder="Sandi Baru" required>
               </div>
-			  <div class="input-group mb-3">
+              <div class="input-group mb-4">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
-                    <i class="fa fa-level-up"></i>
+                    <i class="icon-reload"></i>
                   </span>
                 </div>
-                <input class="form-control" type="text" name="level" placeholder="Level" required>
+                <input class="form-control" type="password" id="repassword" name="repassword" placeholder="Ketik Ulang Sandi" required>
               </div>
+              
               <div class="row">
                 <div class="col-6">
-                  <button class="btn btn-primary px-4" type="submit" value="Login" name="submit" id="submit_button">Register New</button>
-                </div>
-                <div class="col-6 text-right">
-                  <a href="<?php echo site_url('users/recover', (USE_SSL ? 'https' : NULL)); ?>" class="btn btn-link px-0" >Forgot password?</a>
+                  <button class="btn btn-primary px-4" type="submit" value="Login" name="submit" id="submit_button">Kirim</button>
                 </div>
               </div>
           </div>
