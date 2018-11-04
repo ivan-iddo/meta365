@@ -41,7 +41,7 @@ class Dashboard extends MY_Controller {
             'module' => "dashboard",
             'module_name' => "Dashboard",
         );
-			$this->load->view('include/layout', $data);
+			$this->load->view('include/layout_dashbord', $data);
 
 		}
 	}

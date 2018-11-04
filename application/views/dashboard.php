@@ -125,6 +125,8 @@
   </div>
 </main>
 <script type="text/javascript" src="<?=base_url();?>assets/js/jquery.js"></script>
+<script type="text/javascript" src="<?=base_url();?>assets/vendors/popper.js/js/popper.min.js"></script>
+<script type="text/javascript" src="<?=base_url();?>assets/vendors/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<?=base_url();?>assets/vendors/@coreui/coreui-pro/js/coreui.min.js"></script>
 <script type="text/javascript" src="<?=base_url();?>assets/vendors/chart.js/js/Chart.min.js"></script>
 <script>

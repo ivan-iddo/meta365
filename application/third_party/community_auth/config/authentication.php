@@ -28,7 +28,7 @@ $config['levels_and_roles'] = [
 	'1' => 'user',
 	'4' => 'businesspartner',
 	'6' => 'admin',
-	'8' => 'manager',
+	'8' => 'menager',
 	'9' => 'root'
 ];
 /*
@@ -40,7 +40,7 @@ $config['levels_and_roles'] = [
 */
 $config['groups'] = [
 	'superuser' => 'root',
-	'employees' => 'manager,admin',
+	'employees' => 'menager,admin',
 	'client' => 'businesspartner, user'
 ];
 /*

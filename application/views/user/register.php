@@ -35,20 +35,17 @@
                 <input class="form-control" type="password" id="password" name="password" placeholder="Password" required>
 				* Password min 8 char 1 number 1 lower and 1 upper case
               </div>
-			  <div class="input-group mb-3">
+			      <div class="input-group mb-4">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
-                    <i class="fa fa-level-up"></i>
+                    <i class="icon-reload"></i>
                   </span>
                 </div>
-                <input class="form-control" type="text" name="level" placeholder="Level" required>
+                <input class="form-control" type="password" id="repassword" name="repassword" placeholder="Ketik Ulang Sandi" required>
               </div>
               <div class="row">
                 <div class="col-6">
-                  <button class="btn btn-primary px-4" type="submit" value="Login" name="submit" id="submit_button">Register New</button>
-                </div>
-                <div class="col-6 text-right">
-                  <a href="<?php echo site_url('users/recover', (USE_SSL ? 'https' : NULL)); ?>" class="btn btn-link px-0" >Forgot password?</a>
+                  <button class="btn btn-primary px-4" type="submit" value="Login" name="submit" id="submit_button">Kirim</button>
                 </div>
               </div>
           </div>

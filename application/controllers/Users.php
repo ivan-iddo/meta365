@@ -99,8 +99,9 @@ class Users extends MY_Controller {
 		$user_data = [
 			'username'   => $this->input->post("username"),
 			'passwd'     => $this->input->post("password"),
+			'repassword' => $this->input->post("repassword"),
 			'email'      => $this->input->post("email"),
-			'auth_level' => $this->input->post("level"), // 1,6,9 if you want to login @ examples/index.
+			'auth_level' => '1', // 1,6,9 if you want to login @ examples/index.
 		];
 
 		$this->is_logged_in();
@@ -125,6 +126,133 @@ class Users extends MY_Controller {
 			[
 				'field' => 'passwd',
 				'label' => 'passwd',
+				'rules' => [
+					'trim',
+					'matches[repassword]',
+					'required',
+					[ 
+						'_check_password_strength', 
+						[ $this->validation_callables, '_check_password_strength' ] 
+					]
+				],
+				'errors' => [
+					'required' => 'The password field is required.'
+				]
+			],
+			[
+				'field' => 'repassword',
+				'label' => 'repassword',
+				'rules' => [
+					'trim',
+					'required',
+					[ 
+						'_check_password_strength', 
+						[ $this->validation_callables, '_check_password_strength' ] 
+					]
+				],
+				'errors' => [
+					'required' => 'The password field is required.'
+				]
+			],
+			[
+				'field'  => 'email',
+				'label'  => 'email',
+				'rules'  => 'trim|valid_email|is_unique[' . db_table('user_table') . '.email]',
+				'errors' => [
+					'is_unique' => 'Email address already in use.'
+				]
+			],
+			[
+				'field' => 'auth_level',
+				'label' => 'auth_level',
+				'rules' => 'integer|in_list[1]'
+			]
+		];
+
+		$this->form_validation->set_rules( $validation_rules );
+
+		if( $this->form_validation->run() )
+		{
+			$data['username']   = $this->input->post("username");
+			$data['email']     = $this->input->post("email");
+			$data['auth_level'] = '1';
+			$data['passwd']     = $this->authentication->hash_passwd($user_data['passwd']);
+			$data['user_id']    = $this->examples_model->get_unused_id();
+			$data['created_at'] = date('Y-m-d H:i:s');
+
+			$this->db->set($data)
+				->insert(db_table('user_table'));
+				$this->session->set_flashdata('notif', 
+			  '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> You have successfully register.
+                <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>');
+		}
+		else
+		{
+			validation_errors();
+			$this->session->set_flashdata('notif', 
+			  '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Gagal!</strong> You have gagal register.
+                <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>');
+		}
+		echo $this->load->view('user/register', '', TRUE);
+	}
+	
+	public function create()
+	{
+		// Customize this array for your user
+		$user_data = [
+			'username'   => $this->input->post("username"),
+			'passwd'     => $this->input->post("password"),
+			'repassword'     => $this->input->post("repassword"),
+			'email'      => $this->input->post("email"),
+			'auth_level' => $this->input->post("level"), // 1,6,9 if you want to login @ examples/index.
+		];
+
+		$this->is_logged_in();
+		
+		// Load resources
+		$this->load->helper('auth');
+		$this->load->model('examples/examples_model');
+		$this->load->model('examples/validation_callables');
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_data($user_data);
+
+		$validation_rules = [
+			[
+				'field' => 'username',
+				'label' => 'username',
+				'rules' => 'is_unique[' . db_table('user_table') . '.username]',
+				'errors' => [
+					'is_unique' => 'Username already in use.'
+				]
+			],
+				[
+				'field' => 'passwd',
+				'label' => 'passwd',
+				'rules' => [
+					'trim',
+					'matches[repassword]',
+					'required',
+					[ 
+						'_check_password_strength', 
+						[ $this->validation_callables, '_check_password_strength' ] 
+					]
+				],
+				'errors' => [
+					'required' => 'The password field is required.'
+				]
+			],
+			[
+				'field' => 'repassword',
+				'label' => 'repassword',
 				'rules' => [
 					'trim',
 					'required',
@@ -156,11 +284,14 @@ class Users extends MY_Controller {
 
 		if( $this->form_validation->run() )
 		{
-			$user_data['passwd']     = $this->authentication->hash_passwd($user_data['passwd']);
-			$user_data['user_id']    = $this->examples_model->get_unused_id();
-			$user_data['created_at'] = date('Y-m-d H:i:s');
+			$data['username']   = $this->input->post("username");
+			$data['email']     = $this->input->post("email");
+			$data['auth_level'] = $this->input->post("level");
+			$data['passwd']     = $this->authentication->hash_passwd($user_data['passwd']);
+			$data['user_id']    = $this->examples_model->get_unused_id();
+			$data['created_at'] = date('Y-m-d H:i:s');
 
-			$this->db->set($user_data)
+			$this->db->set($data)
 				->insert(db_table('user_table'));
 				$this->session->set_flashdata('notif', 
 			  '<div class="alert alert-success alert-dismissible fade show" role="alert">

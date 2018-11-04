@@ -70,7 +70,7 @@
     </ul>
   </header>
   <div class="app-body">
-    <?php $this->load->view('include/sidebar_m');?>
+    <?php $this->load->view('include/sidebar');?>
     <?php (is_file(APPPATH.'views/' . $module .'.php') ? $this->load->view($module): null);?>
   </div>
 <?php $this->load->view('include/footer');?>

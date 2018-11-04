@@ -55,15 +55,15 @@
                 </div>
                 <input class="form-control" type="password" name="login_pass" placeholder="Password">
               </div>
-              <div class="row">
+             <div class="row">
                 <div class="col-6">
-                  <button class="btn btn-primary px-4" type="submit" value="Login" name="submit" id="submit_button" <?=(isset( $on_hold_message ) ? 'disabled' : '')?>>Login</button>
+                  <button class="btn btn-primary px-4" type="submit" value="Login" name="submit" id="submit_button" <?=(isset( $on_hold_message ) ? 'disabled' : '')?>>Masuk</button>
                 </div>
                 <div class="col-6 text-right">
-                  <a href="<?php echo site_url('users/recover', (USE_SSL ? 'https' : NULL)); ?>" class="btn btn-link px-0" >Forgot password?</a>
+                  <a href="<?php echo site_url('users/recover', (USE_SSL ? 'https' : NULL)); ?>" class="btn btn-link px-0" >Lupa Sandi Anda?</a>
                 </div>
 				<div class="col-12 text-right">
-                  <a href="<?php echo site_url('users/register'); ?>" class="btn btn-link px-0" >Create account New</a>
+                  <a href="<?php echo site_url('users/register'); ?>" class="btn btn-link px-0" >Buat Akun Baru</a>
                 </div>
               </div>
             <?= form_close();?>

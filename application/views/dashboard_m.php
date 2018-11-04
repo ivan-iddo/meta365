@@ -36,7 +36,7 @@
 			}
 		  ?>
           <div class="chart-wrapper" style="height:300px;margin-top:40px;">
-            <canvas class="chart" id="main-chart" height="300"></canvas>
+            <canvas class="chart" id="chart" height="300"></canvas>
           </div>
         </div>
        <div class="card-footer">
@@ -88,3 +88,81 @@
     </div>
   </div>
 </main>
+<script type="text/javascript" src="<?=base_url();?>assets/js/jquery.js"></script>
+<script type="text/javascript" src="<?=base_url();?>assets/vendors/popper.js/js/popper.min.js"></script>
+<script type="text/javascript" src="<?=base_url();?>assets/vendors/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<?=base_url();?>assets/vendors/@coreui/coreui-pro/js/coreui.min.js"></script>
+<script type="text/javascript" src="<?=base_url();?>assets/vendors/chart.js/js/Chart.min.js"></script>
+<script>
+var mainChart = new Chart($('#chart'), {
+  type: 'line',
+  data: {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    datasets: [{
+      label: 'Pulsa',
+      backgroundColor: hexToRgba(getStyle('--info'), 5),
+      borderColor: getStyle('--info'),
+      pointHoverBackgroundColor: '#fff',
+      borderWidth: 2,
+      data: [<?php echo $pulsa ?>]
+    }, {
+      label: 'PPOB',
+      backgroundColor: hexToRgba(getStyle('--info'), 5),
+      borderColor: getStyle('--danger'),
+      pointHoverBackgroundColor: '#fff',
+      borderWidth: 2,
+      data: [<?php echo $ppob ?>]
+    },{
+      label: 'Game',
+      backgroundColor: hexToRgba(getStyle('--info'), 3),
+      borderColor: getStyle('--success'),
+      pointHoverBackgroundColor: '#fff',
+      borderWidth: 2,
+      data: [<?php echo $game?>]
+    },{
+      label: 'Tiket',
+      backgroundColor: hexToRgba(getStyle('--info'), 2),
+      borderColor: getStyle('--warning'),
+      pointHoverBackgroundColor: '#fff',
+      borderWidth: 2,
+      data: [<?php echo $tiket ?>]
+    },{
+      label: 'E-money',
+      backgroundColor: hexToRgba(getStyle('--info'), 1),
+      borderColor: getStyle('--primary'),
+      pointHoverBackgroundColor: '#fff',
+      borderWidth: 2,
+      data: [<?php echo $emoney ?>]
+    }]
+  },
+  options: {
+    maintainAspectRatio: false,
+    legend: {
+      display: false
+    },
+    scales: {
+      xAxes: [{
+        gridLines: {
+          drawOnChartArea: false
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          maxTicksLimit: 5,
+          stepSize: Math.ceil(250 / 5),
+          max: 250
+        }
+      }]
+    },
+    elements: {
+      point: {
+        radius: 0,
+        hitRadius: 10,
+        hoverRadius: 4,
+        hoverBorderWidth: 3
+      }
+    }
+  }
+});
+</script>
