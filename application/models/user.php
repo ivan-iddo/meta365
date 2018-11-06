@@ -14,10 +14,26 @@ class user extends CI_model{
 				 ->get();
 		return $query->result();
 	}
-
-    function get_by_id($id) {
+	
+	function update($id, $data) {
         $this->db->where($this->id, $id);
-        return $this->db->get($this->table)->row();
+        $this->db->update($this->table, $data);
     }
-
+	
+	function get_by(){
+		$query =$this->db->query("SELECT * FROM users where `banned`='1' order by `user_id` DESC limit 5");
+    return $query->result();
+    }
+	
+	function get_by_id($id) {
+        $query =$this->db->query("SELECT * FROM users where `banned`='1' and user_id='$id'");
+    return $query->result();
+	}
+	
+	function sum() {
+		 $query =$this->db->query("SELECT COUNT(`banned`) as sum FROM users WHERE `banned`='1'");
+    $data = $query->row_array();
+	$sum = $data['sum'];
+    return $sum;
+    }
 }

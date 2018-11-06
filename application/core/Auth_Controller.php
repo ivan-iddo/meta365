@@ -497,7 +497,7 @@ class Auth_Controller extends CI_Controller {
 		if( $this->authentication->login_error === TRUE )
 		{
 			// Display a failed login attempt message
-			$view_data['login_error_mesg'] = 1;
+			$view_data['login_error_mesg'] = 0;
 		}
 
 		// Redirect to specified page

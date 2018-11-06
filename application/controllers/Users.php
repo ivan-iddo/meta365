@@ -58,6 +58,35 @@ class Users extends MY_Controller {
 		$this->load->view('user/register','',FALSE);
 	}
 
+	public function active($id)
+	{
+		if( $this->require_role('admin') )
+		{
+		$uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$active = $this->user->get_by();
+		$sum_active= $this->user->sum();
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
+		$activ = $this->user->get_by_id($id);
+		$status = $this->pesan_model->status($id);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
+		$data = array(
+			'pesan' => $pesan,
+            'active' => $active,
+            'activ' => $activ,
+            'sum_active' => $sum_active,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
+            'status' => $status,
+			'module' => 'user/active',
+			'module_name' => 'Active User',
+        );	
+		 $this->load->view('include/admin/layout', $data);
+		}
+	}
+	
 	/**
 	 * This login method only serves to redirect a user to a 
 	 * location once they have successfully logged in. It does
@@ -71,7 +100,7 @@ class Users extends MY_Controller {
 			show_404();
 
 		if( strtolower( $_SERVER['REQUEST_METHOD'] ) == 'post' )
-			$this->require_min_level(1);
+		$this->require_min_level(1);
 
 		$this->setup_login_form();
 
@@ -102,6 +131,7 @@ class Users extends MY_Controller {
 			'repassword' => $this->input->post("repassword"),
 			'email'      => $this->input->post("email"),
 			'auth_level' => '1', // 1,6,9 if you want to login @ examples/index.
+			'banned' => '1', // 1,6,9 if you want to login @ examples/index.
 		];
 
 		$this->is_logged_in();
@@ -165,7 +195,7 @@ class Users extends MY_Controller {
 			[
 				'field' => 'auth_level',
 				'label' => 'auth_level',
-				'rules' => 'integer|in_list[1]'
+				'rules' => 'integer'
 			]
 		];
 
@@ -175,7 +205,8 @@ class Users extends MY_Controller {
 		{
 			$data['username']   = $this->input->post("username");
 			$data['email']     = $this->input->post("email");
-			$data['auth_level'] = '1';
+			$data['auth_level'] = '0';
+			$data['banned'] = '1';
 			$data['passwd']     = $this->authentication->hash_passwd($user_data['passwd']);
 			$data['user_id']    = $this->examples_model->get_unused_id();
 			$data['created_at'] = date('Y-m-d H:i:s');
@@ -203,120 +234,6 @@ class Users extends MY_Controller {
 		}
 		echo $this->load->view('user/register', '', TRUE);
 	}
-	
-	public function create()
-	{
-		// Customize this array for your user
-		$user_data = [
-			'username'   => $this->input->post("username"),
-			'passwd'     => $this->input->post("password"),
-			'repassword'     => $this->input->post("repassword"),
-			'email'      => $this->input->post("email"),
-			'auth_level' => $this->input->post("level"), // 1,6,9 if you want to login @ examples/index.
-		];
-
-		$this->is_logged_in();
-		
-		// Load resources
-		$this->load->helper('auth');
-		$this->load->model('examples/examples_model');
-		$this->load->model('examples/validation_callables');
-		$this->load->library('form_validation');
-
-		$this->form_validation->set_data($user_data);
-
-		$validation_rules = [
-			[
-				'field' => 'username',
-				'label' => 'username',
-				'rules' => 'is_unique[' . db_table('user_table') . '.username]',
-				'errors' => [
-					'is_unique' => 'Username already in use.'
-				]
-			],
-				[
-				'field' => 'passwd',
-				'label' => 'passwd',
-				'rules' => [
-					'trim',
-					'matches[repassword]',
-					'required',
-					[ 
-						'_check_password_strength', 
-						[ $this->validation_callables, '_check_password_strength' ] 
-					]
-				],
-				'errors' => [
-					'required' => 'The password field is required.'
-				]
-			],
-			[
-				'field' => 'repassword',
-				'label' => 'repassword',
-				'rules' => [
-					'trim',
-					'required',
-					[ 
-						'_check_password_strength', 
-						[ $this->validation_callables, '_check_password_strength' ] 
-					]
-				],
-				'errors' => [
-					'required' => 'The password field is required.'
-				]
-			],
-			[
-				'field'  => 'email',
-				'label'  => 'email',
-				'rules'  => 'trim|valid_email|is_unique[' . db_table('user_table') . '.email]',
-				'errors' => [
-					'is_unique' => 'Email address already in use.'
-				]
-			],
-			[
-				'field' => 'auth_level',
-				'label' => 'auth_level',
-				'rules' => 'integer|in_list[1,4,6,8,9]'
-			]
-		];
-
-		$this->form_validation->set_rules( $validation_rules );
-
-		if( $this->form_validation->run() )
-		{
-			$data['username']   = $this->input->post("username");
-			$data['email']     = $this->input->post("email");
-			$data['auth_level'] = $this->input->post("level");
-			$data['passwd']     = $this->authentication->hash_passwd($user_data['passwd']);
-			$data['user_id']    = $this->examples_model->get_unused_id();
-			$data['created_at'] = date('Y-m-d H:i:s');
-
-			$this->db->set($data)
-				->insert(db_table('user_table'));
-				$this->session->set_flashdata('notif', 
-			  '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Success!</strong> You have successfully register.
-                <button class="close" type="button" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>');
-			  
-
-		}
-		else
-		{
-			validation_errors();
-			$this->session->set_flashdata('notif', 
-			  '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>Gagal!</strong> You have gagal register.
-                <button class="close" type="button" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>');
-		}
-		echo $this->load->view('user/register', '', TRUE);
-	}
-
 	// --------------------------------------------------------------
 
 	/**
@@ -325,7 +242,6 @@ class Users extends MY_Controller {
 	public function recover()
 	{
 		// Load resources
-		$this->load->model('examples/examples_model');
 
 		/// If IP or posted email is on hold, display message
 		if( $on_hold = $this->authentication->current_hold_status( TRUE ) )
@@ -397,11 +313,7 @@ class Users extends MY_Controller {
 			}
 		}
 
-		echo $this->load->view('examples/page_header', '', TRUE);
-
 		echo $this->load->view('examples/recover_form', ( isset( $view_data ) ) ? $view_data : '', TRUE );
-
-		echo $this->load->view('examples/page_footer', '', TRUE);
 	}
 
 	// --------------------------------------------------------------
@@ -487,6 +399,17 @@ class Users extends MY_Controller {
 
 		echo $this->load->view('examples/page_footer', '', TRUE);
 	}
+	
+	public function update(){
+		$id=$this->input->post("id");
+        $data = array(
+                'banned' => '0',
+                'auth_level' => $this->input->post("level"),
+        );
+
+        $this->user->update($id, $data);
+        redirect(site_url('dashboard'));
+    }
 
 	// -----------------------------------------------------------------------
 

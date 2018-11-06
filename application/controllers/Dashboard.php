@@ -11,6 +11,25 @@ class Dashboard extends MY_Controller {
 
 	public function index()
 	{
+	if( $this->require_role('admin, user, businesspartner, menager') )
+	{
+	if($this->auth_role == 'user')
+	{
+	redirect(site_url('dashboard/member'));
+	}
+    if( $this->auth_role == 'admin' )
+    {
+    redirect(site_url('admin'));
+    }
+	if($this->require_role('menager, businesspartner'))
+	{
+	redirect(site_url('menager'));
+	}
+	redirect(site_url('dashboard/member'));
+	}
+	}
+	public function member()
+	{
 		if($this->require_role('admin, user, businesspartner'))
 		{	
 		$uid = $this->auth_data->user_id;

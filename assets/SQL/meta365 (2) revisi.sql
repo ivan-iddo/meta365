@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 02, 2018 at 10:25 PM
+-- Generation Time: Nov 06, 2018 at 02:16 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.4
 
@@ -77,13 +77,26 @@ CREATE TABLE `auth_sessions` (
 --
 
 INSERT INTO `auth_sessions` (`id`, `user_id`, `login_time`, `modified_at`, `ip_address`, `user_agent`) VALUES
-('7koqphp8utvoe9nls4an3ggs8qk7nc9l', 3614488494, '2018-11-02 22:09:28', '2018-11-02 21:09:28', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('lb6f5m4gmvb3ebagcvqpleq7cuiu3nkh', 730510257, '2018-11-02 22:20:47', '2018-11-02 21:20:47', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('rclf8e1nclq318ok5oi2fnd1b2oikur2', 730510257, '2018-11-02 22:21:13', '2018-11-02 21:21:13', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('cs5u0m1dm8vppabtf2qvigfr4mcvjip4', 1301294496, '2018-11-02 22:22:36', '2018-11-02 21:22:36', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('elq7mevs464b2thcujoiosfgf41r1tq7', 3614488494, '2018-11-02 21:55:17', '2018-11-02 21:08:34', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('o0hh019b8ph261vq76ll86e0s56shd7n', 3614488494, '2018-11-02 21:25:17', '2018-11-02 20:37:34', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('misk8ft2ua1ft1ikcpm9ub0kq23j4684', 608603457, '2018-11-02 20:00:56', '2018-11-02 19:34:45', '::1', 'Chrome 55.0.2883.87 on Windows 7');
+('l9q856r4852n3m0puteuk5rujo8pi7m5', 2147484848, '2018-11-06 00:37:10', '2018-11-05 23:37:10', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('dklk6q975se8upktuc1hfq5ifhif9l9d', 2147484848, '2018-11-06 00:36:12', '2018-11-05 23:36:12', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('1u1ul9eg913j5aojo4faedu1njf8ib78', 1301294496, '2018-11-06 00:36:00', '2018-11-05 23:36:00', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('fd66aogp7epdi91esqfo1rkglujj10n0', 1242927888, '2018-11-06 00:34:32', '2018-11-05 23:34:32', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('eodjq0eakhfepd02b0umljk3kh14506e', 1242927888, '2018-11-06 00:34:01', '2018-11-05 23:34:01', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('08h66l3t65fs7qdn9qfo3mmfne8v5b44', 3614488494, '2018-11-05 23:57:28', '2018-11-05 22:57:28', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('gd1mcsuaia8t48b8ju0rpvtclnai0j00', 3614488494, '2018-11-05 23:56:32', '2018-11-05 22:56:32', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('du7crrvucpuvtp8ekfhh3ijmkjbs1b69', 3614488494, '2018-11-05 23:51:24', '2018-11-05 22:51:24', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('u21ls52dhcg9vu3bs4f7sqkphuq8arri', 3614488494, '2018-11-05 22:09:50', '2018-11-05 21:09:50', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('vd2pnilmr8acob0qn1tklt6m3rfp0ms7', 3614488494, '2018-11-05 23:39:27', '2018-11-05 22:39:27', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('s41r65oms1rd1ifvrlnrvpbeq882s684', 1380392804, '2018-11-06 00:38:10', '2018-11-05 23:38:11', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('m18t8dieuv60omj0v05rkks3v18fn66m', 2147484848, '2018-11-06 00:39:46', '2018-11-05 23:39:46', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('lnn6pkta3l7bmf059evbb6uh432ale26', 2147484848, '2018-11-06 00:42:09', '2018-11-05 23:42:09', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('s6dap59op8qvpdvf91osu3kuhggub277', 286110552, '2018-11-06 00:43:18', '2018-11-05 23:43:18', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('9pr0oikcoi05462ijapsa61vva0opi87', 2147484848, '2018-11-06 00:45:56', '2018-11-05 23:45:56', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('7tfafvccljdjvii7qdvojemvao1squ69', 3614488494, '2018-11-06 00:47:18', '2018-11-05 23:47:19', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('aj4cbbln5d8ot3pemjem156qdm70b7vn', 3614488494, '2018-11-06 00:47:28', '2018-11-05 23:47:28', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('dul780ca3ecj4mpe191768pvbag1ffkv', 1380392804, '2018-11-06 00:48:47', '2018-11-05 23:48:47', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('3bsg9b9d5oo1cridk4jvbahu87h25mqr', 1380392804, '2018-11-06 00:49:39', '2018-11-05 23:49:39', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('g3rbgcvd6io4fpqg9qkl8rdldu23ghaa', 1380392804, '2018-11-06 00:51:18', '2018-11-05 23:51:18', '::1', 'Chrome 55.0.2883.87 on Windows 7');
 
 -- --------------------------------------------------------
 
@@ -193,7 +206,6 @@ INSERT INTO `emoney` (`product_id`, `product`, `product_type`, `nominal`) VALUES
 ('M500', 'E-TOL', 'E-TOL MANDIRI', 'Mandiri 500 ');
 
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `game`
 --
@@ -274,7 +286,8 @@ CREATE TABLE `login_errors` (
 --
 
 INSERT INTO `login_errors` (`ai`, `username_or_email`, `ip_address`, `time`) VALUES
-(23, 'bangsa', '::1', '2018-11-02 22:21:02');
+(46, 'dia', '::1', '2018-11-06 01:51:13'),
+(45, 'dia', '::1', '2018-11-06 01:49:49');
 
 -- --------------------------------------------------------
 
@@ -1050,14 +1063,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `email`, `auth_level`, `banned`, `passwd`, `passwd_recovery_code`, `passwd_recovery_date`, `passwd_modified_at`, `last_login`, `created_at`, `modified_at`) VALUES
-(286110552, 'palembang', 'palembang@gmail.com', 1, '0', '$2y$11$XlgJq4jfZWYoo2Y720iffOz.TG3b4Opf7i1IEiv8ZNZ1NkoNGs3/C', NULL, NULL, NULL, NULL, '2018-11-02 01:13:15', '2018-11-02 00:13:15'),
-(608603457, 'bandung', 'bandung@gmail.com', 4, '0', '$2y$11$/0FmwEX1jrNbRxD4vMhMfeanjRsNsNqSLvdZG8M5AuVUEQVgm1Bmu', NULL, NULL, NULL, '2018-11-02 20:44:55', '2018-11-02 01:10:48', '2018-11-02 19:44:55'),
+(286110552, 'palembang', 'palembang@gmail.com', 1, '0', '$2y$11$XlgJq4jfZWYoo2Y720iffOz.TG3b4Opf7i1IEiv8ZNZ1NkoNGs3/C', NULL, NULL, NULL, '2018-11-06 00:43:18', '2018-11-02 01:13:15', '2018-11-05 23:43:18'),
+(608603457, 'bandung', 'bandung@gmail.com', 4, '1', '$2y$11$/0FmwEX1jrNbRxD4vMhMfeanjRsNsNqSLvdZG8M5AuVUEQVgm1Bmu', NULL, NULL, NULL, '2018-11-06 00:03:36', '2018-11-02 01:10:48', '2018-11-06 00:04:00'),
 (730510257, 'bangsa', 'bangsa@gmail.com', 9, '0', '$2y$11$BYQHui/8kHtRyQav5keEfeZ9odSJpyLFLurQELlPgauuJTsWd9WOO', NULL, NULL, NULL, '2018-11-02 22:21:13', '2018-10-24 02:25:05', '2018-11-02 21:21:13'),
-(1301294496, 'kota', 'kota@gmail.com', 1, '0', '$2y$11$YmdCjlLVdZWWFq8NzdtBNOeItNs5ynnc2YSyGgmPPzUOVUKNxsGTy', NULL, NULL, NULL, '2018-11-02 22:22:36', '2018-11-02 01:14:24', '2018-11-02 21:22:36'),
-(1380392804, 'menager', 'menager@gmail.com', 8, '0', '$2y$11$ofLgJFxGu3PwbFQiv2.txOTtcN.GAQYMZrXoaYaNk8H42JzGLFvNy', NULL, NULL, NULL, NULL, '2018-11-02 01:12:34', '2018-11-02 00:12:34'),
+(1301294496, 'kota', 'kota@gmail.com', 1, '0', '$2y$11$YmdCjlLVdZWWFq8NzdtBNOeItNs5ynnc2YSyGgmPPzUOVUKNxsGTy', '$2y$11$0VtF2J2rj02uHv0KH2gXMeetgYKlOk/jOtTSmwSpn/FvVxrrrkaai', '2018-11-06 02:07:32', NULL, '2018-11-06 00:36:00', '2018-11-02 01:14:24', '2018-11-06 01:07:32'),
+(1380392804, 'menager', 'menager@gmail.com', 8, '0', '$2y$11$ofLgJFxGu3PwbFQiv2.txOTtcN.GAQYMZrXoaYaNk8H42JzGLFvNy', NULL, NULL, NULL, '2018-11-06 00:58:20', '2018-11-02 01:12:34', '2018-11-05 23:58:20'),
 (1729583169, 'ivan', 'ivan@meta365.com', 6, '0', '$2y$11$X0NMge6rqfG4X1Ed2T/Nkuml3duriW8nlLWy6ja7DyIPuQmwoAtNS', NULL, NULL, NULL, '2018-10-16 20:42:51', '2018-10-16 20:42:39', '2018-10-16 20:42:51'),
-(2147484848, 'kebangsaan', 'Kebangsaan@gmail.com', 1, '0', '$2y$11$dW56TEdtK/KJZqQm.dpZf.qQK6vUr4CXtlaakmSYijzcYt0nlGhvq', NULL, NULL, NULL, '2018-11-02 21:42:21', '2018-10-24 02:23:48', '2018-11-02 20:42:21'),
-(3614488494, 'admin', 'admin@meta365.com', 6, '0', '$2y$11$OUHGkJK4rxU/XDjUb7YTEeRRWeYreFvADm28bvCjIdMAcArHEczG6', NULL, NULL, NULL, '2018-11-02 22:13:12', '2018-10-16 10:35:31', '2018-11-02 21:13:12');
+(2147484848, 'kebangsaan', 'Kebangsaan@gmail.com', 1, '0', '$2y$11$dW56TEdtK/KJZqQm.dpZf.qQK6vUr4CXtlaakmSYijzcYt0nlGhvq', NULL, NULL, NULL, '2018-11-06 00:57:59', '2018-10-24 02:23:48', '2018-11-05 23:57:59'),
+(3614488494, 'admin', 'admin@meta365.com', 6, '0', '$2y$11$OUHGkJK4rxU/XDjUb7YTEeRRWeYreFvADm28bvCjIdMAcArHEczG6', NULL, NULL, NULL, '2018-11-06 01:25:26', '2018-10-16 10:35:31', '2018-11-06 00:25:26');
 
 --
 -- Triggers `users`
@@ -1273,12 +1286,12 @@ ALTER TABLE `denied_access`
 -- AUTO_INCREMENT for table `ips_on_hold`
 --
 ALTER TABLE `ips_on_hold`
-  MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `login_errors`
 --
 ALTER TABLE `login_errors`
-  MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT for table `nominal`
 --
@@ -1307,6 +1320,7 @@ ALTER TABLE `username_or_email_on_hold`
 --
 -- Constraints for dumped tables
 --
+
 --
 -- Constraints for table `acl`
 --

@@ -12,6 +12,28 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <ul class="nav navbar-nav ml-auto">
+	 <li class="nav-item dropdown d-md-down-none">
+        <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-user-circle"></i>
+          <span class="badge badge-pill badge-info"><?php echo $sum_active ?></span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
+          <div class="dropdown-header text-center">
+            <strong>Active Akun</strong>
+          </div>
+		  <?php
+			foreach ($active as $active) {
+		  ?>
+          <a class="dropdown-item" href="<?=base_url().'users/active/'.$active->user_id;?>">
+			<div class="message">
+              <div class="fa fa-user-circle font-weight-bold"> <?php echo $active->username ?></div>
+            </div>
+          </a>
+		  <?php
+			}
+		   ?>
+        </div>
+      </li>
       <li class="nav-item dropdown d-md-down-none">
         <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
           <i class="icon-envelope-letter"></i>
@@ -65,4 +87,3 @@
     <?php (is_file(APPPATH.'views/' . $module .'.php') ? $this->load->view($module): null);?>
   </div>
 <?php $this->load->view('include/footer');?>
-<?php $this->load->view('include/script');?>

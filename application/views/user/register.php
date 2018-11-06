@@ -35,11 +35,8 @@
                 </div>
                 <input class="form-control" type="password" id="password" name="password" placeholder="Sandi Baru" required>
               </div>
-<<<<<<< HEAD
 			      <div class="input-group mb-4">
-=======
               <div class="input-group mb-4">
->>>>>>> origin/BackEnd
                 <div class="input-group-prepend">
                   <span class="input-group-text">
                     <i class="icon-reload"></i>
