@@ -245,4 +245,35 @@ class transaction_model extends CI_Model {
 	$sum = $data['sum'];
     return $sum;
     }
+	
+	function get_tahun() {
+		 $query =$this->db->query("SELECT product,count(*) AS jumlah, YEAR(date_transaction) AS tahun FROM transaction, product where transaction.`product_id` = product.`product_id` and YEAR(`date_transaction`)=YEAR(NOW()) GROUP BY product");
+		if($query->num_rows() > 0){
+            foreach($query->result() as $data){
+                $hasil[] = $data;
+            }
+            return $hasil;
+        }
+    }
+	
+	function get_bulan() {
+		 $query =$this->db->query("SELECT product,count(*) AS jumlah, MONTH(date_transaction) AS bulan FROM transaction, product where transaction.`product_id` = product.`product_id` GROUP BY product");
+		if($query->num_rows() > 0){
+            foreach($query->result() as $data){
+                $hasil[] = $data;
+            }
+            return $hasil;
+        }
+    }
+	
+	function get_hari() {
+		 $query =$this->db->query("SELECT date_transaction,product,count(*) AS jumlah FROM transaction, product where transaction.`product_id` = product.`product_id` GROUP BY product");
+		if($query->num_rows() > 0){
+            foreach($query->result() as $data){
+                $hasil[] = $data;
+            }
+            return $hasil;
+        }
+    }
 }
+?>

@@ -15,6 +15,7 @@ class admin extends MY_Controller {
 		{
 		$uid = $this->auth_data->user_id;
 		$history = $this->transaction_model->get_transaction($uid);
+		$data = $this->transaction_model->get_tahun();
 		$product = $this->transaction_model->get_all();
 		$pesan = $this->pesan_model->get_by($uid);
 		$active = $this->user->get_by();
@@ -34,6 +35,7 @@ class admin extends MY_Controller {
             'sum' => $sum,
             'sum_payment' => $sum_payment,
 			'history' => $history,
+			'data' => $data,
             'product' => $product,
             'pulsa' => $pulsa,
             'emoney' => $emoney,

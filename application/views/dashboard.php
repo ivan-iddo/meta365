@@ -16,19 +16,26 @@
               </button>
               <div class="btn-group btn-group-toggle float-right mr-3" data-toggle="buttons">
                 <label class="btn btn-outline-secondary">
-                  <input id="option1" type="radio" name="options" autocomplete="off"> Day
-                </label>
-                <label class="btn btn-outline-secondary active">
-                  <input id="option2" type="radio" name="options" autocomplete="off" checked=""> Month
+                  <input id="option1" name="option1" type="radio" name="options" autocomplete="off"> Day
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input id="option3" type="radio" name="options" autocomplete="off"> Year
+                  <input id="option2" name="option2" type="radio" name="options" autocomplete="off"> Month
+                </label>
+                <label class="btn btn-outline-secondary active">
+                  <input id="option3" name="option3" type="radio" name="options" autocomplete="off"> Year
                 </label>
               </div>
             </div>
             <!-- /.col-->
           </div>
           <!-- /.row-->
+		  <?php
+          foreach ($data as $data) {
+          $product_tahun[]=$data->product;
+          $tahun=$data->tahun;
+          $jumlah[]=$data->jumlah;
+          }
+          ?>
           <div class="chart-wrapper" style="height:300px;margin-top:40px;">
             <canvas class="chart" id="chart" height="300"></canvas>
           </div>
@@ -133,43 +140,16 @@
 var mainChart = new Chart($('#chart'), {
   type: 'line',
   data: {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-    datasets: [{
-      label: 'Pulsa',
+    labels: <?php echo json_encode($product_tahun);?>,
+	datasets: [{
+	label: <?php echo $tahun;?>,
       backgroundColor: hexToRgba(getStyle('--info'), 5),
       borderColor: getStyle('--info'),
       pointHoverBackgroundColor: '#fff',
       borderWidth: 2,
-      data: [<?php echo $pulsa ?>]
-    }, {
-      label: 'PPOB',
-      backgroundColor: hexToRgba(getStyle('--info'), 5),
-      borderColor: getStyle('--danger'),
-      pointHoverBackgroundColor: '#fff',
-      borderWidth: 2,
-      data: [<?php echo $ppob ?>]
-    },{
-      label: 'Game',
-      backgroundColor: hexToRgba(getStyle('--info'), 3),
-      borderColor: getStyle('--success'),
-      pointHoverBackgroundColor: '#fff',
-      borderWidth: 2,
-      data: [<?php echo $game?>]
-    },{
-      label: 'Tiket',
-      backgroundColor: hexToRgba(getStyle('--info'), 2),
-      borderColor: getStyle('--warning'),
-      pointHoverBackgroundColor: '#fff',
-      borderWidth: 2,
-      data: [<?php echo $tiket ?>]
-    },{
-      label: 'E-money',
-      backgroundColor: hexToRgba(getStyle('--info'), 1),
-      borderColor: getStyle('--primary'),
-      pointHoverBackgroundColor: '#fff',
-      borderWidth: 2,
-      data: [<?php echo $emoney ?>]
-    }]
+      data: <?php echo json_encode($jumlah);?>
+    },
+	]
   },
   options: {
     maintainAspectRatio: false,

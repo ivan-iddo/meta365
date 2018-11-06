@@ -242,7 +242,7 @@ class Users extends MY_Controller {
 	public function recover()
 	{
 		// Load resources
-
+		$this->load->model('examples/examples_model');
 		/// If IP or posted email is on hold, display message
 		if( $on_hold = $this->authentication->current_hold_status( TRUE ) )
 		{
@@ -290,7 +290,7 @@ class Users extends MY_Controller {
 						$link_protocol = USE_SSL ? 'https' : NULL;
 
 						// Set URI of link
-						$link_uri = 'examples/recovery_verification/' . $user_data->user_id . '/' . $recovery_code;
+						$link_uri = 'users/recovery_verification/' . $user_data->user_id . '/' . $recovery_code;
 
 						$view_data['special_link'] = anchor( 
 							site_url( $link_uri, $link_protocol ), 
@@ -313,7 +313,7 @@ class Users extends MY_Controller {
 			}
 		}
 
-		echo $this->load->view('examples/recover_form', ( isset( $view_data ) ) ? $view_data : '', TRUE );
+		echo $this->load->view('user/forgot_password', ( isset( $view_data ) ) ? $view_data : '', TRUE );
 	}
 
 	// --------------------------------------------------------------
@@ -392,12 +392,7 @@ class Users extends MY_Controller {
 				$this->examples_model->recovery_password_change();
 			}
 		}
-
-		echo $this->load->view('examples/page_header', '', TRUE);
-
-		echo $this->load->view( 'examples/choose_password_form', $view_data, TRUE );
-
-		echo $this->load->view('examples/page_footer', '', TRUE);
+		echo $this->load->view( 'user/choose_password', $view_data, TRUE );
 	}
 	
 	public function update(){
