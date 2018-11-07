@@ -35,6 +35,7 @@ class Dashboard extends MY_Controller {
 		$uid = $this->auth_data->user_id;
 		$history = $this->transaction_model->get_transaction($uid);
 		$product = $this->transaction_model->get_all();
+		$data = $this->transaction_model->get_tahun_uid($uid);
 		$pulsa = $this->transaction_model->sum_pulsa_id($uid);
 		$emoney= $this->transaction_model->sum_emoney_id($uid);
 		$ppob = $this->transaction_model->sum_ppob_id($uid);
@@ -52,6 +53,7 @@ class Dashboard extends MY_Controller {
 			'history' => $history,
             'product' => $product,
             'pulsa' => $pulsa,
+			'data' => $data,
             'emoney' => $emoney,
             'ppob' => $ppob,
             'tiket' => $tiket,

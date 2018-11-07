@@ -256,6 +256,16 @@ class transaction_model extends CI_Model {
         }
     }
 	
+	function get_tahun_uid($uid) {
+		 $query =$this->db->query("SELECT product,count(*) AS jumlah, YEAR(date_transaction) AS tahun FROM transaction, product where uid='$uid' and transaction.`product_id` = product.`product_id` and YEAR(`date_transaction`)=YEAR(NOW()) GROUP BY product");
+		if($query->num_rows() > 0){
+            foreach($query->result() as $data){
+                $hasil[] = $data;
+            }
+            return $hasil;
+        }
+    }
+	
 	function get_bulan() {
 		 $query =$this->db->query("SELECT product,count(*) AS jumlah, MONTH(date_transaction) AS bulan FROM transaction, product where transaction.`product_id` = product.`product_id` GROUP BY product");
 		if($query->num_rows() > 0){
@@ -266,8 +276,28 @@ class transaction_model extends CI_Model {
         }
     }
 	
+	function get_bulan_uid($uid) {
+		 $query =$this->db->query("SELECT product,count(*) AS jumlah, MONTH(date_transaction) AS bulan FROM transaction, product where uid='$uid' and transaction.`product_id` = product.`product_id` GROUP BY product");
+		if($query->num_rows() > 0){
+            foreach($query->result() as $data){
+                $hasil[] = $data;
+            }
+            return $hasil;
+        }
+    }
+	
 	function get_hari() {
 		 $query =$this->db->query("SELECT date_transaction,product,count(*) AS jumlah FROM transaction, product where transaction.`product_id` = product.`product_id` GROUP BY product");
+		if($query->num_rows() > 0){
+            foreach($query->result() as $data){ 
+                $hasil[] = $data;
+            }
+            return $hasil;
+        }
+    }
+	
+	function get_hari_uid($uid) {
+		 $query =$this->db->query("SELECT date_transaction,product,count(*) AS jumlah FROM transaction, product where uid='$uid' and transaction.`product_id` = product.`product_id` GROUP BY product");
 		if($query->num_rows() > 0){
             foreach($query->result() as $data){
                 $hasil[] = $data;
