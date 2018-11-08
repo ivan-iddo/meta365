@@ -6,6 +6,30 @@
           <i class="nav-icon icon-speedometer"></i> Dashboard
         </a>
       </li>
+      <!-- contoh menu admin buat yadi -->
+      <?php if($this->require_role('admin')):?>
+      <li class="nav-item">
+        <a class="nav-link" href="<?=base_url().'users';?>">
+          <i class="nav-icon icon-people"></i> User Management
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?=base_url().'payment';?>">
+          <i class="nav-icon icon-list"></i> Payment
+        </a>
+      </li>
+      <?php endif;?>
+      <!-- end contoh buat yadi -->
+
+      <!-- contoh menu manager buat yadi -->
+      <?php if($this->require_role('manager')):?>
+      <li class="nav-item">
+        <a class="nav-link" href="<?=base_url().'Profit';?>">
+          <i class="nav-icon icon-graph"></i> Profit
+        </a>
+      </li>
+      <?php endif;?>
+      <!-- end contoh buat yadi -->
       <li class="nav-title">Product</li>
       <li class="nav-item">
         <a class="nav-link" href="<?=base_url().'pulsa';?>">
