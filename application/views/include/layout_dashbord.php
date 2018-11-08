@@ -5,8 +5,8 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="#">
-      <img class="navbar-brand-full" src="<?=base_url();?>img/brand/logo.svg" width="89" height="25" alt="Meta365 Logo">
-      <img class="navbar-brand-minimized" src="<?=base_url();?>img/brand/sygnet.svg" width="30" height="30" alt="Meta365 Logo">
+      <img class="navbar-brand-full" src="<?=base_url();?>img/brand/logo.svg" width="89" height="25" alt="GtPay.id Logo">
+      <img class="navbar-brand-minimized" src="<?=base_url();?>img/brand/sygnet.svg" width="30" height="30" alt="GtPay.id Logo">
     </a>
     <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
       <span class="navbar-toggler-icon"></span>
@@ -37,15 +37,6 @@
 		  <?php
 			}
 		   ?>
-		  <br>
-		  <form method="post" action="<?=base_url().'pesan/insert';?>">
-            <div class="form-group">
-             <textarea class="form-control" id="isi" name="isi" name="body" rows="3" placeholder="Click here to reply"></textarea>
-            </div>
-            <div class="form-group text-right">
-               <button class="btn btn-success" type="submit">Send</button>
-            </div>
-         </form>
         </div>
       </li>
       <li class="nav-item dropdown">

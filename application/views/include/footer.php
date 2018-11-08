@@ -1,7 +1,7 @@
 <footer class="app-footer">
   <div>
-    <a href="https://meta365.io/">Meta365</a>
-    <span>&copy; 2018 meta.</span>
+    <a href="https://meta365.io/">GtPay.id</a>
+    <span>&copy; 2018.</span>
   </div>
   <div class="ml-auto">
     <span>Powered by</span>

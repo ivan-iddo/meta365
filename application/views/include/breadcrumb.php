@@ -1,6 +1,6 @@
 <!-- Breadcrumb-->
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Meta365</li>
+  <li class="breadcrumb-item">GtPay.id</li>
   <li class="breadcrumb-item active"><?=$module_name;?></li>
   <!-- Breadcrumb Menu-->
   <li class="breadcrumb-menu d-md-down-none">
