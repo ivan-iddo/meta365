@@ -4,8 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Users extends MY_Controller {
 	function __construct() {
         parent::__construct();
-		$this->load->model(array('pesan_model','user','payment_model'));
-        $this->load->library('form_validation');
     }
 
 	// -----------------------------------------------------------------------
@@ -17,39 +15,61 @@ class Users extends MY_Controller {
 	 * shown the login form. Once login is achieved,
 	 * you will be redirected back to this method.
 	 */
+	
 	public function index()
 	{
 		if( $this->require_role('admin') )
 		{
-
-			echo '<p>You are logged in!</p>';
-
+		$jumlah = $this->user->jumlah();
+		$config=array();
+		$config['total_rows']=$jumlah;
+		$config['base_url']=base_url().'users/index/';
+		$config['per_page']=5;
+		$config['num_links']=$jumlah;
+		$config['next_link']='Next';
+		$config['prev_link']='Previous';
+		$this->pagination->initialize($config);
+		$dari=$this->uri->segment(3);
+		$user = $this->user->lihat($config['per_page'],$dari);
+        $uid = $this->auth_data->user_id;
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
+		$saldo = $this->transaction_model->up_saldo($uid);
+		$data = array(
+            'pesan' => $pesan,
+            'sum' => $sum,
+            'sum_payment' => $sum_payment,
+            'user' => $user,
+            'saldo' => $saldo,
+			'module' => "user/users",
+			'module_name' => "User",
+        );
+		$this->load->view('include/layout', $data);
 		}
 	}
 
 	public function profile()
 	{
-		if( $this->require_role('admin, user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
-		$prof = $this->user->get_by_id($uid);
+		$profil = $this->user->get_by_id($uid);
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
-		if ($prof) {
+		$saldo = $this->transaction_model->up_saldo($uid);
 		$data = array(
-            'pesan' => $pesan,
-            'sum' => $sum,
-            'sum_payment' => $sum_payment,
-           'username' => $prof->username,
-           'email' => $prof->email,
-           'last_login' => $prof->last_login,
+           'pesan' => $pesan,
+           'sum' => $sum,
+           'sum_payment' => $sum_payment,
+           'profil' => $profil,
+           'saldo' => $saldo,
            'module' => "user/profile",
            'module_name' => "Profile",
 		);
 		$this->load->view('include/layout', $data);
-		}
 		}
 	}
 	
@@ -65,25 +85,25 @@ class Users extends MY_Controller {
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
 		$active = $this->user->get_by();
-		$sum_active= $this->user->sum();
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
 		$activ = $this->user->get_by_id($id);
 		$status = $this->pesan_model->status($id);
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
+		$saldo = $this->transaction_model->up_saldo($uid);
 		$data = array(
 			'pesan' => $pesan,
             'active' => $active,
             'activ' => $activ,
-            'sum_active' => $sum_active,
             'sum' => $sum,
             'sum_payment' => $sum_payment,
             'status' => $status,
+            'saldo' => $saldo,
 			'module' => 'user/active',
 			'module_name' => 'Active User',
         );	
-		 $this->load->view('include/admin/layout', $data);
+		$this->load->view('include/layout', $data);
 		}
 	}
 	
@@ -205,7 +225,7 @@ class Users extends MY_Controller {
 		{
 			$data['username']   = $this->input->post("username");
 			$data['email']     = $this->input->post("email");
-			$data['auth_level'] = '0';
+			$data['auth_level'] = '5';
 			$data['banned'] = '1';
 			$data['passwd']     = $this->authentication->hash_passwd($user_data['passwd']);
 			$data['user_id']    = $this->examples_model->get_unused_id();
@@ -403,9 +423,32 @@ class Users extends MY_Controller {
         );
 
         $this->user->update($id, $data);
-        redirect(site_url('dashboard'));
+        redirect(site_url('users'));
+    }
+	
+	public function unactive($id){
+        $data = array(
+                'banned' => '1',
+        );
+
+        $this->user->update($id, $data);
+        redirect(site_url('users'));
     }
 
+	   public function delete($id) {
+		if( $this->require_role('admin') )
+		{
+        $row = $this->user->get_by($id);
+        if ($row) {
+            $this->user->delete($id);
+            $this->session->set_flashdata('message', 'Delete Record Success');
+             redirect(site_url('users'));
+        } else {
+            $this->session->set_flashdata('message', 'Record Not Found');
+             redirect(site_url('users'));
+        }
+        }
+    }
 	// -----------------------------------------------------------------------
 
 	/**

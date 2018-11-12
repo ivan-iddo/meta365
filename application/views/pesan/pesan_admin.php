@@ -4,7 +4,8 @@
             <div class="email-app">
               <main class="message">
                 <div class="details">
-				<?php
+					<?php
+					if(!empty($pesan)){
 					 foreach ($pesan as $pesan) {
 					 ?>
                     <div class="header">
@@ -15,7 +16,9 @@
                     <div class="description"><?php echo $pesan->isi ?></div>
 					 <?php $id=$pesan->uid_pengirim ?>
 					 <?php
-					 }
+					 }}else{
+						echo "<div class='text-center'>Data tidak ada</div>";
+						}
 					 ?>
                 </div>
 				<form method="post" action="<?=base_url().'pesan/insert_admin';?>">

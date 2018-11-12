@@ -7,7 +7,7 @@
         </a>
       </li>
       <!-- contoh menu admin buat yadi -->
-      <?php if($this->require_role('admin')):?>
+      <?php if($auth_role=='admin'):?>
       <li class="nav-item">
         <a class="nav-link" href="<?=base_url().'users';?>">
           <i class="nav-icon icon-people"></i> User Management
@@ -18,11 +18,16 @@
           <i class="nav-icon icon-list"></i> Payment
         </a>
       </li>
+	  <li class="nav-item">
+        <a class="nav-link" href="<?=base_url().'topup/konfirmasi';?>">
+          <i class="nav-icon">$</i> Konfirmasi Topup
+        </a>
+      </li>
       <?php endif;?>
       <!-- end contoh buat yadi -->
 
       <!-- contoh menu manager buat yadi -->
-      <?php if($this->require_role('manager')):?>
+      <?php if($auth_role=='menager'):?>
       <li class="nav-item">
         <a class="nav-link" href="<?=base_url().'Profit';?>">
           <i class="nav-icon icon-graph"></i> Profit
@@ -46,6 +51,10 @@
           <li class="nav-item">
             <a class="nav-link" href="<?=base_url().'travel/pesawat';?>">
               <i class="nav-icon fa fa-plane"></i> Pesawat</a>
+          </li>
+		    <li class="nav-item">
+            <a class="nav-link" href="<?=base_url().'travel/hotel';?>">
+              <i class="nav-icon fa fa-hotel"></i> Hotel</a>
           </li>
         </ul>
       </li>

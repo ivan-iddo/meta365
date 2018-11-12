@@ -9,7 +9,14 @@
         <i class="icon-graph"></i>  Dashboard</a>
 	  <ul class="nav navbar-nav ml-auto">
       <li class="nav-item dropdown">
-	   <a class="btn" class="nav-link nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Saldo : <span>IDR 29.356.000</span></a>
+	  <?php
+		  if($saldo==null){
+			$up_saldo=0;
+		  }else{
+			$up_saldo=number_format($saldo , 0, ',', '.');
+		  }
+          ?>
+	   <a class="btn" class="nav-link nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Saldo : <span>IDR <?php echo $up_saldo ?></span></a>
         <div class="dropdown-menu dropdown-menu-right">
           <div class="dropdown-header text-center">
             <strong>Saldo</strong>

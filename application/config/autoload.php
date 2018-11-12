@@ -58,11 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-/*<<<<<<< HEAD*/
-$autoload['libraries'] = array('database','session','form_validation');
-/*=======*/
-$autoload['libraries'] = array('encryption');
-/*>>>>>>> origin/BackEnd*/
+$autoload['libraries'] = array('database','session','form_validation','pagination','encryption');
 
 /*
 | -------------------------------------------------------------------
@@ -93,11 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-/*<<<<<<< HEAD*/
 $autoload['helper'] = array('url','form','file','security',);
-/*=======*/
-$autoload['helper'] = array('url', 'form');
-/*>>>>>>> origin/BackEnd*/
 
 /*
 | -------------------------------------------------------------------
@@ -140,4 +132,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array();
+$autoload['model'] = array('pesan_model','user','payment_model','transaction_model','topup_model','kai_model','pesawat_model','hotel_model','game_model','pdam_model','pln_model','multifinance_model','tv_model','telkom_model','emoney_model','bpjs_model','pulsa_model');

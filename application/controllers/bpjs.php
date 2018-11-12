@@ -4,22 +4,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Bpjs extends MY_Controller {
 	function __construct() {
         parent::__construct();
-		$this->load->model(array('pesan_model','bpjs_model','transaction_model','payment_model'));
-        $this->load->library('form_validation');
     }
 	
 	public function index()
 	{
-		if( $this->require_role('user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
+		$saldo = $this->transaction_model->up_saldo($uid);
 		$data = array(
             'pesan' => $pesan,
             'sum' => $sum,
             'sum_payment' => $sum_payment,
+            'saldo' => $saldo,
 			'module' => "bpjs",
 			'module_name' => "BPJS"
 		);
@@ -28,29 +28,9 @@ class Bpjs extends MY_Controller {
 		}
 	}
 	
-	public function admin()
-	{
-		if( $this->require_role('admin') )
-		{
-		$uid = $this->auth_data->user_id;
-		$pesan = $this->pesan_model->get_by($uid);
-		$sum= $this->pesan_model->sum($uid);
-		$sum_payment= $this->payment_model->sum($uid);
-		$data = array(
-            'pesan' => $pesan,
-            'sum' => $sum,
-            'sum_payment' => $sum_payment,
-			'module' => "bpjs",
-			'module_name' => "BPJS"
-		);
-		
-			$this->load->view('include/admin/layout', $data);
-		}
-	}
-	
 		public function insert_bpjs()
 	{
-		if( $this->require_role('admin, user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$idpel 		= $this->input->post("pelanggan");
@@ -114,6 +94,7 @@ class Bpjs extends MY_Controller {
 			$sum= $this->pesan_model->sum($uid);
 			$sum_payment= $this->payment_model->sum($uid);
 			$data['pesan'] = $pesan;
+			$data['saldo'] = $this->transaction_model->up_saldo($uid);
 			$data['sum'] = $sum;
 			$data['sum_payment'] = $sum_payment;
 			$data['module'] = "ppob/checkout";
@@ -129,7 +110,7 @@ class Bpjs extends MY_Controller {
 	}
 	
 	public function delete_bpjs($id) {
-	if( $this->require_role('admin, user, businesspartner') )
+	if( $this->require_role('admin, user, businesspartner, menager') )
 		{
         $row = $this->bpjs_model->get_by($id);
 
@@ -144,7 +125,7 @@ class Bpjs extends MY_Controller {
         }
     }
 	function checkout_bpjs($id) {
-	if( $this->require_role('admin, user, businesspartner') )
+	if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$row = $this->bpjs_model->get_by($id);
         if ($row) {

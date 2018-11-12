@@ -8,7 +8,7 @@
             <div class="card-header">History Topup</div>
             <div class="card-body"> 
               <table class="table table-responsive-sm table-hover table-outline mb-0">
-                <thead class="thead-light">
+				<thead class="thead-light">
                   <tr>
                     <th class="text-center">
                       No.
@@ -21,7 +21,12 @@
                 </thead>
                 <tbody>
 				<?php
-                 $no = 0;
+				if(!empty($topup)){
+                 if($this->uri->segment(3)){
+					$no = $this->uri->segment(3);
+					}else{
+					$no = 0;
+					}
                  foreach ($topup as $topup) {
                  ?>
                  <tr>
@@ -32,10 +37,22 @@
                    <td><?php echo $topup->status ?></td>
                  </tr>
                  <?php
-                 }
+                 }}else{
+					echo "<tr><td class='text-center' colspan='5'>Data tidak ada</td></tr>";
+					}
                  ?>
                 </tbody>
               </table>
+			    <br>
+				<div id="pagination">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-center">
+						<?php
+						echo $this->pagination->create_links();
+						?>
+						</ul>
+					</nav>
+				</div>
             </div>
           </div>
         </div>

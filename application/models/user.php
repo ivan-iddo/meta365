@@ -9,9 +9,7 @@ class user extends CI_model{
 
 	public function get_all()
 	{
-		$query = $this->db->select("*")
-				 ->from('users')
-				 ->get();
+		$query = $this->db->query("SELECT * FROM users order by created_at DESC");
 		return $query->result();
 	}
 	
@@ -20,13 +18,23 @@ class user extends CI_model{
         $this->db->update($this->table, $data);
     }
 	
+	function lihat($sampai,$dari) {
+        $query =$this->db->get('users',$sampai,$dari);
+        return $query->result();
+    }
+	
+	function jumlah() {
+        $query =$this->db->get('users');
+        return $query->num_rows();
+    }
+	
 	function get_by(){
 		$query =$this->db->query("SELECT * FROM users where `banned`='1' order by `user_id` DESC limit 5");
     return $query->result();
     }
 	
 	function get_by_id($id) {
-        $query =$this->db->query("SELECT * FROM users where `banned`='1' and user_id='$id'");
+        $query =$this->db->query("SELECT * FROM users where user_id='$id'");
     return $query->result();
 	}
 	
@@ -35,5 +43,10 @@ class user extends CI_model{
     $data = $query->row_array();
 	$sum = $data['sum'];
     return $sum;
+    }
+	
+	function delete($id) {
+        $this->db->where($this->id, $id);
+        $this->db->delete($this->table);
     }
 }

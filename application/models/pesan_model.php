@@ -23,6 +23,11 @@ public function get_all()
     return $query->result();
     }
 	
+	function get_by_pesan($uid){
+		$query =$this->db->query("SELECT * FROM pesan,users where pesan.uid_pengirim = users.user_id and uid='$uid' order by id DESC");
+    return $query->result();
+    }
+	
     function get_by_id($uid, $id) {
         $query =$this->db->query("SELECT * FROM pesan,users where pesan.uid_pengirim = users.user_id and uid='$uid' and id='$id'");
     return $query->result();

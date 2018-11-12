@@ -1,10 +1,10 @@
-<?php $this->load->view('include/header');?>
-<body class="app flex-row align-items-center">
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card-group">
-        <div class="card p-4">
+<main class="main">
+  <?php $this->load->view('include/breadcrumb');?>
+	<div class="container-fluid">
+    <div class="animated fadeIn">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card">
           <div class="card-body">
 		  <?php
 			foreach ($activ as $active) {
@@ -33,6 +33,7 @@
                   </span>
                 </div>
 				<select class="form-control select2-single" name="level" id="level" required>
+					<option value="0" disabled selected></option>
 					<option value="8">Menager</option>
 					<option value="4">Business Partner</option>
 					<option value="1">User</option>
@@ -41,7 +42,7 @@
 			  <input class="form-control" type="hidden" name="id" id="id" value="<?php echo $active->user_id ?>">
               <div class="row">
                 <div class="col-6">
-                  <button class="btn btn-primary px-4" type="submit" value="Login" name="submit" id="submit_button">Active Akun</button>
+                  <button class="btn btn-primary px-4" type="submit" value="Active" name="submit" id="submit_button">Active Akun</button>
                 </div>
               </div>
 		 <?php
@@ -50,7 +51,7 @@
           </div>
         </div>
       </div>
+      <!-- /.row-->
     </div>
   </div>
-</div>
-<?php $this->load->view('include/script');?>
+</main>

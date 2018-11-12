@@ -5,22 +5,22 @@ class Pulsa extends MY_Controller {
 
 	function __construct() {
         parent::__construct();
-		$this->load->model(array('pesan_model','pulsa_model','transaction_model','payment_model'));
-        $this->load->library('form_validation');
     }
 
 	public function index()
 	{
-		if( $this->require_role('user,businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
+		$saldo = $this->transaction_model->up_saldo($uid);
 		$data = array(
             'pesan' => $pesan,
             'sum' => $sum,
             'sum_payment' => $sum_payment,
+            'saldo' => $saldo,
 			'module' => "pulsa",
 			'module_name' => "Pulsa",
 		);
@@ -29,29 +29,9 @@ class Pulsa extends MY_Controller {
 		}
 	}
 	
-	public function admin()
-	{
-		if( $this->require_role('admin') )
-		{
-		$uid = $this->auth_data->user_id;
-		$pesan = $this->pesan_model->get_by($uid);
-		$sum= $this->pesan_model->sum($uid);
-		$sum_payment= $this->payment_model->sum($uid);
-		$data = array(
-            'pesan' => $pesan,
-            'sum' => $sum,
-            'sum_payment' => $sum_payment,
-			'module' => "pulsa",
-			'module_name' => "Pulsa",
-		);
-			
-			$this->load->view('include/admin/layout', $data);
-		}
-	}
-	
 	public function insert()
 	{
-		if( $this->require_role('admin, user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$transaction_id = $this->pulsa_model->kdotomatis();
@@ -75,6 +55,7 @@ class Pulsa extends MY_Controller {
 			$data['pesan'] = $this->pesan_model->get_by($uid);
 			$data['sum']= $this->pesan_model->sum($uid);
 			$data['sum_payment']= $this->payment_model->sum($uid);
+			$data['saldo']= $this->transaction_model->up_saldo($uid);
 			$data['date'] = date("F j, Y");
 			$data['module'] = "checkout";
 			$data['module_name'] = "Checkout";
@@ -94,7 +75,7 @@ class Pulsa extends MY_Controller {
 	}
 	
     public function delete($id) {
-		if( $this->require_role('admin, user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
         $row = $this->pulsa_model->get_by($id);
 
@@ -111,7 +92,7 @@ class Pulsa extends MY_Controller {
 
 	
 	public function checkout_pulsa($id) {
-		if( $this->require_role('admin, user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$row = $this->pulsa_model->get_by($id);
 		if ($row) {
@@ -145,7 +126,7 @@ class Pulsa extends MY_Controller {
 	}
 		
 	public function cek_harga($id) {
-	if( $this->require_role('admin, user, businesspartner') )
+	if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$row = $this->pulsa_model->get_by($id);
 		if ($row) {

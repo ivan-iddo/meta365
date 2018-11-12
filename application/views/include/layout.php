@@ -49,7 +49,7 @@
           </div>
           <a class="dropdown-item" href="<?=base_url().'users/profile';?>">
             <i class="fa fa-user"></i> Profile</a>
-          <a class="dropdown-item" href="<?=base_url().'pesan/payment';?>">
+          <a class="dropdown-item" href="<?=base_url().'payment';?>">
             <i class="fa fa-usd"></i> Payments
             <span class="badge badge-dark"><?php echo $sum_payment ?></span>
           </a>

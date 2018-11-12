@@ -4,7 +4,8 @@
             <div class="email-app">
               <main class="message">
                 <div class="details">
-				<?php
+					<?php
+					if(!empty($pesan)){
 					 foreach ($pesan as $pesan) {
 					 ?>
                     <div class="header">
@@ -14,7 +15,9 @@
                     </div>
                     <div class="description"><?php echo $pesan->isi ?></div>
 					 <?php
-					 }
+					 }}else{
+						echo "<div class='text-center'>Data tidak ada</div>";
+						}
 					 ?>
                 </div>
               </main>

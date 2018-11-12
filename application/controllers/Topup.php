@@ -4,22 +4,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Topup extends MY_Controller {
 	function __construct() {
         parent::__construct();
-		$this->load->model(array('pesan_model','topup_model','transaction_model','payment_model'));
-        $this->load->library('form_validation');
     }
 
 	public function index()
 	{
-		if( $this->require_role('admin, user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
+		$saldo = $this->transaction_model->up_saldo($uid);
 		$data = array(
             'pesan' => $pesan,
             'sum' => $sum,
             'sum_payment' => $sum_payment,
+            'saldo' => $saldo,
 			'module' => "topup/topup",
 			'module_name' => "Topup",
 		);
@@ -27,21 +27,71 @@ class Topup extends MY_Controller {
 		$this->load->view('include/layout', $data);
 		}
 	}
-	
-	public function history()
+	public function konfirmasi()
 	{
-		if( $this->require_role('admin, user, businesspartner') )
+		if( $this->require_role('admin') )
 		{
+		$jumlah = $this->payment_model->jumlah();
+		$config=array();
+		$config['total_rows']=$jumlah;
+		$config['base_url']=base_url().'payment/index/';
+		$config['per_page']=10;
+		$config['num_links']=$jumlah;
+		$config['next_link']='Next';
+		$config['prev_link']='Previous';
+		$this->pagination->initialize($config);
+		$dari=$this->uri->segment(3);
+		$status_payment=$this->payment_model->lihat($config['per_page'],$dari);
 		$uid = $this->auth_data->user_id;
-		$topup = $this->transaction_model->id($uid);
 		$pesan = $this->pesan_model->get_by($uid);
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
+		$payment= $this->payment_model->get_by($uid);
+		$payment_sudah= $this->payment_model->get_by_sudah($uid);
+		$status= $this->payment_model->status($uid);
+		$saldo = $this->transaction_model->up_saldo($uid);
+		$data = array(
+            'pesan' => $pesan,
+            'sum' => $sum,
+            'payment' => $payment,
+            'payment_sudah' => $payment_sudah,
+            'sum_payment' => $sum_payment,
+            'status_payment' => $status_payment,
+			'status' => $status,
+			'saldo' => $saldo,
+			'module' => "topup/konfirmasi_topup",
+			'module_name' => "Konfirmasi Topup",
+		);
+		$this->load->view('include/layout', $data);
+		}
+	}
+		
+	public function history()
+	{
+		if( $this->require_role('admin, user, businesspartner, menager') )
+		{
+		$uid = $this->auth_data->user_id;
+		$jumlah = $this->topup_model->jumlah($uid);
+		$config=array();
+		$config['total_rows']=$jumlah;
+		$config['base_url']=base_url().'topup/history/';
+		$config['per_page']=10;
+		$config['num_links']=$jumlah;
+		$config['next_link']='Next';
+		$config['prev_link']='Previous';
+		$this->pagination->initialize($config);
+		$dari=$this->uri->segment(3);
+		$topup=$this->topup_model->lihat($config['per_page'],$dari,$uid);
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
+		$saldo = $this->transaction_model->up_saldo($uid);
 		$data = array(
             'pesan' => $pesan,
             'sum' => $sum,
             'sum_payment' => $sum_payment,
             'topup' => $topup,
+            'saldo' => $saldo,
 			'module' => 'topup/history',
 			'module_name' => 'History Topup',
         );
@@ -51,31 +101,9 @@ class Topup extends MY_Controller {
 		
 	}
 	
-	public function history_m()
-	{
-		if( $this->require_role('menager, businesspartner') )
-		{
-		$topup = $this->transaction_model->get_topup();
-		$uid = $this->auth_data->user_id;
-		$pesan = $this->pesan_model->get_by($uid);
-		$sum= $this->pesan_model->sum($uid);
-		$sum_payment= $this->payment_model->sum($uid);
-		$data = array(
-            'pesan' => $pesan,
-            'sum' => $sum,
-            'sum_payment' => $sum_payment,
-            'topup' => $topup,
-			'module' => 'topup/history_up',
-			'module_name' => 'History Topup',
-        );
-			
-		$this->load->view('include/layout_m', $data);
-		}
-	}
-	
 	public function insert()
 	{
-		if( $this->require_role('admin, user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$transaction_id = $this->topup_model->kdotomatis();
@@ -103,6 +131,7 @@ class Topup extends MY_Controller {
 			$data['pesan'] = $pesan;
 			$data['sum'] = $sum;
 			$data['sum_payment'] = $sum_payment;
+			$data['saldo'] = $this->transaction_model->up_saldo($uid);
 			$data['date'] = date("F j, Y");
 			$data['name'] = $this->auth_data->username;
 			$data['module'] = "topup/topup_checkout";
@@ -127,7 +156,7 @@ class Topup extends MY_Controller {
 	
 	public function checkout($id)
 	{
-		if( $this->require_role('admin, user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$row = $this->topup_model->get_by_id($id);

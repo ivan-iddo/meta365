@@ -4,73 +4,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class pesan extends MY_Controller {
 		function __construct() {
         parent::__construct();
-		$this->load->model(array('pesan_model','transaction_model','payment_model'));
-        $this->load->library('form_validation');
     }
 	
 	public function index()
 	{
-		if( $this->require_role('admin, user, root, businesspartner') )
+		if( $this->require_role('admin, user, root, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
+		$get_by_pesan = $this->pesan_model->get_by_pesan($uid);
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
+		$saldo = $this->transaction_model->up_saldo($uid);
 		$data = array(
             'pesan' => $pesan,
+            'get_by_pesan' => $get_by_pesan,
             'sum' => $sum,
             'sum_payment' => $sum_payment,
+            'saldo' => $saldo,
 			'module' => 'pesan/pesan',
 			'module_name' => 'Messages',
         );
-			$this->load->view('include/layout', $data);
-		}
-	}
-	
-	public function payment()
-	{
-		if( $this->require_role('root, user, businesspartner') )
-		{
-		$uid = $this->auth_data->user_id;
-		$pesan = $this->pesan_model->get_by($uid);
-		$sum= $this->pesan_model->sum($uid);
-		$sum_payment= $this->payment_model->sum($uid);
-		$payment= $this->payment_model->get_by($uid);
-		$status= $this->payment_model->status($uid);
-		$data = array(
-            'pesan' => $pesan,
-            'sum' => $sum,
-            'payment' => $payment,
-            'sum_payment' => $sum_payment,
-			'status' => $status,
-			'module' => "pesan/payment",
-			'module_name' => "Payments",
-		);
-		
-			$this->load->view('include/layout', $data);
-		}
-	}
-	
-	public function payment_admin()
-	{
-		if( $this->require_role('admin') )
-		{
-		$uid = $this->auth_data->user_id;
-		$pesan = $this->pesan_model->get_by($uid);
-		$sum= $this->pesan_model->sum($uid);
-		$sum_payment= $this->payment_model->sum($uid);
-		$payment= $this->payment_model->get_by($uid);
-		$status= $this->payment_model->status($uid);
-		$data = array(
-            'pesan' => $pesan,
-            'sum' => $sum,
-            'payment' => $payment,
-            'sum_payment' => $sum_payment,
-			'status' => $status,
-			'module' => "pesan/payment",
-			'module_name' => "Payments",
-		);
-		
 			$this->load->view('include/layout', $data);
 		}
 	}
@@ -84,10 +38,12 @@ class pesan extends MY_Controller {
 		$status = $this->pesan_model->status($id);
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
+		$saldo = $this->transaction_model->up_saldo($uid);
 		$data = array(
             'pesan' => $pesan,
             'sum' => $sum,
             'sum_payment' => $sum_payment,
+            'saldo' => $saldo,
             'status' => $status,
 			'module' => 'pesan/detail_pesan',
 			'module_name' => 'Detail Pesan',
@@ -105,10 +61,12 @@ class pesan extends MY_Controller {
 		$status = $this->pesan_model->status($id);
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
+		$saldo = $this->transaction_model->up_saldo($uid);
 		$data = array(
             'pesan' => $pesan,
             'sum' => $sum,
             'sum_payment' => $sum_payment,
+            'saldo' => $saldo,
             'status' => $status,
 			'module' => 'pesan/pesan_admin',
 			'module_name' => 'Balas Pesan',
@@ -117,11 +75,12 @@ class pesan extends MY_Controller {
 		}
 	}
 	
-	public function insert()
+	public function insert($id)
 	{
 		if( $this->require_role('user, businesspartner') )
 		{
 		$uid = $this->auth_data->user_id;
+		$get = $this->pesan_model->status($id);
 		$data = array(
 			'isi' 		=> $this->input->post("isi"),
 			'date' => date("Y-m-d H:i:s"),

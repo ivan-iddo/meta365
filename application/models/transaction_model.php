@@ -23,18 +23,24 @@ class transaction_model extends CI_Model {
 		return $query->result();
 	}
 	
-	function get_transaction($uid){
-		$query =$this->db->query("SELECT * FROM transaction WHERE uid='$uid' and transaction_id NOT LIKE 'UP%'");
-    return $query->result();
+	function lihat($sampai,$dari,$uid) {
+		$this->db->select("*");
+		$this->db->from('transaction');
+		$this->db->where("uid='$uid' and transaction_id NOT LIKE 'UP%' and status LIKE 'Success'");
+		$this->db->order_by('date_transaction', 'DESC');
+		return $this->db->limit($sampai,$dari)->get()->result();
+    }
+
+	
+	function jumlah($uid){
+        $query =$this->db->query("SELECT count(*) as sum FROM transaction WHERE uid='$uid' and transaction_id NOT LIKE 'UP%' and status LIKE 'Success'");
+    $data = $query->row_array();
+	$sum = $data['sum'];
+    return $sum;
     }
 	
 	function get($uid){
     $query =$this->db->query("SELECT * FROM transaction WHERE uid='$uid'");
-      return $query->result();
-    }
-	
-	function id($uid){
-    $query =$this->db->query("SELECT * FROM transaction WHERE uid='$uid' and transaction_id LIKE 'UP%'");
       return $query->result();
     }
 	
@@ -47,6 +53,20 @@ class transaction_model extends CI_Model {
     function get_by_id($id) {
         $this->db->where($this->id, $id);
         return $this->db->get($this->table)->row();
+    }
+	
+	function kredit($id) {
+		 $query =$this->db->query("SELECT kredit as data FROM transaction WHERE transaction_id='$id'");
+    $data = $query->row_array();
+	$data = $data['data'];
+    return $data;
+    }
+	
+	function up_saldo($uid) {
+		 $query =$this->db->query("SELECT saldo as data FROM transaction WHERE uid='$uid' order by date_transaction DESC limit 1");
+    $data = $query->row_array();
+	$data = $data['data'];
+    return $data;
     }
 	
 	 function get_by($id) {
@@ -129,7 +149,7 @@ class transaction_model extends CI_Model {
     }
 	
 	function sum_ppob() {
-		 $query =$this->db->query("SELECT COUNT(transaction_id) as sum FROM transaction WHERE transaction_id LIKE 'PAM%' or 'PLN%' or 'MLT%' or 'TV%' or 'TEL%'");
+		 $query =$this->db->query("SELECT COUNT(transaction_id) as sum FROM transaction WHERE transaction_id LIKE 'PAM%' or 'PN%' or 'MLT%' or 'TV%' or 'TEL%'");
     $data = $query->row_array();
 	$sum = $data['sum'];
     return $sum;

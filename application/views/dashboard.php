@@ -7,7 +7,7 @@
           <div class="row">
             <div class="col-sm-5">
               <h4 class="card-title mb-0">Transaction</h4>
-              <div class="small text-muted">October 2018</div>
+              <div class="small text-muted"><?php echo date("F Y");?></div>
             </div>
             <!-- /.col-->
             <div class="col-sm-7 d-none d-md-block">
@@ -16,26 +16,45 @@
               </button>
               <div class="btn-group btn-group-toggle float-right mr-3" data-toggle="buttons">
                 <label class="btn btn-outline-secondary">
-                  <input id="option1" name="option1" type="radio" name="options" autocomplete="off"> Day
+                  <input id="option1" value="option1" type="radio" name="options" autocomplete="off"> Day
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input id="option2" name="option2" type="radio" name="options" autocomplete="off"> Month
+                  <input id="option2" value="option2" type="radio" name="options" autocomplete="off"> Month
                 </label>
                 <label class="btn btn-outline-secondary active">
-                  <input id="option3" name="option3" type="radio" name="options" autocomplete="off"> Year
+                  <input id="option3" value="option3" type="radio" name="options" autocomplete="off"> Year
                 </label>
               </div>
             </div>
             <!-- /.col-->
           </div>
           <!-- /.row-->
+		  <?php if($auth_role=='user'|$auth_role=='businesspartner'):?>
 		  <?php
+		  if(!empty($data)){
           foreach ($data as $data) {
           $product_tahun[]=$data->product;
           $tahun=$data->tahun;
           $jumlah[]=$data->jumlah;
           }
+		  }else{
+			  echo "<center>Data tidak ada</center>";
+		  }
+          ?> 
+		  <?php endif;?>
+		  <?php if($auth_role=='menager'|$auth_role=='admin'):?>
+		  <?php
+		  if(!empty($data_menager)){
+          foreach ($data_menager as $data) {
+          $product_tahun[]=$data->product;
+          $tahun=$data->tahun;
+          $jumlah[]=$data->jumlah;
+          }
+		  }else{
+			  echo "<center>Data tidak ada</center>";
+		  }
           ?>
+		  <?php endif;?>
           <div class="chart-wrapper" style="height:300px;margin-top:40px;">
             <canvas class="chart" id="chart" height="300"></canvas>
           </div>
@@ -46,7 +65,13 @@
               <div class="text-muted">Pulsa</div>
               <strong><?php echo number_format($pulsa , 0, ',', '.') ?> Transaction</strong>
               <div class="progress progress-xs mt-2">
-			  <?php $bar=100/($total/$pulsa) ?>
+			   <?php 
+				 if(!empty($pulsa)){
+					 $bar=100/($total/$pulsa);
+				 }else { 
+				  $bar=0;
+				}
+			  ?> 
                 <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo $bar ?>%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </div>
@@ -54,7 +79,13 @@
               <div class="text-muted">Ticket & Travel</div>
               <strong><?php echo number_format($tiket , 0, ',', '.') ?> Transaction</strong>
               <div class="progress progress-xs mt-2">
-			  <?php $bar1=100/($total/$tiket) ?>
+			  <?php
+			   if(!empty($tiket)){
+				  $bar1=100/($total/$tiket);
+				 }else { 
+				  $bar1=0;
+				}
+			  ?> 
                 <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo $bar1 ?>%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </div>
@@ -62,7 +93,13 @@
               <div class="text-muted">PPOB</div>
               <strong><?php echo number_format($ppob , 0, ',', '.')?> Transaction</strong>
               <div class="progress progress-xs mt-2">
-			  <?php $bar2=100/($total/$ppob) ?>
+			   <?php 
+				if(!empty($ppob)){
+				  $bar2=100/($total/$ppob);
+				 }else { 
+				  $bar2=0;
+				}
+			  ?> 
                 <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo $bar2 ?>%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </div>
@@ -70,7 +107,13 @@
               <div class="text-muted">Voucher Game</div>
               <strong><?php echo number_format($game, 0, ',', '.') ?> Transaction</strong>
               <div class="progress progress-xs mt-2">
-			  <?php $bar3=100/($total/$game) ?>
+			  <?php
+				if(!empty($game)){
+				  $bar3=100/($total/$game);
+				 }else { 
+				  $bar3=0;
+				}
+			  ?> 
                 <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo $bar3 ?>%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </div>
@@ -78,7 +121,13 @@
               <div class="text-muted">e-Money</div>
               <strong><?php echo number_format($emoney, 0, ',', '.') ?> Transaction</strong>
               <div class="progress progress-xs mt-2">
-			  <?php $bar4=100/($total/$emoney) ?>
+			   <?php
+				if(!empty($emoney)){
+				  $bar4=100/($total/$emoney);
+				 }else { 
+				  $bar4=0;
+				}			   
+			  ?> 
                 <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo $bar4 ?>%" aria-valuenow="16" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </div>
@@ -105,7 +154,12 @@
                 </thead>
                 <tbody>
 				<?php
-                 $no = 0;
+				if(!empty($history)){
+                 if($this->uri->segment(3)){
+					$no = $this->uri->segment(3);
+					}else{
+					$no = 0;
+					}
                  foreach ($history as $history) {
                  ?>
                  <tr>
@@ -118,10 +172,21 @@
                    <td><?php echo $history->status ?></td>
                  </tr>
                  <?php
-                 }
+				}}else{
+					echo "<tr><td class='text-center' colspan='5'>Data tidak ada</td></tr>";
+				}
                  ?>
                 </tbody>
               </table>
+			  <div id="pagination">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-center">
+						<?php
+						echo $this->pagination->create_links();
+						?>
+						</ul>
+					</nav>
+			</div>
             </div>
           </div>
         </div>

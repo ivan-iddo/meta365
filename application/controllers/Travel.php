@@ -4,13 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class travel extends MY_Controller {
 	function __construct() {
         parent::__construct();
-		$this->load->model(array('pesan_model','kai_model','pesawat_model','transaction_model','payment_model'));
-        $this->load->library('form_validation');
     }
 
 	public function index()
 	{
-		if( $this->require_role('admin, user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 			$data['module'] = "Travel";
 			
@@ -20,17 +18,19 @@ class travel extends MY_Controller {
 	
 	public function daftar_kai($id)
 	{
-		if( $this->require_role('admin, user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 			
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
+		$saldo = $this->transaction_model->up_saldo($uid);
 		$data = array(
             'pesan' => $pesan,
             'sum' => $sum,
             'sum_payment' => $sum_payment,
+            'saldo' => $saldo,
 			'module' => "travel/daftar",
 			'module_name' => "Daftar",
 			'action' => 'travel/update_kai/$id',
@@ -42,17 +42,19 @@ class travel extends MY_Controller {
 	
 	public function daftar_pesawat($id)
 	{
-		if( $this->require_role('admin, user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 			
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
+		$saldo = $this->transaction_model->up_saldo($uid);
 		$data = array(
             'pesan' => $pesan,
             'sum' => $sum,
             'sum_payment' => $sum_payment,
+            'saldo' => $saldo,
 			'module' => "travel/daftar",
 			'module_name' => "Daftar",
 			'action' => 'travel/update_pesawat/$id',
@@ -64,16 +66,18 @@ class travel extends MY_Controller {
 
 	public function kai()
 	{
-		if( $this->require_role('user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
+		$saldo = $this->transaction_model->up_saldo($uid);
 		$data = array(
             'pesan' => $pesan,
             'sum' => $sum,
             'sum_payment' => $sum_payment,
+            'saldo' => $saldo,
            'module' => "travel/kai",
            'module_name' => "KAI",
 		   'product' => $this->kai_model->data(),
@@ -82,38 +86,20 @@ class travel extends MY_Controller {
 		}
 	}
 	
-	public function kai_admin()
-	{
-		if( $this->require_role('admin') )
-		{
-		$uid = $this->auth_data->user_id;
-		$pesan = $this->pesan_model->get_by($uid);
-		$sum= $this->pesan_model->sum($uid);
-		$sum_payment= $this->payment_model->sum($uid);
-		$data = array(
-            'pesan' => $pesan,
-            'sum' => $sum,
-            'sum_payment' => $sum_payment,
-           'module' => "travel/kai",
-           'module_name' => "KAI",
-		   'product' => $this->kai_model->data(),
-		);
-			$this->load->view('include/admin/layout', $data);
-		}
-	}
-
 	public function pesawat()
 	{
-		if( $this->require_role('user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
+		$saldo = $this->transaction_model->up_saldo($uid);
 		$data = array(
             'pesan' => $pesan,
             'sum' => $sum,
             'sum_payment' => $sum_payment,
+            'saldo' => $saldo,
            'module' => "travel/Pesawat",
            'module_name' => "Pesawat",
 		   'product' => $this->pesawat_model->data(),
@@ -121,29 +107,32 @@ class travel extends MY_Controller {
 			$this->load->view('include/layout', $data);
 		}
 	}	
-	public function pesawat_admin()
+	
+	public function hotel()
 	{
-		if( $this->require_role('admin') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
+		$saldo = $this->transaction_model->up_saldo($uid);
 		$data = array(
             'pesan' => $pesan,
             'sum' => $sum,
             'sum_payment' => $sum_payment,
-           'module' => "travel/Pesawat",
-           'module_name' => "Pesawat",
-		   'product' => $this->pesawat_model->data(),
+            'saldo' => $saldo,
+           'module' => "travel/hotel",
+           'module_name' => "Hotel",
+		   'product' => $this->hotel_model->data(),
 		);
-			$this->load->view('include/admin/layout', $data);
+			$this->load->view('include/layout', $data);
 		}
-	}
+	}	
 	
 	public function cek_kai()
 	{
-		if( $this->require_role('admin, user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$date = $this->input->post("daterange");
@@ -199,6 +188,7 @@ class travel extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
         $data['pesan'] = $pesan;
+        $data['saldo'] = $this->transaction_model->up_saldo($uid);
         $data['sum'] = $sum;
         $data['sum_payment'] = $sum_payment;
 		$data['module'] = "travel/cek_kai";
@@ -210,7 +200,7 @@ class travel extends MY_Controller {
 	
 	public function update_kai($id)
 	{
-		if( $this->require_role('admin, user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$row = $this->kai_model->get_by($id);
         if ($row) {
@@ -227,6 +217,7 @@ class travel extends MY_Controller {
 			$sum= $this->pesan_model->sum($uid);
 			$sum_payment= $this->pesan_model->sum($uid);
 			$data['pesan'] = $pesan;
+			$data['saldo'] = $this->transaction_model->up_saldo($uid);
 			$data['sum'] = $sum;
 			$data['sum_payment'] = $sum_payment;
 			$data['harga'] = $harga;
@@ -240,7 +231,7 @@ class travel extends MY_Controller {
 	
 	public function update_pesawat($id)
 	{
-		if( $this->require_role('admin, user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$row = $this->pesawat_model->get_by($id);
         if ($row) {
@@ -257,6 +248,7 @@ class travel extends MY_Controller {
 			$sum= $this->pesan_model->sum($uid);
 			$sum_payment= $this->pesan_model->sum($uid);
 			$data['pesan'] = $pesan;
+			$data['saldo'] = $this->transaction_model->up_saldo($uid);
 			$data['sum_payment'] = $sum_payment;
 			$data['sum'] = $sum;
 			$data['harga'] = $harga;
@@ -268,9 +260,41 @@ class travel extends MY_Controller {
 		}
 	}
 	
+	
+	public function update_hotel($id)
+	{
+		if( $this->require_role('admin, user, businesspartner, menager') )
+		{
+		$row = $this->hotel_model->get_by($id);
+        if ($row) {
+			$transaction_id= $row->transaction_id;
+			$harga= $row->harga;
+            $data = array(
+                'full_name' => $this->input->post("full_name"),
+                'gender' => $this->input->post("gender"),
+                'phone' => $this->input->post("phone"),
+                'transaction_id' => $transaction_id,
+            );
+			$this->hotel_model->update($id, $data);
+			$pesan = $this->pesan_model->get_by($uid);
+			$sum= $this->pesan_model->sum($uid);
+			$sum_payment= $this->pesan_model->sum($uid);
+			$data['pesan'] = $pesan;
+			$data['saldo'] = $this->transaction_model->up_saldo($uid);
+			$data['sum'] = $sum;
+			$data['sum_payment'] = $sum_payment;
+			$data['harga'] = $harga;
+			$data['module'] = "ppob/checkout";
+			$data['module_name'] = "Checkout";
+			$data['action'] = "checkout_hotel";
+			$this->load->view('include/layout', $data);
+		}
+		}
+	}
+	
 	public function cek_pesawat()
 	{
-		if( $this->require_role('admin, user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$date = $this->input->post("daterange");
@@ -326,6 +350,7 @@ class travel extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
         $data['pesan'] = $pesan;
+        $data['saldo'] = $this->transaction_model->up_saldo($uid);
         $data['sum'] = $sum;
         $data['sum_payment'] = $sum_payment;
 		$data['module'] = "travel/cek_pesawat";
@@ -357,6 +382,62 @@ class travel extends MY_Controller {
 
 		}
 	}
+	
+	
+	public function cek_hotel()
+	{
+		if( $this->require_role('admin, user, businesspartner, menager') )
+		{
+		$uid = $this->auth_data->user_id;
+		$date = $this->input->post("daterange");
+		$transaction_id = $this->hotel_model->kdotomatis();
+		$checkin = substr($date, 0,10);
+		$checkout = substr($date, -10);
+		$data = array(
+			'hotel_id' 	=> $this->input->post("hotel_id"),
+			'checkin' 	=> $checkin,
+			'checkout' 	=> $checkout,
+			'transaction_id' => $transaction_id,
+            'uid' => $uid,
+		);
+
+		$this->hotel_model->insert($data);
+		$id= $transaction_id;
+		$row = $this->hotel_model->get_by($id);
+		if ($row) {
+		$request_data = array(
+			'method'    =>'rajabiller.ing',
+			'uid'       =>'123',
+			'pin'       =>'230',
+			'date_in'       =>'checkin',
+			'date_out'       =>'checkout',
+			'kode_produk' => 'hotel_id',
+			'ref1' => '',
+		);
+		$respon = $this->send($request_data);
+		$Rb 		= json_decode($respon);
+		$data = array(
+		'uid' => $this->auth_data->user_id,
+		'transaction_id' => $id,
+		'harga'     =>$Rb ->harga,
+		'hotel'  =>$Rb ->hotel,
+		'ref2'      =>$Rb ->REF2,
+		);
+		$this->hotel_model->update($id, $data);
+		$pesan = $this->pesan_model->get_by($uid);
+		$sum= $this->pesan_model->sum($uid);
+		$sum_payment= $this->payment_model->sum($uid);
+        $data['pesan'] = $pesan;
+        $data['saldo'] = $this->transaction_model->up_saldo($uid);
+        $data['sum'] = $sum;
+        $data['sum_payment'] = $sum_payment;
+		$data['module'] = "travel/cek_hotel";
+		$data['module_name'] = "Harga Hotel";
+		$this->load->view('include/layout', $data);
+		}
+		}
+	}
+	
 	
 	public function pesawat_m()
 	{

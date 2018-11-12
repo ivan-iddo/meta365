@@ -14,7 +14,22 @@ class topup_model extends CI_model{
 				 ->get();
 		return $query->result();
 	}
+	
+	function lihat($sampai,$dari,$uid) {
+		$this->db->select("*");
+		$this->db->from('transaction');
+		$this->db->where("uid='$uid' and transaction_id LIKE 'UP%'");
+		$this->db->order_by('date_transaction', 'DESC');
+		return $this->db->limit($sampai,$dari)->get()->result();
+    }
 
+	
+	function jumlah($uid){
+        $query =$this->db->query("SELECT count(*) as sum FROM transaction WHERE uid='$uid' and transaction_id LIKE 'UP%'");
+    $data = $query->row_array();
+	$sum = $data['sum'];
+    return $sum;
+    }
 	
     function get_by_id($id) {
         $this->db->where($this->id, $id);

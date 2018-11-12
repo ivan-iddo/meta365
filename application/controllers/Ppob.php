@@ -4,13 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Ppob extends MY_Controller {
 	function __construct() {
         parent::__construct();
-		$this->load->model(array('payment_model','pesan_model','pdam_model','pln_model','multifinance_model','tv_model','telkom_model','transaction_model'));
-        $this->load->library('form_validation');
     }
 
 	public function index()
 	{
-		if( $this->require_role('admin, user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 			
 			$data['module'] = "ppob";
@@ -21,55 +19,40 @@ class Ppob extends MY_Controller {
 
 	public function pdam()
 	{
-		if( $this->require_role('user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
+		$saldo = $this->transaction_model->up_saldo($uid);
 		$data = array(
            'pesan' => $pesan,
            'sum' => $sum,
            'sum_payment' => $sum_payment,
+           'saldo' => $saldo,
            'module' => "ppob/pdam",
            'module_name' => "PDAM",
 		   'product' => $this->pdam_model->data(),
 		);
 			$this->load->view('include/layout', $data);
-		}
-	}
-	public function pdam_admin()
-	{
-		if( $this->require_role('admin') )
-		{
-		$uid = $this->auth_data->user_id;
-		$pesan = $this->pesan_model->get_by($uid);
-		$sum= $this->pesan_model->sum($uid);
-		$sum_payment= $this->payment_model->sum($uid);
-		$data = array(
-           'pesan' => $pesan,
-           'sum' => $sum,
-           'sum_payment' => $sum_payment,
-           'module' => "ppob/pdam",
-           'module_name' => "PDAM",
-		   'product' => $this->pdam_model->data(),
-		);
-			$this->load->view('include/admin/layout', $data);
 		}
 	}
 
 	public function pln()
 	{
-		if( $this->require_role('user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
+		$saldo = $this->transaction_model->up_saldo($uid);
 		$data = array(
            'pesan' => $pesan,
            'sum' => $sum,
            'sum_payment' => $sum_payment,
+           'saldo' => $saldo,
            'module' => "ppob/pln",
            'module_name' => "PLN",
 		   'product' => $this->pln_model->data(),
@@ -77,117 +60,65 @@ class Ppob extends MY_Controller {
 			$this->load->view('include/layout', $data);
 		}
 	}
-	public function pln_admin()
-	{
-		if( $this->require_role('admin') )
-		{
-		$uid = $this->auth_data->user_id;
-		$pesan = $this->pesan_model->get_by($uid);
-		$sum= $this->pesan_model->sum($uid);
-		$sum_payment= $this->payment_model->sum($uid);
-		$data = array(
-           'pesan' => $pesan,
-           'sum' => $sum,
-           'sum_payment' => $sum_payment,
-           'module' => "ppob/pln",
-           'module_name' => "PLN",
-		   'product' => $this->pln_model->data(),
-		);
-			$this->load->view('include/admin/layout', $data);
-		}
-	}
-
 	
 	public function multifinance()
 	{
-		if( $this->require_role('user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
+		$saldo = $this->transaction_model->up_saldo($uid);
 		$data = array(
            'pesan' => $pesan,
            'sum' => $sum,
            'sum_payment' => $sum_payment,
+           'saldo' => $saldo,
            'module' => "ppob/multifinance",
            'module_name' => "Multifinance",
 		   'product' => $this->multifinance_model->data(),
 		);
 			$this->load->view('include/layout', $data);
-		}
-	}
-	public function multifinance_admin()
-	{
-		if( $this->require_role('admin') )
-		{
-		$uid = $this->auth_data->user_id;
-		$pesan = $this->pesan_model->get_by($uid);
-		$sum= $this->pesan_model->sum($uid);
-		$sum_payment= $this->payment_model->sum($uid);
-		$data = array(
-           'pesan' => $pesan,
-           'sum' => $sum,
-           'sum_payment' => $sum_payment,
-           'module' => "ppob/multifinance",
-           'module_name' => "Multifinance",
-		   'product' => $this->multifinance_model->data(),
-		);
-			$this->load->view('include/admin/layout', $data);
 		}
 	}
 	
 	public function telkom()
 	{
-		if( $this->require_role('user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
+		$saldo = $this->transaction_model->up_saldo($uid);
 		$data = array(
            'pesan' => $pesan,
            'sum' => $sum,
            'sum_payment' => $sum_payment,
+           'saldo' => $saldo,
            'module' => "ppob/telkom",
            'module_name' => "Telpon",
 		   'product' => $this->telkom_model->data(),
 		);
 			$this->load->view('include/layout', $data);
-		}
-	}
-	public function telkom_admin()
-	{
-		if( $this->require_role('admin') )
-		{
-		$uid = $this->auth_data->user_id;
-		$pesan = $this->pesan_model->get_by($uid);
-		$sum= $this->pesan_model->sum($uid);
-		$sum_payment= $this->payment_model->sum($uid);
-		$data = array(
-           'pesan' => $pesan,
-           'sum' => $sum,
-           'sum_payment' => $sum_payment,
-           'module' => "ppob/telkom",
-           'module_name' => "Telpon",
-		   'product' => $this->telkom_model->data(),
-		);
-			$this->load->view('include/admin/layout', $data);
 		}
 	}
 	
 	public function tv()
 	{
-		if( $this->require_role('user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$pesan = $this->pesan_model->get_by($uid);
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
+		$saldo = $this->transaction_model->up_saldo($uid);
 		$data = array(
             'pesan' => $pesan,
             'sum' => $sum,
             'sum_payment' => $sum_payment,
+            'saldo' => $saldo,
            'module' => "ppob/tv",
            'module_name' => "TV",
 		   'product' => $this->tv_model->data(),
@@ -196,25 +127,6 @@ class Ppob extends MY_Controller {
 		}
 	}
 	
-	public function tv_admin()
-	{
-		if( $this->require_role('admin') )
-		{
-		$uid = $this->auth_data->user_id;
-		$pesan = $this->pesan_model->get_by($uid);
-		$sum= $this->pesan_model->sum($uid);
-		$sum_payment= $this->payment_model->sum($uid);
-		$data = array(
-            'pesan' => $pesan,
-            'sum' => $sum,
-            'sum_payment' => $sum_payment,
-           'module' => "ppob/tv",
-           'module_name' => "TV",
-		   'product' => $this->tv_model->data(),
-		);
-			$this->load->view('include/admin/layout', $data);
-		}
-	}
 	
 	public function get_tv()
 	{
@@ -232,7 +144,7 @@ class Ppob extends MY_Controller {
 	
 	public function insert_pdam()
 	{
-		if( $this->require_role('admin, user, businesspartner') )
+		if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$product 		= $this->input->post("product_id");
@@ -304,6 +216,7 @@ class Ppob extends MY_Controller {
 			$sum= $this->pesan_model->sum($uid);
 			$sum_payment= $this->payment_model->sum($uid);
 			$data['pesan'] = $pesan;
+			$data['saldo'] = $this->transaction_model->up_saldo($uid);
 			$data['sum'] = $sum;
 			$data['sum_payment'] = $sum_payment;
 			$data['module'] = "ppob/checkout";
@@ -318,7 +231,7 @@ class Ppob extends MY_Controller {
 	}
 	
 	public function delete_pdam($id) {
-	if( $this->require_role('admin, user, businesspartner') )
+	if( $this->require_role('admin, user, businesspartner, menager') )
 		{
         $row = $this->pdam_model->get_by($id);
 
@@ -334,7 +247,7 @@ class Ppob extends MY_Controller {
     }
 	
 	function checkout_pdam($id) {
-	if( $this->require_role('admin, user, businesspartner') )
+	if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$row = $this->pdam_model->get_by($id);
         if ($row) {
@@ -363,7 +276,7 @@ class Ppob extends MY_Controller {
 	
 	public function insert_pln()
 	{
-	if( $this->require_role('admin, user, businesspartner') )
+	if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$idpel 		= $this->input->post("pelanggan");
@@ -450,6 +363,7 @@ class Ppob extends MY_Controller {
 			$sum= $this->pesan_model->sum($uid);
 			$sum_payment= $this->payment_model->sum($uid);
 			$data['pesan'] = $pesan;
+			$data['saldo'] = $this->transaction_model->up_saldo($uid);
 			$data['sum'] = $sum;
 			$data['sum_payment'] = $sum_payment;
 			$data['module'] = "ppob/checkout";
@@ -467,7 +381,7 @@ class Ppob extends MY_Controller {
 	
 	
 	public function delete_pln($id) {
-	if( $this->require_role('admin, user, businesspartner') )
+	if( $this->require_role('admin, user, businesspartner, menager') )
 		{
         $row = $this->pln_model->get_by($id);
 
@@ -484,7 +398,7 @@ class Ppob extends MY_Controller {
 	
 	
 	function checkout_pln($id) {
-	if( $this->require_role('admin, user, businesspartner') )
+	if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$row = $this->pln_model->get_by($id);
         if ($row) {
@@ -514,7 +428,7 @@ class Ppob extends MY_Controller {
 	
 	public function insert_telkom()
 	{
-	if( $this->require_role('admin, user, businesspartner') )
+	if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$product_id = $this->input->post("product_id");
@@ -579,6 +493,7 @@ class Ppob extends MY_Controller {
 			$sum= $this->pesan_model->sum($uid);
 			$sum_payment= $this->payment_model->sum($uid);
 			$data['pesan'] = $pesan;
+			$data['saldo'] = $this->transaction_model->up_saldo($uid);
 			$data['sum'] = $sum;
 			$data['sum_payment'] = $sum_payment;
 			$data['module'] = "ppob/checkout";
@@ -595,7 +510,7 @@ class Ppob extends MY_Controller {
 	
 	
 	public function delete_telkom($id) {
-	if( $this->require_role('admin, user, businesspartner') )
+	if( $this->require_role('admin, user, businesspartner, menager') )
 		{
         $row = $this->telkom_model->get_by($id);
 
@@ -612,7 +527,7 @@ class Ppob extends MY_Controller {
 	
 	
 	function checkout_telkom($id) {
-	if( $this->require_role('admin, user, businesspartner') )
+	if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$row = $this->telkom_model->get_by($id);
         if ($row) {
@@ -642,7 +557,7 @@ class Ppob extends MY_Controller {
 	
 	public function insert_multifinance()
 	{
-	if( $this->require_role('admin, user, businesspartner') )
+	if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$idpel 		= $this->input->post("pelanggan");
@@ -705,6 +620,7 @@ class Ppob extends MY_Controller {
 			$sum= $this->pesan_model->sum($uid);
 			$sum_payment= $this->payment_model->sum($uid);
 			$data['pesan'] = $pesan;
+			$data['saldo'] = $this->transaction_model->up_saldo($uid);
 			$data['sum'] = $sum;
 			$data['sum_payment'] = $sum_payment;
 			$data['module'] = "ppob/checkout";
@@ -721,7 +637,7 @@ class Ppob extends MY_Controller {
 	
 	
 	public function delete_multifinance($id) {
-	if( $this->require_role('admin, user, businesspartner') )
+	if( $this->require_role('admin, user, businesspartner, menager') )
 		{
         $row = $this->multifinance_model->get_by($id);
 
@@ -738,7 +654,7 @@ class Ppob extends MY_Controller {
 	
 	
 	function checkout_multifinance($id) {
-	if( $this->require_role('admin, user, businesspartner') )
+	if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$row = $this->multifinance_model->get_by($id);
         if ($row) {
@@ -768,7 +684,7 @@ class Ppob extends MY_Controller {
 	
 	public function insert_tv()
 	{
-	if( $this->require_role('admin, user, businesspartner') )
+	if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$uid = $this->auth_data->user_id;
 		$idpel 		= $this->input->post("pelanggan");
@@ -831,6 +747,7 @@ class Ppob extends MY_Controller {
 			$sum= $this->pesan_model->sum($uid);
 			$sum_payment= $this->payment_model->sum($uid);
 			$data['pesan'] = $pesan;
+			$data['saldo'] = $this->transaction_model->up_saldo($uid);
 			$data['sum'] = $sum;
 			$data['sum_payment'] = $sum_payment;
 			$data['module'] = "ppob/checkout";
@@ -847,7 +764,7 @@ class Ppob extends MY_Controller {
 	
 
 	public function delete_tv($id) {
-	if( $this->require_role('admin, user, businesspartner') )
+	if( $this->require_role('admin, user, businesspartner, menager') )
 		{
         $row = $this->tv_model->get_by($id);
 
@@ -864,7 +781,7 @@ class Ppob extends MY_Controller {
 	
 	
 	function checkout_tv($id) {
-	if( $this->require_role('admin, user, businesspartner') )
+	if( $this->require_role('admin, user, businesspartner, menager') )
 		{
 		$row = $this->tv_model->get_by($id);
         if ($row) {
