@@ -13,5 +13,6 @@
     <script src="<?=base_url();?>assets/vendors/bootstrap-daterangepicker/js/daterangepicker.js"></script>
     <script src="<?=base_url();?>assets/js/advanced-forms.js"></script>
     <script src="<?=base_url();?>assets/js/grafik.js"></script>
+	<script src="<?=base_url();?>assets/js/jquery.js"></script>
   </body>
 </html>

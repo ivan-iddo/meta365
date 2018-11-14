@@ -18,4 +18,5 @@
     <link href="<?=base_url();?>assets/vendors/bootstrap-daterangepicker/css/daterangepicker.min.css" rel="stylesheet">
     <link href="<?=base_url();?>assets/vendors/select2/css/select2.min.css" rel="stylesheet">
     <link href="<?=base_url();?>assets/vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+	<link href="<?=base_url();?>assets/css/chats.css" rel="stylesheet">
   </head>

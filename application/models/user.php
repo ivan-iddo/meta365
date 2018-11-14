@@ -18,8 +18,11 @@ class user extends CI_model{
         $this->db->update($this->table, $data);
     }
 	
-	function lihat($sampai,$dari) {
-        $query =$this->db->get('users',$sampai,$dari);
+	function lihat($sampai,$dari,$pencarian){
+		if ($pencarian){
+			$this->db->like('username',$pencarian);
+		}
+		$query = $this->db->get('users',$sampai,$dari);
         return $query->result();
     }
 	

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2018 at 02:16 AM
+-- Generation Time: Nov 14, 2018 at 06:39 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.4
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `meta365`
+-- Database: `meta`
 --
 
 -- --------------------------------------------------------
@@ -77,26 +77,7 @@ CREATE TABLE `auth_sessions` (
 --
 
 INSERT INTO `auth_sessions` (`id`, `user_id`, `login_time`, `modified_at`, `ip_address`, `user_agent`) VALUES
-('l9q856r4852n3m0puteuk5rujo8pi7m5', 2147484848, '2018-11-06 00:37:10', '2018-11-05 23:37:10', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('dklk6q975se8upktuc1hfq5ifhif9l9d', 2147484848, '2018-11-06 00:36:12', '2018-11-05 23:36:12', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('1u1ul9eg913j5aojo4faedu1njf8ib78', 1301294496, '2018-11-06 00:36:00', '2018-11-05 23:36:00', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('fd66aogp7epdi91esqfo1rkglujj10n0', 1242927888, '2018-11-06 00:34:32', '2018-11-05 23:34:32', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('eodjq0eakhfepd02b0umljk3kh14506e', 1242927888, '2018-11-06 00:34:01', '2018-11-05 23:34:01', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('08h66l3t65fs7qdn9qfo3mmfne8v5b44', 3614488494, '2018-11-05 23:57:28', '2018-11-05 22:57:28', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('gd1mcsuaia8t48b8ju0rpvtclnai0j00', 3614488494, '2018-11-05 23:56:32', '2018-11-05 22:56:32', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('du7crrvucpuvtp8ekfhh3ijmkjbs1b69', 3614488494, '2018-11-05 23:51:24', '2018-11-05 22:51:24', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('u21ls52dhcg9vu3bs4f7sqkphuq8arri', 3614488494, '2018-11-05 22:09:50', '2018-11-05 21:09:50', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('vd2pnilmr8acob0qn1tklt6m3rfp0ms7', 3614488494, '2018-11-05 23:39:27', '2018-11-05 22:39:27', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('s41r65oms1rd1ifvrlnrvpbeq882s684', 1380392804, '2018-11-06 00:38:10', '2018-11-05 23:38:11', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('m18t8dieuv60omj0v05rkks3v18fn66m', 2147484848, '2018-11-06 00:39:46', '2018-11-05 23:39:46', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('lnn6pkta3l7bmf059evbb6uh432ale26', 2147484848, '2018-11-06 00:42:09', '2018-11-05 23:42:09', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('s6dap59op8qvpdvf91osu3kuhggub277', 286110552, '2018-11-06 00:43:18', '2018-11-05 23:43:18', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('9pr0oikcoi05462ijapsa61vva0opi87', 2147484848, '2018-11-06 00:45:56', '2018-11-05 23:45:56', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('7tfafvccljdjvii7qdvojemvao1squ69', 3614488494, '2018-11-06 00:47:18', '2018-11-05 23:47:19', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('aj4cbbln5d8ot3pemjem156qdm70b7vn', 3614488494, '2018-11-06 00:47:28', '2018-11-05 23:47:28', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('dul780ca3ecj4mpe191768pvbag1ffkv', 1380392804, '2018-11-06 00:48:47', '2018-11-05 23:48:47', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('3bsg9b9d5oo1cridk4jvbahu87h25mqr', 1380392804, '2018-11-06 00:49:39', '2018-11-05 23:49:39', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('g3rbgcvd6io4fpqg9qkl8rdldu23ghaa', 1380392804, '2018-11-06 00:51:18', '2018-11-05 23:51:18', '::1', 'Chrome 55.0.2883.87 on Windows 7');
+('4r53f4bg7fdmjor0rqglr5g7gom41t03', 1380392804, '2018-11-14 05:47:56', '2018-11-14 04:59:50', '::1', 'Chrome 55.0.2883.87 on Windows 7');
 
 -- --------------------------------------------------------
 
@@ -124,6 +105,30 @@ CREATE TABLE `bpjs` (
 
 INSERT INTO `bpjs` (`idpel1`, `product_id`, `transaction_id`, `uid`, `pelanggan`, `nominal`, `struk`, `periode`, `phone`, `date_transaction`, `ref2`) VALUES
 ('123456789012', '', 'BPJ1810001', '3614488494', '', '', '', '12', '081234129812', '0000-00-00 00:00:00', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chat`
+--
+
+CREATE TABLE `chat` (
+  `send_to` varchar(20) NOT NULL,
+  `send_by` varchar(20) NOT NULL,
+  `message` tinytext NOT NULL,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `chat_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `chat`
+--
+
+INSERT INTO `chat` (`send_to`, `send_by`, `message`, `time`, `chat_id`) VALUES
+('3614488494', '2147484848', 'aaa', '2018-11-13 09:32:00', 10),
+('2147484848', '3614488494', 'ssasd', '2018-11-13 09:36:06', 12),
+('3614488494', '2147484848', 'aa', '2018-11-14 04:47:38', 17),
+('3614488494', '1380392804', 'Hay admin, tolong update topup saya.', '2018-11-14 04:48:44', 18);
 
 -- --------------------------------------------------------
 
@@ -206,6 +211,7 @@ INSERT INTO `emoney` (`product_id`, `product`, `product_type`, `nominal`) VALUES
 ('M500', 'E-TOL', 'E-TOL MANDIRI', 'Mandiri 500 ');
 
 -- --------------------------------------------------------
+
 --
 -- Table structure for table `game`
 --
@@ -266,7 +272,8 @@ INSERT INTO `kai` (`from`, `to`, `date_go`, `date_back`, `transaction_id`, `uid`
 ('PLD', 'ABR', '0000-00-00', '0000-00-00', 'KAI1810003', '3614488494', '0', '0', '0', 'L'),
 ('PLD', 'ABR', '0000-00-00', '0000-00-00', 'KAI1810004', '3614488494', '0', '0', '0', 'L'),
 ('PLD', 'CB', '0000-00-00', '0000-00-00', 'KAI1810005', '3614488494', '0', '0', '0', 'L'),
-('PLD', 'ABR', '0000-00-00', '0000-00-00', 'KAI1811001', '608603457', '', '', '', 'L');
+('PLD', 'ABR', '0000-00-00', '0000-00-00', 'KAI1811001', '608603457', '', '', '', 'L'),
+('ABR', 'ABR', '0000-00-00', '0000-00-00', 'KAI1811002', '1380392804', '', '', '', 'L');
 
 -- --------------------------------------------------------
 
@@ -286,8 +293,8 @@ CREATE TABLE `login_errors` (
 --
 
 INSERT INTO `login_errors` (`ai`, `username_or_email`, `ip_address`, `time`) VALUES
-(46, 'dia', '::1', '2018-11-06 01:51:13'),
-(45, 'dia', '::1', '2018-11-06 01:49:49');
+(67, 'didanurwanda', '::1', '2018-11-13 13:57:57'),
+(66, '', '::1', '2018-11-13 13:55:32');
 
 -- --------------------------------------------------------
 
@@ -363,8 +370,8 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`uid_pengirim`, `isi`, `date`, `uid`, `status`, `id`) VALUES
-('3614488494', 'Transaksi dengan kode PLN1810002 berhasil', '2018-10-28 04:09:00', '3614488494', 'sudah', 1),
-('3614488494', 'Transaksi dengan kode PAM1810001 berhasil', '2018-10-31 04:00:00', '3614488494', 'sudah', 2);
+('3614488494', 'Transaksi dengan kode PLN1810002 berhasil', '2018-10-28 04:09:00', '2147484848', 'sudah', 1),
+('3614488494', 'Transaksi dengan kode PAM1810001 berhasil', '2018-10-31 04:00:00', '1380392804', 'sudah', 2);
 
 -- --------------------------------------------------------
 
@@ -419,7 +426,8 @@ INSERT INTO `pesan` (`id`, `uid_pengirim`, `isi`, `date`, `uid`, `status`) VALUE
 (6, '2147484848', 'siap bos', '2018-11-02 21:37:48', '3614488494', 'sudah'),
 (7, '3614488494', 'hay bos', '2018-11-02 21:41:47', '2147484848', 'sudah'),
 (8, '3614488494', 'hay bos', '2018-11-02 21:42:00', '2147484848', 'sudah'),
-(9, '2147484848', 'admin bisa bantu', '2018-11-02 21:52:59', '3614488494', 'belum');
+(9, '2147484848', 'admin bisa bantu', '2018-11-02 21:52:59', '3614488494', 'belum'),
+(10, '3614488494', 'hay', '2018-11-09 09:24:39', '2147484848', 'sudah');
 
 -- --------------------------------------------------------
 
@@ -666,6 +674,7 @@ INSERT INTO `product` (`product_id`, `product_type`, `product`, `product_name`) 
 ('JTR', 'Jember', 'stasiun', 'Jatiroto'),
 ('KA', 'Purwokerto', 'stasiun', 'Karanganyar'),
 ('KAC', 'Bandung', 'stasiun', 'Kiaracondong'),
+('KAI', 'KAI', 'KAI', 'KAI'),
 ('KB', 'Tanjung Karang', 'stasiun', 'Kota bumi'),
 ('KBR', 'Jember', 'stasiun', 'Kalibaru'),
 ('KD', 'Madiun', 'stasiun', 'Kediri'),
@@ -800,6 +809,7 @@ INSERT INTO `product` (`product_id`, `product_type`, `product`, `product_name`) 
 ('TIM', 'PAPUA DAN MALUKU', 'BANDARA', 'Bandara Mozes Kilangin, Mimika'),
 ('TKG', 'SUMATERA', 'BANDARA', 'Bandara Radin Inten II, Bandar Lampung'),
 ('TNJ', 'SUMATERA', 'BANDARA', 'Bandara Raja Haji Fisabilillah, Tanjung pinang'),
+('Topup', 'Topup', 'Topup', 'Topup'),
 ('TRK', 'KALIMANTAN', 'BANDARA', 'Bandara Juwata, Tarakan'),
 ('TVBIG', 'BIG TV', 'TV', 'BIG TV'),
 ('TVGEN100', 'GENFLIX', 'TV', 'GENFLIX (100.000)'),
@@ -963,8 +973,10 @@ INSERT INTO `topup` (`transaction_id`, `no_rek`, `nominal`, `kode`, `uid`) VALUE
 ('UP1811001', '', '1000000', 671, '3614488494'),
 ('UP1811002', '', '1000000', 298, '608603457'),
 ('UP1811003', '', '1000000', 695, '608603457'),
-('UP1811004', '', '500000', 193, '608603457'),
-('UP1811005', '', '10000000', 186, '1301294496');
+('UP1811004', '000512121213231313', '500000', 193, '608603457'),
+('UP1811005', '', '10000000', 186, '1301294496'),
+('UP1811006', '', '800000', 371, '3614488494'),
+('UP1811007', '', '2000000', 841, '1380392804');
 
 -- --------------------------------------------------------
 
@@ -990,21 +1002,21 @@ CREATE TABLE `transaction` (
 INSERT INTO `transaction` (`product_id`, `transaction_id`, `date_transaction`, `debit`, `saldo`, `status`, `kredit`, `uid`) VALUES
 ('GAR1030H', 'GM1810005', '2018-10-17 04:08:11', '100000', '', 'Pendding', '', '2147484848'),
 ('GAS100H', 'GM1811001', '2018-11-03 03:00:00', '50000', '1950000', 'Success', '', '608603457'),
-('K', 'KAI1810001', '2018-10-31 03:00:00', '120000', '', 'Pendding', '', '3614488494'),
-('kai', 'KAI1811001', '2018-11-03 04:00:00', '150000', '1800000', 'Pendding', '', '608603457'),
-('WAAETRA', 'PAM1810001', '2018-10-01 03:09:11', '200000', '', 'Succes', '', '3614488494'),
-('WADPSR', 'PAM1811001', '2018-11-28 04:00:00', '100000', '17000000', 'Successs', '', '608603457'),
+('KAI', 'KAI1810001', '2018-10-31 03:00:00', '120000', '', 'Success', '', '3614488494'),
+('KAI', 'KAI1811001', '2018-11-03 04:00:00', '150000', '1800000', 'Pendding', '', '608603457'),
+('WAAETRA', 'PAM1810001', '2018-10-01 03:09:11', '200000', '', 'Success', '', '3614488494'),
+('WADPSR', 'PAM1811001', '2018-11-28 04:00:00', '100000', '1700000', 'Success', '', '608603457'),
 ('AXD1H', 'PL1810001', '2018-10-17 02:09:00', '50000', '', 'Gagal', '', '2147484848'),
 ('S5H', 'PL1811002', '2018-11-03 03:08:10', '100000', '2000000', 'Pendding', '', '608603457'),
-('PLNPRAY', 'PN1810002', '2018-10-07 02:00:00', '100000', '', 'Succes', '', '2147484848'),
+('PLNPRAY', 'PN1810002', '2018-10-07 02:00:00', '100000', '', 'Success', '', '2147484848'),
 ('Topup', 'UP1810005', '2018-10-24 01:33:30', '', '', 'Pendding', '500000', '2147484848'),
 ('Topup', 'UP1810006', '2018-10-24 04:24:44', '', '', 'Pendding', '500000', '2147484848'),
-('Topup', 'UP1810007', '2018-10-24 13:50:29', '', '', 'Pendding', '1000000', '3614488494'),
-('Topup', 'UP1811001', '2018-11-02 05:15:01', '', '', 'Pendding', '1000000', '3614488494'),
+('Topup', 'UP1810007', '2018-10-24 13:50:29', '', '1000000', 'Success', '1000000', '3614488494'),
+('Topup', 'UP1811001', '2018-11-02 05:15:01', '', '2000000', 'Success', '1000000', '3614488494'),
 ('Topup', 'UP1811002', '2018-11-02 20:02:04', '', '', 'Pendding', '1000000', '608603457'),
 ('Topup', 'UP1811003', '2018-11-02 20:35:00', '', '', 'Pendding', '1000000', '608603457'),
 ('Topup', 'UP1811004', '2018-11-02 20:35:19', '', '', 'Pendding', '500000', '608603457'),
-('Topup', 'UP1811005', '2018-11-02 20:42:02', '', '', 'Pendding', '10000000', '1301294496');
+('Topup', 'UP1811006', '2018-11-06 04:30:07', '', '2800000', 'Success', '800000', '3614488494');
 
 -- --------------------------------------------------------
 
@@ -1063,14 +1075,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `email`, `auth_level`, `banned`, `passwd`, `passwd_recovery_code`, `passwd_recovery_date`, `passwd_modified_at`, `last_login`, `created_at`, `modified_at`) VALUES
-(286110552, 'palembang', 'palembang@gmail.com', 1, '0', '$2y$11$XlgJq4jfZWYoo2Y720iffOz.TG3b4Opf7i1IEiv8ZNZ1NkoNGs3/C', NULL, NULL, NULL, '2018-11-06 00:43:18', '2018-11-02 01:13:15', '2018-11-05 23:43:18'),
+(286110552, 'palembang', 'palembang@gmail.com', 1, '0', '$2y$11$XlgJq4jfZWYoo2Y720iffOz.TG3b4Opf7i1IEiv8ZNZ1NkoNGs3/C', NULL, NULL, NULL, '2018-11-13 10:30:56', '2018-11-02 01:13:15', '2018-11-13 09:30:56'),
 (608603457, 'bandung', 'bandung@gmail.com', 4, '1', '$2y$11$/0FmwEX1jrNbRxD4vMhMfeanjRsNsNqSLvdZG8M5AuVUEQVgm1Bmu', NULL, NULL, NULL, '2018-11-06 00:03:36', '2018-11-02 01:10:48', '2018-11-06 00:04:00'),
 (730510257, 'bangsa', 'bangsa@gmail.com', 9, '0', '$2y$11$BYQHui/8kHtRyQav5keEfeZ9odSJpyLFLurQELlPgauuJTsWd9WOO', NULL, NULL, NULL, '2018-11-02 22:21:13', '2018-10-24 02:25:05', '2018-11-02 21:21:13'),
-(1301294496, 'kota', 'kota@gmail.com', 1, '0', '$2y$11$YmdCjlLVdZWWFq8NzdtBNOeItNs5ynnc2YSyGgmPPzUOVUKNxsGTy', '$2y$11$0VtF2J2rj02uHv0KH2gXMeetgYKlOk/jOtTSmwSpn/FvVxrrrkaai', '2018-11-06 02:07:32', NULL, '2018-11-06 00:36:00', '2018-11-02 01:14:24', '2018-11-06 01:07:32'),
-(1380392804, 'menager', 'menager@gmail.com', 8, '0', '$2y$11$ofLgJFxGu3PwbFQiv2.txOTtcN.GAQYMZrXoaYaNk8H42JzGLFvNy', NULL, NULL, NULL, '2018-11-06 00:58:20', '2018-11-02 01:12:34', '2018-11-05 23:58:20'),
+(825648341, 'didanurwanda', 'eko@gmail.com', 5, '1', '$2y$11$ed2It3kgGbwnTcpFBjN1UeJcukHVvrVbeO2ng2CQ76ENXghvr2GFO', NULL, NULL, NULL, NULL, '2018-11-13 13:57:29', '2018-11-13 12:57:29'),
+(928802434, 'Andi', 'Andi@gmail.com', 5, '1', '$2y$11$VT2Ft6/1pZUeoB9bd2g.c.xX6S5O.3pEvofpkrffuMoUN9qD7BXe.', NULL, NULL, NULL, NULL, '2018-11-09 11:09:32', '2018-11-09 10:09:32'),
+(1301294496, 'kota', 'kota@gmail.com', 1, '0', '$2y$11$f4W.4R9MT1qHAVXj.PHJOe7TdjoNEQX9H70kgsBdsFnExnvsd.HFW', '$2y$11$8FZUTkupqHQCEcvBACxNH.chZ0Jjrfg7PedOzCSon2Fmgwcc36dQu', '2018-11-06 10:15:05', '2018-11-06 12:13:42', '2018-11-11 17:30:27', '2018-11-02 01:14:24', '2018-11-11 16:30:27'),
+(1380392804, 'menager', 'menager@gmail.com', 8, '0', '$2y$11$ofLgJFxGu3PwbFQiv2.txOTtcN.GAQYMZrXoaYaNk8H42JzGLFvNy', NULL, NULL, NULL, '2018-11-14 05:47:56', '2018-11-02 01:12:34', '2018-11-14 04:47:56'),
 (1729583169, 'ivan', 'ivan@meta365.com', 6, '0', '$2y$11$X0NMge6rqfG4X1Ed2T/Nkuml3duriW8nlLWy6ja7DyIPuQmwoAtNS', NULL, NULL, NULL, '2018-10-16 20:42:51', '2018-10-16 20:42:39', '2018-10-16 20:42:51'),
-(2147484848, 'kebangsaan', 'Kebangsaan@gmail.com', 1, '0', '$2y$11$dW56TEdtK/KJZqQm.dpZf.qQK6vUr4CXtlaakmSYijzcYt0nlGhvq', NULL, NULL, NULL, '2018-11-06 00:57:59', '2018-10-24 02:23:48', '2018-11-05 23:57:59'),
-(3614488494, 'admin', 'admin@meta365.com', 6, '0', '$2y$11$OUHGkJK4rxU/XDjUb7YTEeRRWeYreFvADm28bvCjIdMAcArHEczG6', NULL, NULL, NULL, '2018-11-06 01:25:26', '2018-10-16 10:35:31', '2018-11-06 00:25:26');
+(2147484848, 'kebangsaan', 'Kebangsaan@gmail.com', 1, '0', '$2y$11$dW56TEdtK/KJZqQm.dpZf.qQK6vUr4CXtlaakmSYijzcYt0nlGhvq', NULL, NULL, NULL, '2018-11-14 05:47:26', '2018-10-24 02:23:48', '2018-11-14 04:47:26'),
+(3614488494, 'admin', 'admin@meta365.com', 6, '0', '$2y$11$OUHGkJK4rxU/XDjUb7YTEeRRWeYreFvADm28bvCjIdMAcArHEczG6', NULL, NULL, NULL, '2018-11-14 04:36:01', '2018-10-16 10:35:31', '2018-11-14 03:36:01');
 
 --
 -- Triggers `users`
@@ -1122,6 +1136,12 @@ ALTER TABLE `auth_sessions`
 --
 ALTER TABLE `bpjs`
   ADD PRIMARY KEY (`transaction_id`);
+
+--
+-- Indexes for table `chat`
+--
+ALTER TABLE `chat`
+  ADD PRIMARY KEY (`chat_id`);
 
 --
 -- Indexes for table `ci_sessions`
@@ -1278,6 +1298,11 @@ ALTER TABLE `acl_actions`
 ALTER TABLE `acl_categories`
   MODIFY `category_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `chat`
+--
+ALTER TABLE `chat`
+  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+--
 -- AUTO_INCREMENT for table `denied_access`
 --
 ALTER TABLE `denied_access`
@@ -1286,12 +1311,12 @@ ALTER TABLE `denied_access`
 -- AUTO_INCREMENT for table `ips_on_hold`
 --
 ALTER TABLE `ips_on_hold`
-  MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `login_errors`
 --
 ALTER TABLE `login_errors`
-  MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 --
 -- AUTO_INCREMENT for table `nominal`
 --
@@ -1306,7 +1331,7 @@ ALTER TABLE `payment`
 -- AUTO_INCREMENT for table `pesan`
 --
 ALTER TABLE `pesan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `pricelist`
 --

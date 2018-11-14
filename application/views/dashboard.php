@@ -140,7 +140,19 @@
           <div class="card">
             <div class="card-header">History</div>
             <div class="card-body">
-                <table class="table table-responsive-sm table-hover table-outline mb-0">
+			 <form action="<?php echo site_url('dashboard');?>" method='post' class="col-md-5">
+			   <div class="form-group">
+                    <div class="controls">
+                        <div class="input-group">
+                           <input class="form-control"  name="pencarian"  id="pencarian" type="text" placeholder="Enter Search Transaksi Id">
+                            <span class="input-group-append">
+                              <button class="btn btn-secondary" type="submit">Search</button>
+                            </span>
+                        </div>
+                    </div>
+					</div>
+				</form>
+				<table class="table table-responsive-sm table-hover table-outline mb-0">
                 <thead class="thead-light">
                   <tr>
                     <th class="text-center">
@@ -178,14 +190,12 @@
                  ?>
                 </tbody>
               </table>
-			  <div id="pagination">
-					<nav aria-label="Page navigation example">
-						<ul class="pagination justify-content-center">
-						<?php
-						echo $this->pagination->create_links();
-						?>
-						</ul>
-					</nav>
+			  <br>
+			  <div class="row">
+					<div class="col">
+					<!--Tampilkan pagination-->
+					<?php echo $this->pagination->create_links(); ?>
+					</div>
 			</div>
             </div>
           </div>

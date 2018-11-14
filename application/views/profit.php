@@ -10,6 +10,7 @@
               <div class="small text-muted"><?php echo date("F Y");?></div>
             </div>
             <!-- /.col-->
+			<?php if($auth_role=='admin'):?>
             <div class="col-sm-7 d-none d-md-block">
               <button class="btn btn-primary float-right" type="button">
                 <i class="icon-cloud-download"></i>
@@ -23,6 +24,19 @@
                 </label>
               </div>
             </div>
+			<?php endif;?>
+			<?php if($auth_role=='menager'|$auth_role=='user'|$auth_role=='businesspartner'):?>
+			 <div class="col-sm-7 d-none d-md-block">
+              <button class="btn btn-primary float-right" type="button">
+                <i class="icon-cloud-download"></i>
+              </button>
+              <div class="btn-group btn-group-toggle float-right mr-3" data-toggle="buttons">
+                <label class="btn btn-outline-secondary active">
+                  <input id="option3" value="option3" type="radio" name="options" autocomplete="off"> Product
+                </label>
+              </div>
+            </div>
+			<?php endif;?>
             <!-- /.col-->
           </div>
           <!-- /.row-->

@@ -23,7 +23,10 @@ class transaction_model extends CI_Model {
 		return $query->result();
 	}
 	
-	function lihat($sampai,$dari,$uid) {
+	function lihat($sampai,$dari,$uid,$pencarian){
+		if ($pencarian){
+			$this->db->like('transaction_id',$pencarian);
+		}
 		$this->db->select("*");
 		$this->db->from('transaction');
 		$this->db->where("uid='$uid' and transaction_id NOT LIKE 'UP%' and status LIKE 'Success'");
@@ -42,6 +45,11 @@ class transaction_model extends CI_Model {
 	function get($uid){
     $query =$this->db->query("SELECT * FROM transaction WHERE uid='$uid'");
       return $query->result();
+    }
+	
+	function get_transaction($uid){
+		$query =$this->db->query("SELECT * FROM transaction WHERE uid='$uid' and transaction_id NOT LIKE 'UP%'");
+    return $query->result();
     }
 	
     function get_rows() {

@@ -16,7 +16,11 @@ class pesan extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
+		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
+		$admin = $this->db->where('user_id =', 3614488494)->get('users');
 		$data = array(
+			'teman' => $teman,
+			'admin' => $admin,
             'pesan' => $pesan,
             'get_by_pesan' => $get_by_pesan,
             'sum' => $sum,
@@ -39,7 +43,11 @@ class pesan extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
+		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
+		$admin = $this->db->where('user_id =', 3614488494)->get('users');
 		$data = array(
+			'teman' => $teman,
+			'admin' => $admin,
             'pesan' => $pesan,
             'sum' => $sum,
             'sum_payment' => $sum_payment,
@@ -72,43 +80,6 @@ class pesan extends MY_Controller {
 			'module_name' => 'Balas Pesan',
         );	
 		 $this->load->view('include/layout', $data);
-		}
-	}
-	
-	public function insert($id)
-	{
-		if( $this->require_role('user, businesspartner') )
-		{
-		$uid = $this->auth_data->user_id;
-		$get = $this->pesan_model->status($id);
-		$data = array(
-			'isi' 		=> $this->input->post("isi"),
-			'date' => date("Y-m-d H:i:s"),
-			'uid_pengirim' => $uid,
-            'uid' => '3614488494',
-            'status' => 'belum',
-		);
-
-		$this->pesan_model->insert($data);
-		redirect(site_url('dashboard'));
-		}
-	}
-	
-	public function insert_admin()
-	{
-		if( $this->require_role('admin') )
-		{
-		$uid = $this->auth_data->user_id;
-		$data = array(
-			'isi' 		=> $this->input->post("isi"),
-			'date' => date("Y-m-d H:i:s"),
-			'uid_pengirim' => $uid,
-            'uid' => $this->input->post("uid_pengirim"),
-            'status' => 'belum',
-		);
-
-		$this->pesan_model->insert($data);
-		redirect(site_url('admin'));
 		}
 	}
 }

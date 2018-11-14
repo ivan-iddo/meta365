@@ -15,7 +15,11 @@ class Bpjs extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
+		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
+		$admin = $this->db->where('user_id =', 3614488494)->get('users');
 		$data = array(
+			'teman' => $teman,
+			'admin' => $admin,
             'pesan' => $pesan,
             'sum' => $sum,
             'sum_payment' => $sum_payment,
@@ -93,6 +97,8 @@ class Bpjs extends MY_Controller {
 			$pesan = $this->pesan_model->get_by($uid);
 			$sum= $this->pesan_model->sum($uid);
 			$sum_payment= $this->payment_model->sum($uid);
+			$data['teman'] = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
+			$data['admin'] = $this->db->where('user_id =', 3614488494)->get('users');
 			$data['pesan'] = $pesan;
 			$data['saldo'] = $this->transaction_model->up_saldo($uid);
 			$data['sum'] = $sum;
@@ -150,29 +156,6 @@ class Bpjs extends MY_Controller {
         }
     }
 	
-	public function bpjs_m()
-	{
-		if($this->require_role('menager, businesspartner'))
-		{
-			
-		$topup = $this->transaction_model->get_bpjs();
-		$uid = $this->auth_data->user_id;
-		$pesan = $this->pesan_model->get_by($uid);
-		$sum= $this->pesan_model->sum($uid);
-		$sum_payment= $this->payment_model->sum($uid);
-		$data = array(
-            'pesan' => $pesan,
-            'sum' => $sum,
-            'sum_payment' => $sum_payment,
-            'topup' => $topup,
-			'module' => 'topup/history_m',
-			'module_name' => 'History BPJS',
-        );
-		
-			$this->load->view('include/layout_m', $data);
-
-		}
-	}
 	
 	function send($data){
     $api_url = "https://202.43.173.234/transaksi/json.php";

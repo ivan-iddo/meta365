@@ -11,7 +11,9 @@
     <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <ul class="nav navbar-nav ml-auto">
+   <ul class="nav navbar-nav ml-auto">
+		<?php if($auth_role=='admin'):?>
+	    <ul class="nav navbar-nav ml-auto">
       <li class="nav-item dropdown d-md-down-none">
         <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
           <i class="icon-envelope-letter"></i>
@@ -21,17 +23,11 @@
           <div class="dropdown-header text-center">
             <strong>Messages</strong>
           </div>
-		  <a class="dropdown-item text-center" href="<?=base_url().'pesan/';?>">
-            <strong>View all messages</strong>
-          </a>
-		  <?php
-			foreach ($pesan as $pesan) {
-		  ?>
-          <a class="dropdown-item" href="<?=base_url().'pesan/detail_pesan/'.$pesan->id;?>">
+		  <?php foreach ($teman->result() as $item) { ?>
+          <a class="dropdown-item" href="javascript:;" data-friend="<?= $item->user_id ?>"><?= $item->username ?>
             <small class="text-muted float-right mt-1">Today, 3:47 PM</small>
 			<div class="message">
-              <div class="fa fa-user-circle font-weight-bold"> <?php echo $pesan->username ?></div>
-              <div class="small text-muted text-truncate"><?php echo $pesan->isi ?></div>
+              <div class="fa fa-user-circle font-weight-bold"> <?php echo $item->username ?></div>
             </div>
           </a>
 		  <?php
@@ -39,6 +35,17 @@
 		   ?>
         </div>
       </li>
+	<?php endif;?>
+	<?php if($auth_role=='menager'|$auth_role=='user'|$auth_role=='businesspartner'):?>
+      <li class="nav-item dropdown d-md-down-none">
+	   <?php foreach ($admin->result() as $item) { ?>
+        <a class="nav-link" data-toggle="dropdown"  href="javascript:;" data-friend="<?= $item->user_id ?>" role="button" aria-haspopup="true" aria-expanded="false">
+		  <i class="icon-envelope-letter"></i>
+          <span class="badge badge-pill badge-info"><?php echo $sum ?></span>
+        </a>
+      <?php } ?>
+      </li>
+	<?php endif;?>
       <li class="nav-item dropdown">
         <a class="nav-link nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-user-circle"></i><span style="margin-right: 30px;">&nbsp;<?= $auth_username;?></span>
@@ -65,3 +72,4 @@
     <?php (is_file(APPPATH.'views/' . $module .'.php') ? $this->load->view($module): null);?>
   </div>
 <?php $this->load->view('include/footer');?>
+<?php $this->load->view('include/chat');?>

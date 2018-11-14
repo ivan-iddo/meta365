@@ -13,15 +13,22 @@ class payment_model extends CI_model{
     return $query->result();
     }
 	
-	function status_payment($sampai,$dari) {
+	function status_payment($sampai,$dari,$pencarian){
+		if ($pencarian){
+			$this->db->like('username',$pencarian);
+		}
 		$this->db->select("*");
 		$this->db->from('transaction,users,product');
 		$this->db->where("status NOT LIKE 'Success' and transaction_id NOT LIKE 'UP%' and transaction.`product_id` = product.`product_id` and transaction.uid = users.user_id");
 		$this->db->order_by('date_transaction', 'DESC');
 		return $this->db->limit($sampai,$dari)->get()->result();
     }
+
 	
-	function status_payment_uid($sampai,$dari,$uid) {
+	function status_payment_uid($sampai,$dari,$uid,$pencarian){
+		if ($pencarian){
+			$this->db->like('username',$pencarian);
+		}
 		$this->db->select("*");
 		$this->db->from('transaction,users,product');
 		$this->db->where("status NOT LIKE 'Success' and transaction_id NOT LIKE 'UP%' and transaction.`product_id` = product.`product_id` and transaction.uid = users.user_id and uid='$uid'");
@@ -45,7 +52,10 @@ class payment_model extends CI_model{
     }
 	
 	
-	function lihat($sampai,$dari) {
+	function lihat($sampai,$dari,$pencarian) {
+		if ($pencarian){
+			$this->db->like('username',$pencarian);
+		}
 		$this->db->select("*");
 		$this->db->from('transaction,topup,users');
 		$this->db->where('status="Pendding" and topup.transaction_id = transaction.transaction_id and transaction.uid = users.user_id');

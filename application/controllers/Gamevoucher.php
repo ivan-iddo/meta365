@@ -17,7 +17,11 @@ class Gamevoucher extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
+		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
+		$admin = $this->db->where('user_id =', 3614488494)->get('users');
 		$data = array(
+			'teman' => $teman,
+			'admin' => $admin,
             'pesan' => $pesan,
             'sum' => $sum,
             'sum_payment' => $sum_payment,
@@ -62,6 +66,8 @@ class Gamevoucher extends MY_Controller {
                 'phone' => $row->phone,
                 'transaction_id' => $row->transaction_id,
             );
+			$data['teman'] = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
+			$data['admin'] = $this->db->where('user_id =', 3614488494)->get('users');
 			$data['pesan'] = $this->pesan_model->get_by($uid);
 			$data['sum']= $this->pesan_model->sum($uid);
 			$data['sum_payment']= $this->payment_model->sum($uid);
@@ -128,31 +134,6 @@ class Gamevoucher extends MY_Controller {
     }
     }
 	}
-	
-	public function gamevoucher_m()
-	{
-		if($this->require_role('root'))
-		{
-			
-		$topup = $this->transaction_model->get_game();
-		$uid = $this->auth_data->user_id;
-		$pesan = $this->pesan_model->get_by($uid);
-		$sum= $this->pesan_model->sum($uid);
-		$sum_payment= $this->payment_model->sum($uid);
-		$data = array(
-            'pesan' => $pesan,
-            'sum' => $sum,
-            'sum_payment' => $sum_payment,
-            'topup' => $topup,
-			'module' => 'topup/history_m',
-			'module_name' => 'History Game',
-        );
-		
-			$this->load->view('include/layout_m', $data);
-
-		}
-	}
-	
 	
 	function send($data){
     $api_url = "https://202.43.173.234/transaksi/json.php";
