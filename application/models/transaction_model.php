@@ -71,10 +71,14 @@ class transaction_model extends CI_Model {
     }
 	
 	function up_saldo($uid) {
-		 $query =$this->db->query("SELECT saldo as data FROM transaction WHERE uid='$uid' order by date_transaction DESC limit 1");
+	$query =$this->db->query("SELECT sum(kredit) as kredit FROM transaction WHERE status='Success' and uid='$uid'");
     $data = $query->row_array();
-	$data = $data['data'];
-    return $data;
+	$kredit = $data['kredit'];
+    $query = $this->db->query("SELECT sum(debit) as debit FROM transaction WHERE status='Success' and uid='$uid'");
+    $data = $query->row_array();
+    $debit = $data['debit'];
+	$saldo= $kredit-$debit;
+    return $saldo;
     }
 	
 	 function get_by($id) {

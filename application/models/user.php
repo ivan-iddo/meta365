@@ -13,6 +13,18 @@ class user extends CI_model{
 		return $query->result();
 	}
 	
+	public function teman($uid)
+	{
+		$query=$this->db->where('user_id !=', $uid)->get($this->table);
+		return $query;
+	}	
+	
+	public function admin()
+	{
+		$query=$this->db->where($this->id, 3614488494)->get($this->table);
+		return $query;
+	}
+	
 	function update($id, $data) {
         $this->db->where($this->id, $id);
         $this->db->update($this->table, $data);

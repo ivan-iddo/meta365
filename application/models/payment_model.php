@@ -17,11 +17,8 @@ class payment_model extends CI_model{
 		if ($pencarian){
 			$this->db->like('username',$pencarian);
 		}
-		$this->db->select("*");
-		$this->db->from('transaction,users,product');
-		$this->db->where("status NOT LIKE 'Success' and transaction_id NOT LIKE 'UP%' and transaction.`product_id` = product.`product_id` and transaction.uid = users.user_id");
-		$this->db->order_by('date_transaction', 'DESC');
-		return $this->db->limit($sampai,$dari)->get()->result();
+		$query =$this->db->query("SELECT * FROM pln,users,product WHERE transaction_id NOT LIKE 'UP%' and pln.`product_id` = product.`product_id` and pln.uid = users.user_id and transaction_id NOT IN (SELECT transaction_id FROM transaction) ORDER BY `date_transaction` ASC LIMIT $sampai OFFSET $dari");
+		return $query->result();
     }
 
 	
@@ -29,11 +26,8 @@ class payment_model extends CI_model{
 		if ($pencarian){
 			$this->db->like('username',$pencarian);
 		}
-		$this->db->select("*");
-		$this->db->from('transaction,users,product');
-		$this->db->where("status NOT LIKE 'Success' and transaction_id NOT LIKE 'UP%' and transaction.`product_id` = product.`product_id` and transaction.uid = users.user_id and uid='$uid'");
-		$this->db->order_by('date_transaction', 'DESC');
-		return $this->db->limit($sampai,$dari)->get()->result();
+		$query =$this->db->query("SELECT * FROM pln,users,product WHERE transaction_id NOT LIKE 'UP%' and pln.`product_id` = product.`product_id` and pln.uid = users.user_id and uid='$uid' and transaction_id NOT IN (SELECT transaction_id FROM transaction) ORDER BY `date_transaction` ASC LIMIT $sampai OFFSET $dari");
+		return $query->result();
     }
 
 	

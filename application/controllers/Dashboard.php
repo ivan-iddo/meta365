@@ -54,8 +54,8 @@ class Dashboard extends MY_Controller {
 		$sum_payment= $this->payment_model->sum($uid);
 		$payment= $this->payment_model->payment();
 		$saldo = $this->transaction_model->up_saldo($uid);
-		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-		$admin = $this->db->where('user_id =', 3614488494)->get('users');
+		$teman = $this->user->teman($uid);
+		$admin = $this->user->admin();
 		$data = array(
 			'teman' => $teman,
 			'admin' => $admin,

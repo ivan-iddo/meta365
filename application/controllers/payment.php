@@ -53,8 +53,8 @@ class payment extends MY_Controller {
 		$payment_sudah= $this->payment_model->get_by_sudah($uid);
 		$status= $this->payment_model->status($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
-		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-		$admin = $this->db->where('user_id =', 3614488494)->get('users');
+		$teman = $this->user->teman($uid);
+		$admin = $this->user->admin();
 		$data = array(
 			'teman' => $teman,
 			'admin' => $admin,

@@ -26,8 +26,8 @@ class Ppob extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
-		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-		$admin = $this->db->where('user_id =', 3614488494)->get('users');
+		$teman = $this->user->teman($uid);
+		$admin = $this->user->admin();
 		$data = array(
 			'teman' => $teman,
 			'admin' => $admin,
@@ -52,8 +52,8 @@ class Ppob extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
-		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-		$admin = $this->db->where('user_id =', 3614488494)->get('users');
+		$teman = $this->user->teman($uid);
+		$admin = $this->user->admin();
 		$data = array(
 			'teman' => $teman,
 			'admin' => $admin,
@@ -78,8 +78,8 @@ class Ppob extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
-		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-		$admin = $this->db->where('user_id =', 3614488494)->get('users');
+		$teman = $this->user->teman($uid);
+		$admin = $this->user->admin();
 		$data = array(
 			'teman' => $teman,
 			'admin' => $admin,
@@ -104,8 +104,8 @@ class Ppob extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
-		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-		$admin = $this->db->where('user_id =', 3614488494)->get('users');
+		$teman = $this->user->teman($uid);
+		$admin = $this->user->admin();
 		$data = array(
 			'teman' => $teman,
 			'admin' => $admin,
@@ -130,8 +130,8 @@ class Ppob extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
-		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-		$admin = $this->db->where('user_id =', 3614488494)->get('users');
+		$teman = $this->user->teman($uid);
+		$admin = $this->user->admin();
 		$data = array(
 			'teman' => $teman,
 			'admin' => $admin,
@@ -204,6 +204,7 @@ class Ppob extends MY_Controller {
 		$Rb 		= json_decode($respon);
 		$uid = $this->auth_data->user_id;
 		$id = $row->transaction_id;
+		if(!empty($Rb)){
 		$debit       =$Rb ->SALDO_TERPOTONG;
 		$pelanggan       =$Rb ->NAMA_PELANGGAN;
 		$nominal       =$Rb ->NOMINAL;
@@ -220,6 +221,10 @@ class Ppob extends MY_Controller {
 		);
 		$this->transaction_model->insert($data);
 		}
+		else{
+		$this->load->view('errors/html/error');
+		}
+		}
 		$row = $this->transaction_model->get_by($id);
         if ($row) {
             $data = array(
@@ -235,8 +240,8 @@ class Ppob extends MY_Controller {
 			$pesan = $this->pesan_model->get_by($uid);
 			$sum= $this->pesan_model->sum($uid);
 			$sum_payment= $this->payment_model->sum($uid);
-			$data['teman'] = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-			$data['admin'] = $this->db->where('user_id =', 3614488494)->get('users');
+			$data['teman'] = $this->user->teman($uid);
+			$data['admin'] = $this->user->admin();
 			$data['pesan'] = $pesan;
 			$data['saldo'] = $this->transaction_model->up_saldo($uid);
 			$data['sum'] = $sum;
@@ -353,6 +358,7 @@ class Ppob extends MY_Controller {
 		$Rb 		= json_decode($respon);
 		$uid = $this->auth_data->user_id;
 		$id = $row->transaction_id;
+		if(!empty($Rb)){
 		$debit       =$Rb ->SALDO_TERPOTONG;
 		$pelanggan       =$Rb ->NAMA_PELANGGAN;
 		$nominal       =$Rb ->NOMINAL;
@@ -369,6 +375,10 @@ class Ppob extends MY_Controller {
 		);
 		$this->transaction_model->insert($data);
 		}
+		else{
+		$this->load->view('errors/html/error');
+		}
+		}
 		$row = $this->transaction_model->get_by($id);
         if ($row) {
             $data = array(
@@ -384,8 +394,8 @@ class Ppob extends MY_Controller {
 			$pesan = $this->pesan_model->get_by($uid);
 			$sum= $this->pesan_model->sum($uid);
 			$sum_payment= $this->payment_model->sum($uid);
-			$data['teman'] = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-			$data['admin'] = $this->db->where('user_id =', 3614488494)->get('users');
+			$data['teman'] = $this->user->teman($uid);
+			$data['admin'] = $this->user->admin();
 			$data['pesan'] = $pesan;
 			$data['saldo'] = $this->transaction_model->up_saldo($uid);
 			$data['sum'] = $sum;
@@ -397,8 +407,6 @@ class Ppob extends MY_Controller {
         $this->load->view('include/layout', $data);
 
 		}
-		$this->session->set_flashdata('message', 'Record Not Found');
-        redirect(site_url('ppob/pln'));
 		}
 
 	}
@@ -412,10 +420,10 @@ class Ppob extends MY_Controller {
         if ($row) {
             $this->pln_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('ppob/pln'));
+            redirect(site_url('payment'));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('ppob/pln'));
+            redirect(site_url('payment'));
         }
         }
     }
@@ -485,6 +493,7 @@ class Ppob extends MY_Controller {
 		$Rb 		= json_decode($respon);
 		$uid = $this->auth_data->user_id;
 		$id = $row->transaction_id;
+		if(!empty($Rb)){
 		$debit       =$Rb ->SALDO_TERPOTONG;
 		$pelanggan       =$Rb ->NAMA_PELANGGAN;
 		$nominal       =$Rb ->NOMINAL;
@@ -501,6 +510,10 @@ class Ppob extends MY_Controller {
 		);
 		$this->transaction_model->insert($data);
 		}
+		else{
+		$this->load->view('errors/html/error');
+		}
+		}
 		$row = $this->transaction_model->get_by($id);
         if ($row) {
             $data = array(
@@ -516,8 +529,8 @@ class Ppob extends MY_Controller {
 			$pesan = $this->pesan_model->get_by($uid);
 			$sum= $this->pesan_model->sum($uid);
 			$sum_payment= $this->payment_model->sum($uid);
-			$data['teman'] = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-			$data['admin'] = $this->db->where('user_id =', 3614488494)->get('users');
+			$data['teman'] = $this->user->teman($uid);
+			$data['admin'] = $this->user->admin();
 			$data['pesan'] = $pesan;
 			$data['saldo'] = $this->transaction_model->up_saldo($uid);
 			$data['sum'] = $sum;
@@ -528,8 +541,6 @@ class Ppob extends MY_Controller {
 			$data['product'] = $this->db->get_where('product', array('product_id' => $row->product_id))->row_array();
         $this->load->view('include/layout', $data);
 		}
-		$this->session->set_flashdata('message', 'Record Not Found');
-        redirect(site_url('ppob/telkom'));
 		}
 
 	}
@@ -543,10 +554,10 @@ class Ppob extends MY_Controller {
         if ($row) {
             $this->telkom_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('ppob/telkom'));
+            redirect(site_url('payment'));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('ppob/telkom'));
+            redirect(site_url('payment'));
         }
         }
     }
@@ -588,7 +599,7 @@ class Ppob extends MY_Controller {
 		$uid = $this->auth_data->user_id;
 		$idpel 		= $this->input->post("pelanggan");
 		$product_id = $this->input->post("product_id");
-		$transaction_id = $this->multifinance->kdotomatis();
+		$transaction_id = $this->multifinance_model->kdotomatis();
 		$data = array(
 			'idpel1' 	=> $idpel,
 			'product_id' 	=> $product_id,
@@ -614,6 +625,7 @@ class Ppob extends MY_Controller {
 		$Rb 		= json_decode($respon);
 		$uid = $this->auth_data->user_id;
 		$id = $row->transaction_id;
+		if(!empty($Rb)){
 		$debit       =$Rb ->SALDO_TERPOTONG;
 		$pelanggan       =$Rb ->NAMA_PELANGGAN;
 		$nominal       =$Rb ->NOMINAL;
@@ -630,6 +642,10 @@ class Ppob extends MY_Controller {
 		);
 		$this->transaction_model->insert($data);
 		}
+		else{
+		$this->load->view('errors/html/error');
+		}
+		}
 		$row = $this->transaction_model->get_by($id);
         if ($row) {
             $data = array(
@@ -645,8 +661,8 @@ class Ppob extends MY_Controller {
 			$pesan = $this->pesan_model->get_by($uid);
 			$sum= $this->pesan_model->sum($uid);
 			$sum_payment= $this->payment_model->sum($uid);
-			$data['teman'] = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-			$data['admin'] = $this->db->where('user_id =', 3614488494)->get('users');
+			$data['teman'] = $this->user->teman($uid);
+			$data['admin'] = $this->user->admin();
 			$data['pesan'] = $pesan;
 			$data['saldo'] = $this->transaction_model->up_saldo($uid);
 			$data['sum'] = $sum;
@@ -657,8 +673,6 @@ class Ppob extends MY_Controller {
 			$data['product'] = $this->db->get_where('product', array('product_id' => $row->product_id))->row_array();
         $this->load->view('include/layout', $data);
 		}
-		$this->session->set_flashdata('message', 'Record Not Found');
-        redirect(site_url('ppob/multifinance'));
 		}
 
 	}
@@ -672,10 +686,10 @@ class Ppob extends MY_Controller {
         if ($row) {
             $this->multifinance_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('ppob/multifinance'));
+            redirect(site_url('payment'));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('ppob/multifinance'));
+            redirect(site_url('payment'));
         }
         }
     }
@@ -702,10 +716,10 @@ class Ppob extends MY_Controller {
             );
             $data 		= $this->send($data);
 			$this->session->set_flashdata('message', 'Record succes');
-			redirect(site_url('ppob/multifinance'));
+			redirect(site_url('payment/payment'));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('ppob/multifinance'));
+            redirect(site_url('payment/payment'));
         }
         }
     }
@@ -743,6 +757,7 @@ class Ppob extends MY_Controller {
 		$Rb 		= json_decode($respon);
 		$uid = $this->auth_data->user_id;
 		$id = $row->transaction_id;
+		if(!empty($Rb)){
 		$debit       =$Rb ->SALDO_TERPOTONG;
 		$pelanggan       =$Rb ->NAMA_PELANGGAN;
 		$nominal       =$Rb ->NOMINAL;
@@ -759,6 +774,10 @@ class Ppob extends MY_Controller {
 		);
 		$this->transaction_model->insert($data);
 		}
+		else{
+		$this->load->view('errors/html/error');
+		}
+		}
 		$row = $this->transaction_model->get_by($id);
         if ($row) {
             $data = array(
@@ -774,8 +793,8 @@ class Ppob extends MY_Controller {
 			$pesan = $this->pesan_model->get_by($uid);
 			$sum= $this->pesan_model->sum($uid);
 			$sum_payment= $this->payment_model->sum($uid);
-			$data['teman'] = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-			$data['admin'] = $this->db->where('user_id =', 3614488494)->get('users');
+			$data['teman'] = $this->user->teman($uid);
+			$data['admin'] = $this->user->admin();
 			$data['pesan'] = $pesan;
 			$data['saldo'] = $this->transaction_model->up_saldo($uid);
 			$data['sum'] = $sum;
@@ -786,8 +805,6 @@ class Ppob extends MY_Controller {
 			$data['product'] = $this->db->get_where('product', array('product_id' => $row->product_id))->row_array();
         $this->load->view('include/layout', $data);
 		}
-		$this->session->set_flashdata('message', 'Record Not Found');
-        redirect(site_url('ppob/tv'));
 		}
 
 	}
@@ -801,10 +818,10 @@ class Ppob extends MY_Controller {
         if ($row) {
             $this->tv_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('ppob/tv'));
+            redirect(site_url('payment'));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('ppob/tv'));
+            redirect(site_url('payment'));
         }
         }
     }

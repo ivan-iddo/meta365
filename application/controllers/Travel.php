@@ -26,8 +26,8 @@ class travel extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
-		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-		$admin = $this->db->where('user_id =', 3614488494)->get('users');
+		$teman = $this->user->teman($uid);
+		$admin = $this->user->admin();
 		$data = array(
 			'teman' => $teman,
 			'admin' => $admin,
@@ -54,8 +54,8 @@ class travel extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
-		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-		$admin = $this->db->where('user_id =', 3614488494)->get('users');
+		$teman = $this->user->teman($uid);
+		$admin = $this->user->admin();
 		$data = array(
 			'teman' => $teman,
 			'admin' => $admin,
@@ -81,8 +81,8 @@ class travel extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
-		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-		$admin = $this->db->where('user_id =', 3614488494)->get('users');
+		$teman = $this->user->teman($uid);
+		$admin = $this->user->admin();
 		$data = array(
 			'teman' => $teman,
 			'admin' => $admin,
@@ -107,8 +107,8 @@ class travel extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
-		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-		$admin = $this->db->where('user_id =', 3614488494)->get('users');
+		$teman = $this->user->teman($uid);
+		$admin = $this->user->admin();
 		$data = array(
 			'teman' => $teman,
 			'admin' => $admin,
@@ -133,8 +133,8 @@ class travel extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
-		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-		$admin = $this->db->where('user_id =', 3614488494)->get('users');
+		$teman = $this->user->teman($uid);
+		$admin = $this->user->admin();
 		$data = array(
 			'teman' => $teman,
 			'admin' => $admin,
@@ -182,15 +182,16 @@ class travel extends MY_Controller {
 			'method'    =>'rajabiller.ing',
 			'uid'       =>'123',
 			'pin'       =>'230',
-			'from'       =>'from',
-			'to'       =>'to',
-			'date_go'       =>'date_go',
-			'date_back'       =>'date_back',
+			'from'       =>$row->from,
+			'to'       =>$row->to,
+			'date_go'       =>$row->date_go,
+			'date_back'       =>$row->date_back,
 			'kode_produk' => 'kai',
 			'ref1' => '',
 		);
 		$respon = $this->send($request_data);
 		$Rb 		= json_decode($respon);
+		if(!empty($Rb)){
 		$data = array(
 		'uid' => $this->auth_data->user_id,
 		'transaction_id' => $id,
@@ -217,6 +218,10 @@ class travel extends MY_Controller {
 		$data['module_name'] = "Harga KAI";
 		$this->load->view('include/layout', $data);
 		}
+		else{
+		$this->load->view('errors/html/error');
+		}
+		}
 		}
 	}
 	
@@ -238,8 +243,8 @@ class travel extends MY_Controller {
 			$pesan = $this->pesan_model->get_by($uid);
 			$sum= $this->pesan_model->sum($uid);
 			$sum_payment= $this->pesan_model->sum($uid);
-			$data['teman'] = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-			$data['admin'] = $this->db->where('user_id =', 3614488494)->get('users');
+			$data['teman'] = $this->user->teman($uid);
+			$data['admin'] = $this->user->admin();
 			$data['pesan'] = $pesan;
 			$data['saldo'] = $this->transaction_model->up_saldo($uid);
 			$data['sum'] = $sum;
@@ -271,8 +276,8 @@ class travel extends MY_Controller {
 			$pesan = $this->pesan_model->get_by($uid);
 			$sum= $this->pesan_model->sum($uid);
 			$sum_payment= $this->pesan_model->sum($uid);
-			$data['teman'] = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-			$data['admin'] = $this->db->where('user_id =', 3614488494)->get('users');
+			$data['teman'] = $this->user->teman($uid);
+			$data['admin'] = $this->user->admin();
 			$data['pesan'] = $pesan;
 			$data['saldo'] = $this->transaction_model->up_saldo($uid);
 			$data['sum_payment'] = $sum_payment;
@@ -305,8 +310,8 @@ class travel extends MY_Controller {
 			$pesan = $this->pesan_model->get_by($uid);
 			$sum= $this->pesan_model->sum($uid);
 			$sum_payment= $this->pesan_model->sum($uid);
-			$data['teman'] = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-			$data['admin'] = $this->db->where('user_id =', 3614488494)->get('users');
+			$data['teman'] = $this->user->teman($uid);
+			$data['admin'] = $this->user->admin();
 			$data['pesan'] = $pesan;
 			$data['saldo'] = $this->transaction_model->up_saldo($uid);
 			$data['sum'] = $sum;
@@ -352,15 +357,16 @@ class travel extends MY_Controller {
 			'method'    =>'rajabiller.ing',
 			'uid'       =>'123',
 			'pin'       =>'230',
-			'from'       =>'from',
-			'to'       =>'to',
-			'date_go'       =>'date_go',
-			'date_back'       =>'date_back',
+			'from'       =>$row->from,
+			'to'       =>$row->to,
+			'date_go'       =>$row->date_go
+			'date_back'       =>$row->date_back,
 			'kode_produk' => 'Pesawat',
 			'ref1' => '',
 		);
 		$respon = $this->send($request_data);
 		$Rb 		= json_decode($respon);
+		if(!empty($Rb)){
 		$data = array(
 		'uid' => $this->auth_data->user_id,
 		'transaction_id' => $id,
@@ -377,8 +383,8 @@ class travel extends MY_Controller {
 		$pesan = $this->pesan_model->get_by($uid);
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
-		$data['teman'] = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-		$data['admin'] = $this->db->where('user_id =', 3614488494)->get('users');
+		$data['teman'] = $this->user->teman($uid);
+		$data['admin'] = $this->user->admin();
         $data['pesan'] = $pesan;
         $data['saldo'] = $this->transaction_model->up_saldo($uid);
         $data['sum'] = $sum;
@@ -386,6 +392,10 @@ class travel extends MY_Controller {
 		$data['module'] = "travel/cek_pesawat";
 		$data['module_name'] = "Harga Pesawat";
 		$this->load->view('include/layout', $data);
+		}
+		else{
+		$this->load->view('errors/html/error');
+		}
 		}
 		}
 	}
@@ -416,13 +426,14 @@ class travel extends MY_Controller {
 			'method'    =>'rajabiller.ing',
 			'uid'       =>'123',
 			'pin'       =>'230',
-			'date_in'       =>'checkin',
-			'date_out'       =>'checkout',
+			'date_in'       =>$row->checkin,
+			'date_out'       =>$row->checkout,
 			'kode_produk' => 'hotel_id',
 			'ref1' => '',
 		);
 		$respon = $this->send($request_data);
 		$Rb 		= json_decode($respon);
+		if(!empty($Rb)){
 		$data = array(
 		'uid' => $this->auth_data->user_id,
 		'transaction_id' => $id,
@@ -434,8 +445,8 @@ class travel extends MY_Controller {
 		$pesan = $this->pesan_model->get_by($uid);
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
-		$data['teman'] = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-		$data['admin'] = $this->db->where('user_id =', 3614488494)->get('users');
+		$data['teman'] = $this->user->teman($uid);
+		$data['admin'] = $this->user->admin();
         $data['pesan'] = $pesan;
         $data['saldo'] = $this->transaction_model->up_saldo($uid);
         $data['sum'] = $sum;
@@ -443,6 +454,10 @@ class travel extends MY_Controller {
 		$data['module'] = "travel/cek_hotel";
 		$data['module_name'] = "Harga Hotel";
 		$this->load->view('include/layout', $data);
+		}
+		else{
+		$this->load->view('errors/html/error');
+		}
 		}
 		}
 	}

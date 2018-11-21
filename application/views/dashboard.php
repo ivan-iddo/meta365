@@ -16,13 +16,13 @@
               </button>
               <div class="btn-group btn-group-toggle float-right mr-3" data-toggle="buttons">
                 <label class="btn btn-outline-secondary">
-                  <input id="option1" value="option1" type="radio" name="options" autocomplete="off"> Day
+                  <input id="option1" value="Day" type="radio" name="options" autocomplete="off"> Day
                 </label>
                 <label class="btn btn-outline-secondary">
-                  <input id="option2" value="option2" type="radio" name="options" autocomplete="off"> Month
+                  <input id="option2" value="Month" type="radio" name="options" autocomplete="off"> Month
                 </label>
                 <label class="btn btn-outline-secondary active">
-                  <input id="option3" value="option3" type="radio" name="options" autocomplete="off"> Year
+                  <input id="option3" value="Year" type="radio" name="options" autocomplete="off"> Year
                 </label>
               </div>
             </div>

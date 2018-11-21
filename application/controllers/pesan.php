@@ -16,8 +16,8 @@ class pesan extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
-		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-		$admin = $this->db->where('user_id =', 3614488494)->get('users');
+		$teman = $this->user->teman($uid);
+		$admin = $this->user->admin();
 		$data = array(
 			'teman' => $teman,
 			'admin' => $admin,
@@ -43,8 +43,8 @@ class pesan extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
-		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-		$admin = $this->db->where('user_id =', 3614488494)->get('users');
+		$teman = $this->user->teman($uid);
+		$admin = $this->user->admin();
 		$data = array(
 			'teman' => $teman,
 			'admin' => $admin,

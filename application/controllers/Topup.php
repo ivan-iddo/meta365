@@ -15,8 +15,8 @@ class Topup extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
-		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-		$admin = $this->db->where('user_id =', 3614488494)->get('users');
+		$teman = $this->user->teman($uid);
+		$admin = $this->user->admin();
 		$data = array(
 			'teman' => $teman,
 			'admin' => $admin,
@@ -71,8 +71,8 @@ class Topup extends MY_Controller {
 		$payment_sudah= $this->payment_model->get_by_sudah($uid);
 		$status= $this->payment_model->status($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
-		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-		$admin = $this->db->where('user_id =', 3614488494)->get('users');
+		$teman = $this->user->teman($uid);
+		$admin = $this->user->admin();
 		$data = array(
 			'teman' => $teman,
 			'admin' => $admin,
@@ -128,8 +128,8 @@ class Topup extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
-		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-		$admin = $this->db->where('user_id =', 3614488494)->get('users');
+		$teman = $this->user->teman($uid);
+		$admin = $this->user->admin();
 		$data = array(
 			'teman' => $teman,
 			'admin' => $admin,
@@ -174,8 +174,8 @@ class Topup extends MY_Controller {
 			$pesan = $this->pesan_model->get_by($uid);
 			$sum= $this->pesan_model->sum($uid);
 			$sum_payment= $this->payment_model->sum($uid);
-			$data['teman'] = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-			$data['admin'] = $this->db->where('user_id =', 3614488494)->get('users');
+			$data['teman'] = $this->user->teman($uid);
+			$data['admin'] = $this->user->admin();
 			$data['pesan'] = $pesan;
 			$data['sum'] = $sum;
 			$data['sum_payment'] = $sum_payment;

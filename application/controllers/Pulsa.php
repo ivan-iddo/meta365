@@ -16,8 +16,8 @@ class Pulsa extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
-		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-		$admin = $this->db->where('user_id =', 3614488494)->get('users');
+		$teman = $this->user->teman($uid);
+		$admin = $this->user->admin();
 		$data = array(
 			'teman' => $teman,
 			'admin' => $admin,
@@ -56,8 +56,8 @@ class Pulsa extends MY_Controller {
                 'phone' => $row->phone,
                 'transaction_id' => $row->transaction_id,
             );
-			$data['teman'] = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-			$data['admin'] = $this->db->where('user_id =', 3614488494)->get('users');
+			$data['teman'] = $this->user->teman($uid);
+			$data['admin'] = $this->user->admin();
 			$data['pesan'] = $this->pesan_model->get_by($uid);
 			$data['sum']= $this->pesan_model->sum($uid);
 			$data['sum_payment']= $this->payment_model->sum($uid);
@@ -112,9 +112,10 @@ class Pulsa extends MY_Controller {
 		);
 		$respon = $this->send($request_data);
 		$Rb 		= json_decode($respon);
-		$id = $row->transaction_id;
-		$debit       =$Rb ->SALDO_TERPOTONG;
 		$uid = $this->auth_data->user_id;
+		$id = $row->transaction_id;
+		if(!empty($Rb)){
+		$debit       =$Rb ->SALDO_TERPOTONG;
 		$data = array(
 		'product_id'       =>$Rb ->KODE_PRODUK,
 		'transaction_id'       =>$id,
@@ -127,6 +128,10 @@ class Pulsa extends MY_Controller {
 		$this->transaction_model->insert($data);
 		$this->session->set_flashdata('message', 'succes Record Success');
 		redirect(site_url('pulsa'));
+		}
+		else{
+		$this->load->view('errors/html/error');
+		}
 		}
 		}
 	}

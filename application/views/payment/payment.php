@@ -27,11 +27,10 @@
 								<th class="text-center">
 								  No.
 								</th>
-								<th>TRX ID</th>
+								<th>Product</th>
 								<th>Date</th>
 								<th>Username</th>
-								<th>Debit</th>
-								<th>Status</th>
+								<th>Nominal</th>
 								<th>Actions</th>
 							  </tr>
 							</thead>
@@ -47,16 +46,29 @@
 							 ?>
 							 <tr>
 							   <td><?php echo ++$no ?>.</td>
-							   <td><?php echo $payment->transaction_id ?></td>
+							   <td><?php echo $payment->product ?></td>
 							   <td><?php echo $payment->date_transaction ?></td>
 							   <td><?php echo $payment->username ?></td>
-							   <td>Rp. <?php echo number_format($payment->debit , 0, ',', '.') ?></td>
-							   <td><?php echo $payment->status ?></td>
-							   <td><?php echo $payment->status ?></td>
+							   <?php
+							   if(!empty($payment->nominal)){
+								   echo"<td>Rp. ".number_format($payment->nominal , 0, ',', '.')."</td>";
+								}else{
+									echo"<td>0</td>";
+								}
+							   ?>
+							   <td>
+								<a class="btn btn-info" title="Lanjutkan Checkout" href="<?=base_url().'ppob/checkout_pln/'.$payment->transaction_id;?>/<?php echo $payment->uid;?>">
+								Checkout
+								</a>
+								</a>
+								<a class="btn btn-danger" title="Click Untuk Menghapus Akun" href="<?=base_url().'ppob/delete_pln/'.$payment->transaction_id;?>" onclick="return confirm('Apakah Anda yakin akan menghapus ? <?php echo $payment->transaction_id;?>')">
+								  <i class="fa fa-trash-o"></i>
+								</a>
+							  </td>
 							 </tr>
 							 <?php
 							}}else{
-							echo "<tr><td class='text-center' colspan='7'>Data tidak ada</td></tr>";
+							echo "<tr><td class='text-center' colspan='6'>Data tidak ada</td></tr>";
 							}
 							 ?>
 							</tbody>

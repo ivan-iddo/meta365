@@ -17,8 +17,8 @@ class Gamevoucher extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
-		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-		$admin = $this->db->where('user_id =', 3614488494)->get('users');
+		$teman = $this->user->teman($uid);
+		$admin = $this->user->admin();
 		$data = array(
 			'teman' => $teman,
 			'admin' => $admin,
@@ -66,8 +66,8 @@ class Gamevoucher extends MY_Controller {
                 'phone' => $row->phone,
                 'transaction_id' => $row->transaction_id,
             );
-			$data['teman'] = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-			$data['admin'] = $this->db->where('user_id =', 3614488494)->get('users');
+			$data['teman'] = $this->user->teman($uid);
+			$data['admin'] = $this->user->admin();
 			$data['pesan'] = $this->pesan_model->get_by($uid);
 			$data['sum']= $this->pesan_model->sum($uid);
 			$data['sum_payment']= $this->payment_model->sum($uid);
@@ -100,10 +100,9 @@ class Gamevoucher extends MY_Controller {
         }
     }
 	
-    public function checkout_game() {
+    public function checkout_game($id) {
 	if( $this->require_role('admin, user, businesspartner, menager') )
 	{
-	$id=$this->input->post("id");
 	$row = $this->game_model->get_by($id);
 	if ($row) {
     $request_data = array(
@@ -118,6 +117,7 @@ class Gamevoucher extends MY_Controller {
 	$Rb 		= json_decode($respon);
 	$uid = $this->auth_data->user_id;
 	$id = $row->transaction_id;
+	if(!empty($Rb)){
 	$debit       =$Rb ->SALDO_TERPOTONG;
 	$data = array(
 	'product_id'       =>$Rb ->KODE_PRODUK,
@@ -132,6 +132,10 @@ class Gamevoucher extends MY_Controller {
 	$this->session->set_flashdata('message', 'succes Record Success');
     redirect(site_url('gamevoucher'));
     }
+	else{
+	$this->load->view('errors/html/error');
+	}
+	}
     }
 	}
 	

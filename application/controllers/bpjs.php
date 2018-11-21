@@ -15,8 +15,8 @@ class Bpjs extends MY_Controller {
 		$sum= $this->pesan_model->sum($uid);
 		$sum_payment= $this->payment_model->sum($uid);
 		$saldo = $this->transaction_model->up_saldo($uid);
-		$teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-		$admin = $this->db->where('user_id =', 3614488494)->get('users');
+		$teman = $this->user->teman($uid);
+		$admin = $this->user->admin();
 		$data = array(
 			'teman' => $teman,
 			'admin' => $admin,
@@ -66,6 +66,7 @@ class Bpjs extends MY_Controller {
 		$Rb 		= json_decode($respon);
 		$uid = $this->auth_data->user_id;
 		$id = $row->transaction_id;
+		if(!empty($Rb)){
 		$debit       =$Rb ->SALDO_TERPOTONG;
 		$pelanggan       =$Rb ->NAMA_PELANGGAN;
 		$nominal       =$Rb ->NOMINAL;
@@ -82,6 +83,10 @@ class Bpjs extends MY_Controller {
 		);
 		$this->transaction_model->insert($data);
 		}
+		else{
+		$this->load->view('errors/html/error');
+		}
+		}
 		$row = $this->transaction_model->get_by($id);
         if ($row) {
             $data = array(
@@ -97,8 +102,8 @@ class Bpjs extends MY_Controller {
 			$pesan = $this->pesan_model->get_by($uid);
 			$sum= $this->pesan_model->sum($uid);
 			$sum_payment= $this->payment_model->sum($uid);
-			$data['teman'] = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-			$data['admin'] = $this->db->where('user_id =', 3614488494)->get('users');
+			$data['teman'] = $this->user->teman($uid);
+			$data['admin'] = $this->user->admin();
 			$data['pesan'] = $pesan;
 			$data['saldo'] = $this->transaction_model->up_saldo($uid);
 			$data['sum'] = $sum;
@@ -108,9 +113,7 @@ class Bpjs extends MY_Controller {
 			$data['action'] = "checkout_tv";
 			$data['product'] = $this->db->get_where('product', array('product_id' => $row->product_id))->row_array();
         $this->load->view('include/layout', $data);
-		}
-		$this->session->set_flashdata('message', 'Record Not Found');
-        redirect(site_url('bpjs'));
+		}		
 		}
 
 	}
