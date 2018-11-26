@@ -12,28 +12,41 @@
       <span class="navbar-toggler-icon"></span>
     </button>
    <ul class="nav navbar-nav ml-auto">
-		<?php if($auth_role=='admin'):?>
-	    <ul class="nav navbar-nav ml-auto">
+	 <?php if($auth_role=='admin'):?>
       <li class="nav-item dropdown d-md-down-none">
         <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
           <i class="icon-envelope-letter"></i>
           <span class="badge badge-pill badge-info"><?php echo $sum ?></span>
         </a>
-        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
-          <div class="dropdown-header text-center">
-            <strong>Messages</strong>
-          </div>
-		  <?php foreach ($teman->result() as $item) { ?>
-          <a class="dropdown-item" href="javascript:;" data-friend="<?= $item->user_id ?>"><?= $item->username ?>
-            <small class="text-muted float-right mt-1">Today, 3:47 PM</small>
-			<div class="message">
-              <div class="fa fa-user-circle font-weight-bold"> <?php echo $item->username ?></div>
+		    <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
+            <div class="dropdown-header text-center">
+              <strong>You have <?php echo $sum ?> messages</strong>
             </div>
-          </a>
-		  <?php
+			<div data-spy="scroll" data-offset="0" style="height: 300px; overflow: auto">
+			<?php foreach ($pesan as $pesan) { ?>
+            <a class="dropdown-item" href="javascript:;" data-friend="<?= $pesan->user_id ?>">
+              <div class="message">
+                <div class="py-1 mr-1 float-left">
+                  <div class="avatar">
+                    <img class="img-avatar" src="<?= base_url('assets/icon/avatar.png') ?>">
+                    <span class="avatar-status badge-success"></span>
+                  </div>
+                </div>
+                <div>
+                  <small class="text-muted float-right mt-1"><?php echo $pesan->time ?></small>
+                </div>
+                <div class="text-truncate font-weight-bold"><?php echo $pesan->username ?></div>
+                <div class="small text-muted text-truncate"><?php echo $pesan->message ?></div>
+              </div>
+            </a>
+			<?php
 			}
-		   ?>
-        </div>
+			?>
+			</div>
+            <a class="dropdown-item text-center" href="<?=base_url().'pesan';?>">
+              <strong>View all messages</strong>
+            </a>
+          </div>
       </li>
 	<?php endif;?>
 	<?php if($auth_role=='menager'|$auth_role=='user'|$auth_role=='businesspartner'):?>

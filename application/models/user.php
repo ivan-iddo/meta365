@@ -15,9 +15,9 @@ class user extends CI_model{
 	
 	public function teman($uid)
 	{
-		$query=$this->db->where('user_id !=', $uid)->get($this->table);
-		return $query;
-	}	
+		$query = $this->db->query("SELECT username,user_id,count(*) AS jumlah FROM users left join chat on users.user_id = chat.send_by GROUP BY user_id");
+		return $query->result();
+	}
 	
 	public function admin()
 	{

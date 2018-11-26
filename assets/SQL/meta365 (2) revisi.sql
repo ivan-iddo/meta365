@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2018 at 06:39 AM
+-- Generation Time: Nov 26, 2018 at 07:09 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.4
 
@@ -77,7 +77,9 @@ CREATE TABLE `auth_sessions` (
 --
 
 INSERT INTO `auth_sessions` (`id`, `user_id`, `login_time`, `modified_at`, `ip_address`, `user_agent`) VALUES
-('4r53f4bg7fdmjor0rqglr5g7gom41t03', 1380392804, '2018-11-14 05:47:56', '2018-11-14 04:59:50', '::1', 'Chrome 55.0.2883.87 on Windows 7');
+('iijldva1q3oppshbo958bo0lm4n9i6vk', 3614488494, '2018-11-23 18:43:58', '2018-11-23 17:43:58', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('9tc3jdkeo04c05dlmcfrhlobd61up3g8', 3614488494, '2018-11-25 17:38:11', '2018-11-25 17:07:58', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
+('c38amodek3d1cqad5no3viairgcre9pp', 3614488494, '2018-11-26 11:49:03', '2018-11-26 18:03:12', '::1', 'Chrome 55.0.2883.87 on Windows 7');
 
 -- --------------------------------------------------------
 
@@ -117,18 +119,19 @@ CREATE TABLE `chat` (
   `send_by` varchar(20) NOT NULL,
   `message` tinytext NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `chat_id` int(11) NOT NULL
+  `chat_id` int(11) NOT NULL,
+  `status` enum('Belum','Sudah') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `chat`
 --
 
-INSERT INTO `chat` (`send_to`, `send_by`, `message`, `time`, `chat_id`) VALUES
-('3614488494', '2147484848', 'aaa', '2018-11-13 09:32:00', 10),
-('2147484848', '3614488494', 'ssasd', '2018-11-13 09:36:06', 12),
-('3614488494', '2147484848', 'aa', '2018-11-14 04:47:38', 17),
-('3614488494', '1380392804', 'Hay admin, tolong update topup saya.', '2018-11-14 04:48:44', 18);
+INSERT INTO `chat` (`send_to`, `send_by`, `message`, `time`, `chat_id`, `status`) VALUES
+('3614488494', '2147484848', 'aaa', '2018-11-13 09:32:00', 10, 'Belum'),
+('2147484848', '3614488494', 'ssasd', '2018-11-13 09:36:06', 12, 'Belum'),
+('3614488494', '2147484848', 'aa', '2018-11-14 04:47:38', 17, 'Belum'),
+('3614488494', '1380392804', 'Hay admin, tolong update topup saya.', '2018-11-14 04:48:44', 18, 'Belum');
 
 -- --------------------------------------------------------
 
@@ -1078,13 +1081,13 @@ INSERT INTO `users` (`user_id`, `username`, `email`, `auth_level`, `banned`, `pa
 (286110552, 'palembang', 'palembang@gmail.com', 1, '0', '$2y$11$XlgJq4jfZWYoo2Y720iffOz.TG3b4Opf7i1IEiv8ZNZ1NkoNGs3/C', NULL, NULL, NULL, '2018-11-13 10:30:56', '2018-11-02 01:13:15', '2018-11-13 09:30:56'),
 (608603457, 'bandung', 'bandung@gmail.com', 4, '1', '$2y$11$/0FmwEX1jrNbRxD4vMhMfeanjRsNsNqSLvdZG8M5AuVUEQVgm1Bmu', NULL, NULL, NULL, '2018-11-06 00:03:36', '2018-11-02 01:10:48', '2018-11-06 00:04:00'),
 (730510257, 'bangsa', 'bangsa@gmail.com', 9, '0', '$2y$11$BYQHui/8kHtRyQav5keEfeZ9odSJpyLFLurQELlPgauuJTsWd9WOO', NULL, NULL, NULL, '2018-11-02 22:21:13', '2018-10-24 02:25:05', '2018-11-02 21:21:13'),
-(825648341, 'didanurwanda', 'eko@gmail.com', 5, '1', '$2y$11$ed2It3kgGbwnTcpFBjN1UeJcukHVvrVbeO2ng2CQ76ENXghvr2GFO', NULL, NULL, NULL, NULL, '2018-11-13 13:57:29', '2018-11-13 12:57:29'),
+(825648341, 'didanurwa', 'eko@gmail.com', 5, '1', '$2y$11$ed2It3kgGbwnTcpFBjN1UeJcukHVvrVbeO2ng2CQ76ENXghvr2GFO', NULL, NULL, NULL, NULL, '2018-11-13 13:57:29', '2018-11-26 15:25:37'),
 (928802434, 'Andi', 'Andi@gmail.com', 5, '1', '$2y$11$VT2Ft6/1pZUeoB9bd2g.c.xX6S5O.3pEvofpkrffuMoUN9qD7BXe.', NULL, NULL, NULL, NULL, '2018-11-09 11:09:32', '2018-11-09 10:09:32'),
 (1301294496, 'kota', 'kota@gmail.com', 1, '0', '$2y$11$f4W.4R9MT1qHAVXj.PHJOe7TdjoNEQX9H70kgsBdsFnExnvsd.HFW', '$2y$11$8FZUTkupqHQCEcvBACxNH.chZ0Jjrfg7PedOzCSon2Fmgwcc36dQu', '2018-11-06 10:15:05', '2018-11-06 12:13:42', '2018-11-11 17:30:27', '2018-11-02 01:14:24', '2018-11-11 16:30:27'),
 (1380392804, 'menager', 'menager@gmail.com', 8, '0', '$2y$11$ofLgJFxGu3PwbFQiv2.txOTtcN.GAQYMZrXoaYaNk8H42JzGLFvNy', NULL, NULL, NULL, '2018-11-14 05:47:56', '2018-11-02 01:12:34', '2018-11-14 04:47:56'),
 (1729583169, 'ivan', 'ivan@meta365.com', 6, '0', '$2y$11$X0NMge6rqfG4X1Ed2T/Nkuml3duriW8nlLWy6ja7DyIPuQmwoAtNS', NULL, NULL, NULL, '2018-10-16 20:42:51', '2018-10-16 20:42:39', '2018-10-16 20:42:51'),
-(2147484848, 'kebangsaan', 'Kebangsaan@gmail.com', 1, '0', '$2y$11$dW56TEdtK/KJZqQm.dpZf.qQK6vUr4CXtlaakmSYijzcYt0nlGhvq', NULL, NULL, NULL, '2018-11-14 05:47:26', '2018-10-24 02:23:48', '2018-11-14 04:47:26'),
-(3614488494, 'admin', 'admin@meta365.com', 6, '0', '$2y$11$OUHGkJK4rxU/XDjUb7YTEeRRWeYreFvADm28bvCjIdMAcArHEczG6', NULL, NULL, NULL, '2018-11-14 04:36:01', '2018-10-16 10:35:31', '2018-11-14 03:36:01');
+(2147484848, 'kebangsaan', 'Kebangsaan@gmail.com', 1, '0', '$2y$11$dW56TEdtK/KJZqQm.dpZf.qQK6vUr4CXtlaakmSYijzcYt0nlGhvq', NULL, NULL, NULL, '2018-11-23 18:43:17', '2018-10-24 02:23:48', '2018-11-23 17:43:17'),
+(3614488494, 'admin', 'admin@meta365.com', 6, '0', '$2y$11$OUHGkJK4rxU/XDjUb7YTEeRRWeYreFvADm28bvCjIdMAcArHEczG6', NULL, NULL, NULL, '2018-11-26 11:49:03', '2018-10-16 10:35:31', '2018-11-26 10:49:03');
 
 --
 -- Triggers `users`
@@ -1362,3 +1365,4 @@ ALTER TABLE `acl_actions`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+

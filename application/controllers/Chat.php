@@ -11,17 +11,6 @@ class Chat extends MY_Controller {
 		}
     }
 
-    public function index()
-    {
-		if( $this->require_role('admin, user, businesspartner, menager') )
-		{
-        $teman = $this->db->where('user_id !=', $this->auth_data->user_id)->get('users');
-        $this->load->view('chat_dashboard', array(
-            'teman' => $teman
-        ));
-		}
-    }
-
     public function getChats()
     {
         header('Content-Type: application/json');
