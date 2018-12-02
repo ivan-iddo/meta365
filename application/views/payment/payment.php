@@ -60,7 +60,6 @@
 								<a class="btn btn-info" title="Lanjutkan Checkout" href="<?=base_url().'ppob/checkout_pln/'.$payment->transaction_id;?>/<?php echo $payment->uid;?>">
 								Checkout
 								</a>
-								</a>
 								<a class="btn btn-danger" title="Click Untuk Menghapus Akun" href="<?=base_url().'ppob/delete_pln/'.$payment->transaction_id;?>" onclick="return confirm('Apakah Anda yakin akan menghapus ? <?php echo $payment->transaction_id;?>')">
 								  <i class="fa fa-trash-o"></i>
 								</a>

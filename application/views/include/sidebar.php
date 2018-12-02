@@ -19,6 +19,11 @@
         </a>
       </li>
 	  <li class="nav-item">
+        <a class="nav-link" href="<?=base_url().'product';?>">
+          <i class="nav-icon icon-list"></i> Product
+        </a>
+      </li>
+	  <li class="nav-item">
         <a class="nav-link" href="<?=base_url().'topup/konfirmasi';?>">
           <i class="nav-icon">$</i> Konfirmasi Topup
         </a>

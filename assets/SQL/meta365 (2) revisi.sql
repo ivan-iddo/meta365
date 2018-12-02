@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2018 at 07:09 PM
+-- Generation Time: Dec 02, 2018 at 05:22 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.4
 
@@ -77,9 +77,7 @@ CREATE TABLE `auth_sessions` (
 --
 
 INSERT INTO `auth_sessions` (`id`, `user_id`, `login_time`, `modified_at`, `ip_address`, `user_agent`) VALUES
-('iijldva1q3oppshbo958bo0lm4n9i6vk', 3614488494, '2018-11-23 18:43:58', '2018-11-23 17:43:58', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('9tc3jdkeo04c05dlmcfrhlobd61up3g8', 3614488494, '2018-11-25 17:38:11', '2018-11-25 17:07:58', '::1', 'Chrome 55.0.2883.87 on Windows 7'),
-('c38amodek3d1cqad5no3viairgcre9pp', 3614488494, '2018-11-26 11:49:03', '2018-11-26 18:03:12', '::1', 'Chrome 55.0.2883.87 on Windows 7');
+('ivu8gmldjo9vum2h7bqbcjri5vkre8qu', 1380392804, '2018-12-02 09:15:38', '2018-12-02 08:15:38', '::1', 'Chrome 55.0.2883.87 on Windows 7');
 
 -- --------------------------------------------------------
 
@@ -128,10 +126,10 @@ CREATE TABLE `chat` (
 --
 
 INSERT INTO `chat` (`send_to`, `send_by`, `message`, `time`, `chat_id`, `status`) VALUES
-('3614488494', '2147484848', 'aaa', '2018-11-13 09:32:00', 10, 'Belum'),
-('2147484848', '3614488494', 'ssasd', '2018-11-13 09:36:06', 12, 'Belum'),
-('3614488494', '2147484848', 'aa', '2018-11-14 04:47:38', 17, 'Belum'),
-('3614488494', '1380392804', 'Hay admin, tolong update topup saya.', '2018-11-14 04:48:44', 18, 'Belum');
+('3614488494', '2147484848', 'aaa', '2018-11-28 16:42:44', 10, 'Belum'),
+('2147484848', '3614488494', 'ssasd', '2018-11-28 16:28:56', 12, 'Sudah'),
+('3614488494', '2147484848', 'aa', '2018-11-28 16:28:56', 17, 'Sudah'),
+('3614488494', '1380392804', 'Hay admin, tolong update topup saya.', '2018-11-28 16:46:01', 18, 'Belum');
 
 -- --------------------------------------------------------
 
@@ -296,8 +294,7 @@ CREATE TABLE `login_errors` (
 --
 
 INSERT INTO `login_errors` (`ai`, `username_or_email`, `ip_address`, `time`) VALUES
-(67, 'didanurwanda', '::1', '2018-11-13 13:57:57'),
-(66, '', '::1', '2018-11-13 13:55:32');
+(68, 'chvbv', '::1', '2018-11-29 16:50:37');
 
 -- --------------------------------------------------------
 
@@ -529,7 +526,8 @@ INSERT INTO `pricelist` (`pricelist_id`, `product_id`, `price_buy`, `price_sell`
 (21, 'T20H', '19650', '21000'),
 (22, 'T25H', '24700', '25000'),
 (23, 'T30H', '29600', '31000'),
-(24, 'T50H', '49300', '50500');
+(24, 'T50H', '49300', '50500'),
+(25, 'aa', '20000', '23000');
 
 -- --------------------------------------------------------
 
@@ -549,6 +547,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `product_type`, `product`, `product_name`) VALUES
+('aa', 'scxs', 'Wddsaaa', 'zzZ'),
 ('ABR', 'Bandung', 'stasiun', 'Ambarawa'),
 ('ADIRA', 'MULTIFINANCE ADIRA FINANCE', 'Multifinance', 'ADIRA FINANCE'),
 ('AGUH', 'AXIS', 'PULSA', 'Internet Unlimited 30 Hari (Paket Data)'),
@@ -1084,10 +1083,10 @@ INSERT INTO `users` (`user_id`, `username`, `email`, `auth_level`, `banned`, `pa
 (825648341, 'didanurwa', 'eko@gmail.com', 5, '1', '$2y$11$ed2It3kgGbwnTcpFBjN1UeJcukHVvrVbeO2ng2CQ76ENXghvr2GFO', NULL, NULL, NULL, NULL, '2018-11-13 13:57:29', '2018-11-26 15:25:37'),
 (928802434, 'Andi', 'Andi@gmail.com', 5, '1', '$2y$11$VT2Ft6/1pZUeoB9bd2g.c.xX6S5O.3pEvofpkrffuMoUN9qD7BXe.', NULL, NULL, NULL, NULL, '2018-11-09 11:09:32', '2018-11-09 10:09:32'),
 (1301294496, 'kota', 'kota@gmail.com', 1, '0', '$2y$11$f4W.4R9MT1qHAVXj.PHJOe7TdjoNEQX9H70kgsBdsFnExnvsd.HFW', '$2y$11$8FZUTkupqHQCEcvBACxNH.chZ0Jjrfg7PedOzCSon2Fmgwcc36dQu', '2018-11-06 10:15:05', '2018-11-06 12:13:42', '2018-11-11 17:30:27', '2018-11-02 01:14:24', '2018-11-11 16:30:27'),
-(1380392804, 'menager', 'menager@gmail.com', 8, '0', '$2y$11$ofLgJFxGu3PwbFQiv2.txOTtcN.GAQYMZrXoaYaNk8H42JzGLFvNy', NULL, NULL, NULL, '2018-11-14 05:47:56', '2018-11-02 01:12:34', '2018-11-14 04:47:56'),
+(1380392804, 'menager', 'menager@gmail.com', 8, '0', '$2y$11$ofLgJFxGu3PwbFQiv2.txOTtcN.GAQYMZrXoaYaNk8H42JzGLFvNy', NULL, NULL, NULL, '2018-12-02 09:15:38', '2018-11-02 01:12:34', '2018-12-02 08:15:38'),
 (1729583169, 'ivan', 'ivan@meta365.com', 6, '0', '$2y$11$X0NMge6rqfG4X1Ed2T/Nkuml3duriW8nlLWy6ja7DyIPuQmwoAtNS', NULL, NULL, NULL, '2018-10-16 20:42:51', '2018-10-16 20:42:39', '2018-10-16 20:42:51'),
 (2147484848, 'kebangsaan', 'Kebangsaan@gmail.com', 1, '0', '$2y$11$dW56TEdtK/KJZqQm.dpZf.qQK6vUr4CXtlaakmSYijzcYt0nlGhvq', NULL, NULL, NULL, '2018-11-23 18:43:17', '2018-10-24 02:23:48', '2018-11-23 17:43:17'),
-(3614488494, 'admin', 'admin@meta365.com', 6, '0', '$2y$11$OUHGkJK4rxU/XDjUb7YTEeRRWeYreFvADm28bvCjIdMAcArHEczG6', NULL, NULL, NULL, '2018-11-26 11:49:03', '2018-10-16 10:35:31', '2018-11-26 10:49:03');
+(3614488494, 'admin', 'admin@meta365.com', 6, '0', '$2y$11$OUHGkJK4rxU/XDjUb7YTEeRRWeYreFvADm28bvCjIdMAcArHEczG6', NULL, NULL, NULL, '2018-12-02 09:12:35', '2018-10-16 10:35:31', '2018-12-02 08:12:35');
 
 --
 -- Triggers `users`
@@ -1319,7 +1318,7 @@ ALTER TABLE `ips_on_hold`
 -- AUTO_INCREMENT for table `login_errors`
 --
 ALTER TABLE `login_errors`
-  MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 --
 -- AUTO_INCREMENT for table `nominal`
 --
@@ -1339,7 +1338,7 @@ ALTER TABLE `pesan`
 -- AUTO_INCREMENT for table `pricelist`
 --
 ALTER TABLE `pricelist`
-  MODIFY `pricelist_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `pricelist_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `username_or_email_on_hold`
 --
@@ -1365,4 +1364,3 @@ ALTER TABLE `acl_actions`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-

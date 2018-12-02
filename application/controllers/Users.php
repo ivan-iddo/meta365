@@ -464,7 +464,7 @@ class Users extends MY_Controller {
         redirect(site_url('users'));
     }
 
-	   public function delete($id) {
+	public function delete($id) {
 		if( $this->require_role('admin') )
 		{
         $row = $this->user->get_by($id);
