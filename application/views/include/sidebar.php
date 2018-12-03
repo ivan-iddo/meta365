@@ -6,7 +6,6 @@
           <i class="nav-icon icon-speedometer"></i> Dashboard
         </a>
       </li>
-      <!-- contoh menu admin buat yadi -->
       <?php if($auth_role=='admin'):?>
       <li class="nav-item">
         <a class="nav-link" href="<?=base_url().'users';?>">
@@ -29,9 +28,6 @@
         </a>
       </li>
       <?php endif;?>
-      <!-- end contoh buat yadi -->
-
-      <!-- contoh menu manager buat yadi -->
       <?php if($auth_role=='menager'):?>
       <li class="nav-item">
         <a class="nav-link" href="<?=base_url().'Profit';?>">
@@ -39,7 +35,6 @@
         </a>
       </li>
       <?php endif;?>
-      <!-- end contoh buat yadi -->
       <li class="nav-title">Product</li>
       <li class="nav-item">
         <a class="nav-link" href="<?=base_url().'pulsa';?>">
