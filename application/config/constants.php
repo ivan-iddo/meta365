@@ -83,3 +83,14 @@ defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+/*
+|--------------------------------------------------------------------------
+| API Parameter
+|--------------------------------------------------------------------------
+|
+*/
+defined('API_URL')  OR  define('API_URL', 'https://202.43.173.234/transaksi/json.php');
+defined('PROVIDER')  OR  define('PROVIDER', 'rajabiller');
+defined('UID')  OR  define('UID', 'SP133517');
+defined('PIN')  OR  define('PIN', '641666');

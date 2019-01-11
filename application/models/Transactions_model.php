@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Topup_model extends CI_Model
+class Transactions_model extends CI_Model
 
 {
 
@@ -52,7 +52,8 @@ class Topup_model extends CI_Model
       }
     }
 
-    $this->db->order_by('created_at', 'DESC');
+    $this->db->order_by('updated_at', 'DESC');
+    $this->db->order_by('id', 'DESC');
     $this->db->limit(1);
 
     $query = $this->db->get("transactions");
@@ -60,9 +61,48 @@ class Topup_model extends CI_Model
     return $query->result_array();
   }
 
+  // --------------------------------------------------------------
+
+  /**
+   * Get an unused ID for user creation
+   *
+   * @return  int between 50 and 500
+   */
+  public function get_unused_code()
+  {
+      // Create a random user id between 50 and 500
+      $random_unique_int = mt_rand( 50, 500 );
+
+      // Make sure the random user_id isn't already in use
+      $this->db->where( 'amount', $random_unique_int );
+      $this->db->where( 'type', 'COD' );
+      $this->db->where( 'status', '!=SUCCESS' );
+      $query = $this->db->get('transactions');
+
+      if( $query->num_rows() > 0 )
+      {
+          $query->free_result();
+
+          // If the random user_id is already in use, try again
+          return $this->get_unused_code();
+      }
+
+      return $random_unique_int;
+  }
+
+
   public function insert($data){
 
-    if($this->db->insert('transaction',$data)){    
+    if($this->db->insert('transactions',$data)){    
+      return 'Data is inserted successfully';
+    }else{
+      return "Error has occured";
+    }
+  }
+
+  public function insert_batch($data){
+
+    if($this->db->insert_batch('transactions',$data)){    
       return 'Data is inserted successfully';
     }else{
       return "Error has occured";
@@ -70,8 +110,17 @@ class Topup_model extends CI_Model
   }
 
   public function update($data){
-    $this->db->where('trx_id', $data['trx_id']);
+    $this->db->where('id', $data['id']);
     if($this->db->update('transactions', $data)){    
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+  }
+
+  public function update_batch($data){
+    $this->db->where('trx_id', $data['trx_id']);
+    if($this->db->update_batch('transactions', $data)){    
       return TRUE;
     }else{
       return FALSE;

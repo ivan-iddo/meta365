@@ -1,4 +1,3 @@
-
 <main class="main">
   <?php $this->load->view('include/breadcrumb');?>
   <div class="container-fluid">
@@ -7,7 +6,7 @@
         <div class="card-body">
           <div class="row">
           <div class="col-sm-6 col-lg-10">
-            <h3>Topup History</h3>
+            <h3>Transaction History</h3>
           </div>
         </div>
         </div>
@@ -17,24 +16,24 @@
           <table class="table table-striped table-bordered datatable">
             <thead>
               <tr>
-                <th>Trx ID</th>
-                <th>Info</th>
-                <th>Date</th>
-                <th>Amount</th>
-                <th>Code</th>
-                <th>Total</th>
+                <th>Product Code</th>
+                <th>Product Name</th>
+                <th>Type</th>
+                <th>HPP</th>
+                <th>Admin</th>
+                <th>Fee</th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody>
               <?php foreach ($transactions as $key => $value):?>
                   <tr>
-                    <td><a href="<?=base_url().'transactions/detail/'.$value['trx_id'];?>"><?=$value['trx_id'];?></a></td>
+                    <td><a href="<?=base_url().'transactions/detail/'.$value['code'];?>"><?=$value['code'];?></a></td>
                     <td><?=$value['info'];?></td>
-                    <td><?=$value['created_at'];?></td>
-                    <td style="text-align:right;"><?=number_format($value['amount'], 2, ',', '.');?></td>
-                    <td style="text-align:right;"><?=number_format($value['code'], 2, ',', '.');?></td>
-                    <td style="text-align:right;"><?=number_format($value['total'], 2, ',', '.');?></td>
+                    <td><?=$value['type'];?></td>
+                    <td style="text-align:right;"><?=number_format($value['hpp'], 2, ',', '.');?></td>
+                    <td style="text-align:right;"><?=number_format($value['admin'], 2, ',', '.');?></td>
+                    <td style="text-align:right;"><?=number_format($value['fee'], 2, ',', '.');?></td>
                     <td><?=$value['status'];?></td>
                   </tr>
               <?php endforeach;?>

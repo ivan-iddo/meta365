@@ -1,4 +1,3 @@
-
 <main class="main">
   <?php $this->load->view('include/breadcrumb');?>
   <div class="container-fluid">
@@ -10,7 +9,7 @@
             <h3>Products List</h3>
           </div>
           <div class="col-sm-6 col-lg-2">
-            <a href="#" class="btn btn-primary">Add Product</a>
+            <a href="<?=base_url().'products/add';?>" class="btn btn-primary">Add Product</a>
           </div>
         </div>
         </div>
@@ -26,18 +25,20 @@
                 <th>HPP</th>
                 <th>Admin</th>
                 <th>Fee</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
               <?php foreach ($products as $key => $value):?>
-                <tr>
-                  <td><?=$value['code'];?></td>
-                  <td><?=$value['name'];?></td>
-                  <td><?=$value['type'];?></td>
-                  <td><?=$value['hpp'];?></td>
-                  <td><?=$value['admin'];?></td>
-                  <td><?=$value['fee'];?></td>
-                </tr>
+                  <tr>
+                    <td><a href="<?=base_url().'products/detail/'.$value['code'];?>"><?=$value['code'];?></a></td>
+                    <td><?=$value['name'];?></td>
+                    <td><?=$value['type'];?></td>
+                    <td style="text-align:right;"><?=number_format($value['hpp'], 2, ',', '.');?></td>
+                    <td style="text-align:right;"><?=number_format($value['admin'], 2, ',', '.');?></td>
+                    <td style="text-align:right;"><?=number_format($value['fee'], 2, ',', '.');?></td>
+                    <td><?=$value['status'];?></td>
+                  </tr>
               <?php endforeach;?>
             </tbody>
           </table>

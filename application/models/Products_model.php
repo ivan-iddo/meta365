@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Topup_model extends CI_Model
+class Products_model extends CI_Model
 
 {
 
@@ -32,7 +32,7 @@ class Topup_model extends CI_Model
       }
     }
 
-    $query = $this->db->get("transactions");
+    $query = $this->db->get("products");
 
     return $query->result_array();
   }
@@ -55,14 +55,14 @@ class Topup_model extends CI_Model
     $this->db->order_by('created_at', 'DESC');
     $this->db->limit(1);
 
-    $query = $this->db->get("transactions");
+    $query = $this->db->get("products");
 
     return $query->result_array();
   }
 
   public function insert($data){
 
-    if($this->db->insert('transaction',$data)){    
+    if($this->db->insert('products',$data)){    
       return 'Data is inserted successfully';
     }else{
       return "Error has occured";
@@ -70,8 +70,8 @@ class Topup_model extends CI_Model
   }
 
   public function update($data){
-    $this->db->where('trx_id', $data['trx_id']);
-    if($this->db->update('transactions', $data)){    
+    $this->db->where('code', $data['code']);
+    if($this->db->update('products', $data)){    
       return TRUE;
     }else{
       return FALSE;

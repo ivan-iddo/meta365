@@ -7,33 +7,28 @@
         </a>
       </li>
       <?php if($auth_role=='admin'):?>
-      <li class="nav-item">
-        <a class="nav-link" href="<?=base_url().'users';?>">
-          <i class="nav-icon icon-people"></i> User Management
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<?=base_url().'payment';?>">
-          <i class="nav-icon icon-list"></i> Payment
-        </a>
-      </li>
-	  <li class="nav-item">
-        <a class="nav-link" href="<?=base_url().'product';?>">
-          <i class="nav-icon icon-list"></i> Product
-        </a>
-      </li>
-	  <li class="nav-item">
-        <a class="nav-link" href="<?=base_url().'topup/konfirmasi';?>">
-          <i class="nav-icon">$</i> Konfirmasi Topup
-        </a>
-      </li>
-      <?php endif;?>
-      <?php if($auth_role=='menager'):?>
-      <li class="nav-item">
-        <a class="nav-link" href="<?=base_url().'Profit';?>">
-          <i class="nav-icon icon-graph"></i> Profit
-        </a>
-      </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?=base_url().'users';?>">
+            <i class="nav-icon icon-people"></i> User Management
+          </a>
+        </li>
+    	  <li class="nav-item">
+            <a class="nav-link" href="<?=base_url().'products';?>">
+              <i class="nav-icon icon-list"></i> Products
+            </a>
+        </li>
+    	  <li class="nav-item">
+          <a class="nav-link" href="<?=base_url().'topup/confirm';?>">
+            <i class="nav-icon">$</i> Topup Confirmation
+          </a>
+        </li>
+        <?php endif;?>
+        <?php if($auth_role=='menager'):?>
+        <li class="nav-item">
+          <a class="nav-link" href="<?=base_url().'Profit';?>">
+            <i class="nav-icon icon-graph"></i> Profit
+          </a>
+        </li>
       <?php endif;?>
       <li class="nav-title">Product</li>
       <li class="nav-item">

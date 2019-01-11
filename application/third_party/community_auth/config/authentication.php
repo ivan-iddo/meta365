@@ -29,7 +29,7 @@ $config['levels_and_roles'] = [
 	'4' => 'businesspartner',
 	'5' => 'off',
 	'6' => 'admin',
-	'8' => 'menager',
+	'8' => 'manager',
 	'9' => 'root'
 ];
 /*

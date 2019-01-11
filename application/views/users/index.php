@@ -1,4 +1,3 @@
-
 <main class="main">
   <?php $this->load->view('include/breadcrumb');?>
   <div class="container-fluid">
@@ -7,7 +6,10 @@
         <div class="card-body">
           <div class="row">
           <div class="col-sm-6 col-lg-10">
-            <h3>Topup History</h3>
+            <h3>User List</h3>
+          </div>
+          <div class="col-sm-6 col-lg-2">
+            <a href="<?=base_url().'products/add';?>" class="btn btn-primary">Add User</a>
           </div>
         </div>
         </div>
@@ -17,25 +19,19 @@
           <table class="table table-striped table-bordered datatable">
             <thead>
               <tr>
-                <th>Trx ID</th>
-                <th>Info</th>
-                <th>Date</th>
-                <th>Amount</th>
-                <th>Code</th>
-                <th>Total</th>
-                <th>Status</th>
+                <th>User ID</th>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Last Login</th>
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($transactions as $key => $value):?>
+              <?php foreach ($users as $key => $value):?>
                   <tr>
-                    <td><a href="<?=base_url().'transactions/detail/'.$value['trx_id'];?>"><?=$value['trx_id'];?></a></td>
-                    <td><?=$value['info'];?></td>
-                    <td><?=$value['created_at'];?></td>
-                    <td style="text-align:right;"><?=number_format($value['amount'], 2, ',', '.');?></td>
-                    <td style="text-align:right;"><?=number_format($value['code'], 2, ',', '.');?></td>
-                    <td style="text-align:right;"><?=number_format($value['total'], 2, ',', '.');?></td>
-                    <td><?=$value['status'];?></td>
+                    <td><a href="<?=base_url().'users/detail/'.$value['user_id'];?>"><?=$value['user_id'];?></a></td>
+                    <td><a href="<?=base_url().'users/detail/'.$value['user_id'];?>"><?=$value['username'];?></a></td>
+                    <td><?=$value['email'];?></td>
+                    <td><?=$value['last_login'];?></td>
                   </tr>
               <?php endforeach;?>
             </tbody>

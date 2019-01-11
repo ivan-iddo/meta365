@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Topup_model extends CI_Model
+class Topup_point_model extends CI_Model
 
 {
 
@@ -32,7 +32,7 @@ class Topup_model extends CI_Model
       }
     }
 
-    $query = $this->db->get("transactions");
+    $query = $this->db->get("topup_points");
 
     return $query->result_array();
   }
@@ -66,15 +66,6 @@ class Topup_model extends CI_Model
       return 'Data is inserted successfully';
     }else{
       return "Error has occured";
-    }
-  }
-
-  public function update($data){
-    $this->db->where('trx_id', $data['trx_id']);
-    if($this->db->update('transactions', $data)){    
-      return TRUE;
-    }else{
-      return FALSE;
     }
   }
 }

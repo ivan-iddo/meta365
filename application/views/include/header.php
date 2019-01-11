@@ -1,4 +1,3 @@
-<html lang="en">
   <head>
     <base href="./">
     <meta charset="utf-8">
